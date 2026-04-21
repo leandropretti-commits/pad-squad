@@ -8,19 +8,13 @@
 
 ## Instalação
 
-1. Clone ou baixe este repositório
-2. Copie as pastas para `~/.claude/skills/`
-
 ```bash
-# Opção 1 — clone direto na pasta de skills
-git clone https://github.com/leandropretti/pad-squad ~/.claude/skills-temp
-cp -r ~/.claude/skills-temp/* ~/.claude/skills/
-
-# Opção 2 — manual
-# Arraste as pastas (protocolo-ativo-digital/, pad-raio-x/, etc.) para ~/.claude/skills/
+git clone https://github.com/leandropretti-commits/pad-squad /tmp/pad-squad && \
+  find /tmp/pad-squad -mindepth 1 -maxdepth 1 -type d -exec cp -r {} ~/.claude/skills/ \; && \
+  rm -rf /tmp/pad-squad
 ```
 
-3. Abra um projeto no Claude Code e rode:
+Abra um projeto no Claude Code e rode:
 
 ```
 /protocolo-ativo-digital

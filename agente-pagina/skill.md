@@ -84,7 +84,7 @@ A página é o **especialista falando diretamente com quem está lendo**, indepe
 - **Método** — "Meu método"; "A primeira etapa que eu ensino é..."
 - **Entregáveis** — "Eu preparei pra você:" / "Você recebe de mim:"
 - **Bônus** — "Incluí também:" / "Além disso, deixei:"
-- **Garantia** — "Eu te dou 7 dias de garantia incondicional porque..."
+- **Garantia** *(mid e hi ticket apenas — low ticket não menciona garantia em nenhum bloco, nem em trust-line)* — "Eu te dou 7 dias de garantia incondicional porque..."
 - **Quem sou eu** (nunca "Quem é X") — "Sou a {nome}. Há {X} anos eu..."
 - **Oferta final / CTA** — "Quero te receber na turma" (no lugar de "Quero começar a carreira")
 - **FAQ** — respostas em 1ª pessoa: "Eu respondo assim:..." ou direto "Sim, você consegue mesmo sem experiência. Foi assim que eu comecei."
@@ -142,7 +142,7 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
 
 - Bloco 01: **Cabeçalho (hero)** — H1 = Resultado + Prazo. Sub-head opcional. 4 bullets curtos com benefícios imediatos. **SEM CTA aqui. SEM PREÇO aqui** (nem valor cheio, nem parcelado, nem "a partir de R$X"). Trust-line abaixo dos bullets pode ter data de início, nº de vagas, selo de garantia — mas nunca número monetário.
   - Exemplo: "Salve sua amamentação em 30 dias — sem restrições absurdas"
-  - Exemplo de trust-line válido em low ticket: "Acesso imediato · +380 alunas · Garantia de 7 dias"
+  - Exemplo de trust-line válido em low ticket: "Acesso imediato · +380 alunas · Resultado em 7 dias"
   - Exemplo de trust-line **proibido**: "R$97 · 12× R$9,67 · garantia de 14 dias" ❌
   - Exemplo de trust-line **proibido em low ticket**: "Turma 1 começa em 7 dias · 23 vagas restantes" ❌ (isso é pré-venda ou mid/hi, não low perpétuo)
 - Bloco 02: **Prova visual / depoimentos** — Título obrigatório. Antes/depois, prints, 2-4 depoimentos reais com nome e contexto.
@@ -168,6 +168,9 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
 - Frases curtas, emocionais, sem jargão.
 - Linguagem em 2ª pessoa (exceto ruminação que é 1ª pessoa do avatar).
 - Referência validada: Metodologia de Páginas Low-Ticket (modelo APLV).
+
+**Garantia em low ticket — não mencionar (regra inegociável):**
+Garantia existe por lei em todos os produtos digitais, mas não é argumento de venda em low ticket — mencioná-la sinaliza risco e enfraquece o quickwin, que é a aposta central desse ticket. **Não incluir bloco de garantia, não citar em trust-line, não citar em hero, não citar em CTA, não citar em recap de valor.** A aposta é no resultado rápido, não na reversão de risco. Se o operador insistir em incluir garantia, avisar que isso vai contra a lógica do quickwin e pedir confirmação explícita.
 
 **Vocabulário proibido em low ticket (tira valor do produto):**
 - `mini-curso`, `minicurso`, `mini curso`, `curso rápido`, `curso curtinho`, `aulinhas`

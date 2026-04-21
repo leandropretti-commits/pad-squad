@@ -117,7 +117,22 @@ Se o operador disser "quero gravar tudo antes" → confronte:
 
 ### Passo 1 — Confirmar promessa final
 
-Pegar a promessa inicial da extração e fechar versão final. Testar nos 3 testes (vovó / 3 segundos / brevidade inteligente).
+Pegar a promessa inicial da extração e fechar versão final. Testar nos 3 testes obrigatórios abaixo antes de aprovar qualquer headline ou promessa.
+
+#### Testes obrigatórios de copy
+
+**Teste da vovó:** Uma pessoa de 60 anos fora do nicho entende sem explicação?
+- ❌ "Protocolo de instalação do R vibrante" → ✅ "Ensinar seu filho a falar o R em 30 dias"
+- ❌ "Método APLV funcional para lactentes" → ✅ "Alimentar seu filho com APLV sem estresse"
+- Se precisar explicar o que significa, refazer.
+
+**Regra dos 3 segundos:** Em 3 segundos de leitura, fica claro o quê / pra quem / quando?
+- Precisa responder as 3 ao mesmo tempo: o que a pessoa vai conquistar, quem é essa pessoa, em quanto tempo.
+- Se alguma das 3 estiver implícita demais, tornar explícita.
+
+**Brevidade inteligente:** Cada palavra tem função? Remover sem perder sentido = palavra desnecessária.
+- Leia em voz alta. Se precisar respirar no meio da frase, está longa demais. Cortar.
+- Sem advérbios de intensidade ("muito", "bastante", "totalmente") — enfraquecem em vez de reforçar.
 
 Se o tempo não ficou travado em 30 dias, decidir agora:
 - Se a transformação pode acontecer em 30 dias → manter padrão PAD ("em 30 dias" / "em X semanas")

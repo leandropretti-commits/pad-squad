@@ -112,6 +112,22 @@ Antes de construir qualquer página, coletar o mínimo necessário:
 
 Só prosseguir após ter esses 4 itens.
 
+### Testes obrigatórios de copy
+
+Aplicar em todo título de bloco, headline e promessa antes de incluir no HTML:
+
+**Teste da vovó:** Uma pessoa de 60 anos fora do nicho entende sem explicação?
+- ❌ "Protocolo de instalação do R vibrante" → ✅ "Ensinar seu filho a falar o R em 30 dias"
+- Se precisar explicar o que significa, refazer.
+
+**Regra dos 3 segundos:** Em 3 segundos de leitura, fica claro o quê / pra quem / quando?
+- Precisa responder as 3 ao mesmo tempo: o que a pessoa vai conquistar, quem é essa pessoa, em quanto tempo.
+- Se alguma das 3 estiver implícita demais, tornar explícita.
+
+**Brevidade inteligente:** Cada palavra tem função? Remover sem perder sentido = palavra desnecessária.
+- Leia em voz alta. Se precisar respirar no meio da frase, está longa demais. Cortar.
+- Sem advérbios de intensidade ("muito", "bastante", "totalmente") — enfraquecem em vez de reforçar.
+
 ### Escrita
 - Escreve arquivos HTML na pasta `pagina/` dentro do diretório do projeto.
 - Registra ações e estados pendentes no `log.md` do projeto (append only).
@@ -141,6 +157,7 @@ Se houver ambiguidade, perguntar ao usuário qual tipo deseja.
 Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega um pedaço do bolo.
 
 - Bloco 01: **Cabeçalho (hero)** — H1 = Resultado + Prazo. Sub-head opcional. 4 bullets curtos com benefícios imediatos. **SEM CTA aqui. SEM PREÇO aqui** (nem valor cheio, nem parcelado, nem "a partir de R$X"). Trust-line abaixo dos bullets pode ter data de início, nº de vagas, selo de garantia — mas nunca número monetário.
+  - **Visual obrigatório:** o hero deve ter um elemento visual — foto da especialista OU mockup do produto. Se nenhum asset real for fornecido, gerar um **mockup de produto** (SVG/CSS de laptop, livro ou capa de curso com o nome do produto e badge "MOCKUP — substituir pela arte real"). Hero só-texto é aceito quando o operador confirmar explicitamente que não quer imagem.
   - Exemplo: "Salve sua amamentação em 30 dias — sem restrições absurdas"
   - Exemplo de trust-line válido em low ticket: "Acesso imediato · +380 alunas · Resultado em 7 dias"
   - Exemplo de trust-line **proibido**: "R$97 · 12× R$9,67 · garantia de 14 dias" ❌
@@ -152,10 +169,13 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
 - Bloco 04: **Explicação da causa** — Título + subtítulo obrigatórios. Mensagem: "O problema não é você, é a falta de método/orientação clara."
 - Bloco 05: **Motivos de falha** — Título obrigatório. Exatamente 4 razões no formato headline + 1-2 frases de explicação.
   - Exemplo: "Você tenta seguir dicas aleatórias da internet — muitas são exageradas ou incorretas e só aumentam sua ansiedade."
-- Bloco 06: **Apresentação da solução** — Título + subtítulo obrigatórios. Primeiro CTA emocional → âncora no bloco 10 (#recap-valor).
+- Bloco 06: **Apresentação da solução** — Título + subtítulo obrigatórios. Primeiro CTA emocional — **obrigatoriamente `href="#recap-valor"`** (âncora para o bloco 10). **Nunca** colocar link de checkout aqui. **Nunca** mostrar preço no botão, no btn-sub ou em qualquer texto próximo ao CTA.
   - Exemplo CTA: "Quero amamentar com tranquilidade hoje"
+  - ❌ Proibido: `<a href="[LINK_CHECKOUT]">` — quebra a regra do preço e da âncora
+  - ❌ Proibido: btn-sub com "R$X à vista" — preço só no bloco 10
+  - ✅ Correto: `<a href="#recap-valor">Quero amamentar com tranquilidade hoje →</a>`
 - Bloco 07: **Passo a passo do método** — Título obrigatório: "Como funciona na prática". 4 etapas (01-04) em headline + explicação.
-- Bloco 08: **Conteúdo/itens incluídos** — Título obrigatório: "O que você recebe por dentro". Lista: mini-headline + benefício específico.
+- Bloco 08: **Conteúdo/itens incluídos** — Título obrigatório: "O que você recebe por dentro". Lista: mini-headline + benefício específico. **Proibido mostrar valores tachados individuais por item aqui** — sem R$X por entregável, sem total, sem preço. Esse bloco apresenta o conteúdo, não a ancoragem. Ancoragem com valores tachados fica exclusivamente no bloco 10.
 - Bloco 09: **Para quem é** — Título obrigatório: "O [nome do produto] é para você que:". 6-8 sentenças em 2ª pessoa. Fechamento obrigatório: "Se você se identifica com 2 ou mais dessas situações... O [nome] é pra você."
 - Bloco 10: **Recapitulação e valor** — Título: "Recapitulando tudo que você vai receber". Lista de entregáveis com valor tachado. Total → preço real em destaque. CTA direto para checkout. Âncora id="recap-valor".
 - Bloco 11: **Bloco de reflexão** — Obrigatório. Pergunta emocional → ciclo de tentativas frustradas → não é culpa sua → falta de método → convite à virada.

@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Residência Gastronômica — Chef Rafael Dorneles (MODELO FICTÍCIO)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#FAF6F0;
+    --creme-2:#F2ECDF;
+    --papel:#EFE7D6;
+    --dourado:#C4935A;
+    --dourado-2:#A97A44;
+    --ink:#1C1A13;
+    --ink-2:#2B281F;
+    --stone:#6F6A5D;
+    --linha:#D9CFBB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--creme);color:var(--ink);font-family:'Raleway',system-ui,sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+
+  /* badge modelo */
+  .stamp{position:fixed;top:14px;right:14px;z-index:99;background:rgba(28,26,19,.88);color:#EFE7D6;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--dourado);border-radius:2px;backdrop-filter:blur(6px)}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px}
+  .wide{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+  h1{font-size:clamp(46px,6.5vw,86px);line-height:1.02;font-style:italic}
+  h2{font-size:clamp(34px,4.4vw,56px);line-height:1.08;font-style:italic}
+  h3{font-size:clamp(24px,2.4vw,30px);line-height:1.2}
+  h4{font-size:20px;line-height:1.3}
+  .eye{font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--dourado-2);font-weight:500;display:inline-block}
+  .rule{width:44px;height:1px;background:var(--dourado);display:inline-block;vertical-align:middle;margin:0 12px 4px 0}
+  .lede{font-size:19px;color:var(--ink-2);max-width:680px}
+
+  /* botões */
+  .btn-apply{display:inline-block;padding:18px 34px;border:1.5px solid var(--ink);color:var(--ink);font-family:'Raleway',sans-serif;font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-size:12px;transition:all .25s;background:transparent;cursor:pointer}
+  .btn-apply:hover{background:var(--ink);color:var(--creme)}
+  .btn-apply.gold{border-color:var(--dourado);color:var(--dourado-2)}
+  .btn-apply.gold:hover{background:var(--dourado);color:var(--creme)}
+  .btn-apply.light{border-color:var(--creme);color:var(--creme)}
+  .btn-apply.light:hover{background:var(--creme);color:var(--ink)}
+
+  /* sections */
+  section{padding:110px 0}
+  section.sm{padding:80px 0}
+  .dark{background:var(--ink);color:var(--creme-2)}
+  .dark h1,.dark h2,.dark h3,.dark h4{color:var(--creme)}
+  .dark .eye{color:var(--dourado)}
+  .dark .rule{background:var(--dourado)}
+  .papel{background:var(--papel)}
+
+  /* HERO */
+  .hero{padding:80px 0 90px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--linha)}
+  .hero-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone);padding-bottom:70px;border-bottom:1px solid var(--linha);margin-bottom:70px}
+  .hero-head .logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink)}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center}
+  .hero-grid h1 em{color:var(--dourado-2);font-style:italic}
+  .hero-grid .lede{margin:28px 0 40px}
+  .hero-meta{display:flex;gap:40px;margin-top:50px;padding-top:30px;border-top:1px solid var(--linha);font-size:12px;letter-spacing:.1em;color:var(--stone)}
+  .hero-meta b{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--ink);font-weight:500;letter-spacing:0;margin-bottom:4px}
+
+  /* MOCKUP: livro/diário + folha assinatura + carta lacrada */
+  .hero-mock{position:relative;aspect-ratio:4/5;background:linear-gradient(135deg,#EFE7D6 0%,#E4D9BF 100%);display:flex;align-items:center;justify-content:center}
+  .hero-mock svg{width:92%;height:92%;filter:drop-shadow(0 20px 40px rgba(28,26,19,.18))}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;gap:50px}
+    .hero-head{flex-direction:column;gap:16px;align-items:flex-start}
+    section{padding:80px 0}
+  }
+
+  /* TETO — prova discreta */
+  .teto{background:var(--creme-2)}
+  .teto-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
+  .teto blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px,3vw,38px);line-height:1.3;color:var(--ink);border-left:1px solid var(--dourado);padding-left:28px}
+  .teto blockquote cite{display:block;margin-top:22px;font-family:'Raleway',sans-serif;font-style:normal;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--stone)}
+  .teto .pts{list-style:none;padding:0}
+  .teto .pts li{padding:22px 0;border-bottom:1px solid var(--linha);display:flex;gap:22px;align-items:baseline}
+  .teto .pts li:last-child{border-bottom:0}
+  .teto .pts .num{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--dourado-2);font-size:30px;min-width:40px}
+  .teto .pts p{color:var(--ink-2);font-size:16px}
+  @media (max-width:760px){.teto-grid{grid-template-columns:1fr;gap:50px}}
+
+  /* PILARES */
+  .pilares-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:70px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+  .pilar{padding:48px 32px;border-right:1px solid var(--linha)}
+  .pilar:last-child{border-right:0}
+  .pilar .n{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--dourado-2);font-size:14px;letter-spacing:.3em;margin-bottom:28px}
+  .pilar h3{margin-bottom:16px}
+  .pilar p{font-size:14.5px;color:var(--stone)}
+  @media (max-width:860px){.pilares-grid{grid-template-columns:repeat(2,1fr)}.pilar:nth-child(2){border-right:0}.pilar:nth-child(-n+2){border-bottom:1px solid var(--linha)}}
+  @media (max-width:500px){.pilares-grid{grid-template-columns:1fr}.pilar{border-right:0;border-bottom:1px solid var(--linha)}.pilar:last-child{border-bottom:0}}
+
+  /* PROVA SOCIAL — discretíssima */
+  .prova-head{text-align:center;margin-bottom:80px}
+  .prova-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--linha)}
+  .cliente{background:var(--creme);padding:56px 36px;text-align:center;position:relative}
+  .cliente .ini{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:44px;color:var(--dourado-2);line-height:1;margin-bottom:22px}
+  .cliente blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;line-height:1.4;color:var(--ink);margin-bottom:24px}
+  .cliente cite{font-family:'Raleway',sans-serif;font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);display:block}
+  .cliente .badge{position:absolute;top:14px;right:14px;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);background:var(--papel);padding:4px 10px;border-radius:2px}
+  .numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:80px;padding-top:60px;border-top:1px solid var(--linha)}
+  .num-item{text-align:center;padding:0 20px;border-right:1px solid var(--linha)}
+  .num-item:last-child{border-right:0}
+  .num-item b{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:54px;color:var(--dourado-2);line-height:1;margin-bottom:10px;font-weight:500}
+  .num-item span{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--stone)}
+  @media (max-width:760px){.prova-grid,.numeros{grid-template-columns:1fr 1fr}.cliente{padding:40px 24px}.num-item{padding:24px;border-right:0;border-bottom:1px solid var(--linha)}.num-item:nth-last-child(-n+2){border-bottom:0}}
+
+  /* MENTORIA — o que é */
+  .mentoria-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .mentoria-meta{list-style:none;padding:0;margin-top:40px}
+  .mentoria-meta li{padding:20px 0;border-bottom:1px solid rgba(196,147,90,.3);display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+  .mentoria-meta li:last-child{border-bottom:0}
+  .mentoria-meta .k{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dourado)}
+  .mentoria-meta .v{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--creme);text-align:right;flex:1}
+  @media (max-width:760px){.mentoria-grid{grid-template-columns:1fr;gap:50px}}
+
+  /* PARA QUEM */
+  .pq-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px}
+  .pq-col h4{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--linha)}
+  .pq-col ul{list-style:none;padding:0}
+  .pq-col li{padding:14px 0 14px 32px;position:relative;font-size:15px;color:var(--ink-2);border-bottom:1px dotted var(--linha)}
+  .pq-col li:last-child{border-bottom:0}
+  .pq-col.sim li::before{content:"";position:absolute;left:0;top:22px;width:16px;height:1px;background:var(--dourado)}
+  .pq-col.nao{opacity:.55}
+  .pq-col.nao li::before{content:"×";position:absolute;left:0;top:13px;color:var(--stone);font-size:18px;font-family:'Cormorant Garamond',serif}
+  @media (max-width:700px){.pq-grid{grid-template-columns:1fr;gap:40px}}
+
+  /* JORNADA */
+  .jornada-list{margin-top:60px;border-top:1px solid var(--linha)}
+  .fase{display:grid;grid-template-columns:180px 1fr 1.2fr;gap:48px;padding:44px 0;border-bottom:1px solid var(--linha);align-items:start}
+  .fase .tempo{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--dourado-2)}
+  .fase .tempo b{display:block;font-size:36px;line-height:1;margin-bottom:6px}
+  .fase .tempo span{font-family:'Raleway',sans-serif;font-style:normal;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone)}
+  .fase h3{margin-bottom:8px}
+  .fase .obj{font-size:13px;color:var(--stone);letter-spacing:.08em;text-transform:uppercase}
+  .fase .desc{color:var(--ink-2);font-size:15.5px}
+  @media (max-width:760px){.fase{grid-template-columns:1fr;gap:16px}.fase .tempo b{font-size:30px}}
+
+  /* ECOSSISTEMA */
+  .eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linha);margin-top:60px}
+  .eco-card{background:var(--creme);padding:46px 32px}
+  .eco-card .ico{width:36px;height:36px;margin-bottom:24px;color:var(--dourado-2)}
+  .eco-card h4{margin-bottom:12px}
+  .eco-card p{font-size:14px;color:var(--stone)}
+  @media (max-width:760px){.eco-grid{grid-template-columns:1fr}}
+
+  /* BÔNUS */
+  .bonus-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:60px;padding-bottom:30px;border-bottom:1px solid rgba(196,147,90,.3)}
+  .bonus-head span{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dourado)}
+  .bonus-list{list-style:none;padding:0}
+  .bonus-list li{display:grid;grid-template-columns:60px 1fr;gap:30px;padding:32px 0;border-bottom:1px solid rgba(196,147,90,.18);align-items:baseline}
+  .bonus-list li:last-child{border-bottom:0}
+  .bonus-list .n{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--dourado);font-size:28px}
+  .bonus-list h4{color:var(--creme);margin-bottom:8px}
+  .bonus-list p{color:#BFB9AB;font-size:14.5px}
+
+  /* AUTOR */
+  .autor-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
+  .autor-foto{aspect-ratio:3/4;background:var(--papel);overflow:hidden;position:relative}
+  .autor-foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(.98)}
+  .autor-foto::after{content:"Fotografia — arquivo pessoal";position:absolute;bottom:14px;left:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--creme);background:rgba(28,26,19,.7);padding:6px 10px}
+  .autor h2{margin-bottom:8px}
+  .autor .sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--dourado-2);font-size:22px;margin-bottom:28px}
+  .autor p{color:var(--ink-2);margin-bottom:18px;font-size:16px}
+  .autor .creds{list-style:none;padding:0;margin-top:30px;border-top:1px solid var(--linha);padding-top:26px}
+  .autor .creds li{padding:10px 0;font-size:14px;color:var(--stone);display:flex;gap:14px;align-items:baseline}
+  .autor .creds li::before{content:"—";color:var(--dourado)}
+  @media (max-width:760px){.autor-grid{grid-template-columns:1fr;gap:40px}}
+
+  /* CUSTO INAÇÃO */
+  .inacao{text-align:center;background:var(--papel)}
+  .inacao h2{max-width:760px;margin:0 auto 28px}
+  .inacao .eye{margin-bottom:40px}
+  .inacao p{max-width:620px;margin:0 auto;color:var(--ink-2)}
+  .inacao-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(22px,2.4vw,28px);color:var(--dourado-2);margin-top:40px;line-height:1.4}
+
+  /* CTA APLICAÇÃO */
+  .cta-apl{text-align:center}
+  .cta-apl .eye{margin-bottom:24px}
+  .cta-apl h2{max-width:720px;margin:0 auto 22px}
+  .cta-apl p{max-width:560px;margin:0 auto 50px;color:#BFB9AB}
+  .cta-apl .btn-apply{padding:22px 44px;font-size:13px}
+  .cta-apl small{display:block;margin-top:34px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dourado)}
+
+  /* FAQ */
+  .faq-list{margin-top:60px;border-top:1px solid var(--linha)}
+  details{border-bottom:1px solid var(--linha)}
+  details summary{padding:28px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:30px;list-style:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--ink)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--dourado-2);transition:transform .25s;font-style:normal}
+  details[open] summary::after{transform:rotate(45deg)}
+  details .ans{padding:0 0 30px;color:var(--ink-2);font-size:15.5px;max-width:780px}
+
+  /* FOOTER */
+  footer{padding:70px 0 50px;border-top:1px solid var(--linha)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+  .foot-grid .logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;color:var(--ink)}
+
+  .center{text-align:center}
+  .ornament{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--dourado);margin:50px auto;letter-spacing:.4em}
+</style>
+</head>
+<body>
+
+<div class="stamp">⚠ Modelo Fictício · Referência Visual</div>
+
+<!-- 01 HERO -->
+<header class="hero">
+  <div class="wide">
+    <div class="hero-head">
+      <div class="logo">Rafael Dorneles <span style="color:var(--dourado-2)">·</span> Residência Gastronômica</div>
+      <div>Turma 07 · 2026</div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <span class="eye"><span class="rule"></span>Programa por aplicação</span>
+        <h1 style="margin-top:24px">Uma residência de <em>doze meses</em> para chefs que já viveram a cozinha — e querem construir o que fica.</h1>
+        <p class="lede">Não é curso. Não é consultoria avulsa. É um período de convivência, estudo e reconstrução ao lado de doze chefs por ano, no ritmo de quem entende que autoridade não se compra, se apura.</p>
+
+        <a href="#aplicacao" class="btn-apply">Quero aplicar</a>
+
+        <div class="hero-meta">
+          <div><b>12</b><span>chefs por turma</span></div>
+          <div><b>12 meses</b><span>duração integral</span></div>
+          <div><b>Por aplicação</b><span>vagas limitadas</span></div>
+        </div>
+      </div>
+
+      <!-- MOCKUP produto: livro/caderno de residência + carta -->
+      <div class="hero-mock">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-label="mockup dossiê da residência">
+          <!-- mesa de madeira -->
+          <defs>
+            <linearGradient id="woodg" x1="0" x2="1">
+              <stop offset="0" stop-color="#E4D9BF"/>
+              <stop offset="1" stop-color="#D4C39B"/>
+            </linearGradient>
+            <linearGradient id="leatherg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2B281F"/>
+              <stop offset="1" stop-color="#1C1A13"/>
+            </linearGradient>
+            <linearGradient id="pageg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FAF6F0"/>
+              <stop offset="1" stop-color="#EFE7D6"/>
+            </linearGradient>
+          </defs>
+
+          <!-- carta atrás (envelope lacrado) -->
+          <g transform="translate(40 260) rotate(-8)">
+            <rect width="200" height="130" fill="#EFE7D6" stroke="#C4935A" stroke-width="1"/>
+            <path d="M0 0 L100 70 L200 0" fill="none" stroke="#C4935A" stroke-width="1"/>
+            <circle cx="100" cy="80" r="14" fill="#C4935A" opacity=".85"/>
+            <text x="100" y="85" font-family="Cormorant Garamond" font-style="italic" font-size="18" fill="#FAF6F0" text-anchor="middle">RD</text>
+          </g>
+
+          <!-- livro/dossiê principal -->
+          <g transform="translate(110 60)">
+            <!-- sombra -->
+            <rect x="6" y="8" width="220" height="320" fill="#1C1A13" opacity=".15" rx="2"/>
+            <!-- capa couro -->
+            <rect width="220" height="320" fill="url(#leatherg)" rx="2"/>
+            <!-- moldura dourada -->
+            <rect x="14" y="14" width="192" height="292" fill="none" stroke="#C4935A" stroke-width="1"/>
+            <rect x="18" y="18" width="184" height="284" fill="none" stroke="#C4935A" stroke-width=".5" opacity=".5"/>
+            <!-- ornamento topo -->
+            <text x="110" y="74" font-family="Cormorant Garamond" font-style="italic" font-size="14" fill="#C4935A" text-anchor="middle" letter-spacing="6">— RD —</text>
+            <!-- título -->
+            <text x="110" y="150" font-family="Cormorant Garamond" font-style="italic" font-size="24" fill="#FAF6F0" text-anchor="middle">Residência</text>
+            <text x="110" y="180" font-family="Cormorant Garamond" font-style="italic" font-size="24" fill="#FAF6F0" text-anchor="middle">Gastronômica</text>
+            <!-- linha -->
+            <line x1="70" y1="200" x2="150" y2="200" stroke="#C4935A" stroke-width="1"/>
+            <!-- subtítulo -->
+            <text x="110" y="226" font-family="Raleway" font-size="9" fill="#C4935A" text-anchor="middle" letter-spacing="3">DOSSIÊ · TURMA 07</text>
+            <text x="110" y="244" font-family="Raleway" font-size="9" fill="#C4935A" text-anchor="middle" letter-spacing="3">2026 — 2027</text>
+            <!-- ornamento rodapé -->
+            <text x="110" y="282" font-family="Cormorant Garamond" font-style="italic" font-size="14" fill="#C4935A" text-anchor="middle" letter-spacing="6">— RD —</text>
+          </g>
+
+          <!-- marcador de página/fita -->
+          <rect x="300" y="60" width="14" height="350" fill="#C4935A" opacity=".9"/>
+          <polygon points="300,410 314,410 307,425" fill="#C4935A" opacity=".9"/>
+
+          <!-- mesa linha sutil -->
+          <line x1="0" y1="450" x2="400" y2="450" stroke="#C4935A" stroke-width=".5" opacity=".3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 02 TETO -->
+<section class="teto">
+  <div class="wrap">
+    <span class="eye"><span class="rule"></span>O que se eleva</span>
+    <h2 style="margin-top:20px;margin-bottom:60px;max-width:780px">Você não está buscando um curso. Está buscando um teto diferente.</h2>
+
+    <div class="teto-grid">
+      <blockquote>
+        "A Residência levantou o teto do que eu acreditava ser possível cobrar pelo meu trabalho. Saí de um menu degustação de R$240 para R$780 por pessoa em dez meses — e com fila de espera."
+        <cite>— chef c.b., restaurante de assinatura · SP</cite>
+      </blockquote>
+
+      <ul class="pts">
+        <li><span class="num">I.</span><p>Sair do ciclo de salão cheio e caixa apertado. Margem antes de volume.</p></li>
+        <li><span class="num">II.</span><p>Construir uma marca pessoal que sustenta ticket alto sem precisar de influencer nem trend.</p></li>
+        <li><span class="num">III.</span><p>Transformar a cozinha em um sistema — você fora do plantão, o resultado mantido.</p></li>
+        <li><span class="num">IV.</span><p>Reposicionar o restaurante como destino, não como alternativa de jantar.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PILARES -->
+<section>
+  <div class="wide">
+    <div style="max-width:780px">
+      <span class="eye"><span class="rule"></span>Os quatro pilares</span>
+      <h2 style="margin-top:20px">Quatro eixos conduzidos em paralelo, de janeiro a dezembro.</h2>
+    </div>
+
+    <div class="pilares-grid">
+      <div class="pilar">
+        <div class="n">— I —</div>
+        <h3>Autoridade editada</h3>
+        <p>Sua voz, seu acervo, sua história — editadas no nível de um chef com quinze anos de estrada, independentemente do tempo que você tem.</p>
+      </div>
+      <div class="pilar">
+        <div class="n">— II —</div>
+        <h3>Margem estruturada</h3>
+        <p>Precificação por valor percebido, ficha técnica com margem real, carta enxuta. Operação que sustenta ticket alto sem matar o chef.</p>
+      </div>
+      <div class="pilar">
+        <div class="n">— III —</div>
+        <h3>Aquisição silenciosa</h3>
+        <p>Canais que não dependem de post viral: curadoria, imprensa, recomendação, lista privada. Cliente que chega pronto.</p>
+      </div>
+      <div class="pilar">
+        <div class="n">— IV —</div>
+        <h3>Sistema pessoal</h3>
+        <p>Agenda do chef, sucessão, sócios, família. Você continua na cozinha porque quer — não porque o negócio depende disso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROVA SOCIAL -->
+<section class="papel sm">
+  <div class="wide">
+    <div class="prova-head">
+      <span class="eye"><span class="rule"></span>Residentes de turmas anteriores</span>
+      <h2 style="margin-top:20px">Algumas palavras de quem já passou por aqui.</h2>
+      <p style="max-width:620px;margin:22px auto 0;color:var(--stone);font-size:14.5px">Os depoimentos abaixo são representativos do perfil e do resultado típico — na página pública, cada chef cede a palavra por escrito e autoriza o uso da iniciais. Nomes completos ficam reservados por questão de mercado.</p>
+    </div>
+
+    <div class="prova-grid">
+      <div class="cliente">
+        <span class="badge">Exemplo</span>
+        <div class="ini">C. B.</div>
+        <blockquote>"Entrei achando que precisava de marketing. Saí com um restaurante outro — carta editada, ticket triplicado, e uma clareza sobre quem sou como chef que eu não tinha."</blockquote>
+        <cite>Chef · Restaurante de assinatura · SP</cite>
+      </div>
+      <div class="cliente">
+        <span class="badge">Exemplo</span>
+        <div class="ini">R. M.</div>
+        <blockquote>"O maior ganho não foi o faturamento. Foi voltar pra casa às 22h, com a operação rodando sem mim, e perceber que o restaurante tinha crescido até mais rápido."</blockquote>
+        <cite>Chef-proprietário · Bistrô autoral · MG</cite>
+      </div>
+      <div class="cliente">
+        <span class="badge">Exemplo</span>
+        <div class="ini">A. V.</div>
+        <blockquote>"Foi a primeira vez em dezessete anos de cozinha que alguém me ajudou a olhar pro negócio sem desmontar o que eu sou como chef. Isso pagou cada centavo."</blockquote>
+        <cite>Chef-consultora · Cozinha contemporânea · RJ</cite>
+      </div>
+    </div>
+
+    <div class="numeros">
+      <div class="num-item"><b>84</b><span>chefs residentes</span></div>
+      <div class="num-item"><b>6</b><span>turmas concluídas</span></div>
+      <div class="num-item"><b>2,7×</b><span>ticket médio (mediana)</span></div>
+      <div class="num-item"><b>18</b><span>prêmios conquistados</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 MENTORIA (o que é) -->
+<section class="dark">
+  <div class="wide">
+    <div class="mentoria-grid">
+      <div>
+        <span class="eye"><span class="rule"></span>A residência, em forma</span>
+        <h2 style="margin-top:20px">Um ano vivido em cadência editorial — não em sprint de curso.</h2>
+        <p class="lede" style="color:#BFB9AB;margin-top:24px">Doze chefs, doze meses, três encontros presenciais em São Paulo e no interior, chamadas quinzenais conduzidas por mim, acesso direto a uma rede curada de fornecedores, imprensa especializada e investidores do setor.</p>
+      </div>
+
+      <ul class="mentoria-meta">
+        <li><span class="k">Duração</span><span class="v">Doze meses integrais</span></li>
+        <li><span class="k">Formato</span><span class="v">Híbrido · 3 imersões + quinzenais</span></li>
+        <li><span class="k">Tamanho da turma</span><span class="v">Doze chefs, sem exceção</span></li>
+        <li><span class="k">Conduzido por</span><span class="v">Chef Rafael Dorneles</span></li>
+        <li><span class="k">Próxima turma</span><span class="v">Abril de 2026</span></li>
+        <li><span class="k">Vagas</span><span class="v">Por aplicação</span></li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:70px">
+      <a href="#aplicacao" class="btn-apply light">Iniciar aplicação</a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PARA QUEM -->
+<section>
+  <div class="wrap">
+    <div style="max-width:720px">
+      <span class="eye"><span class="rule"></span>Perfil do residente</span>
+      <h2 style="margin-top:20px">Aplique apenas se isto descreve onde você está.</h2>
+      <p class="lede" style="margin-top:22px">Recusamos, em média, dois de cada três pedidos de aplicação. A seleção é o que protege o nível do grupo — e o seu retorno.</p>
+    </div>
+
+    <div class="pq-grid">
+      <div class="pq-col sim">
+        <h4>Aplique se</h4>
+        <ul>
+          <li>Você é chef-proprietário ou responsável pela cozinha de uma casa autoral em operação há mais de três anos.</li>
+          <li>Seu ticket médio hoje está entre R$180 e R$450, e você sente que o teto não é o cliente — é como o negócio está montado.</li>
+          <li>Você já fez curso, MBA, consultoria pontual, e continua no mesmo lugar.</li>
+          <li>Tem disponibilidade real para três imersões de três dias e uma chamada quinzenal de uma hora, ao longo de doze meses.</li>
+          <li>Está disposto a ser editado — no menu, na marca, na comunicação, na vida pessoal se for o caso.</li>
+        </ul>
+      </div>
+
+      <div class="pq-col nao">
+        <h4>Não aplique se</h4>
+        <ul>
+          <li>Você está começando agora e ainda não abriu sua primeira operação.</li>
+          <li>Procura curso rápido, workshop de fim de semana ou acesso a receitas.</li>
+          <li>Não tem abertura para revisar a forma como cobra, precifica e se comunica.</li>
+          <li>Quer garantia de faturamento específico em prazo específico.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">· · ·</div>
+
+<!-- 07 JORNADA -->
+<section class="papel">
+  <div class="wide">
+    <div style="max-width:720px">
+      <span class="eye"><span class="rule"></span>Doze meses em quatro estações</span>
+      <h2 style="margin-top:20px">A jornada do residente.</h2>
+    </div>
+
+    <div class="jornada-list">
+      <div class="fase">
+        <div class="tempo"><b>I.</b><span>Mês 1 — 3</span></div>
+        <div>
+          <h3>Diagnóstico editorial</h3>
+          <div class="obj">Outono · fundação</div>
+        </div>
+        <p class="desc">Mapeamento completo do seu ativo — cozinha, carta, marca, operação, vida pessoal. Primeira imersão presencial em São Paulo. No fim da estação, você tem um retrato por escrito de onde está e o plano de doze meses costurado à sua realidade.</p>
+      </div>
+      <div class="fase">
+        <div class="tempo"><b>II.</b><span>Mês 4 — 6</span></div>
+        <div>
+          <h3>Reconstrução</h3>
+          <div class="obj">Inverno · trabalho de ateliê</div>
+        </div>
+        <p class="desc">Carta re-editada, ficha técnica com margem real, precificação por valor percebido, voz autoral destilada. Segunda imersão — dessa vez no interior, com acesso a produtores da rede. Você sai com o menu novo pronto para estrear.</p>
+      </div>
+      <div class="fase">
+        <div class="tempo"><b>III.</b><span>Mês 7 — 9</span></div>
+        <div>
+          <h3>Estreia e imprensa</h3>
+          <div class="obj">Primavera · abertura</div>
+        </div>
+        <p class="desc">Reposicionamento comunicado ao público, imprensa especializada pautada pela rede, curadoria de canais silenciosos (lista privada, recomendação direta, guias). A casa passa a atrair um cliente diferente.</p>
+      </div>
+      <div class="fase">
+        <div class="tempo"><b>IV.</b><span>Mês 10 — 12</span></div>
+        <div>
+          <h3>Sistema e sucessão</h3>
+          <div class="obj">Verão · colheita</div>
+        </div>
+        <p class="desc">Terceira imersão de encerramento. Você sai com a operação rodando sem depender do seu plantão, sucessão de cozinha encaminhada, caminho claro para a próxima colheita — segunda casa, marca própria, obra editorial, o que fizer sentido para o chef que você virou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 ECOSSISTEMA -->
+<section>
+  <div class="wide">
+    <div style="max-width:720px">
+      <span class="eye"><span class="rule"></span>O que acompanha a residência</span>
+      <h2 style="margin-top:20px">Você não entra em um curso — entra em uma rede.</h2>
+    </div>
+
+    <div class="eco-grid">
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 3 L21 8 L12 13 L3 8 Z"/><path d="M3 8 V16 L12 21 L21 16 V8"/></svg>
+        <h4>Rede de fornecedores</h4>
+        <p>Produtores, importadores e pequenos artesãos curados pelo próprio Rafael — acesso direto, sem intermediário, com condição de residente.</p>
+      </div>
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="4" width="18" height="16"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+        <h4>Imprensa especializada</h4>
+        <p>Jornalistas e editores de guias que aceitam pauta vinda da residência. Uma menção bem colocada substitui meses de investimento em mídia.</p>
+      </div>
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="10" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><circle cx="17" cy="7" r="3"/><path d="M14 14c2-1 5-1 7 1"/></svg>
+        <h4>Pares conduzidos</h4>
+        <p>Onze outros chefs, selecionados pelo mesmo critério. Grupo privado que continua ativo depois do ano — a rede é pra vida.</p>
+      </div>
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        <h4>Biblioteca privada</h4>
+        <p>Arquivo com cardápios, fichas técnicas, cartas de vinho e planos comerciais de restaurantes referência — material que só circula entre residentes.</p>
+      </div>
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+        <h4>Acesso direto ao Rafael</h4>
+        <p>Canal privado entre os quinzenais. Dúvida estratégica, decisão quente, intervenção pontual — sem camada de staff no meio.</p>
+      </div>
+      <div class="eco-card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 3h12l-2 6H8z"/><path d="M8 9v9l4 2 4-2V9"/></svg>
+        <h4>Jantar de encerramento</h4>
+        <p>Um jantar assinado em conjunto pela turma, aberto à imprensa convidada. Fecha o ano de forma pública — e deixa registro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 BÔNUS -->
+<section class="dark">
+  <div class="wrap">
+    <div class="bonus-head">
+      <div>
+        <span class="eye"><span class="rule"></span>Inclusos na residência</span>
+        <h2 style="margin-top:16px">O que acompanha, sem custo adicional.</h2>
+      </div>
+      <span>06 itens</span>
+    </div>
+
+    <ul class="bonus-list">
+      <li>
+        <div class="n">I.</div>
+        <div><h4>Retrato autoral do chef</h4><p>Ensaio fotográfico profissional de cinco horas em sua cozinha, conduzido por fotógrafo de retrato editorial da rede. Material de uso livre em comunicação, imprensa e carta.</p></div>
+      </li>
+      <li>
+        <div class="n">II.</div>
+        <div><h4>Consultoria de carta de vinhos</h4><p>Seis encontros com sommelier convidado, dedicados a reescrever a harmonização da carta e elevar o ticket de bebidas em paralelo ao menu.</p></div>
+      </li>
+      <li>
+        <div class="n">III.</div>
+        <div><h4>Revisão editorial da comunicação</h4><p>Todos os textos da casa — site, menu, legendas, cartão de apresentação — revistos por uma editora que assina livros gastronômicos publicados pela Cia das Letras.</p></div>
+      </li>
+      <li>
+        <div class="n">IV.</div>
+        <div><h4>Assessoria jurídica pontual</h4><p>Duas consultas com advogado especializado em food service: sociedade, proteção de marca, sucessão, contratos com fornecedores.</p></div>
+      </li>
+      <li>
+        <div class="n">V.</div>
+        <div><h4>Acesso vitalício aos residentes</h4><p>Depois do ano formal, você permanece no grupo privado — com acesso ao acervo da biblioteca, a futuras turmas e a eventos da rede.</p></div>
+      </li>
+      <li>
+        <div class="n">VI.</div>
+        <div><h4>Retiro anual</h4><p>Um fim de semana por ano, em propriedade fechada no interior, aberto aos residentes de todas as turmas. Cozinha, vinho, conversa longa.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10 AUTOR -->
+<section>
+  <div class="wide">
+    <div class="autor-grid autor">
+      <div class="autor-foto">
+        <img src="https://i.pravatar.cc/800?img=52" alt="Chef Rafael Dorneles">
+      </div>
+      <div>
+        <span class="eye"><span class="rule"></span>Sobre o condutor</span>
+        <h2 style="margin-top:20px">Rafael Dorneles</h2>
+        <p class="sub">Chef · autor · curador da Residência</p>
+        <p>Dezenove anos de cozinha, onze deles como chef-proprietário de uma casa que virou referência do seu estado e, mais tarde, aberta a imprensa de todo o país. Passei por três reconstruções do meu próprio restaurante antes de entender o que valia a pena ensinar — e só então comecei a receber chefs.</p>
+        <p>Hoje conduzo uma turma por ano, pessoalmente. Não sou palestrante, não sou consultor genérico, não tenho equipe que responde no meu lugar. A Residência é o trabalho que eu faço agora que já não preciso provar nada — e é assim que eu quero continuar.</p>
+
+        <ul class="creds">
+          <li>Chef-proprietário, Restaurante Lastro (2013 — atual)</li>
+          <li>Autor · "Cozinha de Pertença" (Editora Terroir, 2022)</li>
+          <li>Curador da série gastronômica da Bienal de 2024</li>
+          <li>Residente convidado em cozinhas em Lima, Copenhague e Lyon</li>
+          <li>Menção em guias especializados desde 2017</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 CUSTO INAÇÃO -->
+<section class="inacao">
+  <div class="wrap">
+    <span class="eye"><span class="rule"></span>Sobre o que se perde quando se adia</span>
+    <h2>Mais um ano na mesma curva — ou um ano em outra cadência.</h2>
+    <p>Quem adia a aplicação normalmente não decide não entrar. Decide, na prática, repetir mais doze meses do que já vem vivendo: salão cheio e caixa apertado, ticket empatado, operação que só anda quando o chef está em pé. A residência não é para todo mundo, mas, para quem ela é, o custo de esperar é sempre o mesmo ano repetido.</p>
+
+    <p class="inacao-q">"O que foi feito, foi feito. O que se faz agora é decidir o próximo ano."</p>
+  </div>
+</section>
+
+<!-- 12 CTA APLICAÇÃO -->
+<section class="dark cta-apl" id="aplicacao">
+  <div class="wrap">
+    <span class="eye"><span class="rule"></span>Aplicação · Turma 07</span>
+    <h2>Envie sua aplicação.</h2>
+    <p>A aplicação é um formulário escrito de vinte minutos. Leio pessoalmente cada pedido em até sete dias. Se houver fit, marcamos uma conversa de uma hora — sem compromisso, sem pressão. A seleção final acontece após essa conversa.</p>
+
+    <a href="#" class="btn-apply gold" style="padding:22px 44px;font-size:13px">Quero aplicar para a Turma 07</a>
+
+    <small>Vagas limitadas · próxima turma abril/2026</small>
+  </div>
+</section>
+
+<!-- 13 FAQ -->
+<section>
+  <div class="wrap">
+    <span class="eye"><span class="rule"></span>Perguntas que chegam por escrito</span>
+    <h2 style="margin-top:20px;max-width:720px">O que normalmente se pergunta antes de aplicar.</h2>
+
+    <div class="faq-list">
+      <details>
+        <summary>Vocês divulgam o investimento da residência?</summary>
+        <div class="ans">Não publicamente. O valor é apresentado durante a conversa de alinhamento, apenas se a aplicação avançar. Não é por pose — é porque preço sem contexto gera ruído, e quem aplica para uma residência de doze meses precisa primeiro entender o que recebe, depois avaliar se faz sentido para sua casa.</div>
+      </details>
+      <details>
+        <summary>Existe parcelamento?</summary>
+        <div class="ans">Sim — discutido caso a caso na conversa de alinhamento, em função do momento fiscal do restaurante. O formato mais comum é trimestral, ao longo do ano da residência.</div>
+      </details>
+      <details>
+        <summary>Já fiz MBA em gastronomia. O que muda aqui?</summary>
+        <div class="ans">MBA ensina o que a escola sabe. Residência edita o que você é. O material, o ritmo e o acesso são desenhados para chef com operação em curso — não para estudante de cozinha. Se você já passou por um bom MBA, normalmente a residência encontra a casa em ponto de reconstrução, e é aí que o trabalho vira.</div>
+      </details>
+      <details>
+        <summary>Quantos chefs por turma? É grupo grande?</summary>
+        <div class="ans">Doze por turma, sem exceção. É o número que permite três imersões com conversa em círculo, chamadas quinzenais em que todos falam, e um canal direto comigo sem virar atendimento em massa.</div>
+      </details>
+      <details>
+        <summary>E se eu não tiver restaurante aberto ainda?</summary>
+        <div class="ans">Não aceitamos. A residência pressupõe operação em curso há pelo menos três anos — o trabalho é sobre reconstruir, não sobre abrir. Para chef em fase de abertura, recomendo outros caminhos antes.</div>
+      </details>
+      <details>
+        <summary>Qual o perfil médio de quem é aceito?</summary>
+        <div class="ans">Chef-proprietário entre 32 e 55 anos, com uma casa autoral em operação há mais de três anos, ticket médio hoje entre R$180 e R$450, normalmente prêmio regional ou menção nacional na bagagem, e a sensação clara de que o crescimento atual é insustentável do jeito que está montado.</div>
+      </details>
+      <details>
+        <summary>Posso aplicar mais de uma vez se for recusado?</summary>
+        <div class="ans">Pode. Uma parte dos residentes atuais foi recusada na primeira aplicação, voltou um ou dois anos depois em outro ponto de carreira, e foi aceita. A recusa é quase sempre sobre timing, não sobre mérito.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 14 FOOTER -->
+<footer>
+  <div class="wide">
+    <div class="foot-grid">
+      <div class="logo">Rafael Dorneles <span style="color:var(--dourado-2)">·</span> Residência Gastronômica</div>
+      <div>Turma 07 · aplicações abertas até 10/03/2026</div>
+      <div>São Paulo · Brasil</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

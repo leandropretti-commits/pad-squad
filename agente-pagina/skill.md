@@ -32,24 +32,50 @@ Sempre responda em **português do Brasil**.
 - `vsl.md` — roteiro de VSL, se existir (relevante para páginas mid ticket)
 - `produto.md` — estrutura do produto, entregáveis detalhados
 
-### Leitura obrigatória de infraestrutura compartilhada
-- `~/.claude/skills/_shared/swipe-file-paginas/index.md` — catálogo de referências visuais por ticket/nicho. **Sempre consultar antes de gerar HTML.** O swipe file indica qual HTML em `low/`, `mid/`, `hi/` ou `pre-venda/` usar como exemplo visual — adapta paleta/fontes à identidade do cliente/nicho, preserva a estrutura de blocos.
+### Referência visual por ticket (modelos fictícios)
 
-### Modelos fictícios publicados (referência visual completa)
+Cada ticket tem um modelo fictício publicado como referência de estrutura visual — ritmo de blocos, espaçamento, hierarquia tipográfica, tratamento de imagens:
 
-Três modelos fictícios foram construídos seguindo exatamente a anatomia desta skill e estão publicados pra servir como referência visual end-to-end por ticket:
+| Ticket | URL de referência | Usar como |
+|---|---|---|
+| Low | https://pad-modelo-low.vercel.app | Estrutura visual de todos os low tickets |
+| Mid | https://pad-modelo-mid.vercel.app | Estrutura visual de todos os mid tickets |
+| Hi | https://pad-modelo-hi.vercel.app | Estrutura visual de todos os hi tickets |
 
-| Ticket | URL | Nicho fictício | Design system aplicado |
-|---|---|---|---|
-| Low (R$47) | https://pad-modelo-low.vercel.app | Caligrafia Moderna — Larissa Monteiro | Facial Academy (violeta + rosa + verde; Montserrat + Dancing Script) |
-| Mid (R$497) | https://pad-modelo-mid.vercel.app | Confeitaria Autoral — Chef Carol Bastos | Protocolo Venda Viral (laranja #F05A00 + verde CTA #2DB34A; Nunito + Playfair) |
-| Hi (aplicação) | https://pad-modelo-hi.vercel.app | Residência Gastronômica — Chef Rafael Dorneles | Mentoria Case (creme #FAF6F0 + dourado #C4935A + olive; Cormorant Garamond italic + Raleway) |
+**Regra:** Copiar o **tratamento visual** (ritmo, espaçamento, hierarquia). NÃO copiar paleta de cores nem tipografia do modelo — essas vêm da tabela de nicho abaixo.
 
-**Como usar esses modelos:**
-- São **referência visual** — como um bloco é renderizado, tratamento de imagens, ritmo, espaçamento, hierarquia tipográfica, transições entre seções.
-- **NÃO são template de estrutura.** A arquitetura de blocos vem da anatomia desta skill (14 blocos low / 16 mid / 14 hi). Não copiar ordem de blocos do modelo — copiar tratamento visual.
-- **Design system é ajustado ao nicho da pessoa.** Os modelos usam a paleta/tipografia da referência correspondente do swipe file. Ao gerar página real, adaptar paleta, fontes e tom visual ao nicho/marca do especialista — preservando a lógica de composição (ex: hi ticket continua editorial e sóbrio, mas com as cores da marca do cliente).
-- **Fluxo recomendado:** abrir o modelo do ticket → estudar como cada bloco foi renderizado → aplicar a estrutura da skill → adaptar o design system ao nicho.
+> ⛔ **NÃO ler HTMLs de projetos reais de clientes** em `_shared/swipe-file-paginas/low/`, `mid/` ou `hi/`. Esses arquivos são privados e não devem influenciar páginas de outros projetos.
+
+---
+
+### Design system por nicho — tabela de decisão
+
+Identificar a família de nicho a partir de `contexto.md` e aplicar a paleta correspondente. Quando o operador não fornece paleta de marca, esta tabela é o critério único.
+
+| Família de nicho | Exemplos | Primária | Secundária | CTA | Tipografia | Racional |
+|---|---|---|---|---|---|---|
+| **Saúde / fono / pediatria / maternidade** | Fonoaudióloga, pediatra, nutricionista infantil, lactação | `#4A90D9` (azul claro) | `#52B788` (verde menta) | `#2A9D5C` | Inter + Lato | Azul = confiança clínica. Verde = cura, vitalidade (Elliot & Maier, 2012 — Color in Mind) |
+| **Beleza / estética / cuidado pessoal** | Esteticista, make, sobrancelha, skincare | `#C9896A` (rosé terroso) | `#9B72CF` (violeta suave) | `#7B4FBF` | Montserrat + Playfair Display | Tons quentes = acolhimento. Violeta = sofisticação e transformação |
+| **Negócios / marketing / vendas / tráfego** | Gestor de tráfego, copywriter, infoprodutor | `#1A3A5C` (azul escuro) | `#F05A00` (laranja) | `#F05A00` | Nunito + DM Sans | Azul = autoridade. Laranja = ação e urgência (Nielsen Norman Group — CTA Color Studies) |
+| **Jurídico / imóveis / financeiro** | Advogado, corretor, consultor financeiro | `#0D2B45` (marinho) | `#C4935A` (dourado) | `#C4935A` | Georgia + Raleway | Marinho + dourado = premium e segurança institucional |
+| **Gastronomia / confeitaria / lifestyle alimentar** | Chef, confeiteira, nutricionista adulto | `#FAF6F0` (creme) | `#C06040` (terracota) | `#6B7C4A` (verde oliva) | Cormorant Garamond + Nunito | Editorial e acolhedor. Terracota = calor e autenticidade |
+| **Educação / idiomas / infância** | Professora, pedagoga, psicopedagoga | `#F5C842` (amarelo suave) | `#7EC8E3` (azul bebê) | `#2F7BBE` | Nunito + Quicksand | Amarelo = otimismo e aprendizagem. Azul = confiança parental |
+| **Fitness / esportes / performance** | Personal trainer, coach esportivo, fisioterapeuta | `#1A1A2E` (preto azulado) | `#E94560` (vermelho vibrante) | `#E94560` | Roboto + Oswald | Contraste alto = força e urgência. Tom escuro = performance |
+| **Espiritualidade / autoconhecimento / terapia** | Terapeuta, coach de vida, consteladora | `#F3EDE3` (bege quente) | `#8B5E83` (ametista) | `#6B4F78` | Lora + Raleway | Tons terrosos + ametista = profundidade e acolhimento interior |
+
+**Fallback universal** (nicho não identificado ou misto): `#1A3A5C` primária, `#F05A00` CTA, Inter + Nunito. Direto e neutro.
+
+---
+
+### Comportamento após entrega da página
+
+Após gerar o HTML, apresentar ao operador:
+
+> **Design system aplicado:** [família detectada] — [primária hex] / [secundária hex] / CTA [hex]
+> **Tipografia:** [fonte título] + [fonte corpo]
+> **Por quê:** [1 linha com o racional da tabela acima]
+>
+> Se quiser usar a paleta de marca da [nome do protagonista], me passe as cores (hex ou descrição) e refaço a identidade visual mantendo toda a estrutura.
 
 ### Como identificar o protagonista
 O bloco "Quem sou eu" (e outros que citam a pessoa) é sempre do **protagonista da oferta** — que pode ser o operador direto OU a pessoa próxima em co-produção (ex: esposa do gestor de tráfego, sócio do coach, etc.).

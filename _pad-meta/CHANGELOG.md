@@ -9,6 +9,14 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.1.1] — 2026-04-22 — Correções pontuais pós-v1.1.0
+
+### Corrigido
+- `pad-engenharia-oferta`: próximo passo apresentava menu A/B (agente-pagina vs pad-disparo-inicial) apesar do skill apontar só para pad-disparo-inicial — instrução agora prescreve texto literal + bloqueio explícito
+- `agente-pagina`: design system separou "Saúde / medicina adulto" (azul clínico) de "Maternidade / pediatria / fono infantil" (rosa suave + verde menta + Nunito + Playfair Display) — fonoaudióloga infantil estava caindo na família errada
+
+---
+
 ## [1.1.0] — 2026-04-22 — Anti-drift + design system por nicho
 
 ### Adicionado

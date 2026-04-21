@@ -847,6 +847,17 @@ Passos:
    ```
 8. **Retornar URL de produção** ao operador + dica de como conectar domínio próprio no painel Vercel (opcional).
 9. **Registrar no `log.md`:** "Publicado em {URL}. Data: {data}."
+10. **Exibir card de etapa:**
+
+```
+---
+✅ Produzido: Página de vendas publicada — [nome do produto]
+📄 Arquivo:   pagina/index.html
+🔗 Ver:        [URL Vercel]
+⏸  Pausar:    /pad-salvar
+➡️  Próximo:   /agente-ads (criativos) → voltar ao /pad-disparo-inicial
+---
+```
 
 ### Casos especiais
 

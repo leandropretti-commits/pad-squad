@@ -9,6 +9,14 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.2.0] — 2026-04-22 — Consolidador global + cards de progresso
+
+### Adicionado
+- **`/pad-consolidar`** — nova skill. Lê todos os arquivos do projeto (contexto, oferta, disparo, página, log) e gera `consolidadores/resumo-projeto.md` + `consolidadores/resumo-projeto.pdf` via Python/fpdf2. Estrutura: projeto, oferta, página, checkout, tráfego, prospecção, pendências, próximos passos, histórico. Regras de PDF (quebra de página, órfãs, títulos) incorporadas na skill.
+- **Card de etapa** ao final de cada pilar: `pad-raio-x`, `pad-destilacao-metodo`, `pad-engenharia-oferta`, `pad-disparo-inicial`, `agente-pagina` — exibem bloco fixo com ✅ produzido / 📄 arquivo / 🔗 link / ⏸ pausar / ➡️ próximo ao encerrar.
+
+---
+
 ## [1.1.1] — 2026-04-22 — Correções pontuais pós-v1.1.0
 
 ### Corrigido

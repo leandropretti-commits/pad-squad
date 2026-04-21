@@ -79,10 +79,10 @@ Quando aparecer referência, adicionar aqui seguindo o guia abaixo.
 ### Low ticket (14 blocos)
 | Bloco | Asset necessário | Observação |
 |---|---|---|
-| 01 Hero | [asset: logo opcional] | Pode viver só com tipografia |
+| 01 Hero | **[asset: foto da especialista OU mockup do produto]** | Se nenhum for fornecido, gerar mockup SVG/CSS com nome do produto + badge "MOCKUP — substituir". Hero só-texto apenas se o operador confirmar. |
 | 02 Prova visual | **[asset: 3-5 prints de depoimento]** | Placeholder gerado, mas **sempre** pedir reais |
 | 07 Passo a passo | [asset: ícones/ilustrações opcionais] | SVG genérico OK |
-| 08 Conteúdo incluso | [asset: mockup do produto — opcional] | Capa do curso, área de membros |
+| 08 Conteúdo incluso | — | Apenas mini-headline + descrição do benefício. **Sem valores tachados.** Ancoragem com preços fica só no bloco 10. |
 | 12 Quem sou eu | **[asset: foto profissional do especialista]** | Headshot 800x1000px mínimo |
 | 14 FAQ | — | Sem asset |
 

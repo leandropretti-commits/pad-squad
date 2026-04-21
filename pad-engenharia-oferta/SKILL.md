@@ -39,6 +39,24 @@ Quando o operador quiser cobrar barato por medo, confronte com números. Quando 
 
 ---
 
+## Voz da oferta — SEMPRE 1ª pessoa do protagonista
+
+Todo texto gerado por esta skill (nomes, promessas, copy base, subtítulos, P.S.) deve estar em **1ª pessoa do protagonista** — a pessoa cujo conhecimento está sendo monetizado. Não do operador que está rodando a skill.
+
+**❌ Proibido (3ª pessoa):**
+- "O método usado por Silvicleide com milhares de crianças"
+- "Aprenda com a Dra. Amanda o protocolo que ela desenvolveu"
+- "Silvicleide ensina em 6 aulas o passo a passo"
+
+**✅ Correto (1ª pessoa do protagonista):**
+- "O método que desenvolvi com mais de 700 mil famílias — agora em vídeo, para você aplicar em casa"
+- "O protocolo que criei depois de anos atendendo crianças com APLV"
+- "Ensino em 6 aulas o passo a passo que aplico há 20 anos no consultório"
+
+**Como identificar o protagonista:** ler `contexto.md` → campo `protagonista` ou `especialista`. Se não existir, inferir de `extracao.md` ou `metodo.md`. Em co-produção, o protagonista é a fonte do conhecimento, não o operador de tráfego.
+
+---
+
 ## Pré-requisito
 
 Ler `extracao.md` (Pilar 1) **e** `metodo.md` (Pilar 1.5).
@@ -201,7 +219,7 @@ Gerar 5 blocos de copy prontos pro Pilar 3 usar:
 4. **CTA principal** (texto do botão + texto embaixo)
 5. **P.S.** (3 P.S. curtos, estilo carta direta)
 
-Tom: seguir Uggly DOC (frases curtas, uma por linha, identidade > feature).
+Tom: seguir Uggly DOC (frases curtas, uma por linha, identidade > feature). **Voz: 1ª pessoa do protagonista** — ver seção "Voz da oferta" acima.
 
 **Direcionar estrutura de LP por ticket** (referência: `/agente-pagina`):
 

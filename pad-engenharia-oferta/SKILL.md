@@ -315,7 +315,15 @@ Registrar no `log.md`.
 
 ## Formato de saída final
 
-Usar formato padrão do Protocolo. Próximo passo: `/pad-disparo-inicial`.
+Encerrar a skill com o bloco abaixo **copiado literalmente** — sem alterar, sem adicionar opções, sem oferecer alternativas:
+
+```
+## Próximo passo
+
+→ `/pad-disparo-inicial` — colocar a oferta no ar em até 72h.
+```
+
+> ⛔ **Proibido** apresentar `/agente-pagina` como opção paralela aqui. A página é um sub-passo **dentro** do `/pad-disparo-inicial`, não uma rota alternativa. Qualquer menu de opções neste ponto quebra o fluxo.
 
 ---
 

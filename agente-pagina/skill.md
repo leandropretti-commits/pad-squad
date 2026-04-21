@@ -54,7 +54,8 @@ Identificar a família de nicho a partir de `contexto.md` e aplicar a paleta cor
 
 | Família de nicho | Exemplos | Primária | Secundária | CTA | Tipografia | Racional |
 |---|---|---|---|---|---|---|
-| **Saúde / fono / pediatria / maternidade** | Fonoaudióloga, pediatra, nutricionista infantil, lactação | `#4A90D9` (azul claro) | `#52B788` (verde menta) | `#2A9D5C` | Inter + Lato | Azul = confiança clínica. Verde = cura, vitalidade (Elliot & Maier, 2012 — Color in Mind) |
+| **Saúde / medicina adulto** | Médico, nutricionista adulto, dentista, fisioterapeuta adulto | `#4A90D9` (azul claro) | `#52B788` (verde saúde) | `#2A9D5C` | Inter + Lato | Azul = confiança clínica. Verde = cura, vitalidade (Elliot & Maier, 2012) |
+| **Maternidade / pediatria / fono infantil** | Fonoaudióloga infantil, pediatra, consultora de amamentação, terapeuta ABA, estimulação precoce | `#F4A7B9` (rosa suave) | `#A8E6CF` (verde menta) | `#2A9D5C` | Nunito + Playfair Display | Rosa = acolhimento materno. Verde menta = cuidado e crescimento. Avatar é mãe ansiosa, não paciente adulto — paleta clínica afasta, paleta quente aproxima |
 | **Beleza / estética / cuidado pessoal** | Esteticista, make, sobrancelha, skincare | `#C9896A` (rosé terroso) | `#9B72CF` (violeta suave) | `#7B4FBF` | Montserrat + Playfair Display | Tons quentes = acolhimento. Violeta = sofisticação e transformação |
 | **Negócios / marketing / vendas / tráfego** | Gestor de tráfego, copywriter, infoprodutor | `#1A3A5C` (azul escuro) | `#F05A00` (laranja) | `#F05A00` | Nunito + DM Sans | Azul = autoridade. Laranja = ação e urgência (Nielsen Norman Group — CTA Color Studies) |
 | **Jurídico / imóveis / financeiro** | Advogado, corretor, consultor financeiro | `#0D2B45` (marinho) | `#C4935A` (dourado) | `#C4935A` | Georgia + Raleway | Marinho + dourado = premium e segurança institucional |

@@ -49,59 +49,19 @@ Ler `oferta.md`. Se não existir, interromper:
 
 ### Passo 1 — Página de vendas (24h)
 
-A estrutura da LP depende do ticket definido no Pilar 2. Usar `/agente-pagina` para gerar.
+> ⛔ **BLOQUEIO — NÃO gere HTML aqui.**
+> Esta skill NÃO cria página. Qualquer geração inline de HTML viola o protocolo e produz resultado sem qualidade.
 
-#### Se LOW TICKET (R$47-97):
+**Ação obrigatória:**
 
-Estrutura de **14 blocos, SEM vídeo de vendas, SEM CTA na primeira dobra**:
+Instrua o operador a rodar:
+```
+/agente-pagina
+```
 
-1. Hero (H1 resultado + prazo + 4 bullets, SEM botão)
-2. Prova visual / depoimentos
-3. Ruminação (dor em 1ª pessoa do avatar)
-4. Explicação da causa
-5. Motivos de falha (4 razões)
-6. Apresentação da solução + **primeiro CTA** (âncora no bloco 10)
-7. Passo a passo do método (4 etapas)
-8. Conteúdo/itens incluídos
-9. Para quem é (6-8 sentenças)
-10. Recapitulação e valor (stack tachado + preço real + CTA)
-11. Bloco de reflexão (pergunta emocional)
-12. Quem sou eu (opcional)
-13. Oferta final (preço + CTA)
-14. FAQ (mínimo 5)
+O `/agente-pagina` lê `oferta.md`, identifica o ticket automaticamente, aplica a anatomia correta (14 blocos low / 16 blocos mid / 14 blocos hi), consulta o swipe file de referências visuais e gera o HTML completo.
 
-**Regra:** Decisão de compra emocional. Sem vídeo. Sem CTA no hero. Puxa por curiosidade.
-
-#### Se MID TICKET (R$497+):
-
-Estrutura de **16 blocos, COM VSL, CTA na primeira dobra**:
-
-1. Hero + VSL + CTA (vídeo faz o trabalho pesado)
-2. Features rápidas (3-4 cards)
-3. Dor / problema
-4. Diagnóstico / causa
-5. História pessoal (opcional)
-6. Método visual (diagrama/fluxo)
-7. Prova social (mínimo 4-6, ideal 8-12)
-8. Authority / grandes players (opcional)
-9. Para quem é
-10. Entregáveis (stack com mockup)
-11. Bônus (opcional)
-12. Preço + CTA verde
-13. Garantia (selo visual)
-14. Autor / quem sou eu
-15. FAQ (mínimo 5)
-16. WhatsApp / suporte + rodapé
-
-**Regra:** VSL convence. LP reforça com prova e stack. CTA logo após vídeo.
-
----
-
-Design system padrão:
-- Inter 300-900, max-width 700px, --blue:#1A5BC4, --bg:#fff, --text:#111
-- Sem pop-up, sem contador falso, sem auto-play
-
-Salvar em `pagina/index.html`. Deploy Vercel (`cd pagina && npx vercel --prod --yes`).
+Após a geração, retomar aqui com a URL publicada.
 
 ### Passo 2 — Link de pagamento (2h)
 
@@ -133,10 +93,11 @@ Low ticket precisa de volume. A margem é pequena, então o tráfego precisa ser
 - Kill creative com CPA > 2x o preço do produto em 48h
 - Escala horizontal: duplica conjunto que funciona, não aumenta orçamento
 
-**Gerar:**
-- 3 criativos estáticos (imagem + copy curta, ângulos diferentes)
-- 1 criativo em vídeo curto (15-30s, estilo Story/Reels)
-- Sugestão de 5 interesses por conjunto
+> ⛔ **BLOQUEIO — NÃO gere copy de anúncio aqui.**
+> Instrua o operador a rodar `/agente-ads` para criar os criativos.
+> Passar como contexto: ticket (LOW), objetivo (COMPRA), 3 ângulos a testar.
+
+- Sugestão de 5 interesses por conjunto (pode listar aqui)
 
 #### Se MID TICKET (R$497+):
 
@@ -148,10 +109,9 @@ Mid ticket vende menos unidades. Tráfego serve pra gerar conversa, não compra 
 | **DM direta no Instagram (do operador ou da pessoa próxima)** | Conversas 1:1 com base quente | R$0 |
 | **Lista de contatos/WhatsApp** (rede do operador + rede da pessoa próxima) | Conversão mais rápida | R$0 |
 
-**Gerar:**
-- 1 criativo estático Meta Ads (imagem + copy curta)
-- Template de DM (3-4 linhas, identidade, não venda direta)
-- Template de WhatsApp (igual)
+> ⛔ **BLOQUEIO — NÃO gere copy de anúncio aqui.**
+> Instrua o operador a rodar `/agente-ads` para o criativo Meta Ads.
+> Para DM e WhatsApp: esses templates podem ser gerados aqui por serem prospecção direta (não anúncio). Ver Passo 4.
 
 ---
 

@@ -195,7 +195,69 @@ Depois:
 1. Salvar `00-contexto/contexto.md` com tudo da FASE 1 e 2 — **apenas se não existir**.
 2. Inicializar `00-contexto/log.md` — **apenas se não existir**.
 3. Criar `00-contexto/briefing.md` com resumo 1 página pra onboarding de novo agente.
-4. Apresentar menu dos 4 pilares (+ intercalares):
+4. **Criar `CLAUDE.md` na raiz do projeto** — **obrigatório, sempre, mesmo que já exista** (sobrescrever com dados atuais). Este arquivo é carregado pelo Claude Code em todo turno e mantém as regras ativas mesmo sem `/comando`.
+
+Template a preencher com os dados reais do projeto:
+
+```markdown
+# Projeto PAD — [NOME_DO_PROJETO]
+> Gerado por /protocolo-ativo-digital. Atualizado em: [DATA_ISO]
+> Este arquivo mantém as regras do protocolo ativas em toda a conversa.
+
+## Contexto ativo
+- **Protagonista:** [NOME_DA_PROTAGONISTA]
+- **Nicho:** [NICHO]
+- **Modo:** [co-produção | especialista-solo]
+- **Ticket:** [a definir no Pilar 2 | LOW | MID | HI]
+- **Pilar ativo:** [PILAR_INICIAL — ex: Pilar 1 — /pad-raio-x]
+
+## Regras invioláveis
+
+### Voz e copy
+- Copy SEMPRE em 1ª pessoa da [PROTAGONISTA] — não do operador, não do Claude
+- ❌ "o método da [PROTAGONISTA]" → ✅ "meu método"
+- Sem linguagem genérica de IA ("incrível", "transformador", "revolucionário")
+
+### Delegação obrigatória — nunca gerar inline
+- ⛔ Página HTML → /agente-pagina (nunca gerar HTML diretamente)
+- ⛔ Copy de anúncio → /agente-ads (nunca gerar ad copy diretamente)
+- ⛔ Roteiro de VSL → /agente-vsl (nunca gerar VSL diretamente)
+
+### Regras de página (válidas quando ticket estiver definido)
+- Preço NUNCA antes do bloco 10
+- Primeiro CTA SEMPRE href="#recap-valor", nunca link de checkout direto
+- Hero SEMPRE com elemento visual (foto da protagonista ou mockup do produto)
+
+## Modo de operação
+
+**Para manter o protocolo funcionando, inicie cada mensagem com o skill ativo.**
+
+Skill atual: /[PILAR_INICIAL]
+
+Se receber mensagem sem /comando → responder:
+> "Para manter o protocolo, use o skill ativo. Qual você quer usar agora?
+> Sugestão: /[PILAR_SUGERIDO] — ou /protocolo-ativo-digital para ver o estado completo."
+
+Não executar tarefa especializada fora do skill correto.
+
+## Tabela de skills do PAD
+
+| O que fazer | Comando |
+|---|---|
+| Ver estado do projeto / retomar | /protocolo-ativo-digital |
+| Pilar 1 — Identificar o que vender | /pad-raio-x |
+| Pilar 1.5 — Destilar o método | /pad-destilacao-metodo |
+| Pilar 2 — Montar a oferta | /pad-engenharia-oferta |
+| Pilar 3 — Colocar no ar | /pad-disparo-inicial |
+| Pilar 4 — Ajustar até vender | /pad-prova-venda |
+| Pilar 4.5 — Escalar | /pad-escala |
+| Criar a página de vendas | /agente-pagina |
+| Criar anúncios | /agente-ads |
+| Criar roteiro de VSL | /agente-vsl |
+| Salvar checkpoint | /pad-salvar |
+```
+
+5. Apresentar menu dos 4 pilares (+ intercalares):
 
 > Diagnóstico pronto. O protocolo:
 >

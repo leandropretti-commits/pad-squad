@@ -9,6 +9,13 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.2.2] — 2026-04-22 — Extração de avatar obrigatória antes de copy
+
+### Adicionado
+- `agente-pagina`: seção "Extração de avatar" com `⛔ BLOQUEIO` antes de qualquer copy — modelo deve extrair dor/medos/tentativas/linguagem do avatar de `contexto.md` antes de escrever H1, ruminação ou bloco de causa. Se contexto não tiver pesquisa de avatar, pergunta ao operador. Inclui tabela por bloco + exemplos ❌/✅ do erro vs. o certo na headline.
+
+---
+
 ## [1.2.1] — 2026-04-22 — Fix geração de página sem design system
 
 ### Corrigido

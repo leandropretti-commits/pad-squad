@@ -9,6 +9,14 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.2.1] — 2026-04-22 — Fix geração de página sem design system
+
+### Corrigido
+- `agente-pagina`: instrução de swipe file era "consultar referência" (vago, ignorado) — substituída por `⛔ BLOQUEIO` explícito com passo a passo obrigatório de extração de CSS (seções, cards, botões, grid de depoimentos, trust-line) antes de gerar qualquer HTML
+- `agente-pagina`: modelo gerava HTML do zero em vez de usar o CSS do modelo fictício como base — agora a instrução prescreve: leia o arquivo fonte, extraia os padrões, substitua apenas cores e fontes pelo design system do nicho
+
+---
+
 ## [1.2.0] — 2026-04-22 — Consolidador global + cards de progresso
 
 ### Adicionado

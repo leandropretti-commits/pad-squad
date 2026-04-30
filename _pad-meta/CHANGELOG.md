@@ -9,6 +9,16 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.2.3] — 2026-04-30 — Fix de caminhos de arquivo e portabilidade
+
+### Corrigido
+- `pad-raio-x`: adicionado card de etapa com caminho correto `01-extracao/extracao.md` (antes ausente)
+- `pad-disparo-inicial`: `Salvar em 'disparo.md'` → `04-disparo/disparo.md` (salvava na raiz do projeto)
+- `pad-destilacao-metodo`: `entrevista-raw.md` e `entrevista-roteiro.md` sem pasta → `02-metodo/entrevista-raw.md` e `02-metodo/entrevista-roteiro.md`; card e checklist corrigidos para `02-metodo/metodo.md`
+- `_shared/consolidador-protocol.md`: removidas referências pessoais ("Leandro") → linguagem genérica ("operador") para distribuição pública
+
+---
+
 ## [1.2.2] — 2026-04-22 — Extração de avatar obrigatória antes de copy
 
 ### Adicionado

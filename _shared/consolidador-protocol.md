@@ -4,8 +4,7 @@
 > final da etapa, salva em markdown + Word (.docx), e mantém a estrutura do
 > projeto organizada.
 >
-> Inspirado no padrão DOUG.EXE GANG — Módulo 1 Money Skills. Adaptado pros
-> projetos do Leandro.
+> Inspirado no padrão DOUG.EXE GANG — Módulo 1 Money Skills.
 
 ---
 
@@ -15,7 +14,7 @@ Cada etapa termina com **um documento denso em prosa** (não bullet solto) que:
 
 1. Qualquer IA lendo entende o projeto profundamente sem mais contexto
 2. Serve de matéria-prima permanente pra copy, oferta, conteúdo e próximas etapas
-3. Documenta as decisões de forma que o Leandro não dependa de memória
+3. Documenta as decisões de forma que o operador não dependa de memória
 
 Se vier raso, refaz. Se ficar bonito, suspeita — densidade real vem com peso.
 
@@ -35,7 +34,7 @@ projeto-[nome]/
 - **`NN`** = número da etapa, com zero à esquerda (`01`, `02`, …)
 - **`[nome-etapa]`** = slug em minúsculas com hífen (`avatar`, `oferta`, `metodo`)
 - **Mantém o .md E o .docx.** O .md é a versão canônica (editável, lida por
-  IA); o .docx é pro Leandro abrir, imprimir, compartilhar.
+  IA); o .docx é pro operador abrir, imprimir, compartilhar.
 
 ---
 
@@ -260,7 +259,7 @@ projeto-pad-[nome]/
 
 - Cada skill, ao rodar novamente, **regenera** o `.md` + `.docx` do seu consolidador.
 - O consolidador antigo é sobrescrito (não há versionamento automático).
-- Se o Leandro quiser versionar, ele faz manualmente: `cp 02-oferta.md 02-oferta-v1.md`.
+- Para versionar manualmente: `cp 02-oferta.md 02-oferta-v1.md`.
 - O `log.md` em `00-contexto/` registra toda regeneração com data e motivo.
 
 ---

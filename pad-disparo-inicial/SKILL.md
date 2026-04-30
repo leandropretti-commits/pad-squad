@@ -142,7 +142,7 @@ Sem pitch. Sem link direto. Só convite.
 
 ### Passo 5 — Checklist "tá no ar"
 
-Salvar em `disparo.md`:
+Salvar em `04-disparo/disparo.md`:
 
 ```markdown
 # Disparo Inicial — Pilar 3
@@ -204,6 +204,20 @@ Registrar no `log.md`.
 ## Formato de saída final
 
 Usar formato padrão do Protocolo. Próximo passo: `/pad-prova-venda`.
+
+## Card de etapa (exibir sempre ao terminar)
+
+Ao encerrar a skill, exibir este bloco preenchido com dados reais — sem pular:
+
+```
+---
+✅ Produzido: Plano de disparo em 72h — página + checkout + tráfego + 20 contatos
+📄 Arquivo:   04-disparo/disparo.md
+🔗 Página:    [URL publicada ou "local: pagina/index.html"]
+⏸  Pausar:    /pad-salvar
+➡️  Próximo:   /pad-prova-venda
+---
+```
 
 ---
 

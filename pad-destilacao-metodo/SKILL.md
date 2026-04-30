@@ -84,11 +84,22 @@ Ler `extracao.md`. Se não existir, interromper:
 > Sem o Pilar 1 (recorte + promessa), destilar método é destilar vazio.
 > Rode `/pad-raio-x` primeiro. Volto quando existir `extracao.md`.
 
+### Regra de ticket — quando o Pilar 1.5 completo é obrigatório vs opcional
+
+| Ticket | Pilar 1.5 completo (entrevista 45-60min) | Mínimo aceitável |
+|---|---|---|
+| **Low ticket (R$97)** | Opcional — recomendado, não bloqueante | Mecanismo nomeado + 1 caso real + estrutura implícita do Pilar 1. Validar primeiro, aprofundar depois. |
+| **Mid ticket (R$497–R$997)** | Obrigatório | Framework de 3-5 etapas destilado e validado pela pessoa próxima |
+| **Hi ticket (R$1.497+)** | Obrigatório | Framework completo + pulo do gato + sinal precoce + 3 casos destilados |
+
+**Se o ticket definido no Pilar 1 for low ticket:** apresentar ao operador a opção de pular direto para `/pad-engenharia-oferta`, informando que a entrevista pode ser feita após a primeira venda para enriquecer o produto.
+
 Verificar `contexto.md` → campo `modo`:
 
 - **`modo: especialista-solo`**: o operador é o próprio especialista. Pular MOMENTO 1 e MOMENTO 2. Ativar **PLANO C — Auto-Destilação Guiada** (seção abaixo).
-- **`modo: co-producao`** (padrão, ou campo ausente): há uma pessoa próxima a entrevistar. Confirmar se ela topou:
-  - **Se topou:** seguir pro MOMENTO 1 (formato padrão — entrevista 45-60min).
+- **`modo: co-producao`** (padrão, ou campo ausente): há uma pessoa próxima a entrevistar. Verificar como o operador chegou aqui:
+  - **Se trouxe respostas do Formulário de Extração do Ouro:** ativar **PLANO D — Formulário** (seção abaixo). Processar as respostas escritas como se fossem transcrição de entrevista.
+  - **Se quer fazer entrevista ao vivo:** seguir pro MOMENTO 1 (formato padrão — entrevista 45-60min).
   - **Se não topou / resistiu / "não tenho tempo":** ativar **PLANO B — Áudios Casuais** (seção abaixo). Não desistir. A maioria das pessoas próximas não quer "ser entrevistada formalmente" — mas aceita mandar áudios no WhatsApp.
   - **Se absolutamente recusa qualquer formato:** voltar ao Pilar 1 pra revisão de viabilidade. Sem input da pessoa próxima, o produto sai genérico.
 
@@ -118,7 +129,7 @@ O operador manda as 5 perguntas pra pessoa próxima via WhatsApp, UMA POR VEZ, p
 4. "Se você só tivesse 1 hora com essa pessoa e nunca mais pudesse atender ela — o que você faria nessa hora?"
 5. "Qual o erro mais comum que as pessoas cometem tentando resolver isso sozinhas?"
 
-**Processamento:** O operador coleta os 5 áudios, transcreve (pode usar Whisper, IA, ou digitar manualmente) e cola em `entrevista-raw.md`. A partir daí, o MOMENTO 3 (destilação pós-entrevista) segue igual.
+**Processamento:** O operador coleta os 5 áudios, transcreve (pode usar Whisper, IA, ou digitar manualmente) e cola em `02-metodo/entrevista-raw.md`. A partir daí, o MOMENTO 3 (destilação pós-entrevista) segue igual.
 
 **Limitações do Plano B:**
 - Respostas tendem a ser mais curtas e menos profundas
@@ -130,6 +141,30 @@ O operador manda as 5 perguntas pra pessoa próxima via WhatsApp, UMA POR VEZ, p
 > O que exatamente você faz diferente ali?"
 
 Isso substitui o "cavar" da entrevista ao vivo com custo de fricção mínimo.
+
+---
+
+## PLANO D — Formulário de Extração do Ouro (input assíncrono, sem chamada)
+
+Para mid/hi ticket onde o operador veio do Pilar 1.5 via formulário escrito — sem entrevista ao vivo ou áudios.
+
+**Como funciona:**
+
+O operador já trouxe as respostas escritas da pessoa próxima (via material BÔNUS do PAD — Formulário de Extração do Ouro). A squad processa essas respostas como se fossem transcrição de entrevista.
+
+**Processamento:**
+
+1. Colar as respostas do formulário em `02-metodo/entrevista-raw.md` (ou usar diretamente se já coladas).
+2. Seguir direto para o **MOMENTO 3 — Destilação Pós-Entrevista** (sem MOMENTO 1 e MOMENTO 2).
+3. Se alguma resposta estiver vaga ou incompleta, gerar 1-2 follow-ups pontuais para o operador repassar à pessoa próxima por escrito, antes de destillar.
+
+**Limitações:**
+
+- Respostas escritas tendem a ser mais curtas que áudios ou entrevista ao vivo.
+- Sem o "cavar" ao vivo, o "pulo do gato" (diferencial oculto) pode sair raso.
+- Mitigação: após a primeira destilação, identificar o ponto mais fraco e propor 1 follow-up direto.
+
+**Resultado esperado:** mesmo `metodo.md` que os outros planos entregam. A diferença é na profundidade da matéria-prima — não no que é gerado com ela.
 
 ---
 
@@ -152,7 +187,7 @@ Entregar as 5 perguntas abaixo de uma vez. O especialista responde em 1-2h, no p
 4. "Se você só tivesse 1 hora com essa pessoa e nunca mais pudesse atendê-la — o que você faria nessa hora? E o que você deixaria de fora, mesmo achando importante?"
 5. "Quando alguém tenta resolver esse problema sozinha, qual erro ela quase sempre comete? E se ela entendesse esse erro antes de começar, o que mudaria?"
 
-**Processamento:** colar as respostas em `entrevista-raw.md`. A partir daí, MOMENTO 3 (destilação pós-entrevista) segue idêntico ao modo padrão.
+**Processamento:** colar as respostas em `02-metodo/entrevista-raw.md`. A partir daí, MOMENTO 3 (destilação pós-entrevista) segue idêntico ao modo padrão.
 
 **Validação de volta (adaptada):**
 No modo co-produção, a validação é com a pessoa próxima. Em especialista-solo, o especialista valida com alguém que conhece bem o trabalho: um cliente antigo, colega de área, ou relendo o framework 24h depois com olhar crítico. O objetivo é o mesmo — confirmar que o framework captura o que ele realmente faz, não uma versão idealizada.
@@ -175,7 +210,7 @@ Com o operador presente, confirmar:
 3. Data e hora marcadas? (ou prazo pra receber os áudios)
 4. Ambiente: tranquilo, sem interrupção, com ela à vontade
 
-Gerar arquivo `entrevista-roteiro.md` no projeto com:
+Gerar arquivo `02-metodo/entrevista-roteiro.md` no projeto com:
 - As 5 perguntas cirúrgicas (bloco abaixo)
 - Transições sugeridas entre perguntas
 - "Quando não aceitar resposta genérica"
@@ -303,7 +338,7 @@ O operador volta com:
 - Notas da conversa
 - (Se gravou) transcrição ou áudio
 
-Cola tudo em `entrevista-raw.md` no projeto, ou pega a transcrição do
+Cola tudo em `02-metodo/entrevista-raw.md` no projeto, ou pega a transcrição do
 formato dele.
 
 Você processa em **4 passos**:
@@ -449,6 +484,19 @@ Registrar no `log.md`:
 → Próximo: /pad-engenharia-oferta
 ```
 
+## Card de etapa (exibir sempre ao terminar)
+
+Ao encerrar a skill, exibir este bloco preenchido com dados reais — sem pular:
+
+```
+---
+✅ Produzido: Método destilado — [nome do framework] com [N] etapas
+📄 Arquivo:   02-metodo/metodo.md
+⏸  Pausar:    /pad-salvar
+➡️  Próximo:   /pad-engenharia-oferta
+---
+```
+
 ---
 
 ## Armadilhas comuns (cortar na hora)
@@ -514,7 +562,7 @@ Destilei o método de [pessoa próxima] em [N] etapas, validadas por ela em
 - [x] Entrevista de [duração] concluída
 - [x] Framework de [N] etapas destilado
 - [x] Validação de volta feita em [data]
-- [x] Arquivo salvo: projeto-pad-[nome]/metodo.md
+- [x] Arquivo salvo: projeto-pad-[nome]/02-metodo/metodo.md
 
 ### Próximo passo
 > /pad-engenharia-oferta — transformar o método destilado em oferta

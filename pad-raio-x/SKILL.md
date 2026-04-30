@@ -98,34 +98,46 @@ Passar nos 3 testes da promessa primária:
 
 ### Passo 5 — Direção (formato provável)
 
-Sugerir 1-2 formatos de entrega viáveis pro recorte escolhido:
-- PDF + checklist ("guia prático") — R$37-97
-- Pequeno grupo ao vivo 2-4 encontros — R$297-697
-- Acompanhamento 1:1 por 30 dias — R$797-1.997
-- Híbrido (grupo + 1 chamada individual) — R$497-997
+Sempre apresentar as 3 opções de ticket. O sinal de audiência define qual é a mais indicada.
+
+| Opção | Formato | Faixa de preço | Quando indicar |
+|---|---|---|---|
+| **Low ticket** ⭐ | PDF + checklist + aulas ao vivo | R$47–97 | Sempre uma opção. Mais indicada se audiência < 3.000 ou sem venda digital anterior. Valida com menos tráfego, aprende antes de investir pesado. |
+| **Mid ticket** | Pequeno grupo ao vivo / híbrido (grupo + 1:1) | R$297–997 | Audiência ≥ 3.000 ou já vendeu online antes. Exige mais tráfego ou lista existente pra validar. |
+| **Hi ticket** | Acompanhamento 1:1 por 30 dias | R$797–1.997 | Caso real forte + alta proximidade. Pouco volume, alto valor por venda. |
+
+**Regra de sinalização:**
+- Se a Q4 do onboarding indicar audiência < 3.000 ou zero vendas anteriores → marcar low ticket com ⭐ e explicar o porquê.
+- Se não houver dado de audiência → perguntar antes de sugerir direção: "Quantos seguidores/clientes tem hoje a pessoa ou você?"
 
 NÃO travar preço aqui. Só direção. Preço é Pilar 2.
 
-### Passo 5.5 — Confirmar viabilidade pro Pilar 1.5 (Destilação)
+### Passo 5.5 — Rota pós-extração (depende do ticket escolhido)
 
-Antes de fechar, **confirmar explicitamente** com o operador:
+**Se o ticket escolhido for LOW TICKET:**
 
-> "O Pilar 1.5 (Destilação de Método) precisa de input direto da [pessoa
-> próxima]. Tem dois formatos:
->
-> **Formato A (ideal):** Entrevista de 45-60min gravada (chamada ao vivo).
-> Mais profundo, mais material.
->
-> **Formato B (alternativa):** 5 áudios de 3-5min no WhatsApp, respondendo
-> as mesmas perguntas no tempo dela. Menos profundo, mas funciona.
->
-> Sem nenhum dos dois, o Pilar 2 recebe estrutura genérica e o produto
-> sai fraco. Qual formato ela topa?"
+Pular Pilar 1.5. Ir direto para Pilar 2.
 
-- **Se topa A:** ideal. Seguir com entrevista.
-- **Se topa B:** ok. Seguir com áudios casuais (Plano B do Pilar 1.5).
-- **Se não topa nenhum:** operador precisa resolver isso antes de avançar.
-  Sem input da pessoa próxima, não há método pra destilar.
+> "Ótimo. Com low ticket, a destilação de método não é obrigatória agora — você já tem o suficiente para estruturar a oferta.
+>
+> Próximo passo: `/pad-engenharia-oferta`"
+
+---
+
+**Se o ticket escolhido for MID ou HI TICKET:**
+
+O Pilar 1.5 entra como etapa opcional via formulário assíncrono — sem entrevista obrigatória.
+
+> "Para mid/hi ticket, o Pilar 1.5 (Destilação de Método) fortalece muito o produto. Mas o formato mudou — não precisa de chamada ao vivo.
+>
+> No material BÔNUS do PAD você encontra o **Formulário de Extração do Ouro** — um documento com perguntas que a [pessoa próxima] pode responder por escrito, no tempo dela.
+>
+> Quando ela responder, você cola aqui na squad e a gente destila o método dela em framework estruturado.
+>
+> Se preferir pular agora e estruturar a oferta com o que já temos, também funciona — a oferta sai menos específica, mas sai."
+
+- **Se traz as respostas do formulário:** rodar `/pad-destilacao-metodo` com o formulário como input (equivale a transcrição de entrevista).
+- **Se quer pular:** seguir direto para `/pad-engenharia-oferta`. Registrar no `extracao.md` que Pilar 1.5 foi pulado.
 
 ### Passo 6 — Salvar `extracao.md`
 
@@ -153,15 +165,30 @@ Antes de fechar, **confirmar explicitamente** com o operador:
 ## Recortes descartados
 - Recorte [letra]: [razão do descarte]
 
-## Viabilidade do Pilar 1.5
-- Entrevista com a pessoa próxima: topou / precisa ajustar / não topou
-- Data combinada para a entrevista: ...
+## Pilar 1.5
+- Ticket: [low / mid / hi]
+- Status: [pulado (low ticket) / formulário pendente / formulário respondido / destilação concluída]
 
 ## Próximo passo
-→ /pad-destilacao-metodo (Pilar 1.5) — destilar o método dela em framework vendável
+→ [low ticket] /pad-engenharia-oferta (Pilar 2) — estruturar oferta diretamente
+→ [mid/hi ticket] Formulário de Extração do Ouro com a pessoa próxima → /pad-destilacao-metodo → /pad-engenharia-oferta
 ```
 
 Registrar no `log.md`.
+
+## Card de etapa (exibir sempre ao terminar)
+
+Ao encerrar a skill, exibir este bloco preenchido com dados reais — sem pular:
+
+```
+---
+✅ Produzido: Extração de Ouro (Pilar 1) — recorte + avatar + caso + promessa base
+📄 Arquivo:   01-extracao/extracao.md
+⏸  Pausar:    /pad-salvar
+➡️  Próximo (low ticket):   /pad-engenharia-oferta
+➡️  Próximo (mid/hi ticket): Formulário de Extração do Ouro → /pad-destilacao-metodo → /pad-engenharia-oferta
+---
+```
 
 ---
 

@@ -9,6 +9,15 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.1] — 2026-04-30 — Fix install + agente-ads PAD + pad-salvar sem hook
+
+### Corrigido
+- **README**: `find` do one-liner de instalação excluía `commands/` mas não excluía `.git` — corrigido com `! -name '.*'` (previne `~/.claude/skills/.git`)
+- **`agente-ads`**: detecta ecossistema PAD (`projeto-pad-`) e salva em `04-disparo/ads.md`; antes salvava fixo em `07-ads/ads.md` (O Sistema) mesmo dentro de projetos PAD
+- **`commands/pad-salvar.md`**: Passo 3 dependia de `~/.claude/hooks/session-history.sh` com `&&` — se o hook não existisse, nenhum checkpoint era criado. Agora tem fallback: se o hook não existir, cria arquivo diretamente em `~/.claude/history/`
+
+---
+
 ## [1.3.0] — 2026-04-30 — Squad completa: agente-ads, agente-vsl, pad-salvar, pad_version
 
 ### Adicionado

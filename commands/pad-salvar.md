@@ -144,13 +144,25 @@ Regras:
 Execute em uma única tool call Bash, substituindo `{PAD_ROOT}` pelo valor absoluto capturado no Passo 1:
 
 ```bash
-(cd "{PAD_ROOT}" && bash ~/.claude/hooks/session-history.sh) && \
-  ls -t ~/.claude/history/$(date +"%Y/%m")/*.md 2>/dev/null | head -1
+HIST_DIR="$HOME/.claude/history/$(date +"%Y/%m")"
+mkdir -p "$HIST_DIR"
+FALLBACK="$HIST_DIR/$(basename "{PAD_ROOT}")-$(date +"%Y%m%d-%H%M%S").md"
+
+if [ -f "$HOME/.claude/hooks/session-history.sh" ]; then
+  (cd "{PAD_ROOT}" && bash "$HOME/.claude/hooks/session-history.sh") 2>/dev/null
+  CHECKPOINT_PATH=$(ls -t "$HIST_DIR"/*.md 2>/dev/null | head -1)
+  [ -z "$CHECKPOINT_PATH" ] && CHECKPOINT_PATH="$FALLBACK" && touch "$FALLBACK"
+else
+  touch "$FALLBACK"
+  CHECKPOINT_PATH="$FALLBACK"
+fi
+
+echo "CHECKPOINT_PATH=$CHECKPOINT_PATH"
 ```
 
-O `(cd ... && ...)` garante que o hook usa `{PAD_ROOT}` como `$PWD` — então `basename` retorna o nome correto (`projeto-pad-silvi`, não a subpasta onde o aluno estava).
+O `(cd ... && ...)` garante que o hook usa `{PAD_ROOT}` como `$PWD` — então `basename` retorna o nome correto (`projeto-pad-silvi`, não a subpasta onde o aluno estava). Se o hook não existir (instalação nova), o fallback cria o arquivo diretamente em `~/.claude/history/`.
 
-A última linha da saída é o caminho do checkpoint recém-criado. Guarde como `CHECKPOINT_PATH`.
+A última linha da saída é o caminho do checkpoint. Guarde como `CHECKPOINT_PATH`.
 
 Agora use **Read** pra ler `CHECKPOINT_PATH` e em seguida **Write** pra sobrescrevê-lo com o conteúdo abaixo, preenchido com contexto **real** da conversa atual:
 

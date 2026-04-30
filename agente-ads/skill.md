@@ -3,7 +3,7 @@ name: agente-ads
 description: >
   Agente de Anúncios. Gera copy de anúncios e roteiros de criativos para Facebook/Instagram Ads.
   Use /agente-ads para criar variações de anúncios com roteiros prontos para gravar.
-  Parte do ecossistema O Sistema.
+  Parte dos ecossistemas O Sistema e PAD.
 ---
 
 # Agente de Anúncios — Copy + Roteiros de Criativos
@@ -142,8 +142,10 @@ número grande "0 processos" com subtexto.
 - Copy curta e direta — anúncio não é artigo
 - Headlines com gancho forte — a pessoa decide em 1 segundo se para ou scrolla
 - CTA claro e específico (não usar "Saiba mais" genérico — preferir ação: "Quero o kit", "Baixar agora", "Ver como funciona")
-- Salvar resultado em `ads.md`
-- Após salvar em `ads.md`, sugerir: "Anúncios prontos. Rode /agente-pagina para criar a página ou /agente-funil para montar o funil completo."
+- Detectar ecossistema pelo nome da pasta do projeto:
+  - Pasta começa com `projeto-pad-` → **PAD** → salvar em `04-disparo/ads.md`
+  - Pasta começa com `projeto-` (sem `pad-`) → **O Sistema** → salvar em `07-ads/ads.md`
+- Após salvar, sugerir: "Anúncios prontos. Rode /agente-pagina para criar a página."
 
 ---
 
@@ -180,7 +182,7 @@ Ao concluir qualquer entrega, usar este formato:
 
 ### Checkpoints
 - [x] O que foi criado/decidido
-- [x] Arquivo salvo: `projeto-nome/ads.md`
+- [x] Arquivo salvo: `projeto-nome/04-disparo/ads.md` (PAD) ou `projeto-nome/07-ads/ads.md` (O Sistema)
 - [ ] Pendente: próximo passo (se houver)
 
 ### Próximo passo
@@ -195,8 +197,13 @@ Ao terminar o pacote de anúncios, gerar o **consolidador denso** seguindo `~/.c
 
 ### Salvar em
 
+**O Sistema** (`projeto-[nome]/`):
 - `projeto-[nome]/07-ads/ads.md` (1.500 palavras mínimo)
 - `projeto-[nome]/07-ads/ads.docx`
+
+**PAD** (`projeto-pad-[nome]/`):
+- `projeto-pad-[nome]/04-disparo/ads.md` (1.500 palavras mínimo)
+- `projeto-pad-[nome]/04-disparo/ads.docx`
 
 ### Estrutura obrigatória
 
@@ -238,10 +245,19 @@ Lista das 5 principais + qual anúncio endereça cada uma.
 
 ### Converter e registrar
 
+**O Sistema:**
 ```bash
 which pandoc >/dev/null 2>&1 && \
   pandoc "projeto-[nome]/07-ads/ads.md" \
     -o "projeto-[nome]/07-ads/ads.docx" --standalone \
+  || echo "⚠ pandoc não instalado. Rodar: brew install pandoc"
+```
+
+**PAD:**
+```bash
+which pandoc >/dev/null 2>&1 && \
+  pandoc "projeto-pad-[nome]/04-disparo/ads.md" \
+    -o "projeto-pad-[nome]/04-disparo/ads.docx" --standalone \
   || echo "⚠ pandoc não instalado. Rodar: brew install pandoc"
 ```
 

@@ -10,7 +10,7 @@
 
 ```bash
 git clone https://github.com/leandropretti-commits/pad-squad /tmp/pad-squad && \
-  find /tmp/pad-squad -mindepth 1 -maxdepth 1 -type d ! -name commands -exec cp -r {} ~/.claude/skills/ \; && \
+  find /tmp/pad-squad -mindepth 1 -maxdepth 1 -type d ! -name commands ! -name '.*' -exec cp -r {} ~/.claude/skills/ \; && \
   mkdir -p ~/.claude/commands && cp /tmp/pad-squad/commands/*.md ~/.claude/commands/ && \
   rm -rf /tmp/pad-squad
 ```

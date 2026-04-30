@@ -79,10 +79,10 @@ can tell*. Sua função é tornar visível.
 
 ## Pré-requisito
 
-Ler `extracao.md`. Se não existir, interromper:
+Ler `01-extracao/extracao.md`. Se não existir, interromper:
 
 > Sem o Pilar 1 (recorte + promessa), destilar método é destilar vazio.
-> Rode `/pad-raio-x` primeiro. Volto quando existir `extracao.md`.
+> Rode `/pad-raio-x` primeiro. Volto quando existir `01-extracao/extracao.md`.
 
 ### Regra de ticket — quando o Pilar 1.5 completo é obrigatório vs opcional
 
@@ -414,7 +414,7 @@ previne 2 semanas de oferta genérica.
 
 ---
 
-### Passo final — Salvar `metodo.md`
+### Passo final — Salvar `02-metodo/metodo.md`
 
 ```markdown
 # Destilação de Método — Pilar 1.5

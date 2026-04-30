@@ -32,11 +32,15 @@ Sempre responda em **português do Brasil**.
 
 ## Arquivo de estado
 
-- **Lê:** `contexto.md`, `oferta.md`, `metodo.md` (do projeto atual)
-- **Escreve:** `ads.md`
+Detectar ecossistema antes de ler:
+- `projeto-pad-` → **PAD**: `03-oferta/oferta.md`, `02-metodo/metodo.md`
+- `projeto-` (sem `pad-`) → **O Sistema**: `oferta.md`, `metodo.md`
+
+- **Lê:** `contexto.md`, `oferta.md` (ou `03-oferta/oferta.md`), `metodo.md` (ou `02-metodo/metodo.md`)
+- **Escreve:** `04-disparo/ads.md` (PAD) ou `07-ads/ads.md` (O Sistema)
 - **Log:** Registra ações e estados pendentes no `log.md` do projeto (append only).
 
-### Se `oferta.md` não existir:
+### Se `oferta.md` / `03-oferta/oferta.md` não existir:
 
 Coletar o mínimo necessário antes de gerar os anúncios:
 
@@ -48,7 +52,7 @@ Coletar o mínimo necessário antes de gerar os anúncios:
 > 4. **Qual seu diferencial?** (o que faz diferente de todo mundo)
 > 5. **Tem prova social?** (depoimentos, números, resultados de clientes)
 
-Com as respostas, gerar os anúncios. Se `oferta.md` existir, usar tudo que já foi definido.
+Com as respostas, gerar os anúncios. Se `oferta.md` (ou `03-oferta/oferta.md` no PAD) existir, usar tudo que já foi definido.
 
 ---
 

@@ -126,11 +126,11 @@ A página é o **especialista falando diretamente com quem está lendo**, indepe
 
 **Quando for co-produção** (ex: Marcos opera, Juliana é a protagonista): o "eu" da página é da **Juliana**, não do Marcos. A skill deve identificar a protagonista (ver seção acima) e escrever a página inteira como se a protagonista estivesse ditando o texto.
 
-### Regra para mid ticket e `vsl.md`
-- Se a oferta for mid ticket e `vsl.md` existir: referenciar o vídeo na página (bloco 01 — Hero + VSL).
-- Se a oferta for mid ticket e `vsl.md` **não** existir: avisar o usuário: "Sua oferta é mid ticket. Recomendo rodar /agente-vsl para criar o roteiro do vídeo de vendas antes de montar a página. Ou, se já tem um vídeo pronto, me passa o link."
+### Regra para mid ticket e VSL
+- Se a oferta for mid ticket e `03-oferta/vsl-roteiro.md` (PAD) ou `vsl.md` (O Sistema) existir: referenciar o vídeo na página (bloco 01 — Hero + VSL).
+- Se não existir: avisar o usuário: "Sua oferta é mid ticket. Recomendo rodar /agente-vsl para criar o roteiro do vídeo de vendas antes de montar a página. Ou, se já tem um vídeo pronto, me passa o link."
 
-### Se `oferta.md` não existir
+### Se `oferta.md` / `03-oferta/oferta.md` não existir
 Antes de construir qualquer página, coletar o mínimo necessário:
 1. **Nome do produto** — como se chama a oferta
 2. **Preço** — valor cobrado (à vista e parcelado)
@@ -164,7 +164,7 @@ Aplicar em todo título de bloco, headline e promessa antes de incluir no HTML:
 
 ## Auto-detecção do tipo de página
 
-O agente lê `oferta.md` e determina automaticamente o tipo de página com base em:
+O agente lê `oferta.md` (ou `03-oferta/oferta.md` em projetos PAD) e determina automaticamente o tipo de página com base em:
 
 | Critério | Tipo detectado |
 |---|---|

@@ -35,7 +35,7 @@ Paciente mas cortante. O operador tende a se vitimizar ("o mercado tá ruim"). S
 
 ## Pré-requisito
 
-Ler `disparo.md`. Se não existir:
+Ler `04-disparo/disparo.md`. Se não existir:
 
 > Sem disparo, não tem o que validar. Rode `/pad-disparo-inicial` antes.
 

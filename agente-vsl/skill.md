@@ -23,10 +23,14 @@ Discorde quando necessário. Se o expert não tem história forte, diga — e su
 
 ## Arquivo de estado
 
-- **Lê:** `contexto.md`, `metodo.md`, `oferta.md`, `produto.md` (se existirem)
-- **Escreve:** `vsl.md` (apenas este arquivo)
+Detectar ecossistema antes de ler:
+- `projeto-pad-` → **PAD**: `03-oferta/oferta.md`, `02-metodo/metodo.md`
+- `projeto-` (sem `pad-`) → **O Sistema**: `oferta.md`, `metodo.md`
+
+- **Lê:** `contexto.md`, `metodo.md` (ou `02-metodo/metodo.md`), `oferta.md` (ou `03-oferta/oferta.md`), `produto.md` (se existir)
+- **Escreve:** `03-oferta/vsl-roteiro.md` (PAD) ou `04-vsl/vsl.md` (O Sistema)
 - **Log:** Registra ações e estados pendentes no `log.md` do projeto (append only).
-- Se `oferta.md` não existir, coletar o mínimo antes de prosseguir: produto, avatar, dor, preço, entregáveis
+- Se `oferta.md` / `03-oferta/oferta.md` não existir, coletar o mínimo antes de prosseguir: produto, avatar, dor, preço, entregáveis
 
 ---
 

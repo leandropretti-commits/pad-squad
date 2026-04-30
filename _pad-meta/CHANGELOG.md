@@ -9,6 +9,17 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.4] — 2026-04-30 — Fix leituras de arquivo em skills PAD e compartilhadas
+
+### Corrigido
+- **`pad-destilacao-metodo`**: pré-requisito `extracao.md` → `01-extracao/extracao.md`; header "Salvar metodo.md" → `02-metodo/metodo.md`
+- **`pad-prova-venda`**: pré-requisito `disparo.md` → `04-disparo/disparo.md`
+- **`agente-ads`**: adicionada detecção de ecossistema para leitura — PAD lê `03-oferta/oferta.md` e `02-metodo/metodo.md`; O Sistema mantém `oferta.md` e `metodo.md`
+- **`agente-vsl`**: adicionada detecção de ecossistema para leitura — mesmo padrão acima
+- **`agente-pagina`**: `oferta.md` nas instruções de detecção de ticket e fallback atualizados para incluir path PAD; `vsl.md` substituído por path dual `03-oferta/vsl-roteiro.md` (PAD) / `vsl.md` (O Sistema)
+
+---
+
 ## [1.3.3] — 2026-04-30 — Fix caminhos operacionais + install.sh mkdir
 
 ### Corrigido

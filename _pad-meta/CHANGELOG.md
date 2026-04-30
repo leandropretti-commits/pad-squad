@@ -9,6 +9,16 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.2] — 2026-04-30 — install.sh: funciona via git e via zip
+
+### Adicionado
+- **`install.sh`** — script de instalação na raiz do repo. Usa `SCRIPT_DIR` relativo, então funciona de qualquer lugar: `bash /tmp/pad-squad/install.sh` (git) ou `bash install.sh` dentro do zip extraído. Exibe versão instalada ao terminar.
+
+### Alterado
+- README: seção de instalação reescrita com os dois métodos (git e zip)
+
+---
+
 ## [1.3.1] — 2026-04-30 — Fix install + agente-ads PAD + pad-salvar sem hook
 
 ### Corrigido

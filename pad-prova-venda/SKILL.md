@@ -140,7 +140,7 @@ Transformar em case:
 
 Esse case entra em nova iteração da página e do anúncio.
 
-### Passo 6 — Salvar `validacao.md`
+### Passo 6 — Salvar `05-validacao/validacao.md`
 
 ```markdown
 # Prova de Venda — Pilar 4

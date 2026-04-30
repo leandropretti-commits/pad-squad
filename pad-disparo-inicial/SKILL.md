@@ -39,7 +39,7 @@ Quando o operador trazer objeção de perfeição ("preciso revisar a página ma
 
 ## Pré-requisito
 
-Ler `oferta.md`. Se não existir, interromper:
+Ler `03-oferta/oferta.md`. Se não existir, interromper:
 
 > Sem oferta fechada, disparo vira ruído. Rode `/pad-engenharia-oferta` antes.
 
@@ -59,7 +59,7 @@ Instrua o operador a rodar:
 /agente-pagina
 ```
 
-O `/agente-pagina` lê `oferta.md`, identifica o ticket automaticamente, aplica a anatomia correta (14 blocos low / 16 blocos mid / 14 blocos hi), consulta o swipe file de referências visuais e gera o HTML completo.
+O `/agente-pagina` lê `03-oferta/oferta.md`, identifica o ticket automaticamente, aplica a anatomia correta (14 blocos low / 16 blocos mid / 14 blocos hi), consulta o swipe file de referências visuais e gera o HTML completo.
 
 Após a geração, retomar aqui com a URL publicada.
 

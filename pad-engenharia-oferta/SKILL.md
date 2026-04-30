@@ -59,7 +59,7 @@ Todo texto gerado por esta skill (nomes, promessas, copy base, subtítulos, P.S.
 
 ## Pré-requisito
 
-Ler `extracao.md` (Pilar 1) **e** `metodo.md` (Pilar 1.5).
+Ler `01-extracao/extracao.md` (Pilar 1) **e** `02-metodo/metodo.md` (Pilar 1.5).
 
 - Se **nenhum** existir: interromper.
   > Sem Pilar 1, montar oferta é palpite. Rode `/pad-raio-x` primeiro.
@@ -245,7 +245,7 @@ Tom: seguir Uggly DOC (frases curtas, uma por linha, identidade > feature). **Vo
 
 Informar ao operador qual estrutura será usada e por quê.
 
-### Passo 8 — Salvar `oferta.md`
+### Passo 8 — Salvar `03-oferta/oferta.md`
 
 ```markdown
 # Engenharia de Oferta — Pilar 2

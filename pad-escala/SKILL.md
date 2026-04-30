@@ -39,11 +39,11 @@ Protege o ativo. Ativo recém-nascido morre de escolha errada no ciclo 2, não d
 
 ## Pré-requisito
 
-Ler `validacao.md` (Pilar 4) **+** `oferta.md` **+** `metodo.md`.
+Ler `05-validacao/validacao.md` (Pilar 4) **+** `03-oferta/oferta.md` **+** `02-metodo/metodo.md`.
 
-- Se `validacao.md` não existe: interromper.
+- Se `05-validacao/validacao.md` não existe: interromper.
   > Pilar 4 não foi concluído. Sem primeira venda registrada, discutir escala é premature. Rode `/pad-prova-venda` até fechar pelo menos 1 venda paga.
-- Se `validacao.md` existe mas registra 0 vendas: interromper com mesmo aviso.
+- Se `05-validacao/validacao.md` existe mas registra 0 vendas: interromper com mesmo aviso.
 - Se registra ≥1 venda paga: seguir.
 
 ---
@@ -106,7 +106,7 @@ Só apresentar caminhos coerentes com o cenário da Passo 2. Exemplo: em cenári
 
 **Quando escolher:**
 - Recorte original saturou OU mostrou teto claro
-- Método tem componentes transferíveis (verificado no `metodo.md`)
+- Método tem componentes transferíveis (verificado no `02-metodo/metodo.md`)
 - Pessoa próxima topa expandir o escopo de trabalho
 
 **Risco:** cada ampliação é um novo Pilar 1.5. Ampliação sem destilação nova vira cópia superficial.
@@ -235,7 +235,7 @@ Depois de apresentar os caminhos válidos, exigir decisão explícita:
 
 Se o operador resistir, explicar por que (operadores tendem a escolher "ampliar" por FOMO sem terem repetido o suficiente — isso mata o ativo).
 
-### Passo 5 — Salvar `escala.md`
+### Passo 5 — Salvar `06-escala/escala.md`
 
 ```markdown
 # Pilar 4.5 — Ascensão e Escala

@@ -8,6 +8,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Instalando PAD Squad..."
 
+# Garantir que o destino existe antes do cp (sem mkdir, o primeiro cp corromperia a estrutura)
+mkdir -p ~/.claude/skills
+
 # Copiar skills para ~/.claude/skills/ (excluindo commands/ e pastas ocultas como .git)
 find "$SCRIPT_DIR" -mindepth 1 -maxdepth 1 -type d ! -name commands ! -name '.*' \
   -exec cp -r {} ~/.claude/skills/ \;

@@ -9,6 +9,19 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.3] — 2026-04-30 — Fix caminhos operacionais + install.sh mkdir
+
+### Corrigido
+- **`install.sh`**: `mkdir -p ~/.claude/skills` adicionado antes do `find`. Sem ele, em instalação fresh (sem `~/.claude/skills/`), o primeiro `cp -r` renomeava a pasta em vez de copiar para dentro — corrompendo toda a estrutura.
+- **`pad-engenharia-oferta`**: salva em `03-oferta/oferta.md` (antes: `oferta.md` na raiz). Também corrige leitura dos pré-requisitos: `01-extracao/extracao.md` e `02-metodo/metodo.md`.
+- **`pad-prova-venda`**: salva em `05-validacao/validacao.md` (antes: `validacao.md` na raiz).
+- **`pad-escala`**: salva em `06-escala/escala.md` (antes: `escala.md` na raiz). Corrige também as 3 leituras de pré-requisito: `05-validacao/validacao.md`, `03-oferta/oferta.md`, `02-metodo/metodo.md`.
+- **`pad-disparo-inicial`**: lê de `03-oferta/oferta.md` (antes: `oferta.md` na raiz).
+
+> Estes 5 bugs causavam falha silenciosa: o orquestrador nunca detectaria os pilares como concluídos e as skills de pilares avançados nunca encontrariam os arquivos dos pilares anteriores.
+
+---
+
 ## [1.3.2] — 2026-04-30 — install.sh: funciona via git e via zip
 
 ### Adicionado

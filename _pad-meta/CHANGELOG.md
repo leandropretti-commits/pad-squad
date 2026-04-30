@@ -9,6 +9,21 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.0] — 2026-04-30 — Squad completa: agente-ads, agente-vsl, pad-salvar, pad_version
+
+### Adicionado
+- **`agente-ads`** — Cria copy de anúncios e roteiros de criativos para Facebook/Instagram Ads. Estava faltando no repo: `pad-disparo-inicial` instruía rodar este agente mas ele não existia.
+- **`agente-vsl`** — Cria roteiro de VSL (vídeo de vendas) com 2 variações A/B. Referenciado no orquestrador e no `agente-pagina`.
+- **`commands/pad-salvar.md`** — Pausa segura do PAD: salva checkpoint de sessão em `~/.claude/history/` e apenda bloco `🔄 Pendente` no `log.md` do projeto. Referenciado em todos os materiais do produto como o comando de pausa entre pilares — estava faltando no repo.
+- **`commands/pad_version.md`** — Exibe versão instalada + data. Referenciado no README como comando diagnóstico de suporte.
+- **Pasta `commands/`** no repo — abriga arquivos `~/.claude/commands/*.md` (formato diferente das skills). One-liner de instalação atualizado para copiar para `~/.claude/commands/` também.
+
+### Alterado
+- README: one-liner de instalação atualizado para excluir `commands/` do `find` de skills e adicionar `cp commands/*.md ~/.claude/commands/`
+- README: tabela de comandos atualizada com `agente-ads`, `agente-vsl`, `pad-salvar`
+
+---
+
 ## [1.2.3] — 2026-04-30 — Fix de caminhos de arquivo e portabilidade
 
 ### Corrigido

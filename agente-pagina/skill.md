@@ -126,11 +126,11 @@ A página é o **especialista falando diretamente com quem está lendo**, indepe
 
 **Quando for co-produção** (ex: Marcos opera, Juliana é a protagonista): o "eu" da página é da **Juliana**, não do Marcos. A skill deve identificar a protagonista (ver seção acima) e escrever a página inteira como se a protagonista estivesse ditando o texto.
 
-### Regra para mid ticket e `vsl.md`
-- Se a oferta for mid ticket e `vsl.md` existir: referenciar o vídeo na página (bloco 01 — Hero + VSL).
-- Se a oferta for mid ticket e `vsl.md` **não** existir: avisar o usuário: "Sua oferta é mid ticket. Recomendo rodar /agente-vsl para criar o roteiro do vídeo de vendas antes de montar a página. Ou, se já tem um vídeo pronto, me passa o link."
+### Regra para mid ticket e VSL
+- Se a oferta for mid ticket e `03-oferta/vsl-roteiro.md` (PAD) ou `vsl.md` (O Sistema) existir: referenciar o vídeo na página (bloco 01 — Hero + VSL).
+- Se não existir: avisar o usuário: "Sua oferta é mid ticket. Recomendo rodar /agente-vsl para criar o roteiro do vídeo de vendas antes de montar a página. Ou, se já tem um vídeo pronto, me passa o link."
 
-### Se `oferta.md` não existir
+### Se `oferta.md` / `03-oferta/oferta.md` não existir
 Antes de construir qualquer página, coletar o mínimo necessário:
 1. **Nome do produto** — como se chama a oferta
 2. **Preço** — valor cobrado (à vista e parcelado)
@@ -164,7 +164,7 @@ Aplicar em todo título de bloco, headline e promessa antes de incluir no HTML:
 
 ## Auto-detecção do tipo de página
 
-O agente lê `oferta.md` e determina automaticamente o tipo de página com base em:
+O agente lê `oferta.md` (ou `03-oferta/oferta.md` em projetos PAD) e determina automaticamente o tipo de página com base em:
 
 | Critério | Tipo detectado |
 |---|---|
@@ -189,6 +189,9 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
   - Exemplo de trust-line válido em low ticket: "Acesso imediato · +380 alunas · Resultado em 7 dias"
   - Exemplo de trust-line **proibido**: "R$97 · 12× R$9,67 · garantia de 14 dias" ❌
   - Exemplo de trust-line **proibido em low ticket**: "Turma 1 começa em 7 dias · 23 vagas restantes" ❌ (isso é pré-venda ou mid/hi, não low perpétuo)
+  - **Regra dos bullets — quadro, não furadeira (inegociável):** cada bullet descreve o RESULTADO que o avatar conquista, nunca a feature do produto. Teste antes de incluir: substitua o bullet por "você conquista [bullet]" — se soar estranho, é feature, não benefício. Refazer.
+    - ❌ Feature (furadeira): "13 termos de consentimento" / "Módulo de anamnese" / "Acesso ao grupo"
+    - ✅ Resultado (quadro): "Segurança jurídica a cada procedimento, sem criar documento do zero" / "Nunca mais esquecer uma pergunta que contraindica o procedimento" / "Dúvida respondida no mesmo dia, sem ficar travada sozinha"
 - Bloco 02: **Prova visual / depoimentos** — Título obrigatório. Antes/depois, prints, 2-4 depoimentos reais com nome e contexto.
   - Exemplo de título: "A decisão que mudou tudo para essas mães"
 - Bloco 03: **Ruminação (dor)** — Título obrigatório. 5-7 frases curtas em 1ª pessoa (voz interna do avatar). Comparação social, culpa, urgência, medo de julgamento, ansiedade futura.
@@ -202,7 +205,17 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
   - ❌ Proibido: btn-sub com "R$X à vista" — preço só no bloco 10
   - ✅ Correto: `<a href="#recap-valor">Quero amamentar com tranquilidade hoje →</a>`
 - Bloco 07: **Passo a passo do método** — Título obrigatório: "Como funciona na prática". 4 etapas (01-04) em headline + explicação.
-- Bloco 08: **Conteúdo/itens incluídos** — Título obrigatório: "O que você recebe por dentro". Lista: mini-headline + benefício específico. **Proibido mostrar valores tachados individuais por item aqui** — sem R$X por entregável, sem total, sem preço. Esse bloco apresenta o conteúdo, não a ancoragem. Ancoragem com valores tachados fica exclusivamente no bloco 10.
+- Bloco 08: **Conteúdo/itens incluídos** — **Proibido mostrar valores tachados individuais por item aqui** — sem R$X por entregável, sem total, sem preço. Esse bloco apresenta o conteúdo, não a ancoragem. Ancoragem com valores tachados fica exclusivamente no bloco 10.
+  - **Título obrigatório — quadro antes da furadeira:** o título do bloco deve prometer o resultado que o conjunto de entregáveis entrega, antes de listar qualquer item. Fórmula: "Para você [resultado principal em X tempo / eliminando Y dor], veja tudo que você vai receber:" — nunca "O que você recebe por dentro" (isso é feature-first).
+    - ✅ Exemplo: "Para você organizar toda sua documentação em 30 minutos e eliminar a insegurança a cada procedimento, veja o que você vai receber:"
+    - ✅ Exemplo: "Para seu filho falar o R em poucas semanas sem sessões de fono caras, veja o que está dentro:"
+    - ❌ Proibido: "O que você recebe por dentro" / "Conteúdo do produto" / "O que está incluso"
+  - **Estrutura de cada entregável — regra do loop dor→solução (inegociável):** antes de escrever o bloco 08, releia o bloco 03 (ruminação) e faça o pareamento: cada entregável elimina UMA dor específica já nomeada lá. Cada item segue o formato: **[Nome curto do entregável]** → descrição de 1-2 linhas do que faz → fechamento com a ruminação eliminada.
+    - Fórmulas de fechamento: "Acabe com o pensamento: *'...'*" / "Nunca mais pense: *'...'*" / "Elimine a preocupação: *'...'*" / "Esqueça a frustração: *'...'*"
+    - ✅ Exemplo: **Termos de consentimento revisados** — 13 modelos prontos para cada procedimento, redigidos por especialistas em direito na saúde. *Acabe com o pensamento: 'Será que esse termo cobre tudo? Estou realmente protegido?'*
+    - ✅ Exemplo: **Ficha de anamnese completa** — todos os campos para identificar contraindicações antes de começar. *Nunca mais pense: 'Esqueci de perguntar algo que poderia complicar o procedimento?'*
+    - ❌ Proibido: descrever o entregável sem fechar com a dor eliminada ("13 termos específicos e completos, incluindo toxina botulínica e preenchimentos." — isso é furadeira sem quadro)
+  - **Regra de cobertura:** se um entregável não consegue ser pareado com nenhuma ruminação do bloco 03, é sinal de que aquele item não tem lugar nesse bloco — ou a ruminação está incompleta. Não listar entregáveis que não resolvem uma dor nomeada.
 - Bloco 09: **Para quem é** — Título obrigatório: "O [nome do produto] é para você que:". 6-8 sentenças em 2ª pessoa. Fechamento obrigatório: "Se você se identifica com 2 ou mais dessas situações... O [nome] é pra você."
 - Bloco 10: **Recapitulação e valor** — Título: "Recapitulando tudo que você vai receber". Lista de entregáveis com valor tachado. Total → preço real em destaque. CTA direto para checkout. Âncora id="recap-valor".
 - Bloco 11: **Bloco de reflexão** — Obrigatório. Pergunta emocional → ciclo de tentativas frustradas → não é culpa sua → falta de método → convite à virada.

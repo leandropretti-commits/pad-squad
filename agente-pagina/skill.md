@@ -206,16 +206,20 @@ Página curta, sem vídeo. Decisão de compra rápida. Micro-oferta que entrega 
   - ✅ Correto: `<a href="#recap-valor">Quero amamentar com tranquilidade hoje →</a>`
 - Bloco 07: **Passo a passo do método** — Título obrigatório: "Como funciona na prática". 4 etapas (01-04) em headline + explicação.
 - Bloco 08: **Conteúdo/itens incluídos** — **Proibido mostrar valores tachados individuais por item aqui** — sem R$X por entregável, sem total, sem preço. Esse bloco apresenta o conteúdo, não a ancoragem. Ancoragem com valores tachados fica exclusivamente no bloco 10.
-  - **Título obrigatório — quadro antes da furadeira:** o título do bloco deve prometer o resultado que o conjunto de entregáveis entrega, antes de listar qualquer item. Fórmula: "Para você [resultado principal em X tempo / eliminando Y dor], veja tudo que você vai receber:" — nunca "O que você recebe por dentro" (isso é feature-first).
-    - ✅ Exemplo: "Para você organizar toda sua documentação em 30 minutos e eliminar a insegurança a cada procedimento, veja o que você vai receber:"
-    - ✅ Exemplo: "Para seu filho falar o R em poucas semanas sem sessões de fono caras, veja o que está dentro:"
-    - ❌ Proibido: "O que você recebe por dentro" / "Conteúdo do produto" / "O que está incluso"
-  - **Estrutura de cada entregável — regra do loop dor→solução (inegociável):** antes de escrever o bloco 08, releia o bloco 03 (ruminação) e faça o pareamento: cada entregável elimina UMA dor específica já nomeada lá. Cada item segue o formato: **[Nome curto do entregável]** → descrição de 1-2 linhas do que faz → fechamento com a ruminação eliminada.
-    - Fórmulas de fechamento: "Acabe com o pensamento: *'...'*" / "Nunca mais pense: *'...'*" / "Elimine a preocupação: *'...'*" / "Esqueça a frustração: *'...'*"
-    - ✅ Exemplo: **Termos de consentimento revisados** — 13 modelos prontos para cada procedimento, redigidos por especialistas em direito na saúde. *Acabe com o pensamento: 'Será que esse termo cobre tudo? Estou realmente protegido?'*
-    - ✅ Exemplo: **Ficha de anamnese completa** — todos os campos para identificar contraindicações antes de começar. *Nunca mais pense: 'Esqueci de perguntar algo que poderia complicar o procedimento?'*
-    - ❌ Proibido: descrever o entregável sem fechar com a dor eliminada ("13 termos específicos e completos, incluindo toxina botulínica e preenchimentos." — isso é furadeira sem quadro)
-  - **Regra de cobertura:** se um entregável não consegue ser pareado com nenhuma ruminação do bloco 03, é sinal de que aquele item não tem lugar nesse bloco — ou a ruminação está incompleta. Não listar entregáveis que não resolvem uma dor nomeada.
+  - **Se a lista de entregáveis ainda não foi fornecida:** perguntar ao operador antes de construir o bloco. Fontes alternativas: ler `produto.md` ou `oferta.md` — esses arquivos costumam ter a lista. Se nenhum dos dois existir, fazer uma pergunta direta: "Me passa a lista do que a pessoa recebe ao comprar — pode ser rascunho."
+  - **Título obrigatório — quadro antes da furadeira:** o título do bloco deve prometer o resultado que o conjunto entrega, antes de listar qualquer item. Fórmula: "Para você [resultado principal / dor eliminada], veja tudo que você vai receber:" — nunca "O que você recebe por dentro" (feature-first).
+    - ✅ "Para você organizar toda sua documentação em 30 minutos e eliminar a insegurança a cada procedimento, veja o que você vai receber:"
+    - ✅ "Para seu filho falar o R em poucas semanas sem sessões de fono caras, veja o que está dentro:"
+    - ❌ "O que você recebe por dentro" / "Conteúdo do produto" / "O que está incluso"
+  - **Como apresentar cada entregável — lógica de conexão com a ruminação:** antes de descrever cada item, releia o bloco 03 (ruminação) e verifique se aquele entregável — ou uma característica específica dele — resolve algum pensamento do avatar. A conexão pode ser:
+    - **Entregável inteiro** resolve uma ruminação → feche a descrição com a frase de alívio.
+    - **Aspecto interno** do entregável resolve uma ruminação → destaque esse aspecto na descrição e feche com a frase de alívio.
+    - **Nenhuma conexão clara** → descreva normalmente, focando no benefício prático. Não force.
+  - **Fórmulas de fechamento (usar quando houver conexão natural):** "Acabe com o pensamento: *'...'*" / "Nunca mais pense: *'...'*" / "Elimine a preocupação: *'...'*" / "Esqueça a frustração: *'...'*"
+  - **Formato base de cada item:** **[Nome curto]** — [o que faz / o que entrega, 1-2 linhas focadas em benefício]. *[Frase de alívio da ruminação, se houver conexão natural.]*
+    - ✅ Com conexão: **Termos de consentimento revisados** — 13 modelos prontos para cada procedimento, revisados por especialistas em direito na saúde. *Acabe com o pensamento: 'Será que esse termo cobre tudo? Estou realmente protegido?'*
+    - ✅ Sem conexão (aspecto destacado): **Workbook de aplicação** — guia passo a passo para rodar cada pilar do protocolo, com campos para preencher conforme avança. Inclui checklist de "está pronto para avançar" em cada etapa — *elimina a dúvida: 'Será que estou fazendo certo?'*
+    - ✅ Sem conexão (só benefício): **Biblioteca de prompts** — 40+ prompts prontos organizados por etapa do protocolo, para usar direto no Claude Code sem precisar criar do zero.
 - Bloco 09: **Para quem é** — Título obrigatório: "O [nome do produto] é para você que:". 6-8 sentenças em 2ª pessoa. Fechamento obrigatório: "Se você se identifica com 2 ou mais dessas situações... O [nome] é pra você."
 - Bloco 10: **Recapitulação e valor** — Título: "Recapitulando tudo que você vai receber". Lista de entregáveis com valor tachado. Total → preço real em destaque. CTA direto para checkout. Âncora id="recap-valor".
 - Bloco 11: **Bloco de reflexão** — Obrigatório. Pergunta emocional → ciclo de tentativas frustradas → não é culpa sua → falta de método → convite à virada.

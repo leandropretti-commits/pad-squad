@@ -8,10 +8,21 @@
 
 ## Instalação
 
+**Via git (recomendado):**
+
 ```bash
 git clone https://github.com/leandropretti-commits/pad-squad /tmp/pad-squad && \
-  find /tmp/pad-squad -mindepth 1 -maxdepth 1 -type d -exec cp -r {} ~/.claude/skills/ \; && \
+  bash /tmp/pad-squad/install.sh && \
   rm -rf /tmp/pad-squad
+```
+
+**Via download de zip:**
+
+1. Clique em **Code → Download ZIP** no GitHub e extraia o arquivo
+2. No terminal, dentro da pasta extraída:
+
+```bash
+bash install.sh
 ```
 
 Abra um projeto no Claude Code e rode:
@@ -34,6 +45,9 @@ Abra um projeto no Claude Code e rode:
 | `/pad-prova-venda` | Pilar 4 — ajuste até a primeira venda |
 | `/pad-escala` | Pilar 4.5 — sistematização pós-prova |
 | `/agente-pagina` | Gera página HTML completa (low/mid/hi ticket) |
+| `/agente-ads` | Cria copy de anúncios + roteiros de criativos |
+| `/agente-vsl` | Cria roteiro de VSL (vídeo de vendas) |
+| `/pad-salvar` | Pausa segura — salva checkpoint e atualiza log do projeto |
 | `/pad_version` | Mostra a versão instalada |
 
 ---
@@ -58,7 +72,7 @@ Abra um projeto no Claude Code e rode:
 
 ## Versão
 
-`1.0.0` — ver `_pad-meta/CHANGELOG.md`
+`1.3.2` — ver `_pad-meta/CHANGELOG.md`
 
 ---
 

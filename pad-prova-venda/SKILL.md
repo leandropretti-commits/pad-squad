@@ -35,7 +35,7 @@ Paciente mas cortante. O operador tende a se vitimizar ("o mercado tá ruim"). S
 
 ## Pré-requisito
 
-Ler `disparo.md`. Se não existir:
+Ler `04-disparo/disparo.md`. Se não existir:
 
 > Sem disparo, não tem o que validar. Rode `/pad-disparo-inicial` antes.
 
@@ -140,7 +140,7 @@ Transformar em case:
 
 Esse case entra em nova iteração da página e do anúncio.
 
-### Passo 6 — Salvar `validacao.md`
+### Passo 6 — Salvar `05-validacao/validacao.md`
 
 ```markdown
 # Prova de Venda — Pilar 4

@@ -9,6 +9,64 @@ Versionamento segue [SemVer](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [1.3.4] — 2026-04-30 — Fix leituras de arquivo em skills PAD e compartilhadas
+
+### Corrigido
+- **`pad-destilacao-metodo`**: pré-requisito `extracao.md` → `01-extracao/extracao.md`; header "Salvar metodo.md" → `02-metodo/metodo.md`
+- **`pad-prova-venda`**: pré-requisito `disparo.md` → `04-disparo/disparo.md`
+- **`agente-ads`**: adicionada detecção de ecossistema para leitura — PAD lê `03-oferta/oferta.md` e `02-metodo/metodo.md`; O Sistema mantém `oferta.md` e `metodo.md`
+- **`agente-vsl`**: adicionada detecção de ecossistema para leitura — mesmo padrão acima
+- **`agente-pagina`**: `oferta.md` nas instruções de detecção de ticket e fallback atualizados para incluir path PAD; `vsl.md` substituído por path dual `03-oferta/vsl-roteiro.md` (PAD) / `vsl.md` (O Sistema)
+
+---
+
+## [1.3.3] — 2026-04-30 — Fix caminhos operacionais + install.sh mkdir
+
+### Corrigido
+- **`install.sh`**: `mkdir -p ~/.claude/skills` adicionado antes do `find`. Sem ele, em instalação fresh (sem `~/.claude/skills/`), o primeiro `cp -r` renomeava a pasta em vez de copiar para dentro — corrompendo toda a estrutura.
+- **`pad-engenharia-oferta`**: salva em `03-oferta/oferta.md` (antes: `oferta.md` na raiz). Também corrige leitura dos pré-requisitos: `01-extracao/extracao.md` e `02-metodo/metodo.md`.
+- **`pad-prova-venda`**: salva em `05-validacao/validacao.md` (antes: `validacao.md` na raiz).
+- **`pad-escala`**: salva em `06-escala/escala.md` (antes: `escala.md` na raiz). Corrige também as 3 leituras de pré-requisito: `05-validacao/validacao.md`, `03-oferta/oferta.md`, `02-metodo/metodo.md`.
+- **`pad-disparo-inicial`**: lê de `03-oferta/oferta.md` (antes: `oferta.md` na raiz).
+
+> Estes 5 bugs causavam falha silenciosa: o orquestrador nunca detectaria os pilares como concluídos e as skills de pilares avançados nunca encontrariam os arquivos dos pilares anteriores.
+
+---
+
+## [1.3.2] — 2026-04-30 — install.sh: funciona via git e via zip
+
+### Adicionado
+- **`install.sh`** — script de instalação na raiz do repo. Usa `SCRIPT_DIR` relativo, então funciona de qualquer lugar: `bash /tmp/pad-squad/install.sh` (git) ou `bash install.sh` dentro do zip extraído. Exibe versão instalada ao terminar.
+
+### Alterado
+- README: seção de instalação reescrita com os dois métodos (git e zip)
+
+---
+
+## [1.3.1] — 2026-04-30 — Fix install + agente-ads PAD + pad-salvar sem hook
+
+### Corrigido
+- **README**: `find` do one-liner de instalação excluía `commands/` mas não excluía `.git` — corrigido com `! -name '.*'` (previne `~/.claude/skills/.git`)
+- **`agente-ads`**: detecta ecossistema PAD (`projeto-pad-`) e salva em `04-disparo/ads.md`; antes salvava fixo em `07-ads/ads.md` (O Sistema) mesmo dentro de projetos PAD
+- **`commands/pad-salvar.md`**: Passo 3 dependia de `~/.claude/hooks/session-history.sh` com `&&` — se o hook não existisse, nenhum checkpoint era criado. Agora tem fallback: se o hook não existir, cria arquivo diretamente em `~/.claude/history/`
+
+---
+
+## [1.3.0] — 2026-04-30 — Squad completa: agente-ads, agente-vsl, pad-salvar, pad_version
+
+### Adicionado
+- **`agente-ads`** — Cria copy de anúncios e roteiros de criativos para Facebook/Instagram Ads. Estava faltando no repo: `pad-disparo-inicial` instruía rodar este agente mas ele não existia.
+- **`agente-vsl`** — Cria roteiro de VSL (vídeo de vendas) com 2 variações A/B. Referenciado no orquestrador e no `agente-pagina`.
+- **`commands/pad-salvar.md`** — Pausa segura do PAD: salva checkpoint de sessão em `~/.claude/history/` e apenda bloco `🔄 Pendente` no `log.md` do projeto. Referenciado em todos os materiais do produto como o comando de pausa entre pilares — estava faltando no repo.
+- **`commands/pad_version.md`** — Exibe versão instalada + data. Referenciado no README como comando diagnóstico de suporte.
+- **Pasta `commands/`** no repo — abriga arquivos `~/.claude/commands/*.md` (formato diferente das skills). One-liner de instalação atualizado para copiar para `~/.claude/commands/` também.
+
+### Alterado
+- README: one-liner de instalação atualizado para excluir `commands/` do `find` de skills e adicionar `cp commands/*.md ~/.claude/commands/`
+- README: tabela de comandos atualizada com `agente-ads`, `agente-vsl`, `pad-salvar`
+
+---
+
 ## [1.2.3] — 2026-04-30 — Fix de caminhos de arquivo e portabilidade
 
 ### Corrigido

@@ -29,7 +29,9 @@ Swipe em `~/.claude/skills/_shared/swipe-file-paginas/` (low/mid/hi + modelos fi
 
 **LOW (14 blocos, sem VSL):** 1 Hero (resultado + prazo + elemento visual: foto da protagonista ou mockup — **sem CTA aqui**) · 2 Dor (a cena da camada 2-4 do avatar, língua local) · 3 Virada (negação da tese) · 4 Quem é a protagonista (prova em escada) · 5 O método nomeado (etapas com função) · 6 O que você recebe + **1º CTA** · 7 Quick win 48h · 8 Prova/casos REAIS · 9 Pra quem é / não é (filtro) · 10 **Recap de valor + preço** (preço NUNCA aparece antes deste bloco) · 11 Garantia · 12 FAQ (5-7 objeções reais do avatar, 3 colunas traduzidas) · 13 SUAS 3 OPÇÕES · 14 P.S. (2-3, estilo carta).
 
-**MID/HI (16 blocos, com VSL):** mesmos + VSL no topo (CTA logo abaixo do vídeo) + bloco de prova social expandido. HI: + formulário de aplicação no lugar do checkout direto.
+**MID/HI (16 blocos, com vídeo da página):** mesmos + **vídeo da página** no topo (função de VSL, sem produção de VSL: 3-5min, gravado pela protagonista no celular — CTA logo abaixo do vídeo) + bloco de prova social expandido. HI: + formulário de aplicação no lugar do checkout direto.
+
+**Roteiro do vídeo da página (gerar SEMPRE que o ticket for mid/hi):** o vídeo é a OFERTA COMPLETA falada, não copy nova. Estrutura fixa em 4 atos, na voz do voz.md: (1) **abertura pela dor** — a cena da camada 2-4 do avatar, na língua local, 30-45s · (2) **a tese** — negação + origem resumida em 60-90s ("o jeito comum falha porque X; eu descobri Y") · (3) **o mecanismo** — o método nomeado e as etapas em 60-90s, com 1 caso real · (4) **o convite** — promessa + garantia + comando pro botão, 30s. Entregar como bloco destacado com as falas escritas por extenso + instruções de gravação (celular apoiado, luz de janela, olhar na lente, zero teleprompter decorado — ela LÊ o roteiro 3x e fala com as palavras dela). Salvar em `html/roteiro-video-pagina.md`. Regras: zero afirmação fora da substância real · nada que colida com as rejeições dela · passa no teste do genérico como qualquer peça.
 
 **Regras invioláveis:** preço só no bloco de recap (nunca antes) · primeiro CTA aponta pra `#recap-valor`, nunca checkout direto (exceto mid com VSL: CTA sob o vídeo) · hero sempre com elemento visual real · mobile-first (o avatar chega pelo Instagram) · zero palavra da blacklist · depoimento só com permissão registrada.
 
@@ -49,6 +51,7 @@ Swipe em `~/.claude/skills/_shared/swipe-file-paginas/` (low/mid/hi + modelos fi
 5. [ ] SUAS 3 OPÇÕES e o filtro presentes?
 6. [ ] Teste do genérico: trocando o nome da protagonista, a página serviria pra outra do nicho? Reprovada.
 7. [ ] Mobile: hero legível, CTA clicável, checkout abre?
+8. [ ] Mid/hi: roteiro do vídeo da página gerado (4 atos, voz dela) e salvo em `html/roteiro-video-pagina.md`?
 
 ## Card de saída
 

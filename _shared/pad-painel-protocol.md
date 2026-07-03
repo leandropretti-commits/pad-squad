@@ -9,8 +9,8 @@ Toda skill operacional (raio-x, destilação, oferta, disparo, prova-venda, esca
 
 ## Quando o painel aparece (os 3 gatilhos de push)
 
-1. **AO ABRIR a skill** — antes de pedir qualquer coisa, imprimir o **mini-painel** (barra + pilar ativo + "você está aqui" + próximo passo). O operador reancorada em 2 segundos onde está.
-2. **AO FECHAR a skill** — atualizar `00-contexto/PAINEL.md` e imprimir o **painel completo** (o card de etapa evoluído). Sempre com o rodapé de auto-anúncio.
+1. **AO ABRIR a skill** — antes de pedir qualquer coisa, imprimir o **mini-painel** (barra + pilar ativo + "você está aqui" + próximo passo). O operador se reancora em 2 segundos.
+2. **AO FECHAR a skill** — atualizar `00-contexto/PAINEL.md` e imprimir, nesta ordem: **card de etapa da skill** (o que foi produzido AGORA: ✅ Produzido / 📄 Arquivo) e, logo abaixo, o **painel completo** (o mapa do projeto inteiro). **Regra anti-duplicação:** o `➡ PRÓXIMO` aparece UMA vez só — no painel, que é a fonte única do próximo passo; o card não repete a linha de próximo passo quando o painel vem junto.
 3. **SOB DEMANDA** — se o operador digitar "painel", "onde estou", "onde eu tô", "cadê meu projeto", "o que já fiz", "estado do projeto" (ou variação), imprimir o painel na hora, sem executar mais nada. Vale em qualquer skill.
 
 ---
@@ -20,7 +20,7 @@ Toda skill operacional (raio-x, destilação, oferta, disparo, prova-venda, esca
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  PROJETO: [nome] · [protagonista] · [ticket]
- [barra]   Pilar [N] de 7
+ [barra]   [X] de 7 etapas concluídas
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  [icone] 1    Extração ........... [status curto]
  [icone] 1.5  Método ............. [status]
@@ -31,14 +31,16 @@ Toda skill operacional (raio-x, destilação, oferta, disparo, prova-venda, esca
  [icone] 4.5  Escala ............. [status]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  ➡  PRÓXIMO: [ação concreta e específica]
- ⏱  Dia [X] de 30   ·   🎯 meta: 1ª venda
+ ⏱  Dia [X] de 30   ·   🎯 [meta ativa]
  💡 Digite "painel" pra ver isso a qualquer momento
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
+**Meta ativa (🎯):** até a primeira venda paga, a meta é fixa: `1ª venda`. Depois dela (Pilar 4.5 em diante), a meta vira a do ciclo escolhido em `escala.md` (ex.: `20 vendas · CAC estável`). Nunca deixar a meta velha depois de batida — meta batida no painel é `✓` comemorado uma vez e substituído.
+
 **Ícones de status (fixos):** `✓` feito · `▶` em andamento (o ativo) · `○` pendente · `⚠` travado (buraco/pendência que impede avançar).
 
-**Barra de progresso:** 22 blocos, proporcional aos 7 marcos (1, 1.5, 2, 3, 3.5, 4, 4.5). `█` preenchido, `░` vazio. Ex.: 3 de 7 ≈ `█████████░░░░░░░░░░░░░`.
+**Barra de progresso:** 22 blocos, proporcional às etapas CONCLUÍDAS (`✓`) sobre as 7 (1, 1.5, 2, 3, 3.5, 4, 4.5). `█` preenchido, `░` vazio. A etapa em andamento (`▶`) NÃO conta na barra — ela aparece no "você está aqui". Ex.: concluiu 1, 1.5 e 2 (está no Disparo) → "3 de 7 etapas concluídas" → `█████████░░░░░░░░░░░░░` (9 de 22).
 
 **Mini-painel (abertura):** só as 3 primeiras linhas (projeto + barra) + a linha do pilar ativo + o `➡ PRÓXIMO`. Versão curta pra não poluir o começo da skill.
 

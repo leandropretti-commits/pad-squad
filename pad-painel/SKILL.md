@@ -17,7 +17,7 @@ Sempre responda em **português do Brasil**.
 
 Obedece a `~/.claude/skills/_shared/pad-contratos.md` (voz firme e honesta — não maquiar progresso) e implementa `~/.claude/skills/_shared/pad-painel-protocol.md` (formato canônico do painel).
 
-## Fluxo (1 passo)
+## Fluxo
 
 1. Localizar o projeto ativo (`projeto-pad-*/`). Mais de um → perguntar qual. Nenhum → dizer que não há projeto e apontar `/protocolo-ativo-digital`.
 2. **Ler o estado REAL** (nunca chutar): `00-contexto/contexto.md` (nome, protagonista, ticket, relação, data de início) + a existência/conteúdo de `01-extracao/` … `07-posicionamento/` + `metodo.md` (validado?) + `disparo.md` (quantas das 20 abordagens?) + `validacao.md` (vendas?) + qualquer `[BURACO]`/pendência que trave.

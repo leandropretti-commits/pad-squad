@@ -63,7 +63,7 @@ Protocolo de execução, não curso: extração → destilação → oferta → 
 | 4 | Prova de Venda | `/pad-prova-venda` | Loops de ajuste até a 1ª venda paga | até 30 dias |
 | 4.5 | Ascensão e Escala | `/pad-escala` | Pós-venda: Repetir / Ampliar / Bibliotecar + dossiê final | plano 90 dias |
 
-**Satélites:** `/pad-pagina` (gera a página de vendas — chamada pelo Pilar 3) · `/pad-ads` (copy de anúncios — chamada pelo Pilar 3) · `/pad-consolidar` (resumo do projeto a qualquer momento) · `/pad-salvar` (checkpoint).
+**Satélites:** `/pad-pagina` (gera a página de vendas — chamada pelo Pilar 3) · `/pad-ads` (copy de anúncios — chamada pelo Pilar 3) · `/pad-painel` (visão viva instantânea — ou o operador digita "painel"/"onde estou") · `/pad-consolidar` (relatório completo em PDF) · `/pad-salvar` (checkpoint).
 
 **Regras de fluxo:**
 - Regra do Pilar 1.5 = a da régua única (low: opcional com aviso; mid/hi: obrigatório). Uma regra, uma fonte.
@@ -81,23 +81,20 @@ Protocolo de execução, não curso: extração → destilação → oferta → 
 
 Verificar `projeto-pad-*/` no diretório atual.
 
-**Se EXISTE:** ler `00-contexto/contexto.md` + `log.md` (bloco Pendente primeiro). Apresentar:
+**Se EXISTE:** ler `00-contexto/contexto.md` + `log.md` (bloco Pendente primeiro). Apresentar o estado **no formato canônico do painel** (`~/.claude/skills/_shared/pad-painel-protocol.md` — painel completo, estado lido dos arquivos reais), precedido de 1 linha de contexto e seguido da pergunta de retomada:
 
 ```
-Encontrei seu projeto: projeto-pad-[nome]/
+Encontrei seu projeto. Último ponto: [resumo do Pendente ou última entrada do log]
 
-Último ponto: [resumo do Pendente ou última entrada do log]
-Pilar ativo: [Pilar N — nome]
-
-[✓/✗] Contexto      [✓/✗] P1 Extração    [✓/✗] P1.5 Método
-[✓/✗] P2 Oferta     [✓/✗] P3 Disparo     [✓/✗] P3.5 Posicionamento
-[✓/✗] P4 Venda      [✓/✗] P4.5 Escala
+[PAINEL COMPLETO — formato canônico do protocolo]
 
 → Retomo do ponto pendente ou você quer outra coisa?
 ```
 
+Uma visualização de estado só em todo o produto: a do painel. Nunca inventar formato próprio.
+
 Roteamento por intenção (não exigir comando exato):
-"retoma/continua" → skill do pilar pendente · "o que vender" → `/pad-raio-x` · "método/entrevista" → `/pad-destilacao-metodo` · "oferta/preço/stack" → `/pad-engenharia-oferta` · "página/anúncio/no ar" → `/pad-disparo-inicial` · "bandeira/conteúdo/stories" → `/posicionamento` · "não vendeu/ajuste" → `/pad-prova-venda` · "escala/próximo nível" → `/pad-escala` · "novo projeto" → FASE 1.
+"painel/onde estou/cadê meu projeto/o que já fiz" → `/pad-painel` · "retoma/continua" → skill do pilar pendente · "o que vender" → `/pad-raio-x` · "método/entrevista" → `/pad-destilacao-metodo` · "oferta/preço/stack" → `/pad-engenharia-oferta` · "página/anúncio/no ar" → `/pad-disparo-inicial` · "bandeira/conteúdo/stories" → `/posicionamento` · "não vendeu/ajuste" → `/pad-prova-venda` · "escala/próximo nível" → `/pad-escala` · "novo projeto" → FASE 1.
 
 **Projetos legados** (arquivos na raiz, sem `NN-`): operar no layout como está. Não migrar, não sobrescrever.
 
@@ -166,6 +163,8 @@ mkdir -p "$PROJ/00-contexto" "$PROJ/01-extracao" "$PROJ/02-metodo" \
 - Teste do genérico antes de entregar: serviria pra outro profissional do nicho? Reprovada.
 - Página → /pad-pagina. Anúncio → /pad-ads. Nunca gerar inline.
 - Régua de preço: só a de _shared/pad-regua-ticket.md.
+- Voz da squad: firme (não bajula, verdade > conforto), simples (leigo executa sem "como assim"), a serviço — _shared/pad-voz.md.
+- Painel: toda skill abre e fecha mostrando o painel; "painel"/"onde estou" mostra a qualquer momento; estado real em 00-contexto/PAINEL.md — _shared/pad-painel-protocol.md.
 
 ## Roteamento automático (sem exigir comando do operador)
 Ao receber mensagem SEM /comando, identificar a intenção e AGIR com o comportamento da skill
@@ -174,6 +173,7 @@ Só perguntar qual skill quando a intenção for genuinamente ambígua.
 
 | Intenção | Skill |
 |---|---|
+| Ver o painel / "onde estou" / o que já fiz | /pad-painel |
 | Estado do projeto / retomar | /protocolo-ativo-digital |
 | O que vender, recorte, avatar | /pad-raio-x |
 | Método, entrevista, framework | /pad-destilacao-metodo |
@@ -195,7 +195,7 @@ Só perguntar qual skill quando a intenção for genuinamente ambígua.
 
 ```
 projeto-pad-[nome]/
-├── 00-contexto/          contexto.md · log.md · briefing.md
+├── 00-contexto/          contexto.md · log.md · briefing.md · PAINEL.md (visão viva, atualizada por cada skill)
 ├── 01-extracao/          /pad-raio-x → extracao.md
 ├── 02-metodo/            /pad-destilacao-metodo → metodo.md · entrevista-raw.md · entrevista-roteiro.md
 ├── 03-oferta/            /pad-engenharia-oferta → oferta.md · oferta-completa.md

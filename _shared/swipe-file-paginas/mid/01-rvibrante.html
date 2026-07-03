@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — R Vibrante · Dra. Silvicleide Barros</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: #EBF3F8; color: #1A1A1A; font-size: 16px; line-height: 1.6; }
+
+  /* ─── DS CHROME ─────────────────────────────────────── */
+  .ds-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .ds-cover {
+    background: #111111;
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(45,200,64,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ds-cover h1 { font-size: 32px; font-weight: 900; color: #fff; line-height: 1.2; }
+  .ds-cover h1 span { color: #2DC840; }
+  .ds-cover p { font-size: 14px; color: #666; margin-top: 8px; max-width: 520px; }
+  .ds-cover .badge { background: rgba(45,200,64,.15); border: 1px solid rgba(45,200,64,.35); border-radius: 999px; padding: 5px 14px; font-size: 11px; color: #2DC840; font-weight: 800; white-space: nowrap; letter-spacing: .06em; text-transform: uppercase; }
+
+  .ds-section { margin-bottom: 72px; }
+  .ds-section-title { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #94B0BE; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .ds-section-title::after { content: ''; flex: 1; height: 1px; background: #C8DCE8; }
+
+  .ds-grid { display: grid; gap: 16px; }
+  .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 720px) {
+    .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SWATCHES ─────────────────────────────────────── */
+  .swatch { border-radius: 10px; overflow: hidden; border: 1px solid #C8DCE8; }
+  .swatch-color { height: 72px; }
+  .swatch-meta { background: #fff; padding: 10px 12px; }
+  .swatch-name { font-size: 12px; font-weight: 700; color: #1A1A1A; }
+  .swatch-hex  { font-size: 11px; color: #888; font-family: monospace; margin-top: 2px; }
+  .swatch-var  { font-size: 10px; color: #B0C8D4; font-family: monospace; margin-top: 2px; }
+
+  /* ─── TYPE ROWS ────────────────────────────────────── */
+  .type-row { background: #fff; border: 1px solid #D8ECF4; border-radius: 10px; padding: 20px 24px; display: flex; align-items: baseline; gap: 24px; }
+  .type-meta { width: 148px; flex-shrink: 0; }
+  .type-meta .label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #94B0BE; }
+  .type-meta .spec  { font-size: 10px; color: #B8CCd4; margin-top: 3px; font-family: monospace; }
+  .type-sample { flex: 1; }
+
+  /* ─── SPACING ──────────────────────────────────────── */
+  .spacing-row { background: #fff; border: 1px solid #D8ECF4; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+  .spacing-bar  { background: #2DC840; border-radius: 3px; height: 14px; flex-shrink: 0; }
+  .spacing-label { font-size: 13px; font-weight: 700; color: #1A1A1A; width: 48px; }
+  .spacing-var  { font-size: 10px; color: #B0C8D4; font-family: monospace; }
+
+  /* ─── RADIUS ───────────────────────────────────────── */
+  .radius-card { background: #fff; border: 1px solid #D8ECF4; border-radius: 10px; padding: 20px; text-align: center; }
+  .radius-box { width: 60px; height: 60px; background: rgba(45,200,64,.1); border: 2px solid #2DC840; margin: 0 auto 12px; }
+  .radius-label { font-size: 11px; font-weight: 800; color: #1A1A1A; letter-spacing: .04em; text-transform: uppercase; }
+  .radius-val   { font-size: 10px; color: #888; margin-top: 3px; font-family: monospace; }
+
+  /* ─── TOKENS BLOCK ─────────────────────────────────── */
+  .tokens-block { background: #0A0A0A; border-radius: 12px; padding: 28px 32px; overflow-x: auto; border: 1px solid #1E1E1E; }
+  .tokens-block pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.9; color: #CCC; white-space: pre; }
+  .t-comment { color: #333; }
+  .t-prop    { color: #86EFAC; }
+  .t-val     { color: #7DD3FC; }
+  .t-punct   { color: #555; }
+
+  /* ─── COMP WRAPPER ─────────────────────────────────── */
+  .comp-wrap { background: #fff; border: 1px solid #D8ECF4; border-radius: 14px; padding: 28px; }
+  .comp-label { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #94B0BE; margin-bottom: 20px; }
+  .comp-note  { font-size: 11px; color: #B0C8D4; font-family: monospace; margin-top: 14px; border-top: 1px solid #EBF3F8; padding-top: 12px; line-height: 1.7; }
+
+  /* ─── BUTTONS ──────────────────────────────────────── */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Nunito', sans-serif; font-weight: 800; cursor: pointer; border: 2px solid transparent; transition: all .2s; text-decoration: none; letter-spacing: .06em; text-transform: uppercase; }
+  .btn-green    { background: #2DC840; color: #fff; border-color: #2DC840; border-radius: 6px; font-size: 15px; padding: 15px 36px; }
+  .btn-green:hover  { background: #22A030; border-color: #22A030; }
+  .btn-green-lg { font-size: 16px; padding: 18px 48px; border-radius: 6px; }
+  .btn-green-sm { font-size: 13px; padding: 10px 24px; border-radius: 6px; }
+  .btn-whatsapp { background: #25D366; color: #fff; border-color: #25D366; border-radius: 8px; font-size: 14px; padding: 13px 28px; text-transform: none; letter-spacing: 0; font-weight: 700; }
+  .btn-outline  { background: transparent; color: #2DC840; border: 2px solid #2DC840; border-radius: 6px; font-size: 14px; padding: 12px 28px; }
+
+  /* ─── CHECKLIST ────────────────────────────────────── */
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+  .check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: #333; line-height: 1.5; }
+  .check-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+  .check-item strong { color: #1A1A1A; }
+
+  /* ─── AUDIENCE CARDS ───────────────────────────────── */
+  .audience-card { background: #EBF3F8; border: 1px solid #C8DCE8; border-radius: 10px; padding: 24px 20px; text-align: center; }
+  .audience-icon { font-size: 32px; margin-bottom: 10px; }
+  .audience-title { font-size: 14px; font-weight: 800; color: #1A1A1A; margin-bottom: 8px; }
+  .audience-desc  { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* ─── WHATSAPP TESTIMONIAL ─────────────────────────── */
+  .wa-card { background: #1E1E1E; border-radius: 12px; overflow: hidden; max-width: 300px; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+  .wa-header { background: #075E54; padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+  .wa-avatar { width: 34px; height: 34px; border-radius: 50%; background: #128C7E; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .wa-name   { font-size: 14px; font-weight: 700; color: #fff; }
+  .wa-status { font-size: 11px; color: rgba(255,255,255,.7); }
+  .wa-body   { padding: 12px; background: #ECE5DD; }
+  .wa-bubble { background: #fff; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #333; line-height: 1.6; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+  .wa-bubble .highlight { color: #2DC840; font-weight: 800; }
+  .wa-time   { font-size: 10px; color: #999; text-align: right; margin-top: 4px; }
+
+  /* ─── WARNING CALLOUT ──────────────────────────────── */
+  .warning-card { background: #222222; border-radius: 12px; padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; max-width: 560px; }
+  .warning-icon { font-size: 36px; flex-shrink: 0; }
+  .warning-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .warning-title .accent { color: #2DC840; }
+  .warning-text  { font-size: 14px; color: #AAA; line-height: 1.7; }
+  .warning-text strong { color: #E88; }
+
+  /* ─── FLOW DIAGRAM ─────────────────────────────────── */
+  .flow-diagram { background: #111; border-radius: 14px; padding: 40px; text-align: center; }
+  .flow-center { width: 160px; height: 160px; border-radius: 50%; border: 4px solid #333; background: #1A1A1A; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .flow-center-text { font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: .06em; line-height: 1.3; }
+  .flow-phases { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 480px; margin: 0 auto; }
+  .flow-phase { background: #2DC840; border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .flow-phase-num { font-size: 10px; font-weight: 800; color: rgba(0,0,0,.6); letter-spacing: .1em; background: rgba(0,0,0,.15); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+  .flow-phase-name { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; }
+
+  /* ─── NUMBERED STEPS ───────────────────────────────── */
+  .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .step-item { display: flex; gap: 16px; align-items: flex-start; }
+  .step-num  { font-size: 36px; font-weight: 900; color: rgba(45,200,64,.25); line-height: 1; flex-shrink: 0; width: 52px; }
+  .step-content .step-title { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1A1A1A; margin-bottom: 6px; }
+  .step-content .step-desc  { font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* ─── BIO SECTION ──────────────────────────────────── */
+  .bio-wrap { background: #111; border-radius: 14px; padding: 32px; display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
+  .bio-photo { background: #1E1E1E; border-radius: 10px; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 64px; color: #333; }
+  .bio-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+  .bio-name  { font-size: 20px; font-weight: 900; color: #2DC840; margin-bottom: 12px; }
+  .bio-text  { font-size: 13px; color: #888; line-height: 1.8; }
+  .bio-text strong { color: #CCC; }
+
+  /* ─── PRICING CARD ─────────────────────────────────── */
+  .price-card { background: #1A1A1A; border-radius: 14px; padding: 28px; max-width: 420px; border: 1px solid #2A2A2A; }
+  .price-checklist { margin-bottom: 20px; }
+  .price-check { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #CCC; margin-bottom: 10px; }
+  .price-check-icon { color: #2DC840; flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+  .price-check strong { color: #fff; }
+  .price-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #666; text-align: center; margin-bottom: 4px; }
+  .price-value { font-size: 40px; font-weight: 900; color: #2DC840; text-align: center; line-height: 1; }
+  .price-value em { font-size: 20px; font-style: normal; }
+  .price-card .btn-green { width: 100%; margin-top: 20px; justify-content: center; }
+
+  /* ─── GUARANTEE BADGE ──────────────────────────────── */
+  .guarantee-badge { background: linear-gradient(135deg, #C4860A 0%, #E8B020 50%, #C4860A 100%); border-radius: 50%; width: 120px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(196,134,10,.4); border: 4px solid #F0C840; }
+  .guarantee-title { font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #7A4800; }
+  .guarantee-days  { font-size: 28px; font-weight: 900; color: #7A4800; line-height: 1; }
+  .guarantee-sub   { font-size: 8px; font-weight: 800; color: #7A4800; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* ─── FAQ ──────────────────────────────────────────── */
+  .faq-item { background: #EBF3F8; border: 1px solid #C8DCE8; border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; font-size: 14px; color: #1A1A1A; font-weight: 600; cursor: pointer; }
+  .faq-arrow { color: #2DC840; font-size: 12px; flex-shrink: 0; }
+
+  /* ─── SECTION PILL ─────────────────────────────────── */
+  .section-pill { display: inline-flex; align-items: center; border: 1.5px solid #C8DCE8; border-radius: 999px; padding: 5px 16px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #555; background: #fff; }
+
+  /* ─── ARROW DOWN ───────────────────────────────────── */
+  .arrow-down { color: #2DC840; font-size: 20px; display: block; text-align: center; }
+
+  /* ─── VIDEO PLAYER MOCK ────────────────────────────── */
+  .video-mock { background: #222; border-radius: 8px; padding: 48px 24px; text-align: center; position: relative; }
+  .video-time { position: absolute; top: 10px; left: 14px; font-size: 11px; color: rgba(255,255,255,.6); }
+  .video-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .video-btns { display: flex; justify-content: center; gap: 20px; }
+  .video-btn  { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,.7); }
+  .video-btn-icon { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.4); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; }
+
+  /* ─── HERO SECTION ─────────────────────────────────── */
+  .hero-section { background: #111; border-radius: 14px; padding: 36px; }
+  .hero-headline { font-size: clamp(18px, 2.8vw, 24px); font-weight: 900; color: #fff; line-height: 1.3; margin-bottom: 16px; text-align: center; }
+  .hero-headline .green { color: #2DC840; }
+  .hero-checklist { background: rgba(255,255,255,.04); border-radius: 8px; padding: 14px 20px; margin-bottom: 20px; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .hero-check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #CCC; margin-bottom: 6px; }
+  .hero-check:last-child { margin-bottom: 0; }
+  .hero-check strong { color: #fff; }
+</style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- COVER -->
+  <div class="ds-cover">
+    <div>
+      <h1>R <span>Vibrante</span><br>Design System</h1>
+      <p>Sistema de design do curso "Instalando &amp; Automatizando o R Vibrante" — Dra. Silvicleide Barros. Clean, acessível e focado em conversão.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-self:flex-start;">
+      <span class="badge">Health &amp; Education</span>
+      <span class="badge">Nunito</span>
+      <span class="badge">Verde · Azul-Gelo · Dark</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 1. CORES                                            -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">1 — Paleta de Cores</div>
+
+    <p style="font-size:11px;font-weight:800;color:#94B0BE;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Verde (Marca · CTA · Acento)</p>
+    <div class="ds-grid ds-grid-4" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#2DC840;"></div><div class="swatch-meta"><div class="swatch-name">Green Primary</div><div class="swatch-hex">#2DC840</div><div class="swatch-var">--rv-green</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#22A030;"></div><div class="swatch-meta"><div class="swatch-name">Green Dark · Hover</div><div class="swatch-hex">#22A030</div><div class="swatch-var">--rv-green-dark</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:rgba(45,200,64,.12);border:1px solid #C8DCE8;"></div><div class="swatch-meta"><div class="swatch-name">Green Tint</div><div class="swatch-hex">rgba(45,200,64,.12)</div><div class="swatch-var">--rv-green-tint</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:rgba(45,200,64,.25);border:1px solid #C8DCE8;"></div><div class="swatch-meta"><div class="swatch-name">Green Num</div><div class="swatch-hex">rgba(45,200,64,.25)</div><div class="swatch-var">--rv-green-num</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:800;color:#94B0BE;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Azul-Gelo (Fundos de Seção)</p>
+    <div class="ds-grid ds-grid-4" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#F5FAFD;"></div><div class="swatch-meta"><div class="swatch-name">Ice 50</div><div class="swatch-hex">#F5FAFD</div><div class="swatch-var">--rv-ice-50</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#EBF3F8;"></div><div class="swatch-meta"><div class="swatch-name">Ice 100 · Seção</div><div class="swatch-hex">#EBF3F8</div><div class="swatch-var">--rv-ice-100</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#D8ECF4;"></div><div class="swatch-meta"><div class="swatch-name">Ice 200 · Borda</div><div class="swatch-hex">#D8ECF4</div><div class="swatch-var">--rv-ice-200</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C8DCE8;"></div><div class="swatch-meta"><div class="swatch-name">Ice 300 · Borda forte</div><div class="swatch-hex">#C8DCE8</div><div class="swatch-var">--rv-border</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:800;color:#94B0BE;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Dark (Seções de Contraste)</p>
+    <div class="ds-grid ds-grid-4" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#111111;"></div><div class="swatch-meta"><div class="swatch-name">Dark 900</div><div class="swatch-hex">#111111</div><div class="swatch-var">--rv-dark-900</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A;"></div><div class="swatch-meta"><div class="swatch-name">Dark 800</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-var">--rv-dark-800</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#222222;"></div><div class="swatch-meta"><div class="swatch-name">Dark 700 · Warning</div><div class="swatch-hex">#222222</div><div class="swatch-var">--rv-dark-700</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#333333;"></div><div class="swatch-meta"><div class="swatch-name">Dark 600</div><div class="swatch-hex">#333333</div><div class="swatch-var">--rv-dark-600</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:800;color:#94B0BE;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Texto + Especiais</p>
+    <div class="ds-grid ds-grid-5">
+      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A;"></div><div class="swatch-meta"><div class="swatch-name">Text Dark</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-var">--rv-text</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#555555;"></div><div class="swatch-meta"><div class="swatch-name">Text Body</div><div class="swatch-hex">#555555</div><div class="swatch-var">--rv-body</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#ffffff;border:1px solid #C8DCE8;"></div><div class="swatch-meta"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-var">--rv-white</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#25D366;"></div><div class="swatch-meta"><div class="swatch-name">WhatsApp</div><div class="swatch-hex">#25D366</div><div class="swatch-var">--rv-whatsapp</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8B020;"></div><div class="swatch-meta"><div class="swatch-name">Gold · Badge</div><div class="swatch-hex">#E8B020</div><div class="swatch-var">--rv-gold</div></div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 2. TIPOGRAFIA                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">2 — Tipografia · Nunito</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Hero H1</div><div class="spec">Nunito 900 / 24–28px</div></div>
+        <div class="type-sample" style="font-size:clamp(16px,2.5vw,26px);font-weight:900;color:#1A1A1A;line-height:1.3;">Ajude seu filho a falar o <span style="color:#2DC840;">R Vibrante</span> (de p<span style="text-decoration:underline;color:#2DC840;">R</span>aia e Lo<span style="text-decoration:underline;color:#2DC840;">R</span>enzo) corretamente em poucas semanas</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H2 Seção</div><div class="spec">Nunito 900 / 22px</div></div>
+        <div class="type-sample" style="font-size:22px;font-weight:900;color:#1A1A1A;">Tudo que você vai ter acesso ao se inscrever no curso:</div>
+      </div>
+      <div class="type-row" style="background:#111;border-color:#222;">
+        <div class="type-meta"><div class="label" style="color:#444;">H2 Dark</div><div class="spec" style="color:#333;">Nunito 900 / green</div></div>
+        <div class="type-sample" style="font-size:22px;font-weight:900;color:#2DC840;">Um plano comprovadamente eficiente!</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H3 Destaque</div><div class="spec">Nunito 900 / 18px<br>green accent</div></div>
+        <div class="type-sample" style="font-size:18px;font-weight:900;color:#1A1A1A;">Veja o que as <span style="color:#2DC840;font-style:italic;">mães que aplicaram o método</span> estão dizendo</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Step Title</div><div class="spec">Nunito 800 / 13px<br>uppercase</div></div>
+        <div class="type-sample" style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#1A1A1A;">FORTALECIMENTO DA MUSCULATURA DE LÍNGUA</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body</div><div class="spec">Nunito 400 / 14–15px</div></div>
+        <div class="type-sample" style="font-size:15px;font-weight:400;color:#555;line-height:1.7;">As aulas práticas são liberadas semanalmente e detalham os exercícios que compõem o cronograma para a semana.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body Bold</div><div class="spec">Nunito 700 / 15px</div></div>
+        <div class="type-sample" style="font-size:15px;font-weight:700;color:#1A1A1A;line-height:1.6;">Este é o curso certo para você! Eu posso ajudar você a ajudar seu filho ou sua filha!</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Price Label</div><div class="spec">Nunito 700 / 12px<br>uppercase</div></div>
+        <div class="type-sample" style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#666;">APENAS 12X DE</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Price Value</div><div class="spec">Nunito 900 / 40px<br>green</div></div>
+        <div class="type-sample" style="font-size:40px;font-weight:900;color:#2DC840;line-height:1;"><em style="font-size:20px;font-style:normal;color:#2DC840;">R$ </em>30,72</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Eyebrow</div><div class="spec">Nunito 800 / 10px<br>uppercase</div></div>
+        <div class="type-sample" style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#94B0BE;">quem é a fonoaudióloga</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 3. ESPAÇAMENTO                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">3 — Espaçamento</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">4px</div><div class="spacing-var">--rv-space-1</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">8px</div><div class="spacing-var">--rv-space-2</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">12px</div><div class="spacing-var">--rv-space-3</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">16px</div><div class="spacing-var">--rv-space-4</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">24px</div><div class="spacing-var">--rv-space-6</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">32px</div><div class="spacing-var">--rv-space-8</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">48px</div><div class="spacing-var">--rv-space-12</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:64px;"></div><div class="spacing-label">64px</div><div class="spacing-var">--rv-space-16</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 4. BORDER RADIUS                                    -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">4 — Border Radius</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="radius-card"><div class="radius-box" style="border-radius:4px;"></div><div class="radius-label">XS</div><div class="radius-val">4px — --rv-radius-xs</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:6px;"></div><div class="radius-label">SM · Btn</div><div class="radius-val">6px — --rv-radius-sm</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:8px;"></div><div class="radius-label">MD · Card</div><div class="radius-val">8–10px — --rv-radius-md</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:14px;"></div><div class="radius-label">LG · Seção</div><div class="radius-val">14px — --rv-radius-lg</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:9999px;height:36px;"></div><div class="radius-label">Pill · Badge</div><div class="radius-val">9999px — --rv-radius-pill</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 5. COMPONENTES                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">5 — Componentes</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- HERO -->
+      <div class="comp-wrap" style="padding:0;overflow:hidden;">
+        <div class="comp-label" style="padding:20px 28px 0;">Hero Section</div>
+        <div class="hero-section">
+          <div class="hero-headline">
+            Ajude seu filho a falar o <span class="green">R Vibrante</span> (de p<span style="text-decoration:underline;color:#2DC840;">R</span>aia e Lo<span style="text-decoration:underline;color:#2DC840;">R</span>enzo)<br>corretamente em poucas semanas
+          </div>
+          <div class="hero-checklist">
+            <div class="hero-check">✅ Exercícios simples <strong>em casa</strong>, poucos minutos por dia</div>
+            <div class="hero-check">✅ Resultados visíveis em <strong>7 dias</strong></div>
+            <div class="hero-check">✅ Fala correta a partir de <strong>4 semanas</strong></div>
+            <div class="hero-check">✅ Método aprovado por <strong>milhares de famílias</strong></div>
+          </div>
+          <div style="text-align:center;margin-bottom:16px;">
+            <span style="font-size:13px;color:#888;font-weight:600;">Assista o Vídeo Abaixo para Entender Melhor!</span>
+          </div>
+          <div class="video-mock" style="max-width:540px;margin:0 auto 20px;">
+            <div class="video-time">1:00</div>
+            <div class="video-title">Você já começou a assistir esse vídeo</div>
+            <div class="video-btns">
+              <div class="video-btn"><div class="video-btn-icon">▶</div>Continuar assistindo?</div>
+              <div class="video-btn"><div class="video-btn-icon">↺</div>Assistir do Início?</div>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <a class="btn btn-green btn-green-lg">CLIQUE AQUI PARA SE INSCREVER!</a>
+          </div>
+        </div>
+        <div class="comp-note" style="padding:12px 28px;border-top:1px solid #1E1E1E;margin:0;background:#0A0A0A;color:#333;">bg: #111 · headline: branco 900 · accent verde #2DC840 sublinhado nos Rs · checklist ✅ emoji · CTA verde pill 6px</div>
+      </div>
+
+      <!-- BOTÕES -->
+      <div class="comp-wrap">
+        <div class="comp-label">Botões</div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+          <a class="btn btn-green btn-green-lg">CLIQUE AQUI PARA SE INSCREVER!</a>
+          <a class="btn btn-green">CLIQUE AQUI PARA CONFIRMAR</a>
+          <a class="btn btn-green btn-green-sm">Inscrever</a>
+          <a class="btn btn-outline">Ver Detalhes</a>
+          <a class="btn btn-whatsapp">💬 Falar com Suporte no WhatsApp</a>
+        </div>
+        <div class="comp-note">CTA principal: bg #2DC840 · hover #22A030 · font-weight 800 · uppercase · border-radius 6px · letter-spacing .06em<br>WhatsApp: bg #25D366 · normal case · 700 · border-radius 8px</div>
+      </div>
+
+      <!-- AUDIENCE CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Target Audience Cards (3 colunas)</div>
+        <div class="ds-grid ds-grid-3">
+          <div class="audience-card">
+            <div class="audience-icon">👨‍👩‍👧</div>
+            <div class="audience-title">Pais de Crianças</div>
+            <div class="audience-desc">Perfeito para pais que querem ajudar seus filhos a falar o R Vibrante de palavras como praia e areia, de forma fácil e em casa.</div>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">🧑</div>
+            <div class="audience-title">Adultos que não pronunciam o R Vibrante</div>
+            <div class="audience-desc">Adultos que enfrentam dificuldades com a pronúncia do R Vibrante encontrarão neste curso uma oportunidade de superar essa barreira.</div>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">🎙️</div>
+            <div class="audience-title">Fonoaudiólogos</div>
+            <div class="audience-desc">O curso é ideal para fonoaudiólogos que querem atualizar suas técnicas com métodos inovadores, aprimorando habilidades e eficácia.</div>
+          </div>
+        </div>
+        <div class="comp-note">bg: #EBF3F8 · border: #C8DCE8 · border-radius: 10px · ícone 32px · título: Nunito 800 · desc: #555 13px</div>
+      </div>
+
+      <!-- WHATSAPP TESTIMONIALS -->
+      <div class="comp-wrap" style="background:#1A1A1A;border-color:#2A2A2A;">
+        <div class="comp-label" style="color:#444;">Testimonials WhatsApp (Prova Social)</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div class="wa-card">
+            <div class="wa-header">
+              <div class="wa-avatar">📱</div>
+              <div><div class="wa-name">Rvibrante - Angela</div><div class="wa-status">Online</div></div>
+            </div>
+            <div class="wa-body">
+              <div class="wa-bubble">"Minha filha falava Salah... agora <span class="highlight">fala Sarah perfeitamente!</span> Estamos muito felizes com a evolução dela após o curso!"<div class="wa-time">15:31 ✓✓</div></div>
+              <div class="wa-bubble" style="background:#DCF8C6;margin-left:20px;">Que ótimo, ficamos muito felizes com seu depoimento 😊<div class="wa-time" style="color:#999;">16:24 ✓✓</div></div>
+            </div>
+          </div>
+          <div style="max-width:320px;font-size:16px;font-weight:700;color:#fff;line-height:1.6;align-self:center;">
+            "<span style="color:#2DC840;font-style:italic;font-weight:800;">Em pouco tempo</span>, minha filha já conseguiu falar o som do <span style="color:#2DC840;">R Vibrante</span>!"
+          </div>
+        </div>
+        <div class="comp-note" style="color:#333;border-top-color:#222;">Mockup de chat WhatsApp · bg header: #075E54 · bg body: #ECE5DD · bubble enviada: #fff · recebida: #DCF8C6 · texto quote: highlight verde #2DC840 italic</div>
+      </div>
+
+      <!-- WARNING CALLOUT -->
+      <div class="comp-wrap">
+        <div class="comp-label">Warning / Atenção Callout</div>
+        <div class="warning-card">
+          <div class="warning-icon">⚠️</div>
+          <div>
+            <div class="warning-title">Agora preste bastante <span class="accent">atenção</span>!</div>
+            <div class="warning-text">Muitos pais cometem o mesmo <strong>erro</strong>: esperar que o problema se resolva sozinho com o tempo.<br><br>Mas, sem um método correto, essa dificuldade pode acompanhar seu filho até a vida adulta.</div>
+          </div>
+        </div>
+        <div class="comp-note">bg: #222222 · border-radius: 12px · ícone ⚠️ 36px · título: branco 800 · accent verde · "erro": vermelho suave #E88</div>
+      </div>
+
+      <!-- SECTION PILL + ARROW -->
+      <div class="comp-wrap">
+        <div class="comp-label">Section Pill + Seta de Transição</div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+          <span class="section-pill">CRONOGRAMAS SEMANAIS GUIADOS</span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <span class="arrow-down">▼</span>
+            <span style="font-size:11px;color:#94B0BE;">seta de seção</span>
+          </div>
+        </div>
+        <div class="comp-note">Pill: border 1.5px #C8DCE8 · bg #fff · Nunito 800 11px uppercase · Seta: #2DC840 20px</div>
+      </div>
+
+      <!-- FLOW DIAGRAM -->
+      <div class="comp-wrap" style="padding:0;overflow:hidden;">
+        <div class="comp-label" style="padding:20px 28px 0;">Fluxo de Instalação (Diagrama Circular)</div>
+        <div class="flow-diagram">
+          <div style="font-size:18px;font-weight:900;color:#2DC840;margin-bottom:20px;">Fluxo de Instalação do R Vibrante</div>
+          <div class="flow-center">
+            <div class="flow-center-text">INSTALANDO<br>O R VIBRANTE</div>
+          </div>
+          <div class="flow-phases">
+            <div class="flow-phase"><span class="flow-phase-num">FASE 01</span><span class="flow-phase-name">Fortalecimento da musculatura de língua</span></div>
+            <div class="flow-phase"><span class="flow-phase-num">FASE 02</span><span class="flow-phase-name">Encontro do ponto de Vibração</span></div>
+            <div class="flow-phase"><span class="flow-phase-num">FASE 03</span><span class="flow-phase-name">Automatização do Fonema R Vibrante</span></div>
+            <div class="flow-phase"><span class="flow-phase-num">FASE 04</span><span class="flow-phase-name">Aperfeiçoamento da pronúncia</span></div>
+          </div>
+        </div>
+        <div class="comp-note" style="padding:12px 28px;border-top:1px solid #1E1E1E;margin:0;background:#0A0A0A;color:#333;">bg: #111 · círculo central: 160px border #333 · fase pills: bg #2DC840 · num: rgba(0,0,0,.6) 10px uppercase</div>
+      </div>
+
+      <!-- NUMBERED STEPS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Numbered Steps (01–04)</div>
+        <div class="step-grid">
+          <div class="step-item">
+            <div class="step-num">01</div>
+            <div class="step-content"><div class="step-title">Fortalecimento da musculatura de língua</div><div class="step-desc">Nesta fase, trabalhamos para melhorar a articulação e fortalecer a musculatura da língua, preparando-a para a instalação do R Vibrante.</div></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">02</div>
+            <div class="step-content"><div class="step-title">Encontro do ponto de vibração</div><div class="step-desc">Aqui, focamos em encontrar o ponto exato onde a língua deve vibrar. É uma fase crucial para garantir que o som seja produzido corretamente.</div></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">03</div>
+            <div class="step-content"><div class="step-title">Automatização do Fonema</div><div class="step-desc">O objetivo é automatizar a produção do fonema R Vibrante, integrando-o de maneira natural na fala cotidiana.</div></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">04</div>
+            <div class="step-content"><div class="step-title">Aperfeiçoamento da pronúncia</div><div class="step-desc">A fase final é dedicada ao aperfeiçoamento da pronúncia, garantindo clareza e precisão no uso do R Vibrante em diferentes contextos.</div></div>
+          </div>
+        </div>
+        <div class="comp-note">Número: Nunito 900 / 36px / rgba(45,200,64,.25) · título: 13px 800 uppercase · desc: 13px #666 · grid 2 colunas</div>
+      </div>
+
+      <!-- BIO -->
+      <div class="comp-wrap" style="padding:0;overflow:hidden;">
+        <div class="comp-label" style="padding:20px 28px 0;">Expert Bio Section</div>
+        <div class="bio-wrap">
+          <div class="bio-photo">👩‍⚕️</div>
+          <div>
+            <div class="bio-eyebrow">quem é a fonoaudióloga</div>
+            <div class="bio-name">Dra. Silvicleide Barros</div>
+            <div class="bio-text">Sou fonoaudióloga com mais de 20 anos de experiência, especializada em autismo e dificuldades na fala. <strong>Desenvolvi um método prático e eficaz</strong> – o mesmo que utilizo na minha clínica – para levar um tratamento acessível a mais famílias. <strong>Meu objetivo é ajudar cada criança e adulto a conquistar uma fala clara e confiante.</strong></div>
+          </div>
+        </div>
+        <div class="comp-note" style="padding:12px 28px;border-top:1px solid #1E1E1E;margin:0;background:#0A0A0A;color:#333;">bg: #111 · eyebrow: #555 10px uppercase · nome: #2DC840 900 20px · body: #888 · strong: #CCC</div>
+      </div>
+
+      <!-- PRICING CARD + GUARANTEE -->
+      <div class="comp-wrap">
+        <div class="comp-label">Pricing Card + Garantia</div>
+        <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;">
+          <div class="price-card">
+            <div class="price-checklist">
+              <div class="price-check"><span class="price-check-icon">✓</span><span><strong>Vídeo-aulas</strong> rápidas e objetivas com exercícios práticos explicados passo a passo.</span></div>
+              <div class="price-check"><span class="price-check-icon">✓</span>Didática divertida e dinâmica, criada especialmente para cativar a criança.</div>
+              <div class="price-check"><span class="price-check-icon">✓</span>Suporte dedicado: 100% das dúvidas respondidas diretamente pela especialista.</div>
+              <div class="price-check"><span class="price-check-icon">✓</span>Material complementar exclusivo para potencializar os resultados.</div>
+            </div>
+            <div class="price-label">APENAS 12X DE</div>
+            <div class="price-value"><em>R$ </em>30,72</div>
+            <a class="btn btn-green" style="width:100%;justify-content:center;margin-top:20px;">CLIQUE AQUI PARA CONFIRMAR SUA INSCRIÇÃO!</a>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:16px;">
+            <div class="guarantee-badge">
+              <div class="guarantee-title">COMPRA<br>GARANTIDA</div>
+              <div class="guarantee-days">7</div>
+              <div class="guarantee-sub">Dias</div>
+            </div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#888;text-align:center;">100% SEGURO</div>
+            <div style="font-size:13px;font-weight:700;color:#1A1A1A;text-align:center;max-width:180px;">Garantia de Satisfação de 7 Dias</div>
+            <div style="font-size:12px;color:#666;text-align:center;max-width:180px;">Reembolso integral sem perguntas em até 7 dias.</div>
+          </div>
+        </div>
+        <div class="comp-note">Pricing card: bg #1A1A1A · border #2A2A2A · check: #2DC840 · preço: #2DC840 900 40px · badge garantia: gold gradient + border #F0C840</div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="comp-wrap">
+        <div class="comp-label">FAQ Accordion</div>
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:600px;">
+          <div class="faq-item"><span class="faq-arrow">▶</span>Quanto Custa o Curso Instalando &amp; Automatizando o R Vibrante?</div>
+          <div class="faq-item"><span class="faq-arrow">▶</span>Quais são as formas de pagamento?</div>
+          <div class="faq-item"><span class="faq-arrow">▶</span>Por quanto tempo terei acesso ao treinamento?</div>
+          <div class="faq-item" style="background:#D8ECF4;"><span class="faq-arrow" style="transform:rotate(90deg);display:inline-block;">▶</span>O curso "Instalando &amp; Automatizando o R Vibrante" é indicado para fonoaudiólogos?</div>
+        </div>
+        <div class="comp-note">item: bg #EBF3F8 · border #C8DCE8 · border-radius 8px · seta ▶: #2DC840 · item aberto: bg #D8ECF4 · seta rotaciona 90°</div>
+      </div>
+
+      <!-- WHATSAPP SUPPORT + FOOTER -->
+      <div class="comp-wrap" style="background:#111;border-color:#1E1E1E;">
+        <div class="comp-label" style="color:#333;">Suporte WhatsApp + Footer</div>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:24px;">
+          <div style="font-size:32px;">💬</div>
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff;">Ainda tem Dúvidas?</div>
+            <div style="font-size:14px;color:#666;">Fale com nossa equipe no WhatsApp, vamos ajudar você agora!</div>
+          </div>
+          <a class="btn btn-whatsapp" style="margin-left:auto;">Falar com Suporte no WhatsApp</a>
+        </div>
+        <div style="text-align:center;font-size:12px;color:#444;padding-top:16px;border-top:1px solid #1E1E1E;">Dra. Silvicleide Barros © 2025 | Todos os direitos reservados!</div>
+        <div class="comp-note" style="color:#333;border-top-color:#1E1E1E;">bg: #111 · texto: branco/cinza · btn WhatsApp: #25D366 · footer: #444 12px center</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 6. CSS TOKENS                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">6 — CSS Custom Properties (Tokens)</div>
+    <div class="tokens-block">
+<pre><span class="t-comment">/* ── R Vibrante — Dra. Silvicleide Barros — Design Tokens ── */</span>
+<span class="t-punct">:root {</span>
+
+  <span class="t-comment">/* Verde (Marca) */</span>
+  <span class="t-prop">--rv-green</span><span class="t-punct">:</span>          <span class="t-val">#2DC840</span><span class="t-punct">;</span>  <span class="t-comment">/* CTA, acento, bullets, fases */</span>
+  <span class="t-prop">--rv-green-dark</span><span class="t-punct">:</span>     <span class="t-val">#22A030</span><span class="t-punct">;</span>  <span class="t-comment">/* hover state */</span>
+  <span class="t-prop">--rv-green-tint</span><span class="t-punct">:</span>     <span class="t-val">rgba(45, 200, 64, 0.12)</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-green-num</span><span class="t-punct">:</span>      <span class="t-val">rgba(45, 200, 64, 0.25)</span><span class="t-punct">;</span>  <span class="t-comment">/* números 01-04 */</span>
+
+  <span class="t-comment">/* Azul-Gelo (Seções Claras) */</span>
+  <span class="t-prop">--rv-ice-50</span><span class="t-punct">:</span>         <span class="t-val">#F5FAFD</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-ice-100</span><span class="t-punct">:</span>        <span class="t-val">#EBF3F8</span><span class="t-punct">;</span>  <span class="t-comment">/* bg de seções claras */</span>
+  <span class="t-prop">--rv-ice-200</span><span class="t-punct">:</span>        <span class="t-val">#D8ECF4</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-border</span><span class="t-punct">:</span>         <span class="t-val">#C8DCE8</span><span class="t-punct">;</span>  <span class="t-comment">/* bordas padrão */</span>
+
+  <span class="t-comment">/* Dark (Seções de Contraste) */</span>
+  <span class="t-prop">--rv-dark-900</span><span class="t-punct">:</span>       <span class="t-val">#111111</span><span class="t-punct">;</span>  <span class="t-comment">/* hero, bio, fluxo */</span>
+  <span class="t-prop">--rv-dark-800</span><span class="t-punct">:</span>       <span class="t-val">#1A1A1A</span><span class="t-punct">;</span>  <span class="t-comment">/* pricing card */</span>
+  <span class="t-prop">--rv-dark-700</span><span class="t-punct">:</span>       <span class="t-val">#222222</span><span class="t-punct">;</span>  <span class="t-comment">/* warning callout */</span>
+
+  <span class="t-comment">/* Texto */</span>
+  <span class="t-prop">--rv-text</span><span class="t-punct">:</span>           <span class="t-val">#1A1A1A</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-body</span><span class="t-punct">:</span>           <span class="t-val">#555555</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-white</span><span class="t-punct">:</span>          <span class="t-val">#FFFFFF</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-muted-dark</span><span class="t-punct">:</span>     <span class="t-val">#888888</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-muted-light</span><span class="t-punct">:</span>    <span class="t-val">#94B0BE</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Especiais */</span>
+  <span class="t-prop">--rv-whatsapp</span><span class="t-punct">:</span>       <span class="t-val">#25D366</span><span class="t-punct">;</span>  <span class="t-comment">/* botão suporte */</span>
+  <span class="t-prop">--rv-gold</span><span class="t-punct">:</span>           <span class="t-val">#E8B020</span><span class="t-punct">;</span>  <span class="t-comment">/* badge de garantia */</span>
+  <span class="t-prop">--rv-wa-sent</span><span class="t-punct">:</span>        <span class="t-val">#DCF8C6</span><span class="t-punct">;</span>  <span class="t-comment">/* bubble enviada WhatsApp */</span>
+
+  <span class="t-comment">/* Tipografia */</span>
+  <span class="t-prop">--rv-font</span><span class="t-punct">:</span>           <span class="t-val">'Nunito', sans-serif</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-xs</span><span class="t-punct">:</span>        <span class="t-val">10px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-sm</span><span class="t-punct">:</span>        <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-base</span><span class="t-punct">:</span>      <span class="t-val">14px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-md</span><span class="t-punct">:</span>        <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-lg</span><span class="t-punct">:</span>        <span class="t-val">22px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-xl</span><span class="t-punct">:</span>        <span class="t-val">28px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-size-price</span><span class="t-punct">:</span>     <span class="t-val">40px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Espaçamento */</span>
+  <span class="t-prop">--rv-space-1</span><span class="t-punct">:</span>        <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-2</span><span class="t-punct">:</span>        <span class="t-val">8px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-3</span><span class="t-punct">:</span>        <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-4</span><span class="t-punct">:</span>        <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-6</span><span class="t-punct">:</span>        <span class="t-val">24px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-8</span><span class="t-punct">:</span>        <span class="t-val">32px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-12</span><span class="t-punct">:</span>       <span class="t-val">48px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-space-16</span><span class="t-punct">:</span>       <span class="t-val">64px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Border Radius */</span>
+  <span class="t-prop">--rv-radius-xs</span><span class="t-punct">:</span>      <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--rv-radius-sm</span><span class="t-punct">:</span>      <span class="t-val">6px</span><span class="t-punct">;</span>   <span class="t-comment">/* botões CTA */</span>
+  <span class="t-prop">--rv-radius-md</span><span class="t-punct">:</span>      <span class="t-val">10px</span><span class="t-punct">;</span>  <span class="t-comment">/* cards audience */</span>
+  <span class="t-prop">--rv-radius-lg</span><span class="t-punct">:</span>      <span class="t-val">14px</span><span class="t-punct">;</span>  <span class="t-comment">/* seções dark, pricing */</span>
+  <span class="t-prop">--rv-radius-pill</span><span class="t-punct">:</span>    <span class="t-val">9999px</span><span class="t-punct">;</span> <span class="t-comment">/* badges, pills de fase */</span>
+
+<span class="t-punct">}</span></pre>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

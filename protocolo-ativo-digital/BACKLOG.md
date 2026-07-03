@@ -79,7 +79,7 @@ A v02 deve trazer pré-venda como **sistema paralelo**, não como regra fixa no 
 - **Data:** 2026-04-20
 - **Pilar afetado:** meta (squad).
 - **Problema:** Hoje a bandeira (frase-farol) é construída DENTRO de `/posicionamento`. Isso acopla bandeira ao tráfego de topo. Projetos orgânicos ou co-produções fora do PAD não conseguem rodar a construção de bandeira sem puxar junto o resto da skill.
-- **Sugestão:** Extrair `/bandeira` como skill própria. Passa a ser pré-requisito de `/posicionamento`, `/agente-pagina`, `/agente-ads`, `/agente-vsl`. Uma bandeira, muitos canais.
+- **Sugestão:** Extrair `/bandeira` como skill própria. Passa a ser pré-requisito de `/posicionamento`, `/pad-pagina` e `/pad-ads`. Uma bandeira, muitos canais.
 - **Gate pra executar:** quando rodar o primeiro projeto orgânico ou co-produção em que a estrutura PAD não se aplica.
 
 ---

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Desafio Low Ticket · Escola do Perpétuo</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Playfair+Display:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', sans-serif; background: #0D0D0D; color: #E2E2E2; font-size: 16px; line-height: 1.5; }
+
+  /* ─── DS CHROME ───────────────────────────────────────── */
+  .ds-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .ds-cover {
+    background: linear-gradient(135deg, #1A1A1A 0%, #111111 100%);
+    border: 1px solid #2A2A2A;
+    border-top: 4px solid #F05A1A;
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(240,90,26,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ds-cover h1 { font-size: 32px; font-weight: 800; color: #fff; line-height: 1.2; }
+  .ds-cover h1 .brand { font-size: 14px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: #F05A1A; display: block; margin-bottom: 6px; }
+  .ds-cover p { font-size: 14px; color: #888; margin-top: 8px; max-width: 520px; }
+  .ds-cover .badge { background: rgba(240,90,26,.15); border: 1px solid rgba(240,90,26,.4); border-radius: 999px; padding: 5px 14px; font-size: 12px; color: #F05A1A; font-weight: 600; white-space: nowrap; }
+
+  .ds-section { margin-bottom: 72px; }
+  .ds-section-title { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #555; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .ds-section-title::after { content: ''; flex: 1; height: 1px; background: #222; }
+
+  .ds-grid { display: grid; gap: 16px; }
+  .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 720px) {
+    .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SWATCHES ─────────────────────────────────────────── */
+  .swatch { border-radius: 10px; overflow: hidden; border: 1px solid #2A2A2A; }
+  .swatch-color { height: 72px; }
+  .swatch-meta { background: #1A1A1A; padding: 10px 12px; }
+  .swatch-name { font-size: 12px; font-weight: 700; color: #E2E2E2; }
+  .swatch-hex  { font-size: 11px; color: #888; font-family: monospace; margin-top: 2px; }
+  .swatch-var  { font-size: 10px; color: #555; font-family: monospace; margin-top: 2px; }
+
+  /* ─── TYPE SPECIMENS ──────────────────────────────────── */
+  .type-row { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 20px 24px; display: flex; align-items: baseline; gap: 24px; }
+  .type-meta { width: 140px; flex-shrink: 0; }
+  .type-meta .label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #555; }
+  .type-meta .spec  { font-size: 10px; color: #444; margin-top: 2px; font-family: monospace; }
+  .type-sample { flex: 1; }
+
+  /* ─── SPACING ─────────────────────────────────────────── */
+  .spacing-row { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+  .spacing-bar  { background: #F05A1A; border-radius: 3px; height: 16px; flex-shrink: 0; }
+  .spacing-label { font-size: 13px; font-weight: 700; color: #E2E2E2; width: 48px; }
+  .spacing-var  { font-size: 10px; color: #555; font-family: monospace; }
+
+  /* ─── RADIUS ──────────────────────────────────────────── */
+  .radius-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 20px; text-align: center; }
+  .radius-box { width: 60px; height: 60px; background: rgba(240,90,26,.12); border: 2px solid #F05A1A; margin: 0 auto 12px; }
+  .radius-label { font-size: 12px; font-weight: 700; color: #E2E2E2; }
+  .radius-val   { font-size: 10px; color: #666; margin-top: 3px; font-family: monospace; }
+
+  /* ─── SHADOW ──────────────────────────────────────────── */
+  .shadow-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 24px; text-align: center; }
+  .shadow-label { font-size: 11px; font-weight: 700; color: #E2E2E2; margin-top: 12px; }
+  .shadow-val   { font-size: 10px; color: #555; font-family: monospace; margin-top: 4px; word-break: break-all; }
+
+  /* ─── TOKENS BLOCK ───────────────────────────────────── */
+  .tokens-block { background: #080808; border: 1px solid #222; border-radius: 12px; padding: 28px 32px; overflow-x: auto; }
+  .tokens-block pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.9; color: #CCC; white-space: pre; }
+  .t-comment { color: #3A3A3A; }
+  .t-prop    { color: #F97316; }
+  .t-val     { color: #86EFAC; }
+  .t-punct   { color: #555; }
+
+  /* ─── COMP WRAPPER ───────────────────────────────────── */
+  .comp-wrap { background: #141414; border: 1px solid #2A2A2A; border-radius: 14px; padding: 28px 28px 24px; }
+  .comp-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+  .comp-note  { font-size: 11px; color: #444; font-family: monospace; margin-top: 14px; line-height: 1.7; }
+
+  /* ─── LOGO ────────────────────────────────────────────── */
+  .logo-lockup { display: inline-block; }
+  .logo-desafio { font-size: 13px; font-weight: 800; letter-spacing: .25em; text-transform: uppercase; color: #fff; line-height: 1; }
+  .logo-lowticket { font-size: 38px; font-weight: 900; color: #fff; line-height: 1; font-style: italic; }
+  .logo-lowticket em { color: #F05A1A; font-style: italic; }
+
+  /* ─── COUNTDOWN BAR ──────────────────────────────────── */
+  .countdown-bar { background: #F05A1A; padding: 8px 24px; display: flex; justify-content: center; gap: 32px; border-radius: 8px; }
+  .countdown-item { display: flex; align-items: baseline; gap: 6px; }
+  .countdown-num  { font-size: 22px; font-weight: 900; color: #fff; }
+  .countdown-unit { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.8); text-transform: uppercase; }
+
+  /* ─── BUTTONS ─────────────────────────────────────────── */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Montserrat', sans-serif; font-weight: 800; cursor: pointer; border: 2px solid transparent; transition: all .2s; text-decoration: none; letter-spacing: .04em; }
+  .btn-orange    { background: #F05A1A; color: #fff; border-color: #F05A1A; border-radius: 6px; }
+  .btn-orange:hover { background: #C84510; border-color: #C84510; }
+  .btn-orange-lg { font-size: 15px; padding: 16px 36px; border-radius: 6px; text-transform: uppercase; }
+  .btn-orange-md { font-size: 14px; padding: 12px 28px; border-radius: 6px; text-transform: uppercase; }
+  .btn-ghost     { background: transparent; color: #F05A1A; border: 1px solid rgba(240,90,26,.4); border-radius: 6px; font-size: 14px; padding: 10px 24px; }
+
+  /* ─── EVENT PILLS ─────────────────────────────────────── */
+  .event-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 8px 16px; font-size: 13px; color: #D0D0D0; font-weight: 600; }
+  .event-pill-icon { font-size: 15px; }
+
+  /* ─── PROCESS FLOW ───────────────────────────────────── */
+  .process-flow { display: flex; flex-direction: column; gap: 0; align-items: center; max-width: 420px; }
+  .process-pill { background: #1E1E1E; border: 1px solid #333; border-radius: 999px; padding: 12px 28px; font-size: 14px; font-weight: 700; color: #E2E2E2; text-align: center; width: 100%; }
+  .process-arrow { color: #F05A1A; font-size: 24px; line-height: 1; padding: 4px 0; }
+
+  /* ─── BULLET LIST ──────────────────────────────────────  */
+  .orange-list { display: flex; flex-direction: column; gap: 12px; }
+  .orange-item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: #D0D0D0; }
+  .orange-arrow { color: #F05A1A; font-size: 14px; flex-shrink: 0; margin-top: 3px; }
+
+  /* ─── BIO CARD ────────────────────────────────────────── */
+  .bio-card { background: #111; border: 1px solid #2A2A2A; border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 180px 1fr; position: relative; }
+  .bio-card::before, .bio-card::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    border: 2px solid #F05A1A;
+  }
+  .bio-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+  .bio-card::after  { bottom: 0; right: 0; border-left: none; border-top: none; }
+  .bio-photo { background: #1A1A1A; display: flex; align-items: flex-end; justify-content: center; min-height: 200px; font-size: 60px; padding-bottom: 12px; color: #333; }
+  .bio-body  { padding: 24px; }
+  .bio-name  { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: #F05A1A; font-weight: 700; margin-bottom: 8px; }
+  .bio-text  { font-size: 13px; color: #888; line-height: 1.7; }
+  .bio-text strong { color: #E2E2E2; }
+
+  /* ─── PAIN SECTION ────────────────────────────────────── */
+  .pain-section { background: #1A1A1A; border-radius: 12px; padding: 28px; display: grid; grid-template-columns: 1fr 260px; gap: 28px; align-items: center; border: 1px solid #2A2A2A; }
+  .pain-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .pain-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: #F05A1A; font-weight: 700; margin-bottom: 16px; }
+  .pain-text { font-size: 14px; color: #888; line-height: 1.7; margin-bottom: 10px; }
+  .pain-accent { color: #F05A1A; font-style: italic; font-weight: 600; }
+  .pain-img-placeholder { background: #222; border-radius: 10px; min-height: 180px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #333; }
+
+  /* ─── TESTIMONIAL CARD ────────────────────────────────── */
+  .testimonial-card { background: #1E1E1E; border: 1px solid #2E2E2E; border-radius: 10px; padding: 20px; max-width: 520px; }
+  .testimonial-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .testimonial-name  { font-size: 14px; font-weight: 700; color: #E2E2E2; }
+  .testimonial-handle { font-size: 12px; color: #555; }
+  .testimonial-body  { font-size: 13px; color: #AAA; line-height: 1.7; }
+  .testimonial-footer { margin-top: 10px; font-size: 11px; color: #555; display: flex; align-items: center; gap: 6px; }
+
+  /* ─── INCLUSION LIST ──────────────────────────────────── */
+  .inclusion-wrap { background: #141414; border: 1px solid #242424; border-radius: 12px; padding: 24px 28px; max-width: 560px; }
+  .inclusion-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.3; }
+  .inclusion-title span { color: #F05A1A; }
+
+  /* ─── PRICING CARD ────────────────────────────────────── */
+  .price-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 32px 28px; max-width: 380px; text-align: center; }
+  .price-label { font-size: 13px; font-weight: 600; color: #888; margin-bottom: 6px; letter-spacing: .04em; }
+  .price-value { font-size: 64px; font-weight: 900; color: #F05A1A; line-height: 1; }
+  .price-value em { font-size: 32px; font-style: normal; }
+  .price-desc  { font-size: 13px; color: #555; margin-top: 4px; }
+  .price-card .btn-orange { width: 100%; margin-top: 20px; justify-content: center; }
+
+  /* ─── FAQ ─────────────────────────────────────────────── */
+  .faq-section { position: relative; }
+  .faq-watermark { position: absolute; left: -16px; top: -20px; font-size: 120px; font-weight: 900; color: rgba(240,90,26,.06); line-height: 1; user-select: none; pointer-events: none; font-style: italic; }
+  .faq-title { font-size: 22px; font-weight: 800; color: #E2E2E2; margin-bottom: 20px; }
+  .faq-item { border-bottom: 1px solid #222; padding: 16px 0; }
+  .faq-q { font-size: 15px; font-weight: 700; color: #F05A1A; margin-bottom: 6px; }
+  .faq-a { font-size: 14px; color: #777; line-height: 1.7; }
+
+  /* ─── SECTION DIVIDER ─────────────────────────────────── */
+  .scallop-divider { background: #1A1A1A; border-radius: 12px; padding: 20px; text-align: center; position: relative; margin: 8px 0; }
+  .arrow-down-circle { width: 40px; height: 40px; border-radius: 50%; background: #1A1A1A; border: 2px solid #2A2A2A; display: flex; align-items: center; justify-content: center; margin: 0 auto; color: #F05A1A; font-size: 18px; }
+
+  /* ─── RESULTS DASHBOARD ───────────────────────────────── */
+  .dashboard-mock { background: #fff; border-radius: 10px; padding: 16px; max-width: 560px; }
+  .dash-header { font-size: 11px; color: #374151; margin-bottom: 10px; }
+  .dash-tabs { display: flex; gap: 12px; border-bottom: 1px solid #E5E7EB; padding-bottom: 8px; margin-bottom: 12px; }
+  .dash-tab { font-size: 11px; color: #6B7280; padding: 4px 0; cursor: pointer; }
+  .dash-tab.active { color: #1A5BC4; border-bottom: 2px solid #1A5BC4; font-weight: 600; }
+  .dash-metrics { display: flex; gap: 24px; }
+  .dash-metric-label { font-size: 10px; color: #9CA3AF; }
+  .dash-metric-value { font-size: 18px; font-weight: 700; color: #111827; }
+  .dash-row { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid #F3F4F6; font-size: 11px; color: #374151; align-items: center; }
+  .dash-badge { background: #D1FAE5; color: #065F46; border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: 700; }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  .footer-strip { background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 12px; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .footer-logo { font-size: 24px; color: #F05A1A; font-weight: 900; }
+  .footer-copy { font-size: 12px; color: #444; }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 12px; color: #444; text-decoration: none; }
+  .footer-links a:hover { color: #F05A1A; }
+</style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- COVER -->
+  <div class="ds-cover">
+    <div>
+      <span class="brand">Escola do Perpétuo</span>
+      <h1>Desafio<br>Low Ticket<br>Design System</h1>
+      <p>Sistema de design da landing page do Desafio Low Ticket — Micha Menezes &amp; Pedro Aredes. Dark theme com laranja de alta energia e tipografia arrojada.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-self:flex-start;">
+      <span class="badge">Dark Theme</span>
+      <span class="badge">Montserrat</span>
+      <span class="badge">Laranja · Preto</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 1. CORES                                            -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">1 — Paleta de Cores</div>
+
+    <p style="font-size:11px;font-weight:700;color:#444;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Laranja (Marca · CTA · Destaque)</p>
+    <div class="ds-grid ds-grid-4" style="margin-bottom:28px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F05A1A;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Orange Primary</div><div class="swatch-hex">#F05A1A</div><div class="swatch-var">--ep-orange</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C84510;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Orange Hover</div><div class="swatch-hex">#C84510</div><div class="swatch-var">--ep-orange-dark</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(240,90,26,.15);border:1px solid #333;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Orange Tint</div><div class="swatch-hex">rgba(240,90,26,.15)</div><div class="swatch-var">--ep-orange-tint</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(240,90,26,.06);border:1px solid #222;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Orange Ghost</div><div class="swatch-hex">rgba(240,90,26,.06)</div><div class="swatch-var">--ep-orange-ghost</div></div>
+      </div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;color:#444;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Fundos (Dark Scale)</p>
+    <div class="ds-grid ds-grid-5" style="margin-bottom:28px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#050505;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Black</div><div class="swatch-hex">#050505</div><div class="swatch-var">--ep-bg-950</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0A0A0A;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Dark 900</div><div class="swatch-hex">#0A0A0A</div><div class="swatch-var">--ep-bg-900</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#111111;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Dark 800</div><div class="swatch-hex">#111111</div><div class="swatch-var">--ep-bg-800</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A1A1A;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Dark 700</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-var">--ep-bg-700</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2A2A2A;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Dark 600</div><div class="swatch-hex">#2A2A2A</div><div class="swatch-var">--ep-bg-600</div></div>
+      </div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;color:#444;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Texto</p>
+    <div class="ds-grid ds-grid-4">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FFFFFF;"></div>
+        <div class="swatch-meta"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-var">--ep-white</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#E2E2E2;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#E2E2E2</div><div class="swatch-var">--ep-text</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#888888;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Text Muted</div><div class="swatch-hex">#888888</div><div class="swatch-var">--ep-muted</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#444444;"></div>
+        <div class="swatch-meta"><div class="swatch-name">Text Dim</div><div class="swatch-hex">#444444</div><div class="swatch-var">--ep-dim</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 2. TIPOGRAFIA                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">2 — Tipografia · Montserrat + Playfair Display (italic)</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Display XL</div><div class="spec">Montserrat 900<br>56–72px</div></div>
+        <div class="type-sample" style="font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;line-height:1.05;">R$67</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H1 Destaque</div><div class="spec">Playfair Disp.<br>italic 800 / 40px</div></div>
+        <div class="type-sample" style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(24px,4vw,40px);font-weight:800;color:#F05A1A;line-height:1.15;">E Funciona Forte.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H1 Hero</div><div class="spec">Montserrat 800<br>36–40px</div></div>
+        <div class="type-sample" style="font-size:clamp(20px,3.5vw,38px);font-weight:800;color:#fff;line-height:1.2;">Antes de Te Ensinar,<br>Nós Provamos Que Funciona.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H2 Seção</div><div class="spec">Montserrat 800<br>28–32px</div></div>
+        <div class="type-sample" style="font-size:clamp(18px,3vw,30px);font-weight:800;color:#fff;line-height:1.3;">O Desafio Low Ticket é pra você que:</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H3 Acento</div><div class="spec">Playfair Disp.<br>italic 700 / 20px</div></div>
+        <div class="type-sample" style="font-family:'Playfair Display',serif;font-style:italic;font-size:20px;font-weight:700;color:#F05A1A;">E este é o problema</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Nome Expert</div><div class="spec">Playfair Disp.<br>italic 700 / 22px</div></div>
+        <div class="type-sample" style="font-family:'Playfair Display',serif;font-style:italic;font-size:22px;font-weight:700;color:#F05A1A;">Micha Menezes</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body</div><div class="spec">Montserrat 400<br>15px</div></div>
+        <div class="type-sample" style="font-size:15px;font-weight:400;color:#888;line-height:1.7;">Se você se sente travado, consumindo conteúdo sem parar, salvando aulas, comprando cursos e mesmo assim não sai do lugar, você não está sozinho.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body Destaque</div><div class="spec">Montserrat 700<br>15px</div></div>
+        <div class="type-sample" style="font-size:15px;font-weight:700;color:#E2E2E2;">Nós colocamos o método para rodar na prática antes de te vender qualquer coisa.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Eyebrow / Pill</div><div class="spec">Montserrat 700<br>10px uppercase</div></div>
+        <div class="type-sample" style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F05A1A;">Escola do Perpétuo</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Logo</div><div class="spec">DESAFIO 900<br>+ low ticket italic</div></div>
+        <div class="type-sample">
+          <div class="logo-lockup">
+            <div class="logo-desafio">DESAFIO</div>
+            <div class="logo-lowticket"><em>low ticket</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 3. ESPAÇAMENTO                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">3 — Espaçamento</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">4px</div><div class="spacing-var">--ep-space-1</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">8px</div><div class="spacing-var">--ep-space-2</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">12px</div><div class="spacing-var">--ep-space-3</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">16px</div><div class="spacing-var">--ep-space-4</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">24px</div><div class="spacing-var">--ep-space-6</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">32px</div><div class="spacing-var">--ep-space-8</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">48px</div><div class="spacing-var">--ep-space-12</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:64px;"></div><div class="spacing-label">64px</div><div class="spacing-var">--ep-space-16</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:96px;"></div><div class="spacing-label">96px</div><div class="spacing-var">--ep-space-24</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 4. BORDER RADIUS                                    -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">4 — Border Radius</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="radius-card"><div class="radius-box" style="border-radius:4px;"></div><div class="radius-label">XS</div><div class="radius-val">4px — --ep-radius-xs</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:6px;"></div><div class="radius-label">SM · Botão</div><div class="radius-val">6px — --ep-radius-sm</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:10px;"></div><div class="radius-label">MD · Card</div><div class="radius-val">10px — --ep-radius-md</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:16px;"></div><div class="radius-label">LG · Seção</div><div class="radius-val">16px — --ep-radius-lg</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:9999px;height:36px;"></div><div class="radius-label">Pill · Event</div><div class="radius-val">9999px — --ep-radius-pill</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 5. SOMBRAS                                          -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">5 — Sombras</div>
+    <div class="ds-grid ds-grid-4">
+      <div class="shadow-card">
+        <div style="width:80px;height:56px;background:#1A1A1A;border-radius:8px;margin:0 auto;box-shadow:0 1px 4px rgba(0,0,0,.4);"></div>
+        <div class="shadow-label">Shadow XS</div>
+        <div class="shadow-val">0 1px 4px rgba(0,0,0,.4)</div>
+      </div>
+      <div class="shadow-card">
+        <div style="width:80px;height:56px;background:#1A1A1A;border-radius:8px;margin:0 auto;box-shadow:0 4px 16px rgba(0,0,0,.6);"></div>
+        <div class="shadow-label">Shadow MD</div>
+        <div class="shadow-val">0 4px 16px rgba(0,0,0,.6)</div>
+      </div>
+      <div class="shadow-card">
+        <div style="width:80px;height:56px;background:#1A1A1A;border-radius:8px;margin:0 auto;box-shadow:0 8px 32px rgba(0,0,0,.8);"></div>
+        <div class="shadow-label">Shadow LG</div>
+        <div class="shadow-val">0 8px 32px rgba(0,0,0,.8)</div>
+      </div>
+      <div class="shadow-card">
+        <div style="width:80px;height:56px;background:#1A1A1A;border-radius:8px;margin:0 auto;box-shadow:0 8px 32px rgba(240,90,26,.25);"></div>
+        <div class="shadow-label">Shadow Orange</div>
+        <div class="shadow-val">0 8px 32px rgba(240,90,26,.25)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 6. COMPONENTES                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">6 — Componentes</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- COUNTDOWN BAR -->
+      <div class="comp-wrap">
+        <div class="comp-label">Countdown Bar (Topo da Página)</div>
+        <div class="countdown-bar">
+          <div class="countdown-item"><span class="countdown-num">17</span><span class="countdown-unit">Dias</span></div>
+          <div class="countdown-item"><span class="countdown-num">22</span><span class="countdown-unit">Horas</span></div>
+          <div class="countdown-item"><span class="countdown-num">11</span><span class="countdown-unit">Min</span></div>
+          <div class="countdown-item"><span class="countdown-num">52</span><span class="countdown-unit">Seg</span></div>
+        </div>
+        <div class="comp-note">background: #F05A1A · texto branco · font-weight 900 · números 22px · unidades 11px uppercase · padding: 8px 24px</div>
+      </div>
+
+      <!-- LOGO -->
+      <div class="comp-wrap">
+        <div class="comp-label">Logo · Lockup</div>
+        <div style="background:#0A0A0A;padding:28px;border-radius:8px;display:inline-block;">
+          <div class="logo-lockup">
+            <div class="logo-desafio">DESAFIO</div>
+            <div class="logo-lowticket">low <em>ticket</em></div>
+          </div>
+        </div>
+        <div class="comp-note">"DESAFIO" — Montserrat 800 uppercase letter-spacing .25em · "low ticket" — italic 900 · acento laranja #F05A1A</div>
+      </div>
+
+      <!-- BOTÕES -->
+      <div class="comp-wrap">
+        <div class="comp-label">Botões</div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+          <a class="btn btn-orange btn-orange-lg">CLIQUE AQUI PARA GARANTIR SUA VAGA →</a>
+          <a class="btn btn-orange btn-orange-md">GARANTIR VAGA →</a>
+          <a class="btn btn-ghost">Ver Detalhes</a>
+        </div>
+        <div class="comp-note">CTA principal: background #F05A1A · font-weight 800 · uppercase · border-radius 6px · letter-spacing .04em · hover: #C84510<br>Ghost: transparent · border 1px rgba(240,90,26,.4) · color #F05A1A</div>
+      </div>
+
+      <!-- EVENT PILLS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Event Info Pills</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <div class="event-pill"><span class="event-pill-icon">📅</span>07 e 08 de Fevereiro, das 9h às 17h</div>
+          <div class="event-pill"><span class="event-pill-icon">📋</span>Você só copia e coloca no ar</div>
+          <div class="event-pill"><span class="event-pill-icon">🎬</span>Com Gravação</div>
+          <div class="event-pill"><span class="event-pill-icon">🏆</span>100% Online e Ao Vivo</div>
+        </div>
+        <div class="comp-note">background: rgba(255,255,255,.06) · border: 1px solid rgba(255,255,255,.12) · border-radius: 999px · padding: 8px 16px · font-size: 13px 600</div>
+      </div>
+
+      <!-- PROCESS FLOW -->
+      <div class="comp-wrap">
+        <div class="comp-label">Process Flow (Resultado em 3 Passos)</div>
+        <div class="process-flow">
+          <div class="process-pill">Criamos um produto do zero</div>
+          <div class="process-arrow">▼</div>
+          <div class="process-pill">Vendemos para público totalmente frio</div>
+          <div class="process-arrow">▼</div>
+          <div class="process-pill">Faturamos 100 mil reais em apenas 21 dias</div>
+        </div>
+        <div class="comp-note">Pills: bg #1E1E1E · border #333 · border-radius 999px · 14px 700 · Seta: #F05A1A</div>
+      </div>
+
+      <!-- PAIN SECTION -->
+      <div class="comp-wrap">
+        <div class="comp-label">Pain Section (Você aprende, mas pratica pouco)</div>
+        <div class="pain-section">
+          <div>
+            <div class="pain-title">Você aprende muito, mas pratica pouco...</div>
+            <div class="pain-subtitle">E este é o problema</div>
+            <p class="pain-text">Se você se sente travado, consumindo conteúdo sem parar, salvando aulas, comprando cursos e mesmo assim não sai do lugar, você não está sozinho.</p>
+            <p class="pain-text">Está todo mundo cheio de informação, mas quase ninguém ganha dinheiro de verdade.</p>
+            <p class="pain-accent">E é exatamente isso que vamos mudar agora.</p>
+          </div>
+          <div class="pain-img-placeholder">🧑‍💻</div>
+        </div>
+        <div class="comp-note">Layout 2 colunas · título: branco 800 · subtítulo: Playfair Display italic laranja · accent italic: #F05A1A 600</div>
+      </div>
+
+      <!-- TESTIMONIAL CARD -->
+      <div class="comp-wrap">
+        <div class="comp-label">Testimonial Card (Social Proof)</div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">👤</div>
+            <div>
+              <div class="testimonial-name">Milton Giovani Bergamaschi</div>
+              <div class="testimonial-handle">@MiltonGiovani</div>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            @Micha Menezes @Pedro Aredes @Luiz Cota muito obrigado por toda a ajuda e paciência, cada dia faz mais sentido a frase do Micha... <strong style="color:#E2E2E2;">Batemos o 100k em 30 dias.</strong> Ainda bem que não desistimos. Parabéns pelo incrível trabalho!
+          </div>
+          <div class="testimonial-footer">❤️ 🔥 🙌 <span>26</span> <span style="margin-left:auto;">13:40</span></div>
+        </div>
+        <div class="comp-note">bg: #1E1E1E · border: #2E2E2E · avatar circular · nome 700 · texto muted #AAA · texto destaque branco</div>
+      </div>
+
+      <!-- ORANGE BULLET LIST -->
+      <div class="comp-wrap">
+        <div class="comp-label">Lista com Bullet Laranja (▶ Incluso no Desafio)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="orange-list">
+            <div class="orange-item"><span class="orange-arrow">▶</span>Como criar um Low Ticket pronto para escala usando Inteligência Artificial</div>
+            <div class="orange-item"><span class="orange-arrow">▶</span>Templates de páginas de vendas que já geraram múltiplos 6 dígitos</div>
+            <div class="orange-item"><span class="orange-arrow">▶</span>Estrutura de Funil de Vendas Imediato que aumenta o lucro desde o primeiro dia</div>
+          </div>
+          <div class="orange-list">
+            <div class="orange-item"><span class="orange-arrow">▶</span>Swipe File com os melhores anúncios exclusivos para Low Ticket</div>
+            <div class="orange-item"><span class="orange-arrow">▶</span>Estratégia de tráfego pago otimizada para economizar verba e escalar rápido</div>
+            <div class="orange-item"><span class="orange-arrow">▶</span>Área de membros com aulas preparatórias para o Desafio Low Ticket</div>
+          </div>
+        </div>
+        <div class="comp-note">bullet ▶: color #F05A1A 14px · texto: #D0D0D0 15px · gap entre itens: 12px</div>
+      </div>
+
+      <!-- BIO CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Expert Bio Cards (com bordas laranja nos cantos)</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="bio-card">
+            <div class="bio-photo">🎤</div>
+            <div class="bio-body">
+              <div class="bio-name">Micha Menezes</div>
+              <div class="bio-text">
+                Micha Menezes é publicitário, <strong>especialista em perpétuo</strong>, produtor e um dos sócios da Agência Pinguim — empresa especialista em estratégias digitais.<br><br>
+                <strong>Dentro dos últimos 3 anos, já faturou mais de 30 milhões de reais,</strong> recebendo reconhecimento da Hotmart como um dos maiores especialistas em produtos digitais do país.
+              </div>
+            </div>
+          </div>
+          <div class="bio-card">
+            <div class="bio-photo">🎙️</div>
+            <div class="bio-body">
+              <div class="bio-name">Pedro Aredes</div>
+              <div class="bio-text">
+                É sócio do Micha Menezes e atua como estrategista digital, provando que é possível viver exclusivamente da internet sem precisar aparecer nas câmeras.<br><br>
+                <strong>Além de cuidar da parte estratégica da empresa, Pedro é formado em Tecnologia da Informação e comanda todo setor de ferramentas e automações.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-note">bg: #111 · border: #2A2A2A · corner accents: ::before/::after laranja #F05A1A 20×20px · foto 180px col · nome: Playfair Display italic laranja</div>
+      </div>
+
+      <!-- RESULTS DASHBOARD MOCKUP -->
+      <div class="comp-wrap">
+        <div class="comp-label">Dashboard de Resultados (Hotmart Mockup)</div>
+        <div class="dashboard-mock">
+          <div class="dash-header">Veja detalhes das transações e administre todas as suas vendas detalhadamente</div>
+          <div class="dash-tabs">
+            <div class="dash-tab active">Transações</div>
+            <div class="dash-tab">Parcelado Hotmart</div>
+            <div class="dash-tab">Recuperação de Vendas</div>
+          </div>
+          <div class="dash-metrics" style="margin-bottom:14px;">
+            <div><div class="dash-metric-label">Receita Líquida</div><div class="dash-metric-value">R$ 111.290,13</div></div>
+            <div><div class="dash-metric-label">Receita Líquida</div><div class="dash-metric-value">USD$ 452,80</div></div>
+          </div>
+          <div class="dash-row"><span>365 Roteiros...</span><span>AGENCIA PINGUI...</span><span>03/09/2025</span><span style="margin-left:auto;"><span class="dash-badge">Completa</span></span></div>
+          <div class="dash-row"><span>365 Roteiros...</span><span>AGENCIA PINGUI...</span><span>03/09/2025</span><span style="margin-left:auto;"><span class="dash-badge">Completa</span></span></div>
+        </div>
+        <div class="comp-note">Card branco (#fff) embutido no dark bg · usado como prova de resultado (screenshot) · borda-radius: 10px</div>
+      </div>
+
+      <!-- PRICING CARD -->
+      <div class="comp-wrap">
+        <div class="comp-label">Pricing Card</div>
+        <div class="price-card">
+          <div class="price-label">Por apenas</div>
+          <div class="price-value"><em>R$</em>67</div>
+          <div class="price-desc">Acesso completo ao Desafio + todos os bônus</div>
+          <a class="btn btn-orange btn-orange-md">CLIQUE AQUI PARA GARANTIR SUA VAGA →</a>
+        </div>
+        <div class="comp-note">bg: #1A1A1A · border: #2A2A2A · preço: 64px 900 laranja · "R$" em 32px · CTA full-width laranja · border-radius: 16px</div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="comp-wrap">
+        <div class="comp-label">FAQ — Perguntas Frequentes</div>
+        <div class="faq-section">
+          <div class="faq-watermark">FAQ</div>
+          <div class="faq-title">Perguntas frequentes</div>
+          <div class="faq-item">
+            <div class="faq-q">Não consigo participar ao vivo, o Desafio vai ficar gravado?</div>
+            <div class="faq-a">Sim. As aulas do desafio serão gravadas e disponibilizadas na sua área de membros</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Não tenho um curso online ainda, o Desafio vai me ajudar a criar?</div>
+            <div class="faq-a">Sim. O Desafio vai te ajudar a criar um curso online do zero</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Já tenho um curso pronto, posso usar ele para participar do Desafio?</div>
+            <div class="faq-a">Pode sim! E ainda vamos te ajudar a melhorar a oferta para que o seu curso venda muito todos os dias</div>
+          </div>
+        </div>
+        <div class="comp-note">"FAQ" watermark: rgba(240,90,26,.06) 120px italic · pergunta: #F05A1A 700 15px · resposta: #777 14px · divider: #222</div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="comp-wrap">
+        <div class="comp-label">Footer</div>
+        <div class="footer-strip">
+          <div class="footer-logo">@</div>
+          <div class="footer-copy">Copyright ©2026 Escola do Perpétuo | Todos os direitos reservados</div>
+          <div class="footer-links">
+            <a href="#">Políticas de Privacidade</a>
+            <a href="#">Políticas de Cookies</a>
+            <a href="#">Termos de Serviço</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 7. CSS TOKENS                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">7 — CSS Custom Properties (Tokens)</div>
+    <div class="tokens-block">
+<pre><span class="t-comment">/* ── Desafio Low Ticket — Escola do Perpétuo — Design Tokens ── */</span>
+<span class="t-punct">:root {</span>
+
+  <span class="t-comment">/* Laranja (Marca) */</span>
+  <span class="t-prop">--ep-orange</span><span class="t-punct">:</span>         <span class="t-val">#F05A1A</span><span class="t-punct">;</span>  <span class="t-comment">/* CTA, bullet, acento, timer */</span>
+  <span class="t-prop">--ep-orange-dark</span><span class="t-punct">:</span>    <span class="t-val">#C84510</span><span class="t-punct">;</span>  <span class="t-comment">/* hover state */</span>
+  <span class="t-prop">--ep-orange-tint</span><span class="t-punct">:</span>    <span class="t-val">rgba(240, 90, 26, 0.15)</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-orange-ghost</span><span class="t-punct">:</span>   <span class="t-val">rgba(240, 90, 26, 0.06)</span><span class="t-punct">;</span>  <span class="t-comment">/* FAQ watermark */</span>
+
+  <span class="t-comment">/* Fundos Dark */</span>
+  <span class="t-prop">--ep-bg-950</span><span class="t-punct">:</span>         <span class="t-val">#050505</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-bg-900</span><span class="t-punct">:</span>         <span class="t-val">#0A0A0A</span><span class="t-punct">;</span>  <span class="t-comment">/* footer */</span>
+  <span class="t-prop">--ep-bg-800</span><span class="t-punct">:</span>         <span class="t-val">#111111</span><span class="t-punct">;</span>  <span class="t-comment">/* hero, bio cards */</span>
+  <span class="t-prop">--ep-bg-700</span><span class="t-punct">:</span>         <span class="t-val">#1A1A1A</span><span class="t-punct">;</span>  <span class="t-comment">/* cards, pricing, pain section */</span>
+  <span class="t-prop">--ep-bg-600</span><span class="t-punct">:</span>         <span class="t-val">#2A2A2A</span><span class="t-punct">;</span>  <span class="t-comment">/* bordas */</span>
+  <span class="t-prop">--ep-bg-500</span><span class="t-punct">:</span>         <span class="t-val">#1E1E1E</span><span class="t-punct">;</span>  <span class="t-comment">/* process pills, testimonial */</span>
+
+  <span class="t-comment">/* Texto */</span>
+  <span class="t-prop">--ep-white</span><span class="t-punct">:</span>          <span class="t-val">#FFFFFF</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-text</span><span class="t-punct">:</span>           <span class="t-val">#E2E2E2</span><span class="t-punct">;</span>  <span class="t-comment">/* texto principal */</span>
+  <span class="t-prop">--ep-muted</span><span class="t-punct">:</span>          <span class="t-val">#888888</span><span class="t-punct">;</span>  <span class="t-comment">/* body text secundário */</span>
+  <span class="t-prop">--ep-dim</span><span class="t-punct">:</span>            <span class="t-val">#444444</span><span class="t-punct">;</span>  <span class="t-comment">/* notas, meta text */</span>
+
+  <span class="t-comment">/* Tipografia */</span>
+  <span class="t-prop">--ep-font-sans</span><span class="t-punct">:</span>      <span class="t-val">'Montserrat', sans-serif</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-font-display</span><span class="t-punct">:</span>   <span class="t-val">'Playfair Display', serif</span><span class="t-punct">;</span>  <span class="t-comment">/* nomes, H1 laranja italic */</span>
+  <span class="t-prop">--ep-size-xs</span><span class="t-punct">:</span>        <span class="t-val">10px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-sm</span><span class="t-punct">:</span>        <span class="t-val">13px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-base</span><span class="t-punct">:</span>      <span class="t-val">15px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-md</span><span class="t-punct">:</span>        <span class="t-val">20px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-lg</span><span class="t-punct">:</span>        <span class="t-val">28px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-xl</span><span class="t-punct">:</span>        <span class="t-val">40px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-size-display</span><span class="t-punct">:</span>   <span class="t-val">64px</span><span class="t-punct">;</span>   <span class="t-comment">/* preço R$67 */</span>
+
+  <span class="t-comment">/* Espaçamento */</span>
+  <span class="t-prop">--ep-space-1</span><span class="t-punct">:</span>        <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-2</span><span class="t-punct">:</span>        <span class="t-val">8px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-3</span><span class="t-punct">:</span>        <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-4</span><span class="t-punct">:</span>        <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-6</span><span class="t-punct">:</span>        <span class="t-val">24px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-8</span><span class="t-punct">:</span>        <span class="t-val">32px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-12</span><span class="t-punct">:</span>       <span class="t-val">48px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-16</span><span class="t-punct">:</span>       <span class="t-val">64px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-space-24</span><span class="t-punct">:</span>       <span class="t-val">96px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Border Radius */</span>
+  <span class="t-prop">--ep-radius-xs</span><span class="t-punct">:</span>      <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-radius-sm</span><span class="t-punct">:</span>      <span class="t-val">6px</span><span class="t-punct">;</span>   <span class="t-comment">/* botões */</span>
+  <span class="t-prop">--ep-radius-md</span><span class="t-punct">:</span>      <span class="t-val">10px</span><span class="t-punct">;</span>  <span class="t-comment">/* cards */</span>
+  <span class="t-prop">--ep-radius-lg</span><span class="t-punct">:</span>      <span class="t-val">16px</span><span class="t-punct">;</span>  <span class="t-comment">/* seções, pricing card */</span>
+  <span class="t-prop">--ep-radius-pill</span><span class="t-punct">:</span>    <span class="t-val">9999px</span><span class="t-punct">;</span> <span class="t-comment">/* event pills, process flow */</span>
+
+  <span class="t-comment">/* Sombras */</span>
+  <span class="t-prop">--ep-shadow-xs</span><span class="t-punct">:</span>      <span class="t-val">0 1px 4px rgba(0,0,0,.4)</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-shadow-md</span><span class="t-punct">:</span>      <span class="t-val">0 4px 16px rgba(0,0,0,.6)</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-shadow-lg</span><span class="t-punct">:</span>      <span class="t-val">0 8px 32px rgba(0,0,0,.8)</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-shadow-orange</span><span class="t-punct">:</span>  <span class="t-val">0 8px 32px rgba(240,90,26,.25)</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Bordas */</span>
+  <span class="t-prop">--ep-border</span><span class="t-punct">:</span>         <span class="t-val">#2A2A2A</span><span class="t-punct">;</span>
+  <span class="t-prop">--ep-border-orange</span><span class="t-punct">:</span>  <span class="t-val">rgba(240,90,26,.4)</span><span class="t-punct">;</span>
+
+<span class="t-punct">}</span></pre>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

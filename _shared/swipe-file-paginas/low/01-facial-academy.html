@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — Facial Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── CORES DA MARCA ── */
+      --fa-purple:           #7B4FA0;
+      --fa-purple-dark:      #5A3278;
+      --fa-purple-light:     #9B6FC0;
+      --fa-purple-muted:     #B8A0D0;
+      --fa-purple-pale:      #D4C0E8;
+      --fa-purple-ultra:     #EDE7F6;
+
+      /* Gradiente do card de preço */
+      --fa-gradient:         linear-gradient(135deg, #9B55D0 0%, #D96FA8 100%);
+      --fa-gradient-card:    linear-gradient(160deg, #8B4FC8 0%, #C85FA0 100%);
+
+      /* Acento verde (botão CTA) */
+      --fa-green:            #42C952;
+      --fa-green-dark:       #2FA83E;
+
+      /* Superfícies */
+      --fa-bg-dark:          #0E0C1E;
+      --fa-bg-dark-2:        #161328;
+      --fa-bg-light:         #EDE7F6;
+      --fa-bg-light-2:       #F5F0FB;
+      --fa-bg-white:         #FFFFFF;
+      --fa-bg-purple-solid:  #6A3F9A;
+
+      /* Texto */
+      --fa-text-dark:        #1A1630;
+      --fa-text-body:        #3D3558;
+      --fa-text-muted:       #7A6E95;
+      --fa-text-white:       #FFFFFF;
+      --fa-text-white-70:    rgba(255,255,255,0.70);
+      --fa-text-white-50:    rgba(255,255,255,0.50);
+      --fa-text-white-35:    rgba(255,255,255,0.35);
+
+      /* Bordas */
+      --fa-border-dark:      rgba(255,255,255,0.12);
+      --fa-border-light:     #D4C0E8;
+      --fa-border-card:      #E8E0F2;
+
+      /* Aviso */
+      --fa-warning-bg:       #FFF8E1;
+      --fa-warning-border:   #FFD54F;
+
+      /* ── TIPOGRAFIA ── */
+      --fa-font:             'Montserrat', sans-serif;
+
+      --fa-size-eyebrow:     11px;
+      --fa-size-xs:          12px;
+      --fa-size-sm:          14px;
+      --fa-size-base:        16px;
+      --fa-size-md:          18px;
+      --fa-size-lg:          22px;
+      --fa-size-xl:          28px;
+      --fa-size-2xl:         36px;
+      --fa-size-hero:        44px;
+      --fa-size-number:      72px;
+      --fa-size-price:       56px;
+
+      --fa-weight-regular:   400;
+      --fa-weight-medium:    500;
+      --fa-weight-semibold:  600;
+      --fa-weight-bold:      700;
+      --fa-weight-extrabold: 800;
+      --fa-weight-black:     900;
+
+      /* ── ESPAÇAMENTO ── */
+      --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+      --space-4: 16px;  --space-5: 24px;  --space-6: 32px;
+      --space-7: 48px;  --space-8: 64px;  --space-9: 80px;
+      --space-10: 120px;
+
+      /* ── BORDER RADIUS ── */
+      --radius-xs:   4px;
+      --radius-sm:   8px;
+      --radius-md:   12px;
+      --radius-lg:   16px;
+      --radius-xl:   24px;
+      --radius-pill: 9999px;
+
+      /* ── SOMBRAS ── */
+      --shadow-sm:   0 2px 8px rgba(123,79,160,0.10);
+      --shadow-md:   0 4px 20px rgba(123,79,160,0.15);
+      --shadow-lg:   0 8px 40px rgba(123,79,160,0.25);
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ═══════════════ SHELL ═══════════════ */
+    body {
+      font-family: var(--fa-font);
+      background: #F5F0FB;
+      color: var(--fa-text-dark);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .ds-header {
+      background: var(--fa-bg-dark);
+      padding: 52px 72px 44px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .ds-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--fa-gradient);
+    }
+    .ds-header::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(155,85,208,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ds-header-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--fa-purple-light);
+      margin-bottom: 12px;
+    }
+    .ds-header h1 {
+      font-size: 38px; font-weight: 800; color: #fff;
+      line-height: 1.1; margin-bottom: 8px;
+    }
+    .ds-header h1 span {
+      background: var(--fa-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .ds-header-meta { font-size: 13px; color: var(--fa-text-white-35); margin-top: 10px; }
+
+    /* Nav interna */
+    .ds-nav {
+      background: var(--fa-bg-dark-2);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; padding: 0 72px;
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .ds-nav a {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+      text-decoration: none; padding: 14px 18px;
+      border-bottom: 2px solid transparent;
+      letter-spacing: 0.04em; transition: all 0.15s;
+    }
+    .ds-nav a:hover { color: #fff; border-bottom-color: var(--fa-purple-light); }
+
+    /* Layout */
+    .ds-content { max-width: 1100px; margin: 0 auto; padding: 64px 32px; }
+
+    /* Seção */
+    .ds-section { margin-bottom: 80px; }
+    .ds-section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--fa-purple); margin-bottom: 6px;
+    }
+    .ds-section h2 {
+      font-size: 24px; font-weight: 800; color: var(--fa-text-dark);
+      margin-bottom: 8px; padding-bottom: 20px;
+      border-bottom: 2px solid var(--fa-border-card);
+    }
+    .ds-section-desc { font-size: 14px; color: var(--fa-text-muted); margin-top:-12px; margin-bottom:32px; }
+
+    /* ═══════════════ CORES ═══════════════ */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px,1fr)); gap: 12px; }
+    .color-group-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--fa-text-muted); margin: 28px 0 10px; grid-column: 1/-1;
+    }
+    .color-swatch { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-card); }
+    .color-swatch-preview { height: 72px; width: 100%; }
+    .color-swatch-info { padding: 10px 12px; background: #fff; }
+    .color-swatch-name { font-size: 12px; font-weight: 700; color: var(--fa-text-dark); margin-bottom: 2px; }
+    .color-swatch-token { font-family: 'Courier New', monospace; font-size: 9px; color: var(--fa-purple); margin-bottom: 2px; }
+    .color-swatch-hex { font-size: 10px; color: var(--fa-text-muted); }
+
+    /* Gradiente especial */
+    .color-swatch-gradient .color-swatch-preview { background: var(--fa-gradient); }
+
+    /* ═══════════════ TIPOGRAFIA ═══════════════ */
+    .type-block { border-top: 2px solid var(--fa-border-card); }
+    .type-row {
+      display: grid; grid-template-columns: 190px 1fr 170px;
+      align-items: baseline; gap: 24px;
+      padding: 22px 0; border-bottom: 1px solid var(--fa-border-card);
+    }
+    .type-meta strong { display: block; font-size: 11px; font-weight: 700; color: var(--fa-purple); letter-spacing: 0.06em; margin-bottom: 4px; text-transform: uppercase; }
+    .type-meta span { font-family: 'Courier New', monospace; font-size: 10px; color: var(--fa-text-muted); line-height: 1.7; display: block; }
+    .type-token { font-family: 'Courier New', monospace; font-size: 10px; color: var(--fa-text-muted); text-align: right; align-self: center; }
+
+    /* ═══════════════ ESPAÇAMENTO ═══════════════ */
+    .space-grid { display: flex; flex-direction: column; gap: 10px; }
+    .space-row { display: grid; grid-template-columns: 110px 1fr 80px; align-items: center; gap: 16px; }
+    .space-label { font-family: 'Courier New', monospace; font-size: 11px; color: var(--fa-purple); }
+    .space-bar { background: var(--fa-gradient); height: 16px; border-radius: 4px; opacity: 0.6; }
+    .space-val { font-size: 11px; color: var(--fa-text-muted); text-align: right; }
+
+    /* ═══════════════ BORDER RADIUS ═══════════════ */
+    .radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 16px; }
+    .radius-item {
+      background: #fff; border: 1px solid var(--fa-border-card);
+      padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+      border-radius: 12px; box-shadow: var(--shadow-card);
+    }
+    .radius-preview { width: 56px; height: 56px; background: linear-gradient(135deg, var(--fa-purple-light), var(--fa-purple-pale)); }
+    .radius-name { font-size: 11px; font-weight: 700; color: var(--fa-text-dark); text-align: center; }
+    .radius-token { font-family: 'Courier New', monospace; font-size: 9px; color: var(--fa-purple); text-align: center; }
+
+    /* ═══════════════ SOMBRAS ═══════════════ */
+    .shadow-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .shadow-item { background: #fff; border-radius: 12px; padding: 28px 20px; text-align: center; }
+    .shadow-name { font-size: 12px; font-weight: 700; color: var(--fa-text-dark); margin-bottom: 4px; }
+    .shadow-token { font-family: 'Courier New', monospace; font-size: 9px; color: var(--fa-purple); }
+
+    /* ═══════════════ COMPONENTES ═══════════════ */
+    .comp-block {
+      background: #fff; border: 1px solid var(--fa-border-card);
+      border-radius: 16px; padding: 32px; margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .comp-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--fa-purple); margin-bottom: 24px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--fa-border-card);
+    }
+    .comp-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 14px; }
+    .comp-row:last-of-type { margin-bottom: 0; }
+    .comp-note {
+      font-family: 'Courier New', monospace; font-size: 10px;
+      color: var(--fa-text-muted); margin-top: 16px; line-height: 1.9;
+      background: var(--fa-bg-light); padding: 10px 14px; border-radius: 6px;
+    }
+
+    /* ── Botões ── */
+    .btn-primary {
+      font-family: var(--fa-font); font-size: 14px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: #fff; background: var(--fa-purple);
+      border: none; border-radius: var(--radius-pill);
+      padding: 14px 32px; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.2s, transform 0.1s;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover { background: var(--fa-purple-dark); }
+
+    .btn-green {
+      font-family: var(--fa-font); font-size: 14px; font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: #fff; background: var(--fa-green);
+      border: none; border-radius: var(--radius-pill);
+      padding: 16px 32px; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.2s;
+      box-shadow: 0 4px 16px rgba(66,201,82,0.35);
+    }
+    .btn-green:hover { background: var(--fa-green-dark); }
+
+    .btn-outline {
+      font-family: var(--fa-font); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--fa-text-dark); background: transparent;
+      border: 1.5px solid var(--fa-text-dark); border-radius: var(--radius-pill);
+      padding: 14px 32px; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--fa-text-dark); color: #fff; }
+
+    .btn-outline-white {
+      font-family: var(--fa-font); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #fff; background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.5); border-radius: var(--radius-pill);
+      padding: 12px 28px; cursor: pointer; text-decoration: none; display: inline-block;
+    }
+
+    /* ── Feature Pill/Tag ── */
+    .pill-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: var(--fa-text-dark);
+      background: rgba(123,79,160,0.10); border: 1px solid var(--fa-purple-pale);
+      border-radius: var(--radius-pill); padding: 6px 14px;
+    }
+    .pill-tag::before { content: '•'; color: var(--fa-purple); font-size: 14px; }
+
+    .pill-tag-dark {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-pill); padding: 6px 14px;
+    }
+    .pill-tag-dark::before { content: '•'; color: var(--fa-purple-light); font-size: 14px; }
+
+    /* ── Depoimento (WhatsApp style) ── */
+    .testimonial-wrap { background: var(--fa-bg-dark); border-radius: 16px; padding: 24px; }
+    .testimonial-item {
+      background: #1E7E34; /* WhatsApp green */
+      background: #2A7A3B;
+      border-radius: 12px 12px 2px 12px;
+      padding: 14px 16px; max-width: 420px; margin-left: auto; margin-bottom: 12px;
+    }
+    .testimonial-item.left {
+      margin-left: 0; margin-right: auto;
+      border-radius: 2px 12px 12px 12px;
+    }
+    .testimonial-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .testimonial-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--fa-purple-light), var(--fa-purple-pale));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .testimonial-role { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 1px; }
+    .testimonial-body { font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+    .testimonial-time { font-size: 10px; color: rgba(255,255,255,0.4); text-align: right; margin-top: 6px; }
+
+    /* ── Pain card ── */
+    .pain-card {
+      background: #fff; border-radius: var(--radius-lg);
+      padding: 20px; text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .pain-card-emoji { font-size: 32px; margin-bottom: 10px; }
+    .pain-card-text { font-size: 13px; color: var(--fa-text-body); line-height: 1.6; font-style: italic; }
+
+    /* ── Problem numbered card ── */
+    .problem-card {
+      background: rgba(123,79,160,0.08); border: 1px solid var(--fa-purple-pale);
+      border-radius: var(--radius-md); padding: 16px 18px;
+    }
+    .problem-num {
+      font-size: 16px; font-weight: 800; color: var(--fa-purple);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .problem-num span { font-size: 13px; font-weight: 400; color: var(--fa-text-body); }
+
+    /* ── Warning callout ── */
+    .warning-callout {
+      background: var(--fa-warning-bg); border: 1px solid var(--fa-warning-border);
+      border-radius: var(--radius-md); padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .warning-callout-icon { font-size: 20px; flex-shrink: 0; }
+    .warning-callout-text { font-size: 13px; color: #5D4037; font-weight: 600; line-height: 1.5; }
+
+    /* ── Numbered step card ── */
+    .step-card {
+      background: #fff; border: 1px solid var(--fa-border-card);
+      border-radius: var(--radius-lg); padding: 24px 20px;
+      box-shadow: var(--shadow-card); display: flex; gap: 20px; align-items: flex-start;
+    }
+    .step-num {
+      font-size: 72px; font-weight: 900; line-height: 0.85;
+      color: var(--fa-purple-pale); flex-shrink: 0;
+    }
+    .step-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--fa-text-muted); margin-bottom: 4px; }
+    .step-title { font-size: 16px; font-weight: 700; color: var(--fa-text-dark); margin-bottom: 6px; }
+    .step-desc { font-size: 14px; color: var(--fa-text-body); line-height: 1.6; }
+
+    /* ── Checkmark card ── */
+    .check-card {
+      background: #fff; border: 1px solid var(--fa-border-card);
+      border-radius: var(--radius-md); padding: 18px 16px;
+      box-shadow: var(--shadow-card); display: flex; gap: 12px; align-items: flex-start;
+    }
+    .check-icon {
+      width: 28px; height: 28px; background: var(--fa-green);
+      border-radius: var(--radius-sm); flex-shrink: 0; display: flex;
+      align-items: center; justify-content: center; font-size: 14px;
+    }
+    .check-text { font-size: 13px; color: var(--fa-text-body); line-height: 1.6; font-weight: 500; }
+
+    /* ── Value table row ── */
+    .value-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); gap: 12px;
+    }
+    .value-row:last-child { border-bottom: none; }
+    .value-row-name {
+      font-size: 14px; color: rgba(255,255,255,0.8); font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-pill);
+      padding: 8px 18px; flex: 1;
+    }
+    .value-row-price {
+      font-size: 14px; font-weight: 700; color: #fff;
+      background: var(--fa-purple); border-radius: var(--radius-pill);
+      padding: 8px 16px; white-space: nowrap;
+    }
+
+    /* ── Pricing card ── */
+    .pricing-card {
+      background: var(--fa-gradient-card);
+      border-radius: var(--radius-xl); padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 14px; max-width: 320px;
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .pricing-title { font-size: 22px; font-weight: 800; color: #fff; }
+    .pricing-subtitle {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .pricing-price-row { display: flex; align-items: flex-start; gap: 4px; }
+    .pricing-currency { font-size: 20px; font-weight: 700; color: #fff; margin-top: 8px; }
+    .pricing-amount { font-size: 56px; font-weight: 900; line-height: 1; color: #fff; }
+    .pricing-cents { font-size: 20px; font-weight: 700; color: #fff; margin-top: 8px; }
+    .pricing-label-2 { font-size: 11px; color: rgba(255,255,255,0.65); }
+    .pricing-installment { font-size: 12px; color: rgba(255,255,255,0.55); }
+    .pricing-note { font-size: 10px; color: rgba(255,255,255,0.45); font-style: italic; }
+
+    /* ── Process steps (numbered outline) ── */
+    .process-step {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-md); padding: 18px 16px;
+      background: rgba(255,255,255,0.04); text-align: center;
+    }
+    .process-step-num { font-size: 24px; font-weight: 800; color: var(--fa-purple-light); margin-bottom: 10px; }
+    .process-step-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+    /* ── FAQ accordion ── */
+    .faq-item {
+      border: 1px solid var(--fa-border-card); border-radius: var(--radius-md);
+      margin-bottom: 8px; overflow: hidden;
+    }
+    .faq-item.open { border-color: var(--fa-purple-light); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; cursor: pointer;
+      font-size: 14px; font-weight: 600; color: var(--fa-text-dark);
+    }
+    .faq-item.open .faq-q { background: var(--fa-purple-ultra); color: var(--fa-purple-dark); }
+    .faq-chevron { font-size: 12px; color: var(--fa-purple); }
+    .faq-a {
+      padding: 0 18px 14px; font-size: 13px; color: var(--fa-text-body); line-height: 1.7;
+      display: none;
+    }
+    .faq-item.open .faq-a { display: block; background: var(--fa-purple-ultra); }
+
+    /* ── Icon badge (garantia, etc.) ── */
+    .icon-badge {
+      background: #fff; border: 1px solid var(--fa-border-card);
+      border-radius: var(--radius-lg); padding: 20px 16px;
+      text-align: center; box-shadow: var(--shadow-card);
+    }
+    .icon-badge-icon { font-size: 32px; margin-bottom: 10px; }
+    .icon-badge-text { font-size: 13px; font-weight: 600; color: var(--fa-text-dark); }
+
+    /* ── Tokens table ── */
+    .tokens-pre {
+      background: var(--fa-bg-dark); border-radius: 12px;
+      padding: 28px 32px; overflow-x: auto;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .tokens-pre pre {
+      font-family: 'Courier New', monospace; font-size: 12px;
+      line-height: 1.9; color: rgba(255,255,255,0.55); margin: 0;
+    }
+    .t-var   { color: #93C5FD; }
+    .t-val   { color: #86EFAC; }
+    .t-str   { color: #FCA5A5; }
+    .t-dim   { color: #374151; }
+    .t-sel   { color: #D8B4FE; }
+
+    /* Utilitários */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .dark-wrap { background: var(--fa-bg-dark); border-radius: 16px; padding: 28px; }
+    .light-wrap { background: var(--fa-bg-light); border-radius: 16px; padding: 28px; }
+    .divider { height: 1px; background: var(--fa-border-card); margin: 24px 0; }
+
+    @media (max-width: 768px) {
+      .ds-header { padding: 36px 24px; }
+      .ds-header h1 { font-size: 26px; }
+      .ds-nav { padding: 0 16px; overflow-x: auto; }
+      .ds-content { padding: 40px 20px; }
+      .grid-2, .grid-3, .grid-4, .shadow-grid { grid-template-columns: 1fr; }
+      .type-row { grid-template-columns: 1fr; gap: 8px; }
+      .type-token { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="ds-header">
+  <div class="ds-header-eyebrow">Facial Academy &nbsp;·&nbsp; lp.facialacademy.br</div>
+  <h1>Kit HOF <span>Design System</span></h1>
+  <div class="ds-header-meta">v1.0 &nbsp;·&nbsp; Kit Completo de Documentos da HOF &nbsp;·&nbsp; Abril 2026</div>
+</header>
+
+<!-- NAV -->
+<nav class="ds-nav">
+  <a href="#cores">Cores</a>
+  <a href="#tipografia">Tipografia</a>
+  <a href="#espacamento">Espaçamento</a>
+  <a href="#bordas">Border Radius</a>
+  <a href="#sombras">Sombras</a>
+  <a href="#componentes">Componentes</a>
+  <a href="#tokens">Tokens CSS</a>
+</nav>
+
+<div class="ds-content">
+
+  <!-- ══════════ CORES ══════════ -->
+  <section class="ds-section" id="cores">
+    <div class="ds-section-label">Fundação</div>
+    <h2>Paleta de Cores</h2>
+    <p class="ds-section-desc">Sistema tripartite: roxo/violeta como cor primária da marca, verde como cor de conversão (CTA), e uma escala de lavanda para fundos. O gradiente roxo→rosa é exclusivo do card de preço.</p>
+
+    <div class="color-grid">
+
+      <div class="color-group-title">Roxo — Cor Primária</div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#7B4FA0;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Roxo Principal</div>
+          <div class="color-swatch-token">--fa-purple</div>
+          <div class="color-swatch-hex">#7B4FA0</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#5A3278;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Roxo Escuro</div>
+          <div class="color-swatch-token">--fa-purple-dark</div>
+          <div class="color-swatch-hex">#5A3278</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#9B6FC0;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Roxo Claro</div>
+          <div class="color-swatch-token">--fa-purple-light</div>
+          <div class="color-swatch-hex">#9B6FC0</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#B8A0D0;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Roxo Suave</div>
+          <div class="color-swatch-token">--fa-purple-muted</div>
+          <div class="color-swatch-hex">#B8A0D0</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#D4C0E8;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Roxo Pálido</div>
+          <div class="color-swatch-token">--fa-purple-pale</div>
+          <div class="color-swatch-hex">#D4C0E8</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#EDE7F6;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Lavanda Ultra</div>
+          <div class="color-swatch-token">--fa-purple-ultra</div>
+          <div class="color-swatch-hex">#EDE7F6</div>
+        </div>
+      </div>
+
+      <div class="color-group-title">Gradiente — Card de Preço</div>
+
+      <div class="color-swatch color-swatch-gradient" style="grid-column: span 2;">
+        <div class="color-swatch-preview" style="background: linear-gradient(135deg, #9B55D0 0%, #D96FA8 100%);"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Gradiente Roxo → Rosa</div>
+          <div class="color-swatch-token">--fa-gradient</div>
+          <div class="color-swatch-hex">#9B55D0 → #D96FA8 · 135°</div>
+        </div>
+      </div>
+
+      <div class="color-group-title">Verde — CTA / Conversão</div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#42C952;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Verde CTA</div>
+          <div class="color-swatch-token">--fa-green</div>
+          <div class="color-swatch-hex">#42C952</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#2FA83E;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Verde Escuro</div>
+          <div class="color-swatch-token">--fa-green-dark</div>
+          <div class="color-swatch-hex">#2FA83E</div>
+        </div>
+      </div>
+
+      <div class="color-group-title">Superfícies</div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#0E0C1E;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Fundo Escuro</div>
+          <div class="color-swatch-token">--fa-bg-dark</div>
+          <div class="color-swatch-hex">#0E0C1E</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#161328;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Fundo Escuro 2</div>
+          <div class="color-swatch-token">--fa-bg-dark-2</div>
+          <div class="color-swatch-hex">#161328</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#EDE7F6;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Fundo Lavanda</div>
+          <div class="color-swatch-token">--fa-bg-light</div>
+          <div class="color-swatch-hex">#EDE7F6</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#6A3F9A;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Fundo Roxo Sólido</div>
+          <div class="color-swatch-token">--fa-bg-purple-solid</div>
+          <div class="color-swatch-hex">#6A3F9A</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#FFFFFF; border-top:1px solid #eee;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Branco</div>
+          <div class="color-swatch-token">--fa-bg-white</div>
+          <div class="color-swatch-hex">#FFFFFF</div>
+        </div>
+      </div>
+
+      <div class="color-group-title">Texto</div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#1A1630;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Texto Primário</div>
+          <div class="color-swatch-token">--fa-text-dark</div>
+          <div class="color-swatch-hex">#1A1630</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#3D3558;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Texto Corpo</div>
+          <div class="color-swatch-token">--fa-text-body</div>
+          <div class="color-swatch-hex">#3D3558</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#7A6E95;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Texto Suave</div>
+          <div class="color-swatch-token">--fa-text-muted</div>
+          <div class="color-swatch-hex">#7A6E95</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ TIPOGRAFIA ══════════ -->
+  <section class="ds-section" id="tipografia">
+    <div class="ds-section-label">Fundação</div>
+    <h2>Tipografia</h2>
+    <p class="ds-section-desc"><strong>Montserrat</strong> em todos os pesos — da landing page ao produto. Uso intenso de itálico para destaques de cor e negrito como âncora de atenção.</p>
+
+    <div class="type-block">
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Eyebrow / Label</strong>
+          <span>11px · 700 · uppercase<br>tracking: 3px</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#7B4FA0;">KIT COMPLETO DE DOCUMENTOS DA HOF</div>
+        <div class="type-token">--fa-size-eyebrow<br>--fa-weight-bold</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Headline Hero</strong>
+          <span>44px · 800 · lh: 1.15</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:32px; font-weight:800; color:#1A1630; line-height:1.15;">Kit de documentos completo para HOF</div>
+        <div class="type-token">--fa-size-hero<br>--fa-weight-extrabold</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Headline com Destaque</strong>
+          <span>36px · 800 · itálico colorido</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:26px; font-weight:800; color:#1A1630; line-height:1.25;">organize tudo em 30 minutos com <em style="color:#7B4FA0; font-style:italic;">segurança jurídica.</em></div>
+        <div class="type-token">--fa-size-2xl<br>--fa-purple (em)</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Subtítulo / H2</strong>
+          <span>28px · 700 · lh: 1.3</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:22px; font-weight:700; color:#1A1630;">Entenda de uma vez por todas:</div>
+        <div class="type-token">--fa-size-xl<br>--fa-weight-bold</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Número Grande</strong>
+          <span>72px · 900 · lh: 0.85</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:60px; font-weight:900; color:#D4C0E8; line-height:0.9;">01</div>
+        <div class="type-token">--fa-size-number<br>--fa-purple-pale</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Step Label</strong>
+          <span>11px · 700 · uppercase<br>tracking: 2px</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#7A6E95;">ACESSE E BAIXE</div>
+        <div class="type-token">--fa-size-eyebrow<br>--fa-text-muted</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Corpo de Texto</strong>
+          <span>16px · 400 · lh: 1.7</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:15px; font-weight:400; color:#3D3558; line-height:1.7; max-width:480px;">Receberá acesso imediato a todos os documentos prontos para uso em sua clínica, em formato editável.</div>
+        <div class="type-token">--fa-size-base<br>--fa-text-body</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Preço</strong>
+          <span>56px · 900 · lh: 1</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:48px; font-weight:900; color:#fff; background:var(--fa-gradient); display:inline-block; -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1;">67,00</div>
+        <div class="type-token">--fa-size-price<br>--fa-weight-black</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <strong>Botão CTA</strong>
+          <span>14px · 800 · uppercase<br>tracking: 0.05em</span>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#fff; background:#42C952; padding:12px 24px; border-radius:999px; display:inline-block;">SIM, QUERO MAIS SEGURANÇA E AGILIDADE AGORA!</div>
+        <div class="type-token">--fa-size-sm<br>--fa-weight-extrabold</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ ESPAÇAMENTO ══════════ -->
+  <section class="ds-section" id="espacamento">
+    <div class="ds-section-label">Fundação</div>
+    <h2>Escala de Espaçamento</h2>
+    <p class="ds-section-desc">Base 4px. Os espaços --space-9 e --space-10 definem a respiração entre seções da landing page.</p>
+    <div class="space-grid">
+      <div class="space-row"><div class="space-label">--space-1</div><div><div class="space-bar" style="width:4px;"></div></div><div class="space-val">4px</div></div>
+      <div class="space-row"><div class="space-label">--space-2</div><div><div class="space-bar" style="width:8px;"></div></div><div class="space-val">8px</div></div>
+      <div class="space-row"><div class="space-label">--space-3</div><div><div class="space-bar" style="width:12px;"></div></div><div class="space-val">12px</div></div>
+      <div class="space-row"><div class="space-label">--space-4</div><div><div class="space-bar" style="width:16px;"></div></div><div class="space-val">16px · padding botão</div></div>
+      <div class="space-row"><div class="space-label">--space-5</div><div><div class="space-bar" style="width:24px;"></div></div><div class="space-val">24px</div></div>
+      <div class="space-row"><div class="space-label">--space-6</div><div><div class="space-bar" style="width:32px;"></div></div><div class="space-val">32px · padding de card</div></div>
+      <div class="space-row"><div class="space-label">--space-7</div><div><div class="space-bar" style="width:48px;"></div></div><div class="space-val">48px</div></div>
+      <div class="space-row"><div class="space-label">--space-8</div><div><div class="space-bar" style="width:64px;"></div></div><div class="space-val">64px</div></div>
+      <div class="space-row"><div class="space-label">--space-9</div><div><div class="space-bar" style="width:80px;"></div></div><div class="space-val">80px · entre seções</div></div>
+      <div class="space-row"><div class="space-label">--space-10</div><div><div class="space-bar" style="width:120px;"></div></div><div class="space-val">120px · padding de seção</div></div>
+    </div>
+  </section>
+
+  <!-- ══════════ BORDER RADIUS ══════════ -->
+  <section class="ds-section" id="bordas">
+    <div class="ds-section-label">Fundação</div>
+    <h2>Border Radius</h2>
+    <div class="radius-grid">
+      <div class="radius-item"><div class="radius-preview" style="border-radius:4px;"></div><div class="radius-name">Extra Small</div><div class="radius-token">--radius-xs · 4px</div></div>
+      <div class="radius-item"><div class="radius-preview" style="border-radius:8px;"></div><div class="radius-name">Small</div><div class="radius-token">--radius-sm · 8px<br>ícones, badges</div></div>
+      <div class="radius-item"><div class="radius-preview" style="border-radius:12px;"></div><div class="radius-name">Medium</div><div class="radius-token">--radius-md · 12px<br>cards menores</div></div>
+      <div class="radius-item"><div class="radius-preview" style="border-radius:16px;"></div><div class="radius-name">Large</div><div class="radius-token">--radius-lg · 16px<br>cards, steps</div></div>
+      <div class="radius-item"><div class="radius-preview" style="border-radius:24px;"></div><div class="radius-name">X-Large</div><div class="radius-token">--radius-xl · 24px<br>pricing card</div></div>
+      <div class="radius-item"><div class="radius-preview" style="border-radius:999px;"></div><div class="radius-name">Pill</div><div class="radius-token">--radius-pill · 9999px<br>botões, tags</div></div>
+    </div>
+  </section>
+
+  <!-- ══════════ SOMBRAS ══════════ -->
+  <section class="ds-section" id="sombras">
+    <div class="ds-section-label">Fundação</div>
+    <h2>Sombras</h2>
+    <div class="shadow-grid">
+      <div class="shadow-item" style="box-shadow:0 2px 8px rgba(123,79,160,0.10);">
+        <div class="shadow-name">Sutil</div>
+        <div class="shadow-token">--shadow-sm</div>
+      </div>
+      <div class="shadow-item" style="box-shadow:0 4px 20px rgba(123,79,160,0.15);">
+        <div class="shadow-name">Card</div>
+        <div class="shadow-token">--shadow-md</div>
+      </div>
+      <div class="shadow-item" style="box-shadow:0 8px 40px rgba(123,79,160,0.25);">
+        <div class="shadow-name">Pricing Card</div>
+        <div class="shadow-token">--shadow-lg</div>
+      </div>
+      <div class="shadow-item" style="box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+        <div class="shadow-name">Neutro</div>
+        <div class="shadow-token">--shadow-card</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ COMPONENTES ══════════ -->
+  <section class="ds-section" id="componentes">
+    <div class="ds-section-label">Componentes</div>
+    <h2>Biblioteca de Componentes</h2>
+
+    <!-- Botões -->
+    <div class="comp-block">
+      <div class="comp-title">Botões</div>
+      <div class="comp-row">
+        <a href="#" class="btn-primary">Quero organizar meus documentos</a>
+        <a href="#" class="btn-green">SIM, QUERO MAIS SEGURANÇA E AGILIDADE AGORA!</a>
+      </div>
+      <div class="comp-row">
+        <a href="#" class="btn-outline">EU QUERO ORGANIZAR MEUS DOCUMENTOS</a>
+        <div class="dark-wrap" style="padding:12px 16px; display:inline-flex;">
+          <a href="#" class="btn-outline-white">Saiba mais</a>
+        </div>
+      </div>
+      <div class="comp-note">
+        Primário (roxo): background --fa-purple · border-radius --radius-pill · 14px 700 uppercase<br>
+        Conversão (verde): background --fa-green · shadow verde · 14px 800 uppercase — uso exclusivo no CTA de compra<br>
+        Outline escuro: border 1.5px var(--fa-text-dark) · fundo transparente · hover inverte<br>
+        Outline branco: border 1.5px rgba(255,255,255,0.5) · uso em seções dark
+      </div>
+    </div>
+
+    <!-- Feature pills -->
+    <div class="comp-block">
+      <div class="comp-title">Feature Pills / Tags</div>
+      <div class="comp-row">
+        <span class="pill-tag">Documentos essenciais</span>
+        <span class="pill-tag">Segurança jurídica</span>
+        <span class="pill-tag">Profissionalismo</span>
+        <span class="pill-tag">Tudo em um só lugar</span>
+      </div>
+      <div class="comp-row">
+        <div class="dark-wrap" style="padding:12px 16px; display:inline-flex; gap:10px; flex-wrap:wrap;">
+          <span class="pill-tag-dark">Documentos essenciais</span>
+          <span class="pill-tag-dark">Segurança jurídica</span>
+          <span class="pill-tag-dark">Tudo em um só lugar</span>
+        </div>
+      </div>
+      <div class="comp-note">
+        Claro: bg rgba(123,79,160,0.10) · border --fa-purple-pale · --radius-pill · 12px 600<br>
+        Escuro: bg rgba(255,255,255,0.08) · border rgba(255,255,255,0.15) · para fundos dark
+      </div>
+    </div>
+
+    <!-- Depoimentos -->
+    <div class="comp-block">
+      <div class="comp-title">Depoimentos — Estilo WhatsApp</div>
+      <div class="testimonial-wrap">
+        <div class="testimonial-item">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Dra. Mariana P., Dentista</div>
+            </div>
+          </div>
+          <div class="testimonial-body">Nossa, eu vivia super ansiosa pensando se esses documentos vão me proteger. Depois que comprei o Kit, foi um alívio imenso. Reduzi o tempo de documentação de quase 1 hora para 7 minutos por paciente!</div>
+          <div class="testimonial-time">09:41 ✓✓</div>
+        </div>
+        <div class="testimonial-item left">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">R</div>
+            <div>
+              <div class="testimonial-name">Dr. Rafael M., Biomédico Esteta</div>
+            </div>
+          </div>
+          <div class="testimonial-body">Cara, eu era aquele profissional que ficava até tarde adaptando termos. Num final de semana organizei tudo e fui libertado. Economizei 5 horas por semana!</div>
+          <div class="testimonial-time">01:25 ✓✓</div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Bubble: background #2A7A3B · border-radius 12px 12px 2px 12px (direita) · 2px 12px 12px 12px (esquerda)<br>
+        Nome: 12px 700 · Corpo: 13px 400 · Timestamp: 10px, opacity 0.4 · Sobre fundo dark --fa-bg-dark
+      </div>
+    </div>
+
+    <!-- Pain cards -->
+    <div class="comp-block">
+      <div class="comp-title">Cards de Dor (Pain Cards)</div>
+      <div class="light-wrap">
+        <div class="grid-3">
+          <div class="pain-card">
+            <div class="pain-card-emoji">😰</div>
+            <div class="pain-card-text">"Toda vez que tenho que criar documentos do zero para cada procedimento... quanto tempo eu perco com isso quando poderia estar atendendo mais pacientes?"</div>
+          </div>
+          <div class="pain-card">
+            <div class="pain-card-emoji">😱</div>
+            <div class="pain-card-text">"E se algum paciente tiver uma intercorrência e alegar que não foi informado adequadamente? Esse termo me protege?"</div>
+          </div>
+          <div class="pain-card">
+            <div class="pain-card-emoji">😓</div>
+            <div class="pain-card-text">"Como posso ter certeza que meus documentos estão completos e atualizados? Eles cobrem todos os riscos?"</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Container: background --fa-bg-light · Cards: white · border-radius --radius-lg · shadow --shadow-card<br>
+        Emoji: 32px · Texto: 13px 400 italic --fa-text-body · padding 20px
+      </div>
+    </div>
+
+    <!-- Problem cards -->
+    <div class="comp-block">
+      <div class="comp-title">Cards de Problema (Numerados)</div>
+      <div class="light-wrap">
+        <div class="grid-3" style="gap:12px;">
+          <div class="problem-card">
+            <div class="problem-num">1. <span>Você tenta criar cada documento individualmente, gastando tempo valioso</span></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-num">2. <span>Documentos desatualizados não contemplam os procedimentos mais recentes</span></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-num">3. <span>Sem revisão jurídica especializada, ficam lacunas na documentação</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Background: rgba(123,79,160,0.08) · border --fa-purple-pale · --radius-md · 16px 18px padding<br>
+        Número: 16px 800 --fa-purple · Texto: 13px 400 --fa-text-body
+      </div>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="comp-block">
+      <div class="comp-title">Callout de Aviso</div>
+      <div class="warning-callout" style="max-width:480px;">
+        <div class="warning-callout-icon">⚠️</div>
+        <div class="warning-callout-text">O Kit Completo de Documentos da HOF resolve todos esses problemas de uma só vez!</div>
+      </div>
+      <div class="comp-note">
+        Background: --fa-warning-bg (#FFF8E1) · border: 1px solid --fa-warning-border (#FFD54F)<br>
+        --radius-md · Texto: 13px 600 · #5D4037
+      </div>
+    </div>
+
+    <!-- Steps numerados grandes -->
+    <div class="comp-block">
+      <div class="comp-title">Passos com Número Grande</div>
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:560px;">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-label">Passo 1</div>
+            <div class="step-title">Acesse e Baixe</div>
+            <div class="step-desc">Receba acesso imediato a todos os documentos prontos para uso em sua clínica, em formato editável.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-label">Passo 2</div>
+            <div class="step-title">Personalize</div>
+            <div class="step-desc">Adicione seu logotipo e informações da clínica nos campos indicados (leva menos de 10 minutos).</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Número: 72px 900 --fa-purple-pale · Card: bg white · border --fa-border-card · --radius-lg · --shadow-card<br>
+        Label: 11px 700 uppercase --fa-text-muted · Título: 16px 700 · Desc: 14px 400 --fa-text-body
+      </div>
+    </div>
+
+    <!-- Check cards -->
+    <div class="comp-block">
+      <div class="comp-title">Cards com Checkmark (É para você que:)</div>
+      <div class="grid-4">
+        <div class="check-card">
+          <div class="check-icon">✅</div>
+          <div class="check-text">É profissional de saúde que realiza procedimentos de harmonização orofacial</div>
+        </div>
+        <div class="check-card">
+          <div class="check-icon">✅</div>
+          <div class="check-text">Está cansado de criar documentos do zero para cada procedimento</div>
+        </div>
+        <div class="check-card">
+          <div class="check-icon">✅</div>
+          <div class="check-text">Quer garantir segurança jurídica em todos os atendimentos</div>
+        </div>
+        <div class="check-card">
+          <div class="check-icon">✅</div>
+          <div class="check-text">Deseja padronizar os documentos em toda sua clínica</div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Ícone: 28×28px · bg --fa-green · --radius-sm<br>
+        Card: white · border --fa-border-card · --radius-md · padding 18px 16px · --shadow-card<br>
+        Texto: 13px 500 --fa-text-body
+      </div>
+    </div>
+
+    <!-- Value table -->
+    <div class="comp-block">
+      <div class="comp-title">Tabela de Valor</div>
+      <div class="dark-wrap">
+        <div class="value-row">
+          <div class="value-row-name">Pacote completo de termos de consentimento</div>
+          <div class="value-row-price">R$ 199,00</div>
+        </div>
+        <div class="value-row">
+          <div class="value-row-name">Ficha de anamnese profissional</div>
+          <div class="value-row-price">R$ 99,00</div>
+        </div>
+        <div class="value-row">
+          <div class="value-row-name">Planos de aplicação detalhados</div>
+          <div class="value-row-price">R$ 49,00</div>
+        </div>
+        <div class="value-row">
+          <div class="value-row-name">Orientações pós-procedimento</div>
+          <div class="value-row-price">R$ 129,00</div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Item: border-bottom 1px rgba(255,255,255,0.08) · padding 12px 0<br>
+        Nome: outline pill · border rgba(255,255,255,0.18) · --radius-pill · 14px 500<br>
+        Preço: bg --fa-purple · --radius-pill · 14px 700 branco
+      </div>
+    </div>
+
+    <!-- Pricing card -->
+    <div class="comp-block">
+      <div class="comp-title">Card de Preço</div>
+      <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+        <div class="pricing-card">
+          <div>
+            <a href="#" class="btn-green" style="font-size:12px; padding:12px 20px;">SIM, QUERO MAIS SEGURANÇA E AGILIDADE AGORA!</a>
+          </div>
+          <div>
+            <div class="pricing-title">Acesso Vitalício</div>
+            <div class="pricing-subtitle">VOCÊ SÓ PAGA UMA VEZ ESSE VALOR!</div>
+          </div>
+          <div class="pricing-price-row">
+            <div class="pricing-currency">R$</div>
+            <div class="pricing-amount">67</div>
+            <div class="pricing-cents">,00</div>
+          </div>
+          <div class="pricing-label-2">à vista</div>
+          <div class="pricing-installment">ou 9x de R$ 8,50</div>
+          <div class="pricing-note">Condição especial por tempo limitado</div>
+        </div>
+        <div style="flex:1; min-width:240px;">
+          <div style="font-size:13px; color:var(--fa-text-body); line-height:1.8;">
+            <strong>Especificações do card:</strong><br>
+            · Background: gradiente --fa-gradient-card (135°)<br>
+            · Border-radius: --radius-xl (24px)<br>
+            · Padding: 28px 24px<br>
+            · Shadow: --shadow-lg<br><br>
+            <strong>Hierarquia de preço:</strong><br>
+            · "R$": 20px 700 alinhado ao topo<br>
+            · "67": 56px 900 · linha 1<br>
+            · ",00": 20px 700 alinhado ao topo<br>
+            · "à vista": 11px regular muted<br>
+            · Parcelamento: 12px muted
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process steps outline (dark) -->
+    <div class="comp-block">
+      <div class="comp-title">Passos do Processo (Cards Outline — Fundo Escuro)</div>
+      <div class="dark-wrap">
+        <div class="grid-3">
+          <div class="process-step">
+            <div class="process-step-num">1.</div>
+            <div class="process-step-text">Você realiza a compra</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">2.</div>
+            <div class="process-step-text">O acesso é enviado por e-mail.</div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">3.</div>
+            <div class="process-step-text">Acesse o material completo direto no aplicativo.</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Card: border 1px rgba(255,255,255,0.15) · bg rgba(255,255,255,0.04) · --radius-md<br>
+        Número: 24px 800 --fa-purple-light · Texto: 13px rgba(255,255,255,0.7)
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="comp-block">
+      <div class="comp-title">FAQ — Accordion</div>
+      <div style="max-width:560px;">
+        <div class="faq-item open">
+          <div class="faq-q">Qual é a forma de pagamento? <span class="faq-chevron">▲</span></div>
+          <div class="faq-a">Você pode fazer o pagamento pelo pix ou cartão de crédito.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">O pagamento é seguro? <span class="faq-chevron">▼</span></div>
+          <div class="faq-a"></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Funciona pra mim? <span class="faq-chevron">▼</span></div>
+          <div class="faq-a"></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Tem garantia? <span class="faq-chevron">▼</span></div>
+          <div class="faq-a"></div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Item fechado: border 1px --fa-border-card · --radius-md · Q: 14px 600 --fa-text-dark<br>
+        Item aberto: border --fa-purple-light · bg --fa-purple-ultra · Q e A com bg --fa-purple-ultra<br>
+        Chevron: 12px --fa-purple
+      </div>
+    </div>
+
+    <!-- Icon badges -->
+    <div class="comp-block">
+      <div class="comp-title">Badges de Garantia / Benefício</div>
+      <div class="grid-3">
+        <div class="icon-badge">
+          <div class="icon-badge-icon">✅</div>
+          <div class="icon-badge-text">Materiais completos</div>
+        </div>
+        <div class="icon-badge">
+          <div class="icon-badge-icon">📄</div>
+          <div class="icon-badge-text">Garantia legal de 7 dias</div>
+        </div>
+        <div class="icon-badge">
+          <div class="icon-badge-icon">📱</div>
+          <div class="icon-badge-text">Acesso imediato após pagamento</div>
+        </div>
+      </div>
+      <div class="comp-note">
+        Card: white · border --fa-border-card · --radius-lg · padding 20px · text-align: center · --shadow-card<br>
+        Ícone: 32px · Texto: 13px 600 --fa-text-dark
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════ TOKENS CSS ══════════ -->
+  <section class="ds-section" id="tokens">
+    <div class="ds-section-label">Referência</div>
+    <h2>Todos os Tokens CSS</h2>
+    <p class="ds-section-desc">Bloco completo para copiar e usar como variáveis globais.</p>
+
+    <div class="tokens-pre">
+      <pre><span class="t-dim">/* ══════════════════════════════════════════════
+   Facial Academy — Kit HOF Design System
+   lp.facialacademy.br · v1.0 · Abril 2026
+══════════════════════════════════════════════ */</span>
+
+<span class="t-sel">:root</span> {
+
+  <span class="t-dim">/* ── ROXO — Cor Primária ─────────────────── */</span>
+  <span class="t-var">--fa-purple</span>:           <span class="t-val">#7B4FA0</span>;
+  <span class="t-var">--fa-purple-dark</span>:      <span class="t-val">#5A3278</span>;
+  <span class="t-var">--fa-purple-light</span>:     <span class="t-val">#9B6FC0</span>;
+  <span class="t-var">--fa-purple-muted</span>:     <span class="t-val">#B8A0D0</span>;
+  <span class="t-var">--fa-purple-pale</span>:      <span class="t-val">#D4C0E8</span>;   <span class="t-dim">/* números grandes */</span>
+  <span class="t-var">--fa-purple-ultra</span>:     <span class="t-val">#EDE7F6</span>;   <span class="t-dim">/* fundos, FAQ ativo */</span>
+
+  <span class="t-dim">/* ── GRADIENTE ───────────────────────────── */</span>
+  <span class="t-var">--fa-gradient</span>:         <span class="t-str">linear-gradient(135deg, #9B55D0 0%, #D96FA8 100%)</span>;
+  <span class="t-var">--fa-gradient-card</span>:    <span class="t-str">linear-gradient(160deg, #8B4FC8 0%, #C85FA0 100%)</span>;
+
+  <span class="t-dim">/* ── VERDE — CTA / Conversão ─────────────── */</span>
+  <span class="t-var">--fa-green</span>:            <span class="t-val">#42C952</span>;
+  <span class="t-var">--fa-green-dark</span>:       <span class="t-val">#2FA83E</span>;
+
+  <span class="t-dim">/* ── SUPERFÍCIES ─────────────────────────── */</span>
+  <span class="t-var">--fa-bg-dark</span>:          <span class="t-val">#0E0C1E</span>;
+  <span class="t-var">--fa-bg-dark-2</span>:        <span class="t-val">#161328</span>;
+  <span class="t-var">--fa-bg-light</span>:         <span class="t-val">#EDE7F6</span>;
+  <span class="t-var">--fa-bg-light-2</span>:       <span class="t-val">#F5F0FB</span>;
+  <span class="t-var">--fa-bg-white</span>:         <span class="t-val">#FFFFFF</span>;
+  <span class="t-var">--fa-bg-purple-solid</span>:  <span class="t-val">#6A3F9A</span>;
+
+  <span class="t-dim">/* ── TEXTO ───────────────────────────────── */</span>
+  <span class="t-var">--fa-text-dark</span>:        <span class="t-val">#1A1630</span>;
+  <span class="t-var">--fa-text-body</span>:        <span class="t-val">#3D3558</span>;
+  <span class="t-var">--fa-text-muted</span>:       <span class="t-val">#7A6E95</span>;
+  <span class="t-var">--fa-text-white</span>:       <span class="t-val">#FFFFFF</span>;
+  <span class="t-var">--fa-text-white-70</span>:    <span class="t-val">rgba(255, 255, 255, 0.70)</span>;
+  <span class="t-var">--fa-text-white-50</span>:    <span class="t-val">rgba(255, 255, 255, 0.50)</span>;
+  <span class="t-var">--fa-text-white-35</span>:    <span class="t-val">rgba(255, 255, 255, 0.35)</span>;
+
+  <span class="t-dim">/* ── BORDAS ──────────────────────────────── */</span>
+  <span class="t-var">--fa-border-dark</span>:      <span class="t-val">rgba(255, 255, 255, 0.12)</span>;
+  <span class="t-var">--fa-border-light</span>:     <span class="t-val">#D4C0E8</span>;
+  <span class="t-var">--fa-border-card</span>:      <span class="t-val">#E8E0F2</span>;
+
+  <span class="t-dim">/* ── AVISO ───────────────────────────────── */</span>
+  <span class="t-var">--fa-warning-bg</span>:       <span class="t-val">#FFF8E1</span>;
+  <span class="t-var">--fa-warning-border</span>:   <span class="t-val">#FFD54F</span>;
+
+  <span class="t-dim">/* ── TIPOGRAFIA ──────────────────────────── */</span>
+  <span class="t-var">--fa-font</span>:             <span class="t-str">'Montserrat', sans-serif</span>;
+
+  <span class="t-var">--fa-size-eyebrow</span>:     <span class="t-val">11px</span>;
+  <span class="t-var">--fa-size-xs</span>:          <span class="t-val">12px</span>;
+  <span class="t-var">--fa-size-sm</span>:          <span class="t-val">14px</span>;
+  <span class="t-var">--fa-size-base</span>:        <span class="t-val">16px</span>;
+  <span class="t-var">--fa-size-md</span>:          <span class="t-val">18px</span>;
+  <span class="t-var">--fa-size-lg</span>:          <span class="t-val">22px</span>;
+  <span class="t-var">--fa-size-xl</span>:          <span class="t-val">28px</span>;
+  <span class="t-var">--fa-size-2xl</span>:         <span class="t-val">36px</span>;
+  <span class="t-var">--fa-size-hero</span>:        <span class="t-val">44px</span>;
+  <span class="t-var">--fa-size-number</span>:      <span class="t-val">72px</span>;
+  <span class="t-var">--fa-size-price</span>:       <span class="t-val">56px</span>;
+
+  <span class="t-var">--fa-weight-regular</span>:   <span class="t-val">400</span>;
+  <span class="t-var">--fa-weight-medium</span>:    <span class="t-val">500</span>;
+  <span class="t-var">--fa-weight-semibold</span>:  <span class="t-val">600</span>;
+  <span class="t-var">--fa-weight-bold</span>:      <span class="t-val">700</span>;
+  <span class="t-var">--fa-weight-extrabold</span>: <span class="t-val">800</span>;
+  <span class="t-var">--fa-weight-black</span>:     <span class="t-val">900</span>;
+
+  <span class="t-dim">/* ── ESPAÇAMENTO ─────────────────────────── */</span>
+  <span class="t-var">--space-1</span>: <span class="t-val">4px</span>;   <span class="t-var">--space-2</span>: <span class="t-val">8px</span>;   <span class="t-var">--space-3</span>: <span class="t-val">12px</span>;
+  <span class="t-var">--space-4</span>: <span class="t-val">16px</span>;  <span class="t-var">--space-5</span>: <span class="t-val">24px</span>;  <span class="t-var">--space-6</span>: <span class="t-val">32px</span>;
+  <span class="t-var">--space-7</span>: <span class="t-val">48px</span>;  <span class="t-var">--space-8</span>: <span class="t-val">64px</span>;  <span class="t-var">--space-9</span>: <span class="t-val">80px</span>;
+  <span class="t-var">--space-10</span>: <span class="t-val">120px</span>;
+
+  <span class="t-dim">/* ── BORDER RADIUS ───────────────────────── */</span>
+  <span class="t-var">--radius-xs</span>:    <span class="t-val">4px</span>;
+  <span class="t-var">--radius-sm</span>:    <span class="t-val">8px</span>;    <span class="t-dim">/* ícones, badges */</span>
+  <span class="t-var">--radius-md</span>:    <span class="t-val">12px</span>;   <span class="t-dim">/* cards, FAQ, callout */</span>
+  <span class="t-var">--radius-lg</span>:    <span class="t-val">16px</span>;   <span class="t-dim">/* cards de step */</span>
+  <span class="t-var">--radius-xl</span>:    <span class="t-val">24px</span>;   <span class="t-dim">/* pricing card */</span>
+  <span class="t-var">--radius-pill</span>:  <span class="t-val">9999px</span>; <span class="t-dim">/* botões, tags, pills */</span>
+
+  <span class="t-dim">/* ── SOMBRAS ─────────────────────────────── */</span>
+  <span class="t-var">--shadow-sm</span>:    <span class="t-str">0 2px 8px rgba(123, 79, 160, 0.10)</span>;
+  <span class="t-var">--shadow-md</span>:    <span class="t-str">0 4px 20px rgba(123, 79, 160, 0.15)</span>;
+  <span class="t-var">--shadow-lg</span>:    <span class="t-str">0 8px 40px rgba(123, 79, 160, 0.25)</span>;
+  <span class="t-var">--shadow-card</span>:  <span class="t-str">0 2px 12px rgba(0, 0, 0, 0.08)</span>;
+}</pre>
+    </div>
+  </section>
+
+</div>
+
+<footer style="background:var(--fa-bg-dark); padding:20px 72px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);">
+  <span style="font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.25);">FACIAL ACADEMY · DESIGN SYSTEM v1.0</span>
+  <span style="font-family:'Courier New',monospace; font-size:10px; color:rgba(255,255,255,0.2);">Abril 2026</span>
+</footer>
+
+</body>
+</html>

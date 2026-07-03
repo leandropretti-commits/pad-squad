@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Cartilha do Tráfego Pago Low Ticket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ─── RESET ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: #F1F5F9; color: #1E293B; font-size: 16px; line-height: 1.5; }
+
+  /* ─── DS CHROME ─────────────────────────────────────── */
+  .ds-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 96px; }
+  .ds-cover { background: #1A5BC4; border-radius: 16px; padding: 48px 40px; margin-bottom: 64px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .ds-cover h1 { font-size: 36px; font-weight: 800; color: #fff; line-height: 1.2; }
+  .ds-cover h1 span { color: #4ADE80; }
+  .ds-cover p { font-size: 15px; color: rgba(255,255,255,.75); margin-top: 8px; max-width: 520px; }
+  .ds-cover .badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: #fff; font-weight: 600; white-space: nowrap; }
+
+  .ds-section { margin-bottom: 72px; }
+  .ds-section-title { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #64748B; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .ds-section-title::after { content: ''; flex: 1; height: 1px; background: #E2E8F0; }
+
+  .ds-grid { display: grid; gap: 16px; }
+  .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 720px) {
+    .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── COLOR SWATCHES ───────────────────────────────── */
+  .swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .swatch-color { height: 72px; }
+  .swatch-meta { background: #fff; padding: 10px 12px; }
+  .swatch-name { font-size: 12px; font-weight: 700; color: #1E293B; }
+  .swatch-hex  { font-size: 11px; color: #64748B; font-family: monospace; margin-top: 2px; }
+  .swatch-var  { font-size: 10px; color: #94A3B8; font-family: monospace; margin-top: 2px; }
+
+  /* ─── TYPE SPECIMENS ───────────────────────────────── */
+  .type-row { background: #fff; border-radius: 12px; padding: 20px 24px; display: flex; align-items: baseline; gap: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .type-meta { width: 140px; flex-shrink: 0; }
+  .type-meta .label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #64748B; }
+  .type-meta .spec  { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+  .type-sample { flex: 1; color: #1E293B; }
+
+  /* ─── SPACING ──────────────────────────────────────── */
+  .spacing-row { background: #fff; border-radius: 10px; padding: 14px 20px; display: flex; align-items: center; gap: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .spacing-bar  { background: #1A5BC4; border-radius: 3px; height: 20px; flex-shrink: 0; }
+  .spacing-label { font-size: 13px; font-weight: 600; color: #1E293B; width: 48px; }
+  .spacing-var  { font-size: 11px; color: #94A3B8; font-family: monospace; }
+
+  /* ─── RADIUS ───────────────────────────────────────── */
+  .radius-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .radius-box { width: 64px; height: 64px; background: #EEF5FF; border: 2px solid #1A5BC4; margin: 0 auto 12px; }
+  .radius-label { font-size: 12px; font-weight: 700; color: #1E293B; }
+  .radius-val   { font-size: 11px; color: #64748B; margin-top: 2px; }
+
+  /* ─── SHADOWS ──────────────────────────────────────── */
+  .shadow-card { background: #fff; border-radius: 12px; padding: 24px; text-align: center; }
+  .shadow-label { font-size: 12px; font-weight: 700; color: #1E293B; margin-top: 12px; }
+  .shadow-val { font-size: 10px; color: #94A3B8; font-family: monospace; margin-top: 4px; word-break: break-all; }
+
+  /* ─── TOKENS BLOCK ─────────────────────────────────── */
+  .tokens-block { background: #0F172A; border-radius: 12px; padding: 28px 32px; overflow-x: auto; }
+  .tokens-block pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.8; color: #E2E8F0; white-space: pre; }
+  .t-comment { color: #475569; }
+  .t-prop    { color: #7DD3FC; }
+  .t-val     { color: #86EFAC; }
+  .t-punct   { color: #94A3B8; }
+
+  /* ─── COMPONENTS ────────────────────────────────────── */
+  .comp-wrap { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+  .comp-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #94A3B8; margin-bottom: 20px; }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Poppins', sans-serif; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: all .2s; text-decoration: none; }
+  .btn-lg   { font-size: 18px; padding: 18px 48px; border-radius: 999px; }
+  .btn-md   { font-size: 15px; padding: 13px 32px; border-radius: 999px; }
+  .btn-sm   { font-size: 13px; padding: 9px 20px; border-radius: 999px; }
+  .btn-green  { background: #22C55E; color: #fff; border-color: #22C55E; }
+  .btn-green:hover  { background: #16A34A; border-color: #16A34A; }
+  .btn-blue   { background: #1A5BC4; color: #fff; border-color: #1A5BC4; }
+  .btn-blue:hover   { background: #1549A0; border-color: #1549A0; }
+  .btn-outline-blue { background: transparent; color: #1A5BC4; border-color: #1A5BC4; }
+  .btn-outline-blue:hover { background: #EEF5FF; }
+  .btn-outline-white { background: transparent; color: #fff; border-color: #fff; }
+  .btn-outline-white:hover { background: rgba(255,255,255,.1); }
+
+  /* ROI COMPARISON */
+  .roi-compare { display: grid; grid-template-columns: 1fr 1fr; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.12); max-width: 480px; }
+  .roi-bad  { background: #fff; border-right: 1px solid #E2E8F0; }
+  .roi-good { background: #fff; }
+  .roi-header { padding: 10px 16px; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+  .roi-header.bad  { background: #DC2626; color: #fff; }
+  .roi-header.good { background: #22C55E; color: #fff; }
+  .roi-badge { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .roi-row { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #F1F5F9; }
+  .roi-number.bad  { font-size: 20px; font-weight: 700; color: #1E293B; }
+  .roi-number.good { font-size: 20px; font-weight: 700; color: #16A34A; }
+  .roi-bar { height: 4px; border-radius: 2px; margin-top: 3px; }
+  .roi-bar.bad  { background: #DC2626; }
+  .roi-bar.good { background: #22C55E; }
+
+  /* PAIN QUOTE CARD */
+  .pain-quote { background: #DC2626; color: #fff; border-radius: 12px; padding: 16px 20px; font-size: 15px; font-weight: 600; line-height: 1.5; max-width: 320px; }
+  .pain-quote strong { color: #FCA5A5; }
+
+  /* WARNING CALLOUT */
+  .warning-callout { background: #FFF7ED; border: 2px solid #DC2626; border-radius: 12px; padding: 20px 24px; display: flex; gap: 20px; align-items: flex-start; max-width: 560px; }
+  .warning-icon { font-size: 40px; flex-shrink: 0; margin-top: 2px; }
+  .warning-title { font-size: 15px; font-weight: 700; color: #1E293B; margin-bottom: 6px; }
+  .warning-text  { font-size: 14px; color: #374151; line-height: 1.6; }
+  .warning-text strong { color: #1A5BC4; }
+
+  /* BLUE BANNER STRIP */
+  .banner-strip { background: #1A5BC4; border-radius: 12px; padding: 20px 32px; text-align: center; color: #fff; }
+  .banner-strip h3 { font-size: 22px; font-weight: 800; }
+  .banner-strip p  { font-size: 14px; color: rgba(255,255,255,.8); margin-top: 4px; }
+
+  /* BENEFIT CARD */
+  .benefit-card { background: #fff; border-radius: 14px; padding: 24px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.07); border: 1px solid #E2E8F0; }
+  .benefit-icon { font-size: 36px; margin-bottom: 12px; }
+  .benefit-title { font-size: 14px; font-weight: 700; color: #1E293B; line-height: 1.4; }
+  .benefit-title strong { color: #1A5BC4; }
+
+  /* MODULE CARD */
+  .module-card { background: #fff; border-radius: 14px; padding: 24px; display: flex; gap: 24px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.07); border: 1px solid #E2E8F0; }
+  .module-thumb { width: 110px; height: 110px; background: linear-gradient(135deg, #1A5BC4 0%, #3B82F6 100%); border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; }
+  .module-title { font-size: 17px; font-weight: 700; color: #1A5BC4; margin-bottom: 6px; line-height: 1.35; }
+  .module-desc  { font-size: 13px; color: #64748B; line-height: 1.6; }
+
+  /* SOCIAL PROOF CARD */
+  .proof-card { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 240px; }
+  .proof-badge { padding: 10px 14px; font-size: 12px; font-weight: 700; color: #fff; line-height: 1.4; }
+  .proof-badge.roi-blue { background: #1A5BC4; }
+  .proof-badge.roi-dark { background: #1E293B; }
+  .proof-body  { background: #fff; padding: 14px; }
+  .proof-body.dark { background: #1E293B; }
+  .proof-field { font-size: 11px; color: #94A3B8; margin-bottom: 2px; }
+  .proof-value { font-size: 15px; font-weight: 700; color: #1E293B; margin-bottom: 10px; }
+  .proof-value.green { color: #16A34A; }
+  .proof-value.white { color: #fff; }
+  .proof-field.light { color: #94A3B8; }
+
+  /* VALUE STACK */
+  .value-stack { background: #fff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+  .value-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F1F5F9; gap: 12px; }
+  .value-row:last-child { border-bottom: none; }
+  .value-check { color: #1A5BC4; font-size: 16px; flex-shrink: 0; }
+  .value-name  { font-size: 14px; color: #374151; flex: 1; }
+  .value-price { font-size: 14px; color: #DC2626; text-decoration: line-through; font-weight: 600; white-space: nowrap; }
+  .value-total { display: flex; justify-content: flex-end; padding-top: 14px; font-size: 15px; color: #64748B; }
+  .value-total strong { color: #DC2626; text-decoration: line-through; margin-left: 8px; }
+
+  /* PRICING CARD */
+  .price-card { background: #fff; border-radius: 16px; padding: 28px 24px; box-shadow: 0 8px 32px rgba(26,91,196,.15); border: 2px solid #1A5BC4; max-width: 380px; }
+  .price-from  { font-size: 14px; color: #94A3B8; }
+  .price-from span { text-decoration: line-through; font-weight: 600; color: #DC2626; }
+  .price-main  { font-size: 48px; font-weight: 900; color: #1E293B; line-height: 1; margin: 8px 0 4px; }
+  .price-main em { font-size: 22px; font-style: normal; color: #64748B; }
+  .price-or    { font-size: 13px; color: #94A3B8; margin-bottom: 20px; }
+  .price-or strong { color: #16A34A; }
+
+  /* 3-STEP PROCESS */
+  .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .step-card  { background: #fff; border-radius: 14px; padding: 24px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.07); border: 1px solid #E2E8F0; }
+  .step-icon  { font-size: 32px; margin-bottom: 12px; }
+  .step-title { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1A5BC4; margin-bottom: 6px; }
+  .step-desc  { font-size: 13px; color: #64748B; line-height: 1.5; }
+
+  /* TWO OPTIONS */
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; }
+  .option-card  { border-radius: 14px; padding: 20px; border: 2px solid; }
+  .option-card.bad  { background: #FFF5F5; border-color: #FECACA; }
+  .option-card.good { background: #F0FFF4; border-color: #A7F3D0; }
+  .option-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .option-badge  { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; color: #fff; flex-shrink: 0; }
+  .option-badge.bad  { background: #DC2626; }
+  .option-badge.good { background: #22C55E; }
+  .option-title { font-size: 15px; font-weight: 700; color: #1E293B; }
+  .option-desc  { font-size: 13px; color: #64748B; line-height: 1.6; }
+
+  /* CHECKLIST */
+  .checklist { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+  .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #374151; }
+  .check-icon { width: 22px; height: 22px; border-radius: 50%; background: #1A5BC4; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+  /* AUTHORITY STRIP */
+  .authority-strip { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .authority-avatar { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .authority-photo { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid #1A5BC4; background: #CBD5E1; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .authority-name { font-size: 11px; font-weight: 600; color: #374151; text-align: center; }
+
+  /* BIO SECTION */
+  .bio-section { background: #0F172A; border-radius: 16px; padding: 32px; display: flex; gap: 32px; align-items: center; }
+  .bio-text h3 { font-size: 20px; font-weight: 700; color: #1A5BC4; font-style: italic; margin-bottom: 6px; }
+  .bio-text h2 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+  .bio-text h2 strong { color: #4ADE80; }
+  .bio-text p  { font-size: 14px; color: #94A3B8; line-height: 1.7; margin-bottom: 8px; }
+  .bio-photo { width: 160px; height: 200px; border-radius: 12px; background: linear-gradient(180deg, #1E3A8A 0%, #0F172A 100%); flex-shrink: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; color: rgba(255,255,255,.3); font-size: 13px; }
+
+  /* LOGO HEADER */
+  .logo-header { background: #fff; border-radius: 12px; padding: 16px 24px; display: flex; align-items: center; justify-content: center; border: 1px solid #E2E8F0; max-width: 300px; }
+  .logo-subtitle { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #94A3B8; text-align: center; }
+  .logo-main { font-size: 17px; font-weight: 800; color: #1E293B; text-align: center; line-height: 1.2; }
+  .logo-accent { font-size: 20px; font-weight: 900; color: #1A5BC4; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: #1A5BC4; }
+</style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- ── COVER ── -->
+  <div class="ds-cover">
+    <div>
+      <h1>Tráfego Pago<br><span>Low Ticket</span> — Design System</h1>
+      <p>Documentação visual do sistema de design da landing page da Cartilha do Tráfego Pago Low Ticket por Ricardo Maxxima.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span class="badge">Direct-Response</span>
+      <span class="badge">Poppins</span>
+      <span class="badge">Azul · Vermelho · Verde</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 1. CORES                                          -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">1 — Paleta de Cores</div>
+
+    <!-- Primárias -->
+    <p style="font-size:12px;font-weight:700;color:#94A3B8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Cores Primárias</p>
+    <div class="ds-grid ds-grid-5" style="margin-bottom:28px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A5BC4;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Blue 600</div>
+          <div class="swatch-hex">#1A5BC4</div>
+          <div class="swatch-var">--tp-blue-600</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1549A0;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Blue 700</div>
+          <div class="swatch-hex">#1549A0</div>
+          <div class="swatch-var">--tp-blue-700</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#3B82F6;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Blue 400</div>
+          <div class="swatch-hex">#3B82F6</div>
+          <div class="swatch-var">--tp-blue-400</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#DBEAFE;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Blue 100</div>
+          <div class="swatch-hex">#DBEAFE</div>
+          <div class="swatch-var">--tp-blue-100</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EEF5FF;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Blue 50</div>
+          <div class="swatch-hex">#EEF5FF</div>
+          <div class="swatch-var">--tp-blue-50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semânticas -->
+    <p style="font-size:12px;font-weight:700;color:#94A3B8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Semânticas (Sucesso · Erro · Alerta)</p>
+    <div class="ds-grid ds-grid-5" style="margin-bottom:28px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#22C55E;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Green CTA</div>
+          <div class="swatch-hex">#22C55E</div>
+          <div class="swatch-var">--tp-green-cta</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#16A34A;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Green 600</div>
+          <div class="swatch-hex">#16A34A</div>
+          <div class="swatch-var">--tp-green-600</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#DC2626;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Red 600</div>
+          <div class="swatch-hex">#DC2626</div>
+          <div class="swatch-var">--tp-red-600</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FCA5A5;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Red 300</div>
+          <div class="swatch-hex">#FCA5A5</div>
+          <div class="swatch-var">--tp-red-300</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F59E0B;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Amber 500</div>
+          <div class="swatch-hex">#F59E0B</div>
+          <div class="swatch-var">--tp-amber-500</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neutros -->
+    <p style="font-size:12px;font-weight:700;color:#94A3B8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Neutros</p>
+    <div class="ds-grid ds-grid-5">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0F172A;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Slate 900</div>
+          <div class="swatch-hex">#0F172A</div>
+          <div class="swatch-var">--tp-dark</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1E293B;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Slate 800</div>
+          <div class="swatch-hex">#1E293B</div>
+          <div class="swatch-var">--tp-heading</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#374151;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Gray 700</div>
+          <div class="swatch-hex">#374151</div>
+          <div class="swatch-var">--tp-body</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#64748B;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Slate 500</div>
+          <div class="swatch-hex">#64748B</div>
+          <div class="swatch-var">--tp-muted</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FFFFFF; border:1px solid #E2E8F0;"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">White</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-var">--tp-white</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 2. TIPOGRAFIA                                     -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">2 — Tipografia · Poppins</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Display</div><div class="spec">56px / 900</div></div>
+        <div class="type-sample" style="font-size:clamp(28px,5vw,56px);font-weight:900;line-height:1.1;">12x de 9,90</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H1 Hero</div><div class="spec">40px / 800</div></div>
+        <div class="type-sample" style="font-size:clamp(22px,4vw,40px);font-weight:800;line-height:1.2;">Copie minhas estruturas de campanhas</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H2 Seção</div><div class="spec">32px / 700</div></div>
+        <div class="type-sample" style="font-size:clamp(20px,3vw,32px);font-weight:700;line-height:1.3;">Veja o que você vai receber</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H3 Card</div><div class="spec">22px / 700</div></div>
+        <div class="type-sample" style="font-size:22px;font-weight:700;">Teste de Criativos com estruturas</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Subtítulo</div><div class="spec">18px / 600</div></div>
+        <div class="type-sample" style="font-size:18px;font-weight:600;color:#1A5BC4;">Grandes players também utilizam</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body</div><div class="spec">16px / 400</div></div>
+        <div class="type-sample" style="font-size:16px;font-weight:400;color:#374151;">Você vai receber minhas estruturas para teste de criativos, encontrar os melhores criativos com ROI 2+ para escalar seu produto.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body SM</div><div class="spec">14px / 400</div></div>
+        <div class="type-sample" style="font-size:14px;font-weight:400;color:#64748B;">Um passo a passo direto para cortar desperdício, desligar o que dá prejuízo.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Eyebrow</div><div class="spec">11px / 700 caps</div></div>
+        <div class="type-sample" style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#94A3B8;">Cartilha do Tráfego Pago</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Preço tachado</div><div class="spec">16px / 600 line-through</div></div>
+        <div class="type-sample" style="font-size:16px;font-weight:600;color:#DC2626;text-decoration:line-through;">R$1.041,00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 3. ESPAÇAMENTO                                    -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">3 — Espaçamento</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">4px</div><div class="spacing-var">--tp-space-1</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">8px</div><div class="spacing-var">--tp-space-2</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">12px</div><div class="spacing-var">--tp-space-3</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">16px</div><div class="spacing-var">--tp-space-4</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">24px</div><div class="spacing-var">--tp-space-6</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">32px</div><div class="spacing-var">--tp-space-8</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">48px</div><div class="spacing-var">--tp-space-12</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:64px;"></div><div class="spacing-label">64px</div><div class="spacing-var">--tp-space-16</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:96px;"></div><div class="spacing-label">96px</div><div class="spacing-var">--tp-space-24</div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 4. RAIOS DE BORDA                                 -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">4 — Border Radius</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:4px;"></div>
+        <div class="radius-label">XS</div>
+        <div class="radius-val">4px — --tp-radius-xs</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:8px;"></div>
+        <div class="radius-label">SM</div>
+        <div class="radius-val">8px — --tp-radius-sm</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:12px;"></div>
+        <div class="radius-label">MD</div>
+        <div class="radius-val">12px — --tp-radius-md</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:16px;"></div>
+        <div class="radius-label">LG</div>
+        <div class="radius-val">16px — --tp-radius-lg</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:9999px;height:40px;"></div>
+        <div class="radius-label">Pill</div>
+        <div class="radius-val">9999px — --tp-radius-pill</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 5. SOMBRAS                                        -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">5 — Sombras</div>
+    <div class="ds-grid ds-grid-4">
+      <div class="shadow-card" style="box-shadow:0 1px 3px rgba(0,0,0,.06);">
+        <div style="width:80px;height:60px;background:#fff;border-radius:8px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.06);"></div>
+        <div class="shadow-label">Shadow XS</div>
+        <div class="shadow-val">0 1px 3px rgba(0,0,0,.06)</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 2px 8px rgba(0,0,0,.08);">
+        <div style="width:80px;height:60px;background:#fff;border-radius:8px;margin:0 auto;box-shadow:0 2px 8px rgba(0,0,0,.08);"></div>
+        <div class="shadow-label">Shadow SM</div>
+        <div class="shadow-val">0 2px 8px rgba(0,0,0,.08)</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 4px 16px rgba(0,0,0,.12);">
+        <div style="width:80px;height:60px;background:#fff;border-radius:8px;margin:0 auto;box-shadow:0 4px 16px rgba(0,0,0,.12);"></div>
+        <div class="shadow-label">Shadow MD</div>
+        <div class="shadow-val">0 4px 16px rgba(0,0,0,.12)</div>
+      </div>
+      <div class="shadow-card" style="box-shadow:0 8px 32px rgba(26,91,196,.15);">
+        <div style="width:80px;height:60px;background:#fff;border-radius:8px;margin:0 auto;box-shadow:0 8px 32px rgba(26,91,196,.15);"></div>
+        <div class="shadow-label">Shadow Blue</div>
+        <div class="shadow-val">0 8px 32px rgba(26,91,196,.15)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 6. COMPONENTES                                    -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">6 — Componentes</div>
+    <div style="display:flex;flex-direction:column;gap:24px;">
+
+      <!-- LOGO / HEADER -->
+      <div class="comp-wrap">
+        <div class="comp-label">Logo · Header</div>
+        <div class="logo-header">
+          <div>
+            <div class="logo-subtitle">Cartilha do</div>
+            <div class="logo-main">TRÁFEGO PAGO</div>
+            <div class="logo-accent">LOW TICKET <div class="logo-dot"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTÕES -->
+      <div class="comp-wrap">
+        <div class="comp-label">Botões</div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+          <a class="btn btn-green btn-lg">QUERO MINHA CARTILHA</a>
+          <a class="btn btn-green btn-md">Comprar Agora</a>
+          <a class="btn btn-blue btn-md">Saiba Mais</a>
+          <a class="btn btn-outline-blue btn-md">Ver Detalhes</a>
+          <div style="background:#1A5BC4;padding:16px 20px;border-radius:10px;display:flex;gap:12px;align-items:center;">
+            <a class="btn btn-outline-white btn-sm">Opção 2</a>
+          </div>
+        </div>
+        <div style="margin-top:16px;background:#F8FAFC;border-radius:8px;padding:12px 16px;font-size:12px;color:#64748B;">
+          <strong>Especificações:</strong> font-family: Poppins · font-weight: 700 · border-radius: 9999px (pill) · uppercase nos CTAs principais · lg: 18px / 18px 48px · md: 15px / 13px 32px · sm: 13px / 9px 20px
+        </div>
+      </div>
+
+      <!-- ROI COMPARISON TABLE -->
+      <div class="comp-wrap">
+        <div class="comp-label">Tabela Comparativa de ROI</div>
+        <div class="roi-compare">
+          <div class="roi-bad">
+            <div class="roi-header bad"><div class="roi-badge">✕</div>SEU ROI HOJE!</div>
+            <div class="roi-row">
+              <div><div class="roi-number bad">1,30</div><div class="roi-bar bad" style="width:52px;"></div></div>
+            </div>
+            <div class="roi-row">
+              <div><div class="roi-number bad">1,30</div><div class="roi-bar bad" style="width:52px;"></div></div>
+            </div>
+            <div class="roi-row">
+              <div><div class="roi-number bad">1,30</div><div class="roi-bar bad" style="width:52px;"></div></div>
+            </div>
+            <div class="roi-row" style="border:none">
+              <div><div class="roi-number bad">1,30</div><div class="roi-bar bad" style="width:52px;"></div></div>
+            </div>
+          </div>
+          <div class="roi-good">
+            <div class="roi-header good"><div class="roi-badge">✓</div>COMO VAI FICAR!</div>
+            <div class="roi-row"><div><div class="roi-number good">2,76</div><div class="roi-bar good" style="width:88px;"></div></div></div>
+            <div class="roi-row"><div><div class="roi-number good">2,67</div><div class="roi-bar good" style="width:84px;"></div></div></div>
+            <div class="roi-row"><div><div class="roi-number good">2,62</div><div class="roi-bar good" style="width:82px;"></div></div></div>
+            <div class="roi-row" style="border:none"><div><div class="roi-number good">2,59</div><div class="roi-bar good" style="width:80px;"></div></div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Badge esquerdo: bg #DC2626 · Badge direito: bg #22C55E · Números bons: #16A34A · Barras ruins: #DC2626</div>
+      </div>
+
+      <!-- SOCIAL PROOF CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Cards de Prova Social (Meta Ads)</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div class="proof-card">
+            <div class="proof-badge roi-blue">ROI de 2.1 após usar as estruturas de campanha Maxxima</div>
+            <div class="proof-body">
+              <div class="proof-field">Gastos com anúncios</div>
+              <div class="proof-value">R$ 153.874,71</div>
+              <div class="proof-field">Faturamento Líquido</div>
+              <div class="proof-value">R$ 325.264,32</div>
+              <div class="proof-field">Lucro</div>
+              <div class="proof-value green">R$ 171.389,61</div>
+              <div class="proof-field">ROI</div>
+              <div class="proof-value green">2.11</div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-badge roi-dark">ROI de 2.9 após usar as estruturas de campanha Maxxima</div>
+            <div class="proof-body dark">
+              <div class="proof-field light">Gastos com anúncios</div>
+              <div class="proof-value white">R$ 1.763,27</div>
+              <div class="proof-field light">Faturamento Bruto</div>
+              <div class="proof-value green">R$ 5.147,37</div>
+              <div class="proof-field light">Lucro</div>
+              <div class="proof-value green">R$ 3.384,10</div>
+              <div class="proof-field light">ROAS</div>
+              <div class="proof-value green">2.92</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Variante Light: badge #1A5BC4 + body branco · Variante Dark: badge #1E293B + body #1E293B · Valores positivos: #16A34A</div>
+      </div>
+
+      <!-- PAIN QUOTE CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Pain Quote Cards (Objeções de Dor)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;">
+          <div class="pain-quote">"Essa merda <strong>Vende bem por 2 dias</strong> e para de vender"</div>
+          <div class="pain-quote">Já troquei criativo, oferta, público… <strong>nada funciona.</strong></div>
+          <div class="pain-quote">"Meu ROI <strong>só cai</strong> e eu não sei mais o que fazer!"</div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">background: #DC2626 · color: #fff · bold accent: #FCA5A5 · border-radius: 12px · padding: 16px 20px</div>
+      </div>
+
+      <!-- WARNING CALLOUT -->
+      <div class="comp-wrap">
+        <div class="comp-label">Warning Callout</div>
+        <div class="warning-callout">
+          <div class="warning-icon">⚠️</div>
+          <div>
+            <div class="warning-title">Agora eu te pergunto...</div>
+            <div class="warning-text">Se você pudesse ter acesso a cartilha com todas as minhas estruturas de campanhas low ticket que batem ROI 2+, você iria colocar para rodar? Se a sua resposta for "SIM", <strong>a CARTILHA DO TRÁFEGO LOW TICKET é para você!</strong></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">background: #FFF7ED · border: 2px solid #DC2626 · ícone âmbar ⚠️ · texto negrito: #1A5BC4</div>
+      </div>
+
+      <!-- BLUE BANNER STRIP -->
+      <div class="comp-wrap">
+        <div class="comp-label">Banner Strip (Full Width)</div>
+        <div class="banner-strip">
+          <h3>Com a Cartilha do Tráfego pago para Low Ticket você vai:</h3>
+          <p>Estruturas validadas para escalar seu produto low ticket com ROI 2+</p>
+        </div>
+        <div style="margin-top:8px;">
+          <div class="banner-strip" style="background:#1E293B;">
+            <h3>AINDA NÃO ACABOU! Você também vai receber</h3>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Variante Azul: #1A5BC4 · Variante Dark: #1E293B · padding: 20px 32px · text-align: center</div>
+      </div>
+
+      <!-- BENEFIT CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Benefit Icon Cards (Grid 3 colunas)</div>
+        <div class="ds-grid ds-grid-3">
+          <div class="benefit-card"><div class="benefit-icon">📈</div><div class="benefit-title"><strong>Aumentar acima de 2</strong> o ROI dos seus produto Low Ticket</div></div>
+          <div class="benefit-card"><div class="benefit-icon">📋</div><div class="benefit-title">Copiar estruturas <strong>validadas</strong> de campanhas</div></div>
+          <div class="benefit-card"><div class="benefit-icon">🎯</div><div class="benefit-title">Usar a mesma estrutura de <strong>campanha que os BigPlayers usam</strong></div></div>
+          <div class="benefit-card"><div class="benefit-icon">🚀</div><div class="benefit-title"><strong>Escalar seus produtos</strong> com estruturas validadas</div></div>
+          <div class="benefit-card"><div class="benefit-icon">🔄</div><div class="benefit-title"><strong>Reviver ofertas</strong> que tinham morrido por conta do ROI baixo</div></div>
+          <div class="benefit-card"><div class="benefit-icon">💰</div><div class="benefit-title"><strong>Parar de queimar dinheiro</strong> no gerenciador de anúncios.</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">background: #fff · border: 1px solid #E2E8F0 · border-radius: 14px · padding: 24px 20px · text-align: center · texto bold: #1A5BC4</div>
+      </div>
+
+      <!-- MODULE CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Module Cards (Horizontal com mockup)</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="module-card">
+            <div class="module-thumb">📱</div>
+            <div>
+              <div class="module-title">Estruturas de Campanhas de Tráfego Pago para Low Ticket</div>
+              <div class="module-desc">Modelos prontos de campanhas que batem ROI 2+ para você copiar, colar e lucrar, evitando erros e acelerando seus resultados com estruturas validadas.</div>
+            </div>
+          </div>
+          <div class="module-card" style="flex-direction:row-reverse;">
+            <div class="module-thumb">🎨</div>
+            <div>
+              <div class="module-title">Teste de Criativos com estruturas de Campanhas Low</div>
+              <div class="module-desc">Você vai receber minhas estruturas para teste de criativos, encontrar os melhores criativos com ROI 2+ para escalar seu produto.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Alternância: imagem esquerda / imagem direita · título: #1A5BC4 700 17px · desc: #64748B 13px · border-radius: 14px</div>
+      </div>
+
+      <!-- AUTHORITY STRIP -->
+      <div class="comp-wrap">
+        <div class="comp-label">Authority Strip (Grandes Players)</div>
+        <div style="background:#EEF5FF;border-radius:12px;padding:24px;text-align:center;margin-bottom:16px;">
+          <p style="font-size:20px;font-weight:700;margin-bottom:20px;"><span style="color:#1A5BC4;font-weight:800;">Grandes players</span> também utilizam a Cartilha do Tráfego Low Ticket</p>
+          <div class="authority-strip" style="justify-content:center;">
+            <div class="authority-avatar"><div class="authority-photo">👤</div><div class="authority-name">Lucas Scudeler</div></div>
+            <div class="authority-avatar"><div class="authority-photo">👤</div><div class="authority-name">Karina Peloi</div></div>
+            <div class="authority-avatar"><div class="authority-photo" style="border-color:#DC2626;">👤</div><div class="authority-name">Wendell Carvalho</div></div>
+            <div class="authority-avatar"><div class="authority-photo">👤</div><div class="authority-name">Marcelo Germano</div></div>
+            <div class="authority-avatar"><div class="authority-photo">👤</div><div class="authority-name">Leandro Aguiari</div></div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#94A3B8;">Fotos circulares · border: 3px solid #1A5BC4 · destaque central maior · bg seção: #EEF5FF</div>
+      </div>
+
+      <!-- CHECKLIST -->
+      <div class="comp-wrap">
+        <div class="comp-label">Checklist (Para quem é)</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon">✓</div>Está vendo o ROI das suas campanhas caindo</div>
+          <div class="check-item"><div class="check-icon">✓</div>Não consegue escalar um low ticket como antes</div>
+          <div class="check-item"><div class="check-icon">✓</div>Está travando com a nova atualização do Facebook, sem resultado</div>
+          <div class="check-item"><div class="check-icon">✓</div>Quer escalar low tickets com ROI 2+</div>
+          <div class="check-item"><div class="check-icon">✓</div>Quer copiar e colar as campanhas que os Big Players usam para lucrar alto no low ticket</div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">ícone: círculo #1A5BC4 · checkmark branco · texto: #374151 15px</div>
+      </div>
+
+      <!-- VALUE STACK -->
+      <div class="comp-wrap">
+        <div class="comp-label">Value Stack (Recapitulando)</div>
+        <div class="value-stack">
+          <div class="value-row"><span class="value-check">✓</span><span class="value-name">Estruturas de Campanhas de Tráfego Pago para Low Ticket</span><span class="value-price">R$399,00</span></div>
+          <div class="value-row"><span class="value-check">✓</span><span class="value-name">Teste de Criativos com estruturas de Campanhas Low</span><span class="value-price">R$199,00</span></div>
+          <div class="value-row"><span class="value-check">✓</span><span class="value-name">Estruturas de Campanha de Escala Moderada e Agressiva</span><span class="value-price">R$199,00</span></div>
+          <div class="value-row"><span class="value-check">✓</span><span class="value-name">Estruturas de Campanha para Teste de Público Frio</span><span class="value-price">R$147,00</span></div>
+          <div class="value-row"><span class="value-check">✓</span><span class="value-name">Passo a Passo para Otimização das Campanhas</span><span class="value-price">R$97,00</span></div>
+          <div class="value-total">Tudo isso deveria custar: <strong>R$1.041,00</strong></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">ícone check: #1A5BC4 · preços tachados: #DC2626 line-through · total: bold tachado vermelho</div>
+      </div>
+
+      <!-- PRICING CARD -->
+      <div class="comp-wrap">
+        <div class="comp-label">Pricing Card (Oferta)</div>
+        <div class="price-card">
+          <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#94A3B8;font-weight:700;margin-bottom:12px;">CARTILHA DO TRÁFEGO PAGO LOW TICKET ●</div>
+          <div class="price-from">De: <span>R$1.041,00</span> por:</div>
+          <div class="price-main"><em>12x de </em>9,90</div>
+          <div class="price-or">ou <strong>R$ 87,00 à vista</strong></div>
+          <a class="btn btn-green btn-lg" style="width:100%;margin-top:8px;">QUERO MINHA CARTILHA</a>
+          <div style="display:flex;justify-content:center;gap:20px;margin-top:14px;">
+            <div style="font-size:11px;color:#94A3B8;text-align:center;">🔒<br>Compra<br>Segura</div>
+            <div style="font-size:11px;color:#94A3B8;text-align:center;">✅<br>Satisfação<br>Garantida</div>
+            <div style="font-size:11px;color:#94A3B8;text-align:center;">🛡️<br>Privacidade<br>Protegida</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">border: 2px solid #1A5BC4 · shadow blue · "De:" riscado #DC2626 · preço: 48px 900 · CTA: btn-green pill full-width</div>
+      </div>
+
+      <!-- 3-STEP PROCESS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Processo em 3 Etapas</div>
+        <div class="steps-row">
+          <div class="step-card">
+            <div class="step-icon">🛒</div>
+            <div class="step-title">Faça sua Compra</div>
+            <div class="step-desc">Em poucos minutos você recebe seu acesso na sua caixa de entrada.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">⬇️</div>
+            <div class="step-title">Baixe o Material</div>
+            <div class="step-desc">Todo o material fica disponível para download instantâneo no seu celular ou computador.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">✅</div>
+            <div class="step-title">Tudo Pronto!</div>
+            <div class="step-desc">Agora é só seguir as campanhas no seu gerenciador e ver o ROI subir!</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Ícones no topo · título: uppercase #1A5BC4 700 12px · desc: #64748B 13px · border: 1px solid #E2E8F0</div>
+      </div>
+
+      <!-- BIO SECTION -->
+      <div class="comp-wrap">
+        <div class="comp-label">Seção Bio (Autoridade)</div>
+        <div class="bio-section">
+          <div class="bio-photo">foto</div>
+          <div class="bio-text">
+            <h3>Ricardo Maxxima</h3>
+            <h2>É o criador do <strong>Cartilha do Tráfego Low Ticket</strong></h2>
+            <p>Sou o criador do movimento Low Ticket no Brasil e sócio do Wendell Carvalho.</p>
+            <p>Minhas estruturas de campanha low ticket revolucionaram a forma rodar low no Brasil, com múltiplos 7 dígitos de lucro.</p>
+            <p>Agora, chegou a sua vez de copiar e colar essas campanhas para escalar seu produto low ticket com ROI 2+.</p>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">background: #0F172A · nome: #1A5BC4 italic · título bold accent: #4ADE80 · texto: #94A3B8</div>
+      </div>
+
+      <!-- TWO OPTIONS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Duas Opções (Red vs. Green)</div>
+        <div class="options-grid">
+          <div class="option-card bad">
+            <div class="option-header">
+              <div class="option-badge bad">✕</div>
+              <div class="option-title">Opção 1</div>
+            </div>
+            <div class="option-desc">Continuar seguindo sem resultado com seu roi abaixo de 2, sofrendo com a atualização da Andrômeda e vendo seu ROI despencar...</div>
+          </div>
+          <div class="option-card good">
+            <div class="option-header">
+              <div class="option-badge good">✓</div>
+              <div class="option-title">Opção 2</div>
+            </div>
+            <div class="option-desc">Investir R$ 87 e finalmente copiar minhas estruturas de campanhas para escalar seu low ticket com ROI 2+...</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#94A3B8;">Bad: bg #FFF5F5 · border #FECACA · badge #DC2626 · Good: bg #F0FFF4 · border #A7F3D0 · badge #22C55E</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- 7. CSS TOKENS                                     -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">7 — CSS Custom Properties (Tokens)</div>
+    <div class="tokens-block">
+<pre><span class="t-comment">/* ── Cartilha do Tráfego Pago Low Ticket — Design Tokens ── */</span>
+<span class="t-punct">:root {</span>
+
+  <span class="t-comment">/* Cores Primárias */</span>
+  <span class="t-prop">--tp-blue-50</span><span class="t-punct">:</span>     <span class="t-val">#EEF5FF</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-blue-100</span><span class="t-punct">:</span>    <span class="t-val">#DBEAFE</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-blue-400</span><span class="t-punct">:</span>    <span class="t-val">#3B82F6</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-blue-600</span><span class="t-punct">:</span>    <span class="t-val">#1A5BC4</span><span class="t-punct">;</span>  <span class="t-comment">/* brand primary */</span>
+  <span class="t-prop">--tp-blue-700</span><span class="t-punct">:</span>    <span class="t-val">#1549A0</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Sucesso */</span>
+  <span class="t-prop">--tp-green-cta</span><span class="t-punct">:</span>   <span class="t-val">#22C55E</span><span class="t-punct">;</span>  <span class="t-comment">/* CTA principal */</span>
+  <span class="t-prop">--tp-green-600</span><span class="t-punct">:</span>   <span class="t-val">#16A34A</span><span class="t-punct">;</span>  <span class="t-comment">/* números positivos, ROI */</span>
+
+  <span class="t-comment">/* Erro / Dor */</span>
+  <span class="t-prop">--tp-red-300</span><span class="t-punct">:</span>     <span class="t-val">#FCA5A5</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-red-600</span><span class="t-punct">:</span>     <span class="t-val">#DC2626</span><span class="t-punct">;</span>  <span class="t-comment">/* pain cards, preços tachados */</span>
+
+  <span class="t-comment">/* Alerta */</span>
+  <span class="t-prop">--tp-amber-500</span><span class="t-punct">:</span>   <span class="t-val">#F59E0B</span><span class="t-punct">;</span>  <span class="t-comment">/* ícone warning ⚠️ */</span>
+
+  <span class="t-comment">/* Neutros */</span>
+  <span class="t-prop">--tp-dark</span><span class="t-punct">:</span>        <span class="t-val">#0F172A</span><span class="t-punct">;</span>  <span class="t-comment">/* seção bio, fundo dark */</span>
+  <span class="t-prop">--tp-heading</span><span class="t-punct">:</span>     <span class="t-val">#1E293B</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-body</span><span class="t-punct">:</span>        <span class="t-val">#374151</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-muted</span><span class="t-punct">:</span>       <span class="t-val">#64748B</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-border</span><span class="t-punct">:</span>      <span class="t-val">#E2E8F0</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-surface</span><span class="t-punct">:</span>     <span class="t-val">#F1F5F9</span><span class="t-punct">;</span>  <span class="t-comment">/* fundo de página */</span>
+  <span class="t-prop">--tp-white</span><span class="t-punct">:</span>       <span class="t-val">#FFFFFF</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Tipografia */</span>
+  <span class="t-prop">--tp-font</span><span class="t-punct">:</span>        <span class="t-val">'Poppins', sans-serif</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-xs</span><span class="t-punct">:</span>     <span class="t-val">11px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-sm</span><span class="t-punct">:</span>     <span class="t-val">13px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-base</span><span class="t-punct">:</span>   <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-lg</span><span class="t-punct">:</span>     <span class="t-val">18px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-xl</span><span class="t-punct">:</span>     <span class="t-val">22px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-2xl</span><span class="t-punct">:</span>    <span class="t-val">32px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-3xl</span><span class="t-punct">:</span>    <span class="t-val">40px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-size-display</span><span class="t-punct">:</span><span class="t-val">56px</span><span class="t-punct">;</span>   <span class="t-comment">/* preço principal */</span>
+
+  <span class="t-comment">/* Espaçamento */</span>
+  <span class="t-prop">--tp-space-1</span><span class="t-punct">:</span>     <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-2</span><span class="t-punct">:</span>     <span class="t-val">8px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-3</span><span class="t-punct">:</span>     <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-4</span><span class="t-punct">:</span>     <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-6</span><span class="t-punct">:</span>     <span class="t-val">24px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-8</span><span class="t-punct">:</span>     <span class="t-val">32px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-12</span><span class="t-punct">:</span>    <span class="t-val">48px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-16</span><span class="t-punct">:</span>    <span class="t-val">64px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-space-24</span><span class="t-punct">:</span>    <span class="t-val">96px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Border Radius */</span>
+  <span class="t-prop">--tp-radius-xs</span><span class="t-punct">:</span>   <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-radius-sm</span><span class="t-punct">:</span>   <span class="t-val">8px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-radius-md</span><span class="t-punct">:</span>   <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-radius-lg</span><span class="t-punct">:</span>   <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-radius-pill</span><span class="t-punct">:</span> <span class="t-val">9999px</span><span class="t-punct">;</span>  <span class="t-comment">/* botões CTA */</span>
+
+  <span class="t-comment">/* Sombras */</span>
+  <span class="t-prop">--tp-shadow-xs</span><span class="t-punct">:</span>   <span class="t-val">0 1px 3px rgba(0,0,0,.06)</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-shadow-sm</span><span class="t-punct">:</span>   <span class="t-val">0 2px 8px rgba(0,0,0,.08)</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-shadow-md</span><span class="t-punct">:</span>   <span class="t-val">0 4px 16px rgba(0,0,0,.12)</span><span class="t-punct">;</span>
+  <span class="t-prop">--tp-shadow-blue</span><span class="t-punct">:</span> <span class="t-val">0 8px 32px rgba(26,91,196,.15)</span><span class="t-punct">;</span>
+
+<span class="t-punct">}</span></pre>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

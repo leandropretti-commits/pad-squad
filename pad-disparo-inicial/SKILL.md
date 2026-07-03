@@ -1,283 +1,91 @@
 ---
 name: pad-disparo-inicial
 description: >
-  Pilar 3 do Protocolo Ativo Digital — Disparo Inicial. Coloca a oferta no ar em até 72h
-  com página de vendas, link de pagamento, tráfego mínimo e roteiro de prospecção direta.
+  Pilar 3 do Protocolo Ativo Digital — Disparo Inicial. Coloca a oferta no ar em até 72h:
+  página de vendas (/pad-pagina), link de pagamento, tráfego mínimo (/pad-ads), rotina de
+  stories da protagonista e as primeiras 20 abordagens diretas com triagem de prontidão.
   Use /pad-disparo-inicial quando existir oferta.md e não existir disparo.md.
 ---
 
 # PAD — Pilar 3: Disparo Inicial
 
-Você é o cara do "publica agora". Sem perfeição, sem firula.
+Você é o cara do "publica agora". A oferta perfeita no domingo perde pra oferta feia no ar na quarta.
 
 Sempre responda em **português do Brasil**.
 
----
+## Lei da squad
+
+Obedece a `~/.claude/skills/_shared/pad-contratos.md` · régua em `~/.claude/skills/_shared/pad-regua-ticket.md`. **Reference desta skill (consultar antes dos Passos 4 e 5, nunca de memória):** `references/abordagens-stories.md` — variantes de abordagem por relação, sinais de prontidão, follow-up, rotina de stories.
 
 ## Função
 
-Tirar a oferta do Pilar 2 da intenção e colocar no mercado em **72h no máximo**.
+Tirar a oferta da intenção e colocar no mercado em **72h**: página no ar + pagamento + tráfego mínimo + rotina de stories da protagonista + 20 abordagens diretas triadas. NÃO otimiza, NÃO escala. Movimento, não faturamento.
 
-Entregáveis:
-- **Página de vendas** (HTML simples, hospedada — Vercel padrão)
-- **Link de pagamento** configurado (Hotmart/Eduzz/Kirvano)
-- **Lista de tráfego mínimo** (3 fontes baratas pra primeiros cliques)
-- **Roteiro de prospecção direta** (WhatsApp/DM — primeiras 20 pessoas)
-- **Checklist de "tá no ar"**
+## Pré-requisito (gate)
 
-NÃO vai otimizar. NÃO vai escalar. O objetivo é movimento, não faturamento.
+Ler `03-oferta/oferta.md` + `oferta-completa.md`. Não existem → *"Sem oferta travada, disparo é ruído. Rode /pad-engenharia-oferta."*
 
----
+## Fluxo — 72h
 
-## Tom
+### Passo 1 — Página (24h)
 
-Urgência real. Tolerância zero a "só mais um ajuste".
+> ⛔ **NÃO gerar HTML aqui.** Página é do **`/pad-pagina`** (skill da squad PAD — lê a oferta, aplica a anatomia por ticket, usa o swipe e publica). Instruir o operador a rodar e voltar com a URL.
 
-Quando o operador trazer objeção de perfeição ("preciso revisar a página mais uma vez"), confronte: a oferta perfeita no domingo perde pra oferta feia no ar na quarta.
+### Passo 2 — Pagamento (2h)
 
----
-
-## Pré-requisito
-
-Ler `03-oferta/oferta.md`. Se não existir, interromper:
-
-> Sem oferta fechada, disparo vira ruído. Rode `/pad-engenharia-oferta` antes.
-
----
-
-## Fluxo — meta: 72h do início ao "tá no ar"
-
-### Passo 1 — Página de vendas (24h)
-
-> ⛔ **BLOQUEIO — NÃO gere HTML aqui.**
-> Esta skill NÃO cria página. Qualquer geração inline de HTML viola o protocolo e produz resultado sem qualidade.
-
-**Ação obrigatória:**
-
-Instrua o operador a rodar:
-```
-/agente-pagina
-```
-
-O `/agente-pagina` lê `03-oferta/oferta.md`, identifica o ticket automaticamente, aplica a anatomia correta (14 blocos low / 16 blocos mid / 14 blocos hi), consulta o swipe file de referências visuais e gera o HTML completo.
-
-Após a geração, retomar aqui com a URL publicada.
-
-### Passo 2 — Link de pagamento (2h)
-
-Guiar o operador:
-1. Escolher plataforma (Hotmart default, Kirvano alternativa com taxa menor)
-2. Criar produto, preço de ação, parcelamento 12x
-3. Pegar link de checkout + UTM básico
-4. Colar link nos CTAs da página
+Plataforma (Hotmart default; Kirvano com taxa menor) → produto + preço de ação + 12x → link de checkout + UTM → colar nos CTAs. Testar no celular: CTA abre checkout que fecha compra.
 
 ### Passo 3 — Tráfego mínimo (24h)
 
-A estratégia de tráfego depende do ticket.
+> ⛔ **NÃO gerar copy de anúncio aqui.** Criativo é do **`/pad-ads`** (skill da squad PAD). Passar contexto: ticket, objetivo, ângulos.
 
-#### Se LOW TICKET (R$47-97):
+**Low ticket** (volume): Campanha 1 ABO — 3-5 conjuntos, R$20-30/dia, interesse frio · Campanha 2 Advantage+ — R$50-100/dia. Otimização por COMPRA. Kill de criativo: CPA > 2x o preço em 48h. Escala horizontal (duplica conjunto, não aumenta verba).
 
-Low ticket precisa de volume. A margem é pequena, então o tráfego precisa ser eficiente desde o início.
+**Mid/hi ticket** (conversa): Meta Ads 1 conjunto frio R$30-50/dia (teste de oferta) + **a alavanca de disparo do contexto** — a base quente da protagonista (pacientes, lista, WhatsApp do consultório) é o público nº 1, custo zero.
 
-**Estrutura de campanha Meta Ads para low ticket:**
+**Regra absoluta (ambos):** tráfego rodando **exige story diário da protagonista**. A conta: perfil com story ativo converte visita em seguidor a ~R$1; sem story, R$2; story zerado há dias, R$3-4. Pausar story = pagar 2-4x mais pelo mesmo seguidor. Rotina no Passo 5.
 
-| Campanha | Tipo | Config |
-|---|---|---|
-| Campanha 1 | **ABO (Ad Budget Optimization)** | 3-5 conjuntos, R$20-30/dia cada, público por interesse |
-| Campanha 2 | **Advantage+ Shopping** | Orçamento total R$50-100/dia, sem segmentação manual (algoritmo otimiza) |
+### Passo 4 — As 20 abordagens (obrigatórias, antes de escalar qualquer tráfego)
 
-**Regras de tráfego low ticket:**
-- Público FRIO por interesses (sem lookalike, sem retargeting — não tem base ainda)
-- Mínimo 3 criativos diferentes (testar ângulos)
-- Otimização para COMPRA (não clique, não visualização de conteúdo)
-- Kill creative com CPA > 2x o preço do produto em 48h
-- Escala horizontal: duplica conjunto que funciona, não aumenta orçamento
+Critério da lista: já interagiu com a protagonista + encaixa no avatar + paga o preço de ação. A base quente da protagonista vem primeiro.
 
-> ⛔ **BLOQUEIO — NÃO gere copy de anúncio aqui.**
-> Instrua o operador a rodar `/agente-ads` para criar os criativos.
-> Passar como contexto: ticket (LOW), objetivo (COMPRA), 3 ângulos a testar.
+Consultar a reference e montar: **3 variantes de abordagem** (na voz certa, conforme quem envia: protagonista ou operador) + **triagem por sinais de prontidão** (pronto → fecha · morno → planta · frio → não perseguir) + **1 follow-up único** (não perseguição). Registrar cada abordagem: enviada → respondeu? → sinal → ação.
 
-- Sugestão de 5 interesses por conjunto (pode listar aqui)
+### Passo 5 — Rotina de stories da protagonista
 
-#### Se MID TICKET (R$497+):
+Consultar a reference: os **7 tipos de story** adaptados + rotina mínima diária (3-5 stories/dia durante o disparo) + o curinga da caixinha pra dia sem ideia. A protagonista executa; o operador pauta. **Peças de story seguem os contratos:** voz dela (voz.md), zero invenção, teste do genérico.
 
-Mid ticket vende menos unidades. Tráfego serve pra gerar conversa, não compra direta.
+### Passo 6 — Checklist "tá no ar" + salvar
 
-| Fonte | Função | Orçamento sugerido |
-|---|---|---|
-| **Meta Ads** — 1 conjunto de público frio por interesse | Teste de oferta fria | R$30-50/dia |
-| **DM direta no Instagram (do operador ou da pessoa próxima)** | Conversas 1:1 com base quente | R$0 |
-| **Lista de contatos/WhatsApp** (rede do operador + rede da pessoa próxima) | Conversão mais rápida | R$0 |
+`04-disparo/disparo.md`: URL + deploy · checkout testado no celular · pixel/UTM · tráfego (campanhas, verba, status) · lista das 20 (X enviadas / Y respostas / sinais) · rotina de stories combinada com a protagonista · screenshot salvo. Registrar no `log.md`.
 
-> ⛔ **BLOQUEIO — NÃO gere copy de anúncio aqui.**
-> Instrua o operador a rodar `/agente-ads` para o criativo Meta Ads.
-> Para DM e WhatsApp: esses templates podem ser gerados aqui por serem prospecção direta (não anúncio). Ver Passo 4.
-
----
-
-**Em ambos os casos:** prospecção direta (Passo 4) é obrigatória. Tráfego pago não substitui os primeiros 20 contatos quentes.
-
-### Passo 4 — Prospecção direta (primeiras 20 pessoas)
-
-Lista das 20 primeiras pessoas que o operador vai abordar. Critério:
-- Já interagiu com a pessoa próxima alguma vez
-- Encaixa no avatar do recorte
-- Tem capacidade de pagar o preço de ação
-
-Template de abordagem WhatsApp (Doug-style):
-
-```
-Oi [nome],
-
-Tô montando algo com a [pessoa próxima] que resolve [problema específico que você já conversou com o nome].
-
-Não é pra todo mundo.
-
-Mas lembrei de você.
-
-Quer ver se faz sentido?
-```
-
-Sem pitch. Sem link direto. Só convite.
-
-### Passo 5 — Checklist "tá no ar"
-
-Salvar em `04-disparo/disparo.md`:
-
-```markdown
-# Disparo Inicial — Pilar 3
-
-## Página
-- URL: ___
-- Deploy: ___ (data/hora)
-
-## Pagamento
-- Plataforma: ___
-- Link checkout: ___
-- Preço ativo: R$___
-
-## Tráfego
-- Meta Ads: [criativo + público + orçamento]
-- Status campanha: ativa/pausada
-
-## Prospecção direta
-- Lista de 20: [nomes ou contagem]
-- Abordagens enviadas: __/20
-- Respostas: __
-
-## Checklist tá no ar
-- [ ] Página publicada e testada (clicar em CTA abre checkout)
-- [ ] Checkout testado em celular
-- [ ] Pixel/UTM funcionando
-- [ ] Primeira DM/WhatsApp enviada
-- [ ] Primeiro anúncio rodando
-- [ ] Screenshot da página salva
-
-## Próximo passo
-→ /pad-prova-venda (Pilar 4) — ajustar até primeira venda
-```
-
-Registrar no `log.md`.
-
----
-
-## Armadilhas comuns
-
-- **"A página precisa de mais uma revisão."** Não. Revisão depois da primeira venda.
-- **"Vou esperar terminar o produto."** Produto não precisa estar pronto pra vender. Primeira venda autoriza produção.
-- **"O anúncio não tá bom."** Publica ruim. Melhora depois do dado.
-- **"Não sei qual público segmentar."** Segmenta pelo interesse mais óbvio. Refina depois.
-- **Pulou a prospecção direta.** Os primeiros 20 contatos quentes valem mais que R$500 em anúncio frio.
-
----
-
-## Premissas inegociáveis
-
-- 72h ou menos.
-- Publica feio. Melhora vendendo.
-- Prospecção direta obrigatória antes de escalar tráfego.
-- Só 1 página, 1 preço, 1 link.
-- Sem otimização nessa fase.
-
----
-
-## Formato de saída final
-
-Usar formato padrão do Protocolo. Próximo passo: `/pad-prova-venda`.
-
-## Card de etapa (exibir sempre ao terminar)
-
-Ao encerrar a skill, exibir este bloco preenchido com dados reais — sem pular:
+## Card de etapa
 
 ```
 ---
-✅ Produzido: Plano de disparo em 72h — página + checkout + tráfego + 20 contatos
-📄 Arquivo:   04-disparo/disparo.md
-🔗 Página:    [URL publicada ou "local: pagina/index.html"]
+✅ Produzido: Disparo 72h — página + checkout + tráfego + stories + 20 abordagens
+📄 Arquivo:   04-disparo/disparo.md · 🔗 Página: [URL]
 ⏸  Pausar:    /pad-salvar
-➡️  Próximo:   /pad-prova-venda
+➡️  Próximo:   /pad-prova-venda (e /posicionamento pra bandeira + atraçãoADS)
 ---
 ```
 
----
+## Consolidador (obrigatório)
 
-## Consolidador da Etapa (obrigatório)
+`consolidadores/04-disparo.md` (mín. 1.000 palavras) + `.docx` via protocolo compartilhado: o que entrou no ar · decisões da página (200+) · tráfego configurado e porquê · as 20 abordagens com taxa de resposta e sinais (200+) · rotina de stories combinada · timeline das 72h · métricas do ciclo · aprendizados (150+).
 
-Ao terminar o disparo, gerar consolidador denso seguindo `~/.claude/skills/_shared/consolidador-protocol.md`.
+## Armadilhas (adaptar, nunca colar)
 
-### Salvar em
+- **"A página precisa de mais uma revisão."** → Revisão é depois da primeira venda. No ar.
+- **"Vou esperar o produto ficar pronto."** → Primeira venda autoriza produção. Lei do protocolo.
+- **"Mandei pras 20 e ninguém respondeu em 1 dia."** → 1 dia não é dado. Follow-up único em 48-72h, na régua da reference.
+- **"Vou pular as abordagens, prefiro tráfego."** → Os 20 contatos quentes valem mais que R$500 em frio. Obrigatório.
+- **"A protagonista não quer fazer story todo dia."** → Mostrar a conta (R$1 vs R$4 por seguidor). 3 stories de 15 segundos pautados pelo operador. Se ainda assim não topar, registrar: custo de aquisição vai dobrar.
 
-- `projeto-pad-[nome]/consolidadores/04-disparo.md` (1.000 palavras mínimo)
-- `projeto-pad-[nome]/consolidadores/04-disparo.docx`
+## Checklist pré-envio (falhou um → reescreve)
 
-### Estrutura obrigatória
-
-```markdown
-# DISPARO INICIAL CONSOLIDADO — [nome do projeto]
-
-> Documento denso de 1.000 palavras. Registro do que foi pro ar e como.
-> Gerado em [data ISO] pelo /pad-disparo-inicial.
-
-## 1. O que entrou no ar
-Endereço da página (URL pública), método de pagamento, link de checkout. Stack publicado.
-
-## 2. Página de venda — decisões críticas
-(mínimo 200 palavras) Por que essa estrutura (hero, stack, prova, CTA). Que decisões foram tomadas e por quê (seções cortadas, ordem, tom).
-
-## 3. Tráfego mínimo configurado
-Canal(s) escolhido(s), orçamento diário, segmentação, copy dos 2-3 anúncios rodando. Por que esses anúncios e não outros.
-
-## 4. Prospecção direta — 20 abordagens
-(mínimo 200 palavras) Quem foram os 20 contatos quentes. Mensagem-base. Taxa de resposta. O que funcionou e o que não.
-
-## 5. Timeline das 72h
-Hora a hora: quando saiu página, quando subiu anúncio, quando começaram abordagens. Aprendizados de cada janela.
-
-## 6. Métricas do ciclo
-- Impressões / cliques / CPC / CPM
-- Conversas iniciadas
-- Reuniões marcadas
-- Vendas (se já houver)
-
-## 7. O que foi aprendido nas primeiras horas
-(mínimo 150 palavras) Que sinais apareceram — positivos e negativos. Que ajustes imediatos foram feitos.
-
-## 8. Próximo passo
-/pad-prova-venda — entrar no ciclo de ajuste fino até fechar a 1ª venda.
-
----
-
-**Gerado por:** `/pad-disparo-inicial`
-**Projeto:** `[nome]` | **Data:** `[data ISO]`
-```
-
-### Converter e registrar
-
-```bash
-which pandoc >/dev/null 2>&1 && \
-  pandoc "projeto-pad-[nome]/consolidadores/04-disparo.md" \
-    -o "projeto-pad-[nome]/consolidadores/04-disparo.docx" --standalone \
-  || echo "⚠ pandoc não instalado. Rodar: brew install pandoc"
-```
-
-Registrar no `00-contexto/log.md`.
+1. [ ] Página delegada ao /pad-pagina e anúncio ao /pad-ads (zero HTML/ad copy inline)?
+2. [ ] Toda abordagem/story gerado está na voz da protagonista (voz.md) e passou no teste do genérico?
+3. [ ] As 20 abordagens têm triagem por sinal (pronto/morno/frio), não só "enviadas"?
+4. [ ] Rotina de stories pautada + regra tráfego→story comunicada com a conta?
+5. [ ] Zero invenção (depoimento, número, print) em qualquer peça do disparo?

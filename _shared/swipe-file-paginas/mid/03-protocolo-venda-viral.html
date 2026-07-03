@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo Venda Viral — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   PROTOCOLO VENDA VIRAL — DESIGN SYSTEM
+   Gerado por Claude · Abril 2026
+   Prefixo de tokens: --pvv-*
+   Font stack: Nunito (Google Fonts)
+   Tema: Criação de conteúdo viral / social media
+   Bg: #F5F6F8  |  Primário: #F05A00  |  CTA: #2DB34A
+============================================= */
+
+:root {
+  /* ── Cores primárias ── */
+  --pvv-orange:        #F05A00;
+  --pvv-orange-hover:  #CC4D00;
+  --pvv-orange-light:  #FFF3EC;
+  --pvv-orange-mid:    #FF7A2E;
+
+  /* ── CTA verde ── */
+  --pvv-green:         #2DB34A;
+  --pvv-green-hover:   #239E3F;
+  --pvv-green-light:   #EDFBF1;
+
+  /* ── Antes / Depois ── */
+  --pvv-antes:         #F05A00;
+  --pvv-depois:        #2DB34A;
+
+  /* ── Neutros ── */
+  --pvv-dark:          #1A1A1A;
+  --pvv-text:          #333333;
+  --pvv-muted:         #666666;
+  --pvv-subtle:        #999999;
+  --pvv-bg:            #F5F6F8;
+  --pvv-bg-alt:        #EEF0F3;
+  --pvv-card:          #FFFFFF;
+  --pvv-border:        #E5E7EB;
+  --pvv-border-light:  #F0F0F0;
+
+  /* ── Tipografia ── */
+  --pvv-font:          'Nunito', sans-serif;
+  --pvv-size-xs:       12px;
+  --pvv-size-sm:       14px;
+  --pvv-size-base:     16px;
+  --pvv-size-md:       18px;
+  --pvv-size-lg:       22px;
+  --pvv-size-xl:       28px;
+  --pvv-size-2xl:      36px;
+  --pvv-size-3xl:      48px;
+  --pvv-size-hero:     64px;
+
+  /* ── Espaçamento ── */
+  --pvv-space-1:       4px;
+  --pvv-space-2:       8px;
+  --pvv-space-3:       12px;
+  --pvv-space-4:       16px;
+  --pvv-space-5:       20px;
+  --pvv-space-6:       24px;
+  --pvv-space-8:       32px;
+  --pvv-space-10:      40px;
+  --pvv-space-12:      48px;
+  --pvv-space-16:      64px;
+  --pvv-space-20:      80px;
+
+  /* ── Border radius ── */
+  --pvv-radius-sm:     6px;
+  --pvv-radius-md:     12px;
+  --pvv-radius-lg:     16px;
+  --pvv-radius-xl:     24px;
+  --pvv-radius-pill:   100px;
+
+  /* ── Sombras ── */
+  --pvv-shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --pvv-shadow-md:     0 4px 12px rgba(0,0,0,.10);
+  --pvv-shadow-lg:     0 8px 32px rgba(0,0,0,.12);
+  --pvv-shadow-orange: 0 4px 20px rgba(240,90,0,.30);
+  --pvv-shadow-green:  0 4px 20px rgba(45,179,74,.30);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--pvv-font);
+  background: #EBEBEB;
+  color: var(--pvv-dark);
+  line-height: 1.6;
+  font-size: var(--pvv-size-base);
+}
+
+/* ── Layout ── */
+.ds-page { max-width: 1100px; margin: 0 auto; padding: 60px 32px; }
+.ds-section { margin-bottom: 80px; }
+.ds-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ds-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.ds-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ds-flex { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+
+/* ── Cabeçalho DS ── */
+.ds-cover {
+  background: var(--pvv-dark);
+  border-radius: var(--pvv-radius-xl);
+  padding: 64px 56px;
+  margin-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.ds-cover::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,90,0,.35) 0%, transparent 70%);
+}
+.ds-cover::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 40%;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,179,74,.18) 0%, transparent 70%);
+}
+.ds-cover-tag {
+  display: inline-block;
+  background: rgba(240,90,0,.15);
+  color: var(--pvv-orange);
+  border: 1px solid rgba(240,90,0,.35);
+  border-radius: var(--pvv-radius-pill);
+  font-size: var(--pvv-size-xs);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 24px;
+}
+.ds-cover h1 {
+  font-size: 46px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.ds-cover h1 span { color: var(--pvv-orange); }
+.ds-cover p {
+  color: rgba(255,255,255,.55);
+  font-size: var(--pvv-size-md);
+  max-width: 480px;
+}
+.ds-cover-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+}
+.ds-cover-meta-item { display: flex; flex-direction: column; gap: 2px; }
+.ds-cover-meta-item .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); }
+.ds-cover-meta-item .value { font-size: var(--pvv-size-md); font-weight: 700; color: #fff; }
+
+/* ── Section heading ── */
+.ds-heading {
+  font-size: var(--pvv-size-xl);
+  font-weight: 900;
+  color: var(--pvv-dark);
+  margin-bottom: 6px;
+}
+.ds-subheading {
+  font-size: var(--pvv-size-sm);
+  color: var(--pvv-muted);
+  margin-bottom: 32px;
+}
+.ds-divider {
+  width: 40px;
+  height: 3px;
+  background: var(--pvv-orange);
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+.ds-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--pvv-muted);
+  margin-bottom: 8px;
+}
+
+/* =============================================
+   1. IDENTIDADE — LOGO
+============================================= */
+.logo-box {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--pvv-shadow-sm);
+  border: 1px solid var(--pvv-border);
+}
+.logo-icon {
+  width: 56px; height: 56px;
+  background: var(--pvv-dark);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.logo-icon::before {
+  content: '▷';
+  font-size: 22px;
+  color: var(--pvv-orange);
+}
+.logo-wordmark { display: flex; flex-direction: column; line-height: 1; }
+.logo-protocolo {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--pvv-muted);
+  margin-bottom: 3px;
+}
+.logo-name {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+.logo-name .venda { color: var(--pvv-dark); }
+.logo-name .viral { color: var(--pvv-orange); }
+
+.logo-dark-box {
+  background: var(--pvv-dark);
+  border-radius: var(--pvv-radius-lg);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--pvv-shadow-sm);
+}
+.logo-dark-box .logo-protocolo { color: rgba(255,255,255,.45); }
+.logo-dark-box .logo-name .venda { color: #fff; }
+
+/* Sirius partner lockup */
+.sirius-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-md);
+  border: 1px solid var(--pvv-border);
+  width: fit-content;
+}
+.sirius-icon {
+  display: grid;
+  grid-template-columns: repeat(4,5px);
+  gap: 3px;
+}
+.sirius-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--pvv-orange);
+  opacity: .7;
+}
+.sirius-dot:nth-child(odd) { opacity: 1; }
+.sirius-name {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: var(--pvv-orange);
+}
+
+/* =============================================
+   2. PALETA DE CORES
+============================================= */
+.color-swatch {
+  border-radius: var(--pvv-radius-md);
+  overflow: hidden;
+  box-shadow: var(--pvv-shadow-sm);
+}
+.color-chip {
+  height: 100px;
+}
+.color-info {
+  background: var(--pvv-card);
+  padding: 14px 16px;
+  border: 1px solid var(--pvv-border);
+  border-top: none;
+}
+.color-name { font-size: var(--pvv-size-sm); font-weight: 700; color: var(--pvv-dark); }
+.color-hex { font-size: var(--pvv-size-xs); color: var(--pvv-muted); font-family: monospace; }
+.color-role { font-size: 10px; color: var(--pvv-subtle); text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+
+/* =============================================
+   3. TIPOGRAFIA
+============================================= */
+.type-specimen {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  padding: 40px;
+  border: 1px solid var(--pvv-border);
+  margin-bottom: 16px;
+}
+.type-hero   { font-size: 56px; font-weight: 900; line-height: 1.05; }
+.type-h1     { font-size: 42px; font-weight: 900; line-height: 1.1; }
+.type-h2     { font-size: 32px; font-weight: 800; line-height: 1.15; }
+.type-h3     { font-size: 24px; font-weight: 700; line-height: 1.2; }
+.type-lead   { font-size: 18px; font-weight: 500; line-height: 1.6; color: var(--pvv-text); }
+.type-body   { font-size: 16px; font-weight: 400; line-height: 1.7; color: var(--pvv-text); }
+.type-small  { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--pvv-muted); }
+.type-caption{ font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--pvv-subtle); }
+.type-label  { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--pvv-muted); }
+
+.highlight-orange { color: var(--pvv-orange); }
+.highlight-green  { color: var(--pvv-green); }
+
+/* =============================================
+   4. ESPAÇAMENTO
+============================================= */
+.space-demo {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 32px;
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  border: 1px solid var(--pvv-border);
+}
+.space-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.space-bar {
+  width: 40px;
+  background: linear-gradient(180deg, var(--pvv-orange) 0%, var(--pvv-orange-mid) 100%);
+  border-radius: 4px;
+  opacity: .7;
+}
+.space-token { font-size: 10px; font-family: monospace; color: var(--pvv-muted); }
+.space-px    { font-size: 11px; font-weight: 700; color: var(--pvv-dark); }
+
+/* =============================================
+   5. RADIUS & SOMBRAS
+============================================= */
+.radius-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 32px;
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  border: 1px solid var(--pvv-border);
+  margin-bottom: 16px;
+}
+.radius-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.radius-shape {
+  width: 64px; height: 64px;
+  background: var(--pvv-orange-light);
+  border: 2px solid var(--pvv-orange);
+}
+.radius-label { font-size: 11px; font-family: monospace; color: var(--pvv-muted); text-align: center; }
+
+.shadow-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 40px 32px;
+  background: var(--pvv-bg);
+  border-radius: var(--pvv-radius-lg);
+}
+.shadow-card {
+  width: 140px; height: 100px;
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.shadow-name { font-size: 11px; font-weight: 700; color: var(--pvv-dark); }
+.shadow-token { font-size: 10px; font-family: monospace; color: var(--pvv-muted); }
+
+/* =============================================
+   6. COMPONENTES
+============================================= */
+
+/* ── Botões ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--pvv-font);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: var(--pvv-radius-md);
+  border: none;
+  cursor: pointer;
+  padding: 14px 28px;
+  transition: all .2s;
+  text-decoration: none;
+}
+.btn-cta {
+  background: var(--pvv-green);
+  color: #fff;
+  box-shadow: var(--pvv-shadow-green);
+}
+.btn-cta:hover { background: var(--pvv-green-hover); transform: translateY(-1px); }
+
+.btn-orange {
+  background: var(--pvv-orange);
+  color: #fff;
+  box-shadow: var(--pvv-shadow-orange);
+}
+.btn-orange:hover { background: var(--pvv-orange-hover); }
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--pvv-dark);
+  border: 2px solid var(--pvv-dark);
+}
+.btn-outline-dark:hover { background: var(--pvv-dark); color: #fff; }
+
+.btn-ghost-orange {
+  background: var(--pvv-orange-light);
+  color: var(--pvv-orange);
+  border: 1.5px solid rgba(240,90,0,.25);
+}
+
+.btn-lg { font-size: 14px; padding: 16px 36px; border-radius: var(--pvv-radius-md); }
+.btn-sm { font-size: 11px; padding: 9px 18px; }
+
+/* ── Pills / badges ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--pvv-size-xs);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: var(--pvv-radius-pill);
+  padding: 5px 14px;
+}
+.pill-orange   { background: var(--pvv-orange);     color: #fff; }
+.pill-green    { background: var(--pvv-green);      color: #fff; }
+.pill-antes    { background: var(--pvv-antes);      color: #fff; }
+.pill-depois   { background: var(--pvv-depois);     color: #fff; }
+.pill-outline  { background: transparent; border: 1.5px solid var(--pvv-border); color: var(--pvv-muted); }
+.pill-dark     { background: var(--pvv-dark);       color: #fff; }
+.pill-light    { background: var(--pvv-bg-alt);     color: var(--pvv-dark); }
+.pill-bonus    { background: var(--pvv-orange); color: #fff; font-size: 13px; padding: 6px 20px; letter-spacing: .12em; }
+
+/* ── Métricas flutuantes ── */
+.metric-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-md);
+  padding: 10px 16px;
+  box-shadow: var(--pvv-shadow-md);
+  font-size: var(--pvv-size-sm);
+}
+.metric-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--pvv-orange-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.metric-info { display: flex; flex-direction: column; line-height: 1.3; }
+.metric-label { font-size: 10px; color: var(--pvv-subtle); font-weight: 600; }
+.metric-value { font-size: var(--pvv-size-sm); font-weight: 800; color: var(--pvv-dark); }
+.metric-value .up   { color: var(--pvv-green);  font-size: 11px; }
+.metric-value .down { color: #EF4444;           font-size: 11px; }
+
+/* ── Pain section card ── */
+.pain-card {
+  background: var(--pvv-orange);
+  border-radius: var(--pvv-radius-xl);
+  padding: 40px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.pain-card::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.pain-card h2 { font-size: 32px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+.pain-card h2 span { color: rgba(255,255,255,.75); font-style: italic; }
+.pain-card p  { font-size: var(--pvv-size-sm); opacity: .85; line-height: 1.7; }
+
+/* ── Insight card (white centered) ── */
+.insight-card {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-xl);
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: var(--pvv-shadow-md);
+  border: 1px solid var(--pvv-border);
+}
+.insight-card h2 { font-size: 28px; font-weight: 900; line-height: 1.2; margin-bottom: 12px; }
+.insight-card p  { font-size: var(--pvv-size-sm); color: var(--pvv-muted); line-height: 1.7; }
+
+/* ── Feature image grid (4-col with captions) ── */
+.feature-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.feature-item {}
+.feature-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--pvv-bg-alt);
+  border-radius: var(--pvv-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.feature-img-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 8px;
+  background: linear-gradient(transparent, rgba(0,0,0,.45));
+}
+.feature-caption { font-size: var(--pvv-size-xs); color: var(--pvv-muted); text-align: center; line-height: 1.4; }
+
+/* ── Audience target pills grid ── */
+.audience-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.audience-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pvv-card);
+  border: 1.5px solid var(--pvv-border);
+  border-radius: var(--pvv-radius-pill);
+  padding: 8px 16px;
+  font-size: var(--pvv-size-sm);
+  font-weight: 600;
+  color: var(--pvv-dark);
+  box-shadow: var(--pvv-shadow-sm);
+}
+.audience-pill .icon {
+  width: 20px; height: 20px;
+  background: var(--pvv-orange-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+}
+
+/* ── Benefits checklist ── */
+.benefit-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--pvv-size-sm);
+  color: var(--pvv-text);
+  line-height: 1.5;
+}
+.benefit-icon {
+  width: 28px; height: 28px;
+  background: var(--pvv-orange-light);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Antes / Depois card ── */
+.antes-depois-card {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--pvv-shadow-md);
+  border: 1px solid var(--pvv-border);
+}
+.ad-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.ad-half {
+  flex: 1;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: 800;
+  font-size: var(--pvv-size-sm);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.ad-half.antes { background: var(--pvv-antes);  color: #fff; }
+.ad-half.depois{ background: var(--pvv-depois); color: #fff; }
+.ad-arrow {
+  width: 32px; height: 32px;
+  background: var(--pvv-card);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--pvv-dark);
+  border: 2px solid var(--pvv-border);
+  z-index: 1;
+  flex-shrink: 0;
+  margin: 0 -12px;
+}
+.ad-body { display: flex; }
+.ad-pane {
+  flex: 1;
+  padding: 20px;
+  background: var(--pvv-bg);
+}
+.ad-pane.depois-pane { background: var(--pvv-green-light); border-left: 1px solid var(--pvv-border); }
+.ad-stat { font-size: var(--pvv-size-xs); color: var(--pvv-muted); margin-bottom: 4px; }
+.ad-value { font-size: var(--pvv-size-xl); font-weight: 900; color: var(--pvv-dark); }
+.ad-value.positive { color: var(--pvv-green); }
+.ad-value.negative { color: #EF4444; }
+.ad-value sup { font-size: 14px; }
+.ad-delta { font-size: 11px; font-weight: 700; margin-top: 4px; }
+.ad-delta.up   { color: var(--pvv-green); }
+.ad-delta.down { color: #EF4444; }
+
+/* ── BÔNUS card ── */
+.bonus-card {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-xl);
+  border: 1.5px solid var(--pvv-border);
+  overflow: hidden;
+  box-shadow: var(--pvv-shadow-md);
+  position: relative;
+}
+.bonus-badge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -14px;
+  position: relative;
+  z-index: 2;
+  padding-top: 16px;
+}
+.bonus-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  padding: 28px 28px 28px 0;
+}
+.bonus-img-col {
+  padding: 0 0 0 28px;
+  display: flex;
+  align-items: center;
+}
+.bonus-img-placeholder {
+  width: 180px;
+  aspect-ratio: 4/3;
+  background: var(--pvv-dark);
+  border-radius: var(--pvv-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+.bonus-content { padding-left: 24px; }
+.bonus-content h3 { font-size: var(--pvv-size-lg); font-weight: 900; line-height: 1.2; margin-bottom: 10px; }
+.bonus-content h3 span { color: var(--pvv-orange); }
+.bonus-content p { font-size: var(--pvv-size-sm); color: var(--pvv-text); line-height: 1.7; margin-bottom: 12px; }
+.bonus-content .note { color: var(--pvv-orange); font-size: var(--pvv-size-sm); font-weight: 700; font-style: italic; }
+
+/* ── Pricing card ── */
+.pricing-card {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-xl);
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: var(--pvv-shadow-lg);
+  border: 2px solid var(--pvv-border);
+}
+.pricing-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.pricing-plus {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--pvv-muted);
+}
+.pricing-label {
+  font-size: var(--pvv-size-sm);
+  color: var(--pvv-muted);
+  margin-bottom: 12px;
+}
+.pricing-display {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 4px;
+}
+.pricing-prefix {
+  font-size: var(--pvv-size-lg);
+  font-weight: 900;
+  color: var(--pvv-dark);
+  margin-top: 12px;
+}
+.pricing-number {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--pvv-orange);
+}
+.pricing-cents {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--pvv-orange);
+  margin-top: 16px;
+}
+.pricing-interval {
+  font-size: var(--pvv-size-sm);
+  color: var(--pvv-muted);
+  margin-bottom: 24px;
+}
+.pricing-interval strong { color: var(--pvv-dark); }
+
+/* ── Guarantee badge ── */
+.guarantee-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--pvv-bg);
+  border-radius: var(--pvv-radius-lg);
+  padding: 20px 28px;
+  border: 1px solid var(--pvv-border);
+  width: fit-content;
+}
+.guarantee-number {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--pvv-orange);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.guarantee-info {}
+.guarantee-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--pvv-muted);
+}
+.guarantee-title {
+  font-size: var(--pvv-size-md);
+  font-weight: 900;
+  color: var(--pvv-dark);
+  margin-bottom: 4px;
+}
+.guarantee-stars { color: #FBBF24; letter-spacing: 2px; font-size: var(--pvv-size-sm); }
+.guarantee-text { font-size: var(--pvv-size-xs); color: var(--pvv-muted); margin-top: 4px; }
+
+/* ── WhatsApp testimonial card ── */
+.whatsapp-card {
+  background: #E5DDD5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0 0h60v60H0z' fill='%23e5ddd5'/%3E%3C/svg%3E");
+  border-radius: var(--pvv-radius-lg);
+  padding: 16px;
+  max-width: 320px;
+  box-shadow: var(--pvv-shadow-md);
+}
+.wapp-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #075E54;
+  border-radius: 10px 10px 0 0;
+  margin: -16px -16px 12px;
+  padding: 10px 14px;
+}
+.wapp-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--pvv-orange);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #fff;
+}
+.wapp-name { font-size: var(--pvv-size-sm); font-weight: 700; color: #fff; }
+.wapp-status { font-size: 11px; color: rgba(255,255,255,.65); }
+.wapp-bubble {
+  background: #fff;
+  border-radius: 0 10px 10px 10px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  position: relative;
+  max-width: 90%;
+  box-shadow: 0 1px 2px rgba(0,0,0,.12);
+}
+.wapp-bubble::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -7px;
+  border: 6px solid transparent;
+  border-right-color: #fff;
+  border-top-color: #fff;
+}
+.wapp-bubble p { font-size: var(--pvv-size-xs); color: var(--pvv-dark); line-height: 1.5; }
+.wapp-time { font-size: 10px; color: var(--pvv-subtle); text-align: right; margin-top: 4px; }
+.wapp-bubble-sent {
+  background: #DCF8C6;
+  border-radius: 10px 0 10px 10px;
+  padding: 10px 14px;
+  margin-left: auto;
+  margin-bottom: 6px;
+  max-width: 90%;
+  box-shadow: 0 1px 2px rgba(0,0,0,.12);
+}
+.wapp-bubble-sent p { font-size: var(--pvv-size-xs); color: var(--pvv-dark); line-height: 1.5; }
+
+/* ── FAQ ── */
+.faq-wrap {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--pvv-border);
+}
+.faq-header {
+  padding: 28px 32px 0;
+}
+.faq-title {
+  font-size: var(--pvv-size-xl);
+  font-weight: 900;
+  color: var(--pvv-orange);
+  margin-bottom: 8px;
+}
+.faq-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--pvv-muted);
+  margin-bottom: 24px;
+}
+.faq-item {
+  padding: 20px 32px;
+  border-top: 1px solid var(--pvv-border);
+}
+.faq-q {
+  font-size: var(--pvv-size-sm);
+  font-weight: 700;
+  color: var(--pvv-dark);
+  margin-bottom: 6px;
+}
+.faq-a {
+  font-size: var(--pvv-size-sm);
+  color: var(--pvv-muted);
+  line-height: 1.6;
+}
+
+/* ── Bio / expert section ── */
+.bio-section {
+  background: var(--pvv-dark);
+  border-radius: var(--pvv-radius-xl);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.bio-photo {
+  width: 160px; height: 200px;
+  background: rgba(255,255,255,.08);
+  border-radius: var(--pvv-radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+}
+.bio-content h3 { font-size: var(--pvv-size-xl); font-weight: 900; color: #fff; margin-bottom: 4px; }
+.bio-content .bio-role { font-size: var(--pvv-size-sm); color: var(--pvv-orange); font-weight: 700; margin-bottom: 16px; }
+.bio-content p { font-size: var(--pvv-size-sm); color: rgba(255,255,255,.70); line-height: 1.7; }
+.bio-stat-row { display: flex; gap: 24px; margin-top: 20px; }
+.bio-stat .stat-num { font-size: var(--pvv-size-xl); font-weight: 900; color: var(--pvv-orange); }
+.bio-stat .stat-label { font-size: var(--pvv-size-xs); color: rgba(255,255,255,.5); }
+
+/* ── Result highlight bar ── */
+.result-bar {
+  background: var(--pvv-bg-alt);
+  border-radius: var(--pvv-radius-lg);
+  padding: 24px 32px;
+  text-align: center;
+  border: 1px dashed var(--pvv-border);
+}
+.result-bar p { font-size: var(--pvv-size-md); font-weight: 600; color: var(--pvv-text); line-height: 1.5; }
+.result-bar strong { font-weight: 900; color: var(--pvv-dark); }
+.result-bar .emphasis { color: var(--pvv-green); font-weight: 900; }
+
+/* =============================================
+   7. TOKENS CSS
+============================================= */
+.tokens-block {
+  background: #0D1117;
+  border-radius: var(--pvv-radius-xl);
+  padding: 40px;
+  overflow-x: auto;
+}
+.tokens-block pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #C9D1D9;
+  margin: 0;
+  white-space: pre;
+}
+.t-comment  { color: #6E7681; }
+.t-selector { color: #79C0FF; }
+.t-property { color: #FF7B72; }
+.t-value    { color: #A5D6FF; }
+.t-hex      { color: #7EE787; }
+.t-number   { color: #F2CC60; }
+.t-punct    { color: #C9D1D9; }
+
+/* ── Utility ── */
+.card-base {
+  background: var(--pvv-card);
+  border-radius: var(--pvv-radius-lg);
+  border: 1px solid var(--pvv-border);
+  padding: 28px;
+  box-shadow: var(--pvv-shadow-sm);
+}
+</style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- ══════════════════════════════════════════
+       CAPA
+  ══════════════════════════════════════════ -->
+  <div class="ds-cover">
+    <div class="ds-cover-tag">Design System · v1.0</div>
+    <h1>Protocolo<br><span>Venda Viral</span></h1>
+    <p>Sistema de design visual extraído da landing page do Protocolo Venda Viral. Tema: criação de conteúdo para redes sociais, viralização orgânica.</p>
+    <div class="ds-cover-meta">
+      <div class="ds-cover-meta-item">
+        <span class="label">Primária</span>
+        <span class="value" style="color:var(--pvv-orange)">#F05A00</span>
+      </div>
+      <div class="ds-cover-meta-item">
+        <span class="label">CTA</span>
+        <span class="value" style="color:var(--pvv-green)">#2DB34A</span>
+      </div>
+      <div class="ds-cover-meta-item">
+        <span class="label">Fonte</span>
+        <span class="value">Nunito</span>
+      </div>
+      <div class="ds-cover-meta-item">
+        <span class="label">Prefixo</span>
+        <span class="value">--pvv-*</span>
+      </div>
+      <div class="ds-cover-meta-item">
+        <span class="label">Componentes</span>
+        <span class="value">14</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       1. IDENTIDADE
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">1. Identidade &amp; Logo</div>
+    <div class="ds-divider"></div>
+
+    <div class="ds-grid-2" style="margin-bottom:16px">
+      <div>
+        <div class="ds-label">Fundo claro</div>
+        <div class="logo-box">
+          <div class="logo-icon"></div>
+          <div class="logo-wordmark">
+            <span class="logo-protocolo">Protocolo</span>
+            <span class="logo-name">
+              <span class="venda">Venda</span><span class="viral">Viral</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ds-label">Fundo escuro</div>
+        <div class="logo-dark-box">
+          <div class="logo-icon"></div>
+          <div class="logo-wordmark">
+            <span class="logo-protocolo">Protocolo</span>
+            <span class="logo-name">
+              <span class="venda">Venda</span><span class="viral">Viral</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-label" style="margin-top:24px">App parceiro — Sirius Lab</div>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="sirius-logo">
+        <div class="sirius-icon">
+          <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+          <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+          <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+        </div>
+        <span class="sirius-name">SIRIUS</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;background:var(--pvv-card);border:1px solid var(--pvv-border);border-radius:var(--pvv-radius-lg);padding:16px 24px;">
+        <div class="logo-icon"></div>
+        <div class="logo-wordmark">
+          <span class="logo-protocolo">Protocolo</span>
+          <span class="logo-name"><span class="venda">Venda</span><span class="viral">Viral</span></span>
+        </div>
+        <span style="font-size:22px;font-weight:900;color:var(--pvv-muted);padding:0 4px">+</span>
+        <div class="sirius-logo" style="border:none;padding:0;background:transparent">
+          <div class="sirius-icon">
+            <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+            <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+            <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+          </div>
+          <span class="sirius-name">SIRIUS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       2. CORES
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">2. Paleta de Cores</div>
+    <div class="ds-divider"></div>
+
+    <div class="ds-label">Cores primárias</div>
+    <div class="ds-grid-4" style="margin-bottom:20px">
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-orange)"></div>
+        <div class="color-info">
+          <div class="color-name">Orange</div>
+          <div class="color-hex">#F05A00</div>
+          <div class="color-role">Brand · Highlights · ANTES</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-orange-hover)"></div>
+        <div class="color-info">
+          <div class="color-name">Orange Hover</div>
+          <div class="color-hex">#CC4D00</div>
+          <div class="color-role">Estado ativo</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-orange-mid)"></div>
+        <div class="color-info">
+          <div class="color-name">Orange Mid</div>
+          <div class="color-hex">#FF7A2E</div>
+          <div class="color-role">Gradiente · decoração</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-orange-light)"></div>
+        <div class="color-info">
+          <div class="color-name">Orange Light</div>
+          <div class="color-hex">#FFF3EC</div>
+          <div class="color-role">Tint · ícone bg</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-label">CTA &amp; ação positiva</div>
+    <div class="ds-grid-4" style="margin-bottom:20px">
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-green)"></div>
+        <div class="color-info">
+          <div class="color-name">Green</div>
+          <div class="color-hex">#2DB34A</div>
+          <div class="color-role">CTA Button · DEPOIS</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-green-hover)"></div>
+        <div class="color-info">
+          <div class="color-name">Green Hover</div>
+          <div class="color-hex">#239E3F</div>
+          <div class="color-role">Estado ativo</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-green-light)"></div>
+        <div class="color-info">
+          <div class="color-name">Green Light</div>
+          <div class="color-hex">#EDFBF1</div>
+          <div class="color-role">Após tint · painéis positivos</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:#EF4444"></div>
+        <div class="color-info">
+          <div class="color-name">Negative</div>
+          <div class="color-hex">#EF4444</div>
+          <div class="color-role">Métricas ruins · queda</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-label">Neutros</div>
+    <div class="ds-grid-4">
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-dark)"></div>
+        <div class="color-info">
+          <div class="color-name">Dark</div>
+          <div class="color-hex">#1A1A1A</div>
+          <div class="color-role">Títulos · seções escuras</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-text)"></div>
+        <div class="color-info">
+          <div class="color-name">Text</div>
+          <div class="color-hex">#333333</div>
+          <div class="color-role">Corpo do texto</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-bg);border:1px solid var(--pvv-border)"></div>
+        <div class="color-info">
+          <div class="color-name">Background</div>
+          <div class="color-hex">#F5F6F8</div>
+          <div class="color-role">Página · seções claras</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-chip" style="background:var(--pvv-card);border:1px solid var(--pvv-border)"></div>
+        <div class="color-info">
+          <div class="color-name">Card</div>
+          <div class="color-hex">#FFFFFF</div>
+          <div class="color-role">Cards · containers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       3. TIPOGRAFIA
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">3. Tipografia — Nunito</div>
+    <div class="ds-divider"></div>
+
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">Hero · 56px · 900</div>
+      <div class="type-hero">O algoritmo <span class="highlight-orange">ama</span> entregar.</div>
+    </div>
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">H1 · 42px · 900</div>
+      <div class="type-h1">Você já <span class="highlight-orange">desistiu</span> de crescer o seu perfil.</div>
+    </div>
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">H2 · 32px · 800</div>
+      <div class="type-h2">Viralizar suas vendas não é sorte… É <span class="highlight-orange">ciência!</span></div>
+    </div>
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">H3 · 24px · 700</div>
+      <div class="type-h3">O que você vai receber ao se inscrever no <span class="highlight-orange">Protocolo Venda Viral</span></div>
+    </div>
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">Lead · 18px · 500</div>
+      <div class="type-lead">Você vai receber tudo mastigado para produzir os conteúdos, gravar, editar, e vender no seu perfil.</div>
+    </div>
+    <div class="type-specimen" style="margin-bottom:12px">
+      <div class="ds-label">Body · 16px · 400</div>
+      <div class="type-body">Postava todos os dias, ninguém engajava, dependia sempre de tráfego pago, e me sentia frustrado com o meu perfil, a ponto de cogitar criar um perfil novo, abandonar meus 300 mil seguidores e começar tudo do zero.</div>
+    </div>
+    <div class="ds-grid-2">
+      <div class="type-specimen">
+        <div class="ds-label">Small · 14px · 400</div>
+        <div class="type-small">Profissionais que tiveram acesso a este protocolo, também viralizaram os seus conteúdos e as suas vendas.</div>
+      </div>
+      <div class="type-specimen">
+        <div class="ds-label">Caption · 12px · 500</div>
+        <div class="type-caption">Resultados individuais podem variar · Baseado em casos reais</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       4. ESPAÇAMENTO
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">4. Escala de Espaçamento</div>
+    <div class="ds-divider"></div>
+    <div class="space-demo">
+      <div class="space-block"><div class="space-bar" style="height:4px"></div><div class="space-token">--pvv-space-1</div><div class="space-px">4px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:8px"></div><div class="space-token">--pvv-space-2</div><div class="space-px">8px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:12px"></div><div class="space-token">--pvv-space-3</div><div class="space-px">12px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:16px"></div><div class="space-token">--pvv-space-4</div><div class="space-px">16px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:20px"></div><div class="space-token">--pvv-space-5</div><div class="space-px">20px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:24px"></div><div class="space-token">--pvv-space-6</div><div class="space-px">24px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:32px"></div><div class="space-token">--pvv-space-8</div><div class="space-px">32px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:40px"></div><div class="space-token">--pvv-space-10</div><div class="space-px">40px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:48px"></div><div class="space-token">--pvv-space-12</div><div class="space-px">48px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:64px"></div><div class="space-token">--pvv-space-16</div><div class="space-px">64px</div></div>
+      <div class="space-block"><div class="space-bar" style="height:80px"></div><div class="space-token">--pvv-space-20</div><div class="space-px">80px</div></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       5. RADIUS & SOMBRAS
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">5. Border Radius &amp; Sombras</div>
+    <div class="ds-divider"></div>
+
+    <div class="radius-row" style="margin-bottom:20px">
+      <div class="radius-block"><div class="radius-shape" style="border-radius:var(--pvv-radius-sm)"></div><div class="radius-label">--pvv-radius-sm<br>6px</div></div>
+      <div class="radius-block"><div class="radius-shape" style="border-radius:var(--pvv-radius-md)"></div><div class="radius-label">--pvv-radius-md<br>12px</div></div>
+      <div class="radius-block"><div class="radius-shape" style="border-radius:var(--pvv-radius-lg)"></div><div class="radius-label">--pvv-radius-lg<br>16px</div></div>
+      <div class="radius-block"><div class="radius-shape" style="border-radius:var(--pvv-radius-xl)"></div><div class="radius-label">--pvv-radius-xl<br>24px</div></div>
+      <div class="radius-block"><div class="radius-shape" style="border-radius:var(--pvv-radius-pill)"></div><div class="radius-label">--pvv-radius-pill<br>100px</div></div>
+    </div>
+
+    <div class="shadow-row">
+      <div class="shadow-card" style="box-shadow:var(--pvv-shadow-sm)"><div class="shadow-name">sm</div><div class="shadow-token">--pvv-shadow-sm</div></div>
+      <div class="shadow-card" style="box-shadow:var(--pvv-shadow-md)"><div class="shadow-name">md</div><div class="shadow-token">--pvv-shadow-md</div></div>
+      <div class="shadow-card" style="box-shadow:var(--pvv-shadow-lg)"><div class="shadow-name">lg</div><div class="shadow-token">--pvv-shadow-lg</div></div>
+      <div class="shadow-card" style="box-shadow:var(--pvv-shadow-orange)"><div class="shadow-name" style="color:var(--pvv-orange)">orange</div><div class="shadow-token">--pvv-shadow-orange</div></div>
+      <div class="shadow-card" style="box-shadow:var(--pvv-shadow-green)"><div class="shadow-name" style="color:var(--pvv-green)">green</div><div class="shadow-token">--pvv-shadow-green</div></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       6. COMPONENTES
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">6. Biblioteca de Componentes</div>
+    <div class="ds-divider"></div>
+
+
+    <!-- 6.1 Botões -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:20px">6.1 Botões</div>
+      <div class="ds-flex" style="margin-bottom:16px">
+        <div>
+          <div class="ds-label">CTA primário (verde)</div>
+          <button class="btn btn-cta btn-lg">Clique Aqui Para Fazer Sua Inscrição</button>
+        </div>
+        <div>
+          <div class="ds-label">Ação secundária (laranja)</div>
+          <button class="btn btn-orange btn-lg">Quero Acesso Agora</button>
+        </div>
+      </div>
+      <div class="ds-flex">
+        <div>
+          <div class="ds-label">Outline escuro</div>
+          <button class="btn btn-outline-dark">Saiba Mais</button>
+        </div>
+        <div>
+          <div class="ds-label">Ghost laranja</div>
+          <button class="btn btn-ghost-orange">Ver Detalhes</button>
+        </div>
+        <div>
+          <div class="ds-label">CTA pequeno</div>
+          <button class="btn btn-cta btn-sm">Inscrever-se</button>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px 16px;background:var(--pvv-bg);border-radius:var(--pvv-radius-md);font-size:12px;font-family:monospace;color:var(--pvv-muted)">
+        Nota: Botão CTA sempre em maiúsculas · weight 800 · border-radius: 12px · sombra colorida
+      </div>
+    </div>
+
+
+    <!-- 6.2 Pills & Badges -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:20px">6.2 Pills &amp; Badges</div>
+      <div class="ds-flex">
+        <div><div class="ds-label">Bônus</div><span class="pill pill-bonus">BÔNUS</span></div>
+        <div><div class="ds-label">Antes</div><span class="pill pill-antes">ANTES</span></div>
+        <div><div class="ds-label">Depois</div><span class="pill pill-depois">DEPOIS</span></div>
+        <div><div class="ds-label">Laranja</div><span class="pill pill-orange">Protocolo</span></div>
+        <div><div class="ds-label">Verde</div><span class="pill pill-green">Viral</span></div>
+        <div><div class="ds-label">Escuro</div><span class="pill pill-dark">Método</span></div>
+        <div><div class="ds-label">Outline</div><span class="pill pill-outline">Em breve</span></div>
+        <div><div class="ds-label">Claro</div><span class="pill pill-light">Conteúdo</span></div>
+      </div>
+    </div>
+
+
+    <!-- 6.3 Métricas flutuantes -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:20px">6.3 Métricas Flutuantes</div>
+      <div class="ds-flex">
+        <div class="metric-card">
+          <div class="metric-icon">📈</div>
+          <div class="metric-info">
+            <span class="metric-label">Visualizações — 30 dias</span>
+            <span class="metric-value">1.8m <span class="up">+39%</span></span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">💰</div>
+          <div class="metric-info">
+            <span class="metric-label">Vendas — últimos 30 dias</span>
+            <span class="metric-value">R$46.228 ↗</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">📉</div>
+          <div class="metric-info">
+            <span class="metric-label">Visualizações — 30 dias</span>
+            <span class="metric-value">2.344 <span class="down">-18%</span></span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">💸</div>
+          <div class="metric-info">
+            <span class="metric-label">Vendas — últimos 30 dias</span>
+            <span class="metric-value" style="color:#EF4444">R$14,37 ↘</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;font-family:monospace;color:var(--pvv-muted)">
+        Uso: cards flutuantes sobrepostos sobre imagens ou seções de fundo laranja/escuro. Positivo ↗ = verde, negativo ↘ = vermelho.
+      </div>
+    </div>
+
+
+    <!-- 6.4 Pain section card -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.4 Pain Section Card (fundo laranja)</div>
+      <div class="pain-card" style="max-width:500px">
+        <h2>Você já <span>desistiu</span> de crescer o seu perfil.</h2>
+        <p>Você quer crescer, quer produzir conteúdo, mas acha que a única forma disso acontecer é fazendo dancinha, fazendo meme. O que pode até viralizar, mas não traz as vendas que você espera no seu perfil.</p>
+        <p style="margin-top:12px">E com isso, se sente <strong>frustrado como profissional</strong>, porque vê pessoas com menos tempo de profissão, crescendo mais rápido do que você.</p>
+      </div>
+    </div>
+
+
+    <!-- 6.5 Insight card -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.5 Insight Card (destaque central branco)</div>
+      <div class="insight-card">
+        <h2>É isso que está <span class="highlight-orange">travando o seu crescimento,</span> e você nem percebe</h2>
+        <p>Você produz um conteúdo técnico, profissional, bem editado, mas ninguém assiste. E aí você até posta, mas oculta as visualizações, oculta as curtidas, apaga os conteúdos que floparam.</p>
+      </div>
+    </div>
+
+
+    <!-- 6.6 Feature grid 4-col -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:20px">6.6 Feature Grid 4 Colunas (conteúdo com legendas)</div>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-img" style="background:linear-gradient(135deg,#FFD6B8,#F05A00)">🎬</div>
+          <div class="feature-caption">O tipo certo de conteúdo que viraliza para profissionais</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-img" style="background:linear-gradient(135deg,#B8FFD6,#2DB34A)">📱</div>
+          <div class="feature-caption">Como Viralizar as vendas, sem depender de tráfego pago</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-img" style="background:linear-gradient(135deg,#B8D6FF,#3B82F6)">👥</div>
+          <div class="feature-caption">Como atrair os seguidores certos</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-img" style="background:linear-gradient(135deg,#E8B8FF,#8B5CF6)">🤖</div>
+          <div class="feature-caption">E como prever se o algoritmo vai gostar deste conteúdo ou não.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.7 Result bar -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.7 Barra de Resultado</div>
+      <div class="result-bar">
+        <p>O resultado? <span class="emphasis">Eu cresci em 1 ano, o que levei mais de 6 para conseguir.</span> E o melhor, com muito mais dinheiro no bolso e menos esforço na hora de gravar.</p>
+      </div>
+    </div>
+
+
+    <!-- 6.8 Audience pills -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:16px">6.8 Público-Alvo Pills</div>
+      <div class="audience-grid">
+        <div class="audience-pill"><div class="icon">🧑‍💼</div>Empreendedores</div>
+        <div class="audience-pill"><div class="icon">⚖️</div>Profissionais Liberais</div>
+        <div class="audience-pill"><div class="icon">🏪</div>Donos de Lojas</div>
+        <div class="audience-pill"><div class="icon">🏷️</div>Donos de marca</div>
+        <div class="audience-pill"><div class="icon">🎓</div>Mentores</div>
+        <div class="audience-pill"><div class="icon">💻</div>Pra quem vende curso online</div>
+        <div class="audience-pill"><div class="icon">🔧</div>Prestadores de Serviço</div>
+        <div class="audience-pill"><div class="icon">🌐</div>E pra todo mundo que quer viralizar</div>
+      </div>
+    </div>
+
+
+    <!-- 6.9 Benefits checklist -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:16px">6.9 Checklist de Benefícios</div>
+      <ul class="benefit-list">
+        <li class="benefit-item">
+          <div class="benefit-icon">🎯</div>
+          Vai entender como fazer parte dos 1% dos criadores de conteúdo que mais crescem no insta;
+        </li>
+        <li class="benefit-item">
+          <div class="benefit-icon">📲</div>
+          Vai saber o jeito certo de produzir um conteúdo que viraliza as suas vendas;
+        </li>
+        <li class="benefit-item">
+          <div class="benefit-icon">🎬</div>
+          Vai aprender a roteirizar, gravar e editar os 7 tipos de conteúdo que o algoritmo ama viralizar;
+        </li>
+        <li class="benefit-item">
+          <div class="benefit-icon">✨</div>
+          Vai aprender o jeito certo de testar um conteúdo viral;
+        </li>
+        <li class="benefit-item">
+          <div class="benefit-icon">📱</div>
+          E vai ter acesso ao primeiro app do mundo 100% focado em produzir roteiros que viralizam as suas vendas.
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- 6.10 Antes/Depois card -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.10 Card Antes / Depois</div>
+      <div class="ds-grid-2">
+        <div class="antes-depois-card">
+          <div class="ad-header">
+            <div class="ad-half antes">Antes</div>
+            <div class="ad-arrow">→</div>
+            <div class="ad-half depois">Depois</div>
+          </div>
+          <div class="ad-body">
+            <div class="ad-pane">
+              <div class="ad-stat">Seguidores</div>
+              <div class="ad-value negative">1.508</div>
+              <div class="ad-delta down">▼ estagnado</div>
+            </div>
+            <div class="ad-pane depois-pane">
+              <div class="ad-stat">Seguidores</div>
+              <div class="ad-value positive">273 mil</div>
+              <div class="ad-delta up">▲ +18.000%</div>
+            </div>
+          </div>
+        </div>
+        <div class="antes-depois-card">
+          <div class="ad-header">
+            <div class="ad-half antes">Antes</div>
+            <div class="ad-arrow">→</div>
+            <div class="ad-half depois">Depois</div>
+          </div>
+          <div class="ad-body">
+            <div class="ad-pane">
+              <div class="ad-stat">Visualizações/mês</div>
+              <div class="ad-value negative">2.344</div>
+              <div class="ad-delta down">▼ -18%</div>
+            </div>
+            <div class="ad-pane depois-pane">
+              <div class="ad-stat">Visualizações/mês</div>
+              <div class="ad-value positive">1.8m</div>
+              <div class="ad-delta up">▲ +39%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.11 BÔNUS card -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.11 Card BÔNUS</div>
+      <div class="bonus-card">
+        <div class="bonus-badge-wrap">
+          <span class="pill pill-bonus">BÔNUS</span>
+        </div>
+        <div class="bonus-body">
+          <div class="bonus-img-col">
+            <div class="bonus-img-placeholder">💻</div>
+          </div>
+          <div class="bonus-content">
+            <h3><span>O primeiro app do mundo</span> 100% em viralizar as suas vendas</h3>
+            <p>Ao se inscrever no Protocolo Venda Viral, você vai ter acesso a <strong>Sirius Lab</strong>, um app que você pode usar tanto no celular quanto no seu computador, que vai te entregar todos os roteiros, te ajudar a usar referências para viralizar seus conteúdos, produzir roteiros que comunicam diretamente com o seu potencial cliente.</p>
+            <p>Calendário Editorial para organizar os conteúdos da semana, e ainda vai receber o conteúdo do dia sempre no seu Whatsapp</p>
+            <div class="note">Agora não tem mais desculpa na hora de gravar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.12 Pricing card -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.12 Card de Precificação</div>
+      <div class="pricing-card" style="max-width:500px;margin:0 auto">
+        <div class="pricing-logos">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="logo-icon"></div>
+            <div class="logo-wordmark">
+              <span class="logo-protocolo">Protocolo</span>
+              <span class="logo-name"><span class="venda">Venda</span><span class="viral">Viral</span></span>
+            </div>
+          </div>
+          <span class="pricing-plus">+</span>
+          <div class="sirius-logo" style="border:none;padding:0;background:transparent">
+            <div class="sirius-icon">
+              <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+              <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+              <div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div><div class="sirius-dot"></div>
+            </div>
+            <span class="sirius-name">SIRIUS</span>
+          </div>
+        </div>
+        <div class="pricing-label">Por apenas 12x de</div>
+        <div class="pricing-display">
+          <span class="pricing-prefix">R$</span>
+          <span class="pricing-number">31</span>
+          <span class="pricing-cents">,44</span>
+        </div>
+        <div class="pricing-interval">ou <strong>R$297 / ano</strong></div>
+        <button class="btn btn-cta btn-lg" style="width:100%">Clique Aqui Para Fazer Sua Inscrição</button>
+      </div>
+    </div>
+
+
+    <!-- 6.13 Guarantee badge -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.13 Badge de Garantia</div>
+      <div class="guarantee-wrap">
+        <div class="guarantee-number">7</div>
+        <div class="guarantee-info">
+          <div class="guarantee-label">Dias de</div>
+          <div class="guarantee-title">Garantia</div>
+          <div class="guarantee-stars">★★★★★</div>
+          <div class="guarantee-text">Se não gostar, devolvemos 100% do seu dinheiro</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.14 WhatsApp testimonial -->
+    <div class="card-base" style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:20px">6.14 WhatsApp Testimonial Mockup</div>
+      <div class="ds-grid-2">
+        <div>
+          <div class="whatsapp-card">
+            <div class="wapp-header">
+              <div class="wapp-avatar">M</div>
+              <div>
+                <div class="wapp-name">Mastermind ORION</div>
+                <div class="wapp-status">9 online</div>
+              </div>
+            </div>
+            <div class="wapp-bubble">
+              <p>Hey meu mentor! Não sei se foi por causa de produção de conteúdo, mas fechei uma Publi de 10k essa semana e recebi proposta de outro banco pra fazer!</p>
+              <div class="wapp-time">10:45</div>
+            </div>
+            <div class="wapp-bubble">
+              <p>Turma, eu nunca imaginei produzir essa quantidade de conteúdo em tão pouco tempo 😍</p>
+              <div class="wapp-time">12:48</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="whatsapp-card">
+            <div class="wapp-header">
+              <div class="wapp-avatar">H</div>
+              <div>
+                <div class="wapp-name">Heloíse N.</div>
+                <div class="wapp-status">online</div>
+              </div>
+            </div>
+            <div class="wapp-bubble">
+              <p>Já podem me considerar como uma blogueira oficial 🎉</p>
+              <div class="wapp-time">20:06</div>
+            </div>
+            <div class="wapp-bubble-sent">
+              <p>ahhhhhhh, que tudoooo. talvez a gente larga essa vida do bastidor e vá viver de blogueiragem 😂</p>
+              <div class="wapp-time">20:17 ✓✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.15 FAQ -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.15 FAQ</div>
+      <div class="faq-wrap">
+        <div class="faq-header">
+          <div class="faq-label">FAQ</div>
+          <div class="faq-title">Perguntas frequentes</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Serve para todos os nichos?</div>
+          <div class="faq-a">Sim! O Protocolo Venda Viral serve para todos os nichos.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Precisa investir em tráfego pago?</div>
+          <div class="faq-a">Todas as estratégias do Protocolo Venda Viral não dependem de tráfego pago para funcionar.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Funciona se eu tiver poucos seguidores?</div>
+          <div class="faq-a">Sim, o protocolo foi desenvolvido justamente para quem quer sair do zero e crescer de forma orgânica sem depender de uma base grande.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6.16 Bio section -->
+    <div style="margin-bottom:20px">
+      <div class="ds-label" style="margin-bottom:12px">6.16 Seção Bio (fundo escuro)</div>
+      <div class="bio-section">
+        <div class="bio-photo">🧑</div>
+        <div class="bio-content">
+          <h3>Criador do Protocolo</h3>
+          <div class="bio-role">Especialista em Conteúdo Viral &amp; Vendas Orgânicas</div>
+          <p>Passei 6 anos produzindo conteúdo do jeito errado. Postava todos os dias, ninguém engajava, dependia sempre de tráfego pago, e me sentia frustrado com o meu perfil, a ponto de cogitar criar um perfil novo, abandonar meus 300 mil seguidores e começar tudo do zero.</p>
+          <p style="margin-top:10px">Mas foi aí que eu descobri o que faltava nos meus conteúdos.</p>
+          <div class="bio-stat-row">
+            <div class="bio-stat"><div class="stat-num">300k</div><div class="stat-label">Seguidores</div></div>
+            <div class="bio-stat"><div class="stat-num">119</div><div class="stat-label">Posts em 30 dias</div></div>
+            <div class="bio-stat"><div class="stat-num">1 ano</div><div class="stat-label">Crescimento 6x acelerado</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fim componentes -->
+
+
+  <!-- ══════════════════════════════════════════
+       7. CSS TOKENS
+  ══════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-heading">7. CSS Custom Properties</div>
+    <div class="ds-divider"></div>
+    <div class="tokens-block">
+<pre>
+<span class="t-comment">/* ===================================================
+   PROTOCOLO VENDA VIRAL — CSS Design Tokens
+   Prefixo: --pvv-*
+   Fonte: Nunito (Google Fonts)
+   Página: protocolovendaviral.br
+=================================================== */</span>
+
+<span class="t-selector">:root</span> <span class="t-punct">{</span>
+
+  <span class="t-comment">/* ── Cores de marca ── */</span>
+  <span class="t-property">--pvv-orange</span><span class="t-punct">:</span>        <span class="t-hex">#F05A00</span><span class="t-punct">;</span>  <span class="t-comment">/* brand, highlights, ANTES badge */</span>
+  <span class="t-property">--pvv-orange-hover</span><span class="t-punct">:</span>  <span class="t-hex">#CC4D00</span><span class="t-punct">;</span>  <span class="t-comment">/* hover / active state */</span>
+  <span class="t-property">--pvv-orange-mid</span><span class="t-punct">:</span>    <span class="t-hex">#FF7A2E</span><span class="t-punct">;</span>  <span class="t-comment">/* gradiente decorativo */</span>
+  <span class="t-property">--pvv-orange-light</span><span class="t-punct">:</span>  <span class="t-hex">#FFF3EC</span><span class="t-punct">;</span>  <span class="t-comment">/* tint, icon backgrounds */</span>
+
+  <span class="t-comment">/* ── CTA verde ── */</span>
+  <span class="t-property">--pvv-green</span><span class="t-punct">:</span>         <span class="t-hex">#2DB34A</span><span class="t-punct">;</span>  <span class="t-comment">/* CTA button, DEPOIS badge */</span>
+  <span class="t-property">--pvv-green-hover</span><span class="t-punct">:</span>   <span class="t-hex">#239E3F</span><span class="t-punct">;</span>  <span class="t-comment">/* hover state */</span>
+  <span class="t-property">--pvv-green-light</span><span class="t-punct">:</span>   <span class="t-hex">#EDFBF1</span><span class="t-punct">;</span>  <span class="t-comment">/* após tint, positive panes */</span>
+
+  <span class="t-comment">/* ── Antes / Depois ── */</span>
+  <span class="t-property">--pvv-antes</span><span class="t-punct">:</span>         <span class="t-hex">#F05A00</span><span class="t-punct">;</span>  <span class="t-comment">/* before state badge */</span>
+  <span class="t-property">--pvv-depois</span><span class="t-punct">:</span>        <span class="t-hex">#2DB34A</span><span class="t-punct">;</span>  <span class="t-comment">/* after/result badge */</span>
+  <span class="t-property">--pvv-negative</span><span class="t-punct">:</span>     <span class="t-hex">#EF4444</span><span class="t-punct">;</span>  <span class="t-comment">/* bad metrics, down arrows */</span>
+
+  <span class="t-comment">/* ── Neutros ── */</span>
+  <span class="t-property">--pvv-dark</span><span class="t-punct">:</span>          <span class="t-hex">#1A1A1A</span><span class="t-punct">;</span>  <span class="t-comment">/* headings, dark sections */</span>
+  <span class="t-property">--pvv-text</span><span class="t-punct">:</span>          <span class="t-hex">#333333</span><span class="t-punct">;</span>  <span class="t-comment">/* body copy */</span>
+  <span class="t-property">--pvv-muted</span><span class="t-punct">:</span>         <span class="t-hex">#666666</span><span class="t-punct">;</span>  <span class="t-comment">/* captions, labels */</span>
+  <span class="t-property">--pvv-subtle</span><span class="t-punct">:</span>        <span class="t-hex">#999999</span><span class="t-punct">;</span>  <span class="t-comment">/* placeholders, meta */</span>
+  <span class="t-property">--pvv-bg</span><span class="t-punct">:</span>            <span class="t-hex">#F5F6F8</span><span class="t-punct">;</span>  <span class="t-comment">/* page background */</span>
+  <span class="t-property">--pvv-bg-alt</span><span class="t-punct">:</span>        <span class="t-hex">#EEF0F3</span><span class="t-punct">;</span>  <span class="t-comment">/* alternating sections */</span>
+  <span class="t-property">--pvv-card</span><span class="t-punct">:</span>          <span class="t-hex">#FFFFFF</span><span class="t-punct">;</span>  <span class="t-comment">/* card, container bg */</span>
+  <span class="t-property">--pvv-border</span><span class="t-punct">:</span>        <span class="t-hex">#E5E7EB</span><span class="t-punct">;</span>  <span class="t-comment">/* dividers, card borders */</span>
+  <span class="t-property">--pvv-border-light</span><span class="t-punct">:</span>  <span class="t-hex">#F0F0F0</span><span class="t-punct">;</span>  <span class="t-comment">/* subtle separators */</span>
+
+  <span class="t-comment">/* ── Tipografia ── */</span>
+  <span class="t-property">--pvv-font</span><span class="t-punct">:</span>          <span class="t-value">'Nunito', sans-serif</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-xs</span><span class="t-punct">:</span>       <span class="t-number">12px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-sm</span><span class="t-punct">:</span>       <span class="t-number">14px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-base</span><span class="t-punct">:</span>     <span class="t-number">16px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-md</span><span class="t-punct">:</span>       <span class="t-number">18px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-lg</span><span class="t-punct">:</span>       <span class="t-number">22px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-xl</span><span class="t-punct">:</span>       <span class="t-number">28px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-2xl</span><span class="t-punct">:</span>      <span class="t-number">36px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-3xl</span><span class="t-punct">:</span>      <span class="t-number">48px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-size-hero</span><span class="t-punct">:</span>     <span class="t-number">64px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* ── Espaçamento ── */</span>
+  <span class="t-property">--pvv-space-1</span><span class="t-punct">:</span>       <span class="t-number">4px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-2</span><span class="t-punct">:</span>       <span class="t-number">8px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-3</span><span class="t-punct">:</span>       <span class="t-number">12px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-4</span><span class="t-punct">:</span>       <span class="t-number">16px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-5</span><span class="t-punct">:</span>       <span class="t-number">20px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-6</span><span class="t-punct">:</span>       <span class="t-number">24px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-8</span><span class="t-punct">:</span>       <span class="t-number">32px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-10</span><span class="t-punct">:</span>      <span class="t-number">40px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-12</span><span class="t-punct">:</span>      <span class="t-number">48px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-16</span><span class="t-punct">:</span>      <span class="t-number">64px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-space-20</span><span class="t-punct">:</span>      <span class="t-number">80px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* ── Border radius ── */</span>
+  <span class="t-property">--pvv-radius-sm</span><span class="t-punct">:</span>     <span class="t-number">6px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-radius-md</span><span class="t-punct">:</span>     <span class="t-number">12px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-radius-lg</span><span class="t-punct">:</span>     <span class="t-number">16px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-radius-xl</span><span class="t-punct">:</span>     <span class="t-number">24px</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-radius-pill</span><span class="t-punct">:</span>   <span class="t-number">100px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* ── Sombras ── */</span>
+  <span class="t-property">--pvv-shadow-sm</span><span class="t-punct">:</span>     <span class="t-value">0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06)</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-shadow-md</span><span class="t-punct">:</span>     <span class="t-value">0 4px 12px rgba(0,0,0,.10)</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-shadow-lg</span><span class="t-punct">:</span>     <span class="t-value">0 8px 32px rgba(0,0,0,.12)</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-shadow-orange</span><span class="t-punct">:</span> <span class="t-value">0 4px 20px rgba(240,90,0,.30)</span><span class="t-punct">;</span>
+  <span class="t-property">--pvv-shadow-green</span><span class="t-punct">:</span>  <span class="t-value">0 4px 20px rgba(45,179,74,.30)</span><span class="t-punct">;</span>
+<span class="t-punct">}</span>
+</pre>
+    </div>
+  </div>
+
+</div><!-- fim ds-page -->
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Venda Todo Santo Dia (VTSD)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F0F0F0; color: #1A1A1A; font-size: 16px; line-height: 1.6; }
+
+  /* ─── DS CHROME ─────────────────────────────────────── */
+  .ds-page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  .ds-cover {
+    background: #fff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border: 1px solid #E8E8E8;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #18B86A 0%, #0F9554 100%);
+  }
+  .ds-cover::after {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(24,184,106,.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ds-cover-logo { font-size: 13px; font-weight: 600; color: #888; letter-spacing: .04em; margin-bottom: 12px; display: block; }
+  .ds-cover-logo span { color: #18B86A; }
+  .ds-cover h1 { font-size: 30px; font-weight: 800; color: #1A1A1A; line-height: 1.2; }
+  .ds-cover p { font-size: 14px; color: #666; margin-top: 8px; max-width: 520px; }
+  .ds-cover .badge { background: rgba(24,184,106,.1); border: 1px solid rgba(24,184,106,.25); border-radius: 999px; padding: 5px 14px; font-size: 11px; color: #18B86A; font-weight: 700; white-space: nowrap; }
+
+  .ds-section { margin-bottom: 72px; }
+  .ds-section-title { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #AAA; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .ds-section-title::after { content: ''; flex: 1; height: 1px; background: #E0E0E0; }
+
+  .ds-grid { display: grid; gap: 16px; }
+  .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .ds-grid-6 { grid-template-columns: repeat(6, 1fr); }
+  @media (max-width: 720px) {
+    .ds-grid-3,.ds-grid-4,.ds-grid-5,.ds-grid-6 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SWATCHES ─────────────────────────────────────── */
+  .swatch { border-radius: 10px; overflow: hidden; border: 1px solid #E8E8E8; }
+  .swatch-color { height: 72px; }
+  .swatch-meta { background: #fff; padding: 10px 12px; }
+  .swatch-name { font-size: 12px; font-weight: 700; color: #1A1A1A; }
+  .swatch-hex  { font-size: 11px; color: #888; font-family: monospace; margin-top: 2px; }
+  .swatch-var  { font-size: 10px; color: #CCC; font-family: monospace; margin-top: 2px; }
+
+  /* ─── TYPE ROWS ────────────────────────────────────── */
+  .type-row { background: #fff; border: 1px solid #E8E8E8; border-radius: 10px; padding: 20px 24px; display: flex; align-items: baseline; gap: 24px; }
+  .type-meta { width: 148px; flex-shrink: 0; }
+  .type-meta .label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #AAA; }
+  .type-meta .spec  { font-size: 10px; color: #DDD; margin-top: 3px; font-family: monospace; }
+  .type-sample { flex: 1; }
+
+  /* ─── SPACING ──────────────────────────────────────── */
+  .spacing-row { background: #fff; border: 1px solid #E8E8E8; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; }
+  .spacing-bar  { background: #18B86A; border-radius: 3px; height: 14px; flex-shrink: 0; }
+  .spacing-label { font-size: 13px; font-weight: 700; color: #1A1A1A; width: 48px; }
+  .spacing-var  { font-size: 10px; color: #CCC; font-family: monospace; }
+
+  /* ─── RADIUS ───────────────────────────────────────── */
+  .radius-card { background: #fff; border: 1px solid #E8E8E8; border-radius: 10px; padding: 20px; text-align: center; }
+  .radius-box { width: 60px; height: 60px; background: rgba(24,184,106,.08); border: 2px solid #18B86A; margin: 0 auto 12px; }
+  .radius-label { font-size: 11px; font-weight: 700; color: #1A1A1A; text-transform: uppercase; letter-spacing: .04em; }
+  .radius-val   { font-size: 10px; color: #888; margin-top: 3px; font-family: monospace; }
+
+  /* ─── TOKENS ───────────────────────────────────────── */
+  .tokens-block { background: #0D1117; border-radius: 12px; padding: 28px 32px; overflow-x: auto; }
+  .tokens-block pre { font-family: 'JetBrains Mono','Fira Code',monospace; font-size: 13px; line-height: 1.9; color: #CCC; white-space: pre; }
+  .t-comment { color: #3A3A3A; }
+  .t-prop    { color: #79C0FF; }
+  .t-val     { color: #A5F3B0; }
+  .t-punct   { color: #555; }
+
+  /* ─── COMP WRAPPER ─────────────────────────────────── */
+  .comp-wrap { background: #fff; border: 1px solid #E8E8E8; border-radius: 14px; padding: 28px; }
+  .comp-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #CCC; margin-bottom: 20px; }
+  .comp-note  { font-size: 11px; color: #CCC; font-family: monospace; margin-top: 14px; border-top: 1px solid #F0F0F0; padding-top: 12px; line-height: 1.7; }
+
+  /* ─── LOGO ─────────────────────────────────────────── */
+  .logo-wrap { text-align: center; }
+  .logo-method { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #888; margin-bottom: 2px; }
+  .logo-name { font-size: 22px; font-weight: 800; line-height: 1.1; color: #1A1A1A; }
+  .logo-name .teal { color: #18B86A; }
+
+  /* ─── BUTTONS ──────────────────────────────────────── */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: pointer; border: none; transition: all .2s; text-decoration: none; border-radius: 999px; }
+  .btn-cta { background: #18B86A; color: #fff; font-size: 15px; padding: 15px 24px; }
+  .btn-cta:hover { background: #0F9554; }
+  .btn-cta .arrow-circle { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .btn-cta-sm { font-size: 13px; padding: 11px 20px; background: #18B86A; color: #fff; border-radius: 999px; font-weight: 700; }
+  .btn-outline { background: transparent; color: #1A1A1A; border: 1.5px solid #D0D0D0; font-size: 14px; padding: 12px 24px; border-radius: 999px; font-weight: 600; }
+  .btn-outline:hover { border-color: #18B86A; color: #18B86A; }
+  .btn-outline .arrow { color: #888; }
+
+  /* ─── SAFETY META ──────────────────────────────────── */
+  .safety-meta { display: flex; gap: 16px; align-items: center; justify-content: center; margin-top: 10px; }
+  .safety-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #888; }
+
+  /* ─── DIAMOND BULLETS ──────────────────────────────── */
+  .diamond-list { display: flex; flex-direction: column; gap: 10px; }
+  .diamond-item { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #333; }
+  .diamond { color: #18B86A; font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+
+  /* ─── FEATURE CARDS ────────────────────────────────── */
+  .feature-card { background: #fff; border: 1px solid #E8E8E8; border-radius: 12px; padding: 20px; }
+  .feature-icon-wrap { width: 44px; height: 44px; border-radius: 10px; background: rgba(24,184,106,.12); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 12px; }
+  .feature-title { font-size: 14px; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; }
+  .feature-desc  { font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* ─── AGENT CHIP ───────────────────────────────────── */
+  .agent-chip { display: inline-flex; align-items: center; gap: 7px; background: #fff; border: 1px solid #E8E8E8; border-radius: 8px; padding: 7px 12px; font-size: 12px; font-weight: 600; color: #1A1A1A; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+  .agent-chip-icon { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  /* ─── PHASE CHIP ───────────────────────────────────── */
+  .phase-chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 700; }
+
+  /* ─── PHASE CARD ───────────────────────────────────── */
+  .phase-card { background: #fff; border: 1px solid #E8E8E8; border-radius: 10px; padding: 18px; }
+  .phase-card-num { font-size: 11px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .phase-card-title { font-size: 14px; font-weight: 700; color: #1A1A1A; margin-bottom: 8px; }
+  .phase-card-meta { font-size: 12px; color: #888; }
+  .phase-card-meta strong { color: #555; }
+
+  /* ─── TESTIMONIAL AVATAR ───────────────────────────── */
+  .testi-avatar { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .testi-photo { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .testi-label { text-align: center; }
+  .testi-name   { font-size: 11px; font-weight: 700; color: #1A1A1A; }
+  .testi-handle { font-size: 10px; color: #888; }
+
+  /* ─── VIDEO TESTIMONIAL ────────────────────────────── */
+  .video-testi { background: #1A1A1A; border-radius: 12px; overflow: hidden; }
+  .video-thumb { height: 140px; background: #2A2A2A; display: flex; align-items: center; justify-content: center; position: relative; }
+  .play-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.9); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .video-meta { padding: 14px; }
+  .video-name  { font-size: 12px; font-weight: 600; color: #CCC; margin-bottom: 4px; }
+  .video-desc  { font-size: 12px; color: #18B86A; font-weight: 700; line-height: 1.4; }
+
+  /* ─── COMPARISON ───────────────────────────────────── */
+  .comp-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; }
+  .comp-card { border-radius: 12px; padding: 20px; border: 1px solid; }
+  .comp-card.good { background: #F0FDF6; border-color: rgba(24,184,106,.2); }
+  .comp-card.bad  { background: #FFF5F5; border-color: rgba(239,68,68,.15); }
+  .comp-card-title { font-size: 15px; font-weight: 800; margin-bottom: 14px; }
+  .comp-card.good .comp-card-title { color: #1A1A1A; }
+  .comp-card.good .comp-card-title span { color: #18B86A; }
+  .comp-card.bad  .comp-card-title { color: #1A1A1A; }
+  .comp-card.bad  .comp-card-title span { color: #EF4444; }
+  .comp-check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; margin-bottom: 10px; color: #374151; }
+  .comp-check-icon.good { color: #18B86A; font-size: 14px; margin-top: 1px; }
+  .comp-check-icon.bad  { color: #EF4444; font-size: 14px; margin-top: 1px; }
+
+  /* ─── TOPIC PILLS ──────────────────────────────────── */
+  .topic-pill { display: inline-flex; align-items: center; background: #F0FDF6; border: 1px solid rgba(24,184,106,.2); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: #1A1A1A; margin: 4px; }
+
+  /* ─── PRESS CARD ───────────────────────────────────── */
+  .press-card { background: #fff; border: 1px solid #E8E8E8; border-radius: 10px; padding: 16px; }
+  .press-logo { font-size: 11px; font-weight: 800; color: #1A1A1A; letter-spacing: .04em; margin-bottom: 8px; }
+  .press-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; line-height: 1.4; }
+  .press-body  { font-size: 11px; color: #888; line-height: 1.6; }
+
+  /* ─── CAROUSEL NAV ─────────────────────────────────── */
+  .carousel-nav { display: flex; align-items: center; gap: 8px; justify-content: center; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #D0D0D0; }
+  .carousel-dot.active { background: #18B86A; width: 20px; border-radius: 4px; }
+  .carousel-arrow { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #D0D0D0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #555; cursor: pointer; }
+  .carousel-arrow:hover { border-color: #18B86A; color: #18B86A; }
+</style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- COVER -->
+  <div class="ds-cover">
+    <div>
+      <span class="ds-cover-logo">método · <span>venda todo Santo dia</span></span>
+      <h1>VTSD — Design System</h1>
+      <p>Sistema de design da landing page "Venda Todo Santo Dia". Estética SaaS moderna: fundo cinza-gelo, teal como cor de ação, tipografia clean e alta legibilidade.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-self:flex-start;">
+      <span class="badge">SaaS · Modern</span>
+      <span class="badge">Plus Jakarta Sans</span>
+      <span class="badge">Teal · Cinza · Branco</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 1. CORES                                            -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">1 — Paleta de Cores</div>
+
+    <p style="font-size:11px;font-weight:700;color:#AAA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Teal (Marca · CTA · Acento Positivo)</p>
+    <div class="ds-grid ds-grid-5" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#18B86A;"></div><div class="swatch-meta"><div class="swatch-name">Teal Primary</div><div class="swatch-hex">#18B86A</div><div class="swatch-var">--vtsd-teal</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#0F9554;"></div><div class="swatch-meta"><div class="swatch-name">Teal Dark · Hover</div><div class="swatch-hex">#0F9554</div><div class="swatch-var">--vtsd-teal-dark</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E6F9F0;"></div><div class="swatch-meta"><div class="swatch-name">Teal Light · BG</div><div class="swatch-hex">#E6F9F0</div><div class="swatch-var">--vtsd-teal-50</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:rgba(24,184,106,.12);border:1px solid #E0E0E0;"></div><div class="swatch-meta"><div class="swatch-name">Teal Tint</div><div class="swatch-hex">rgba(24,184,106,.12)</div><div class="swatch-var">--vtsd-teal-tint</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F0FDF6;border:1px solid #E8E8E8;"></div><div class="swatch-meta"><div class="swatch-name">Teal Ghost</div><div class="swatch-hex">#F0FDF6</div><div class="swatch-var">--vtsd-teal-ghost</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;color:#AAA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Vermelho (Negativo · Sem VTSD)</p>
+    <div class="ds-grid ds-grid-3" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#EF4444;"></div><div class="swatch-meta"><div class="swatch-name">Red · Negativo</div><div class="swatch-hex">#EF4444</div><div class="swatch-var">--vtsd-red</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FFF5F5;border:1px solid #E8E8E8;"></div><div class="swatch-meta"><div class="swatch-name">Red Ghost</div><div class="swatch-hex">#FFF5F5</div><div class="swatch-var">--vtsd-red-ghost</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FECACA;border:1px solid #E8E8E8;"></div><div class="swatch-meta"><div class="swatch-name">Red Border</div><div class="swatch-hex">#FECACA</div><div class="swatch-var">--vtsd-red-border</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;color:#AAA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Cores de Fase (Roadmap)</p>
+    <div class="ds-grid ds-grid-6" style="margin-bottom:28px;">
+      <div class="swatch"><div class="swatch-color" style="background:#9CA3AF;"></div><div class="swatch-meta"><div class="swatch-name">Fase 1</div><div class="swatch-hex">#9CA3AF</div><div class="swatch-var">--vtsd-phase-1</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#EC4899;"></div><div class="swatch-meta"><div class="swatch-name">Fase 2</div><div class="swatch-hex">#EC4899</div><div class="swatch-var">--vtsd-phase-2</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3B82F6;"></div><div class="swatch-meta"><div class="swatch-name">Fase 3</div><div class="swatch-hex">#3B82F6</div><div class="swatch-var">--vtsd-phase-3</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8B5CF6;"></div><div class="swatch-meta"><div class="swatch-name">Fase 4</div><div class="swatch-hex">#8B5CF6</div><div class="swatch-var">--vtsd-phase-4</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#22C55E;"></div><div class="swatch-meta"><div class="swatch-name">Fase 5</div><div class="swatch-hex">#22C55E</div><div class="swatch-var">--vtsd-phase-5</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#EAB308;"></div><div class="swatch-meta"><div class="swatch-name">Fase 6</div><div class="swatch-hex">#EAB308</div><div class="swatch-var">--vtsd-phase-6</div></div></div>
+    </div>
+
+    <p style="font-size:11px;font-weight:700;color:#AAA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Neutros</p>
+    <div class="ds-grid ds-grid-5">
+      <div class="swatch"><div class="swatch-color" style="background:#1A1A1A;"></div><div class="swatch-meta"><div class="swatch-name">Dark</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-var">--vtsd-dark</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#555555;"></div><div class="swatch-meta"><div class="swatch-name">Body</div><div class="swatch-hex">#555555</div><div class="swatch-var">--vtsd-body</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#888888;"></div><div class="swatch-meta"><div class="swatch-name">Muted</div><div class="swatch-hex">#888888</div><div class="swatch-var">--vtsd-muted</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7F7F7;border:1px solid #E8E8E8;"></div><div class="swatch-meta"><div class="swatch-name">BG Page</div><div class="swatch-hex">#F7F7F7</div><div class="swatch-var">--vtsd-bg</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border:1px solid #E8E8E8;"></div><div class="swatch-meta"><div class="swatch-name">White · Card</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-var">--vtsd-white</div></div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 2. TIPOGRAFIA                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">2 — Tipografia · Plus Jakarta Sans</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H1 Hero</div><div class="spec">800 / 36–40px</div></div>
+        <div class="type-sample" style="font-size:clamp(22px,3.5vw,38px);font-weight:800;color:#1A1A1A;line-height:1.2;">Aprenda como criar um negócio digital <span style="color:#18B86A;">lucrativo do zero com IA</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H2 Seção</div><div class="spec">800 / 28–32px</div></div>
+        <div class="type-sample" style="font-size:clamp(18px,2.8vw,30px);font-weight:800;color:#1A1A1A;line-height:1.3;">O <span style="color:#18B86A;">plano detalhado</span> que vai tirar sua ideia do papel e fazer a <span style="color:#18B86A;">primeira venda</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">H3 Card</div><div class="spec">700 / 18–20px</div></div>
+        <div class="type-sample" style="font-size:20px;font-weight:700;color:#1A1A1A;">Conheça nossos agentes de Inteligência Artificial</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Subtítulo</div><div class="spec">700 / 16px<br>teal accent</div></div>
+        <div class="type-sample" style="font-size:16px;font-weight:700;color:#1A1A1A;">Entrar no mercado digital <span style="color:#18B86A;">com o VTSD</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Body</div><div class="spec">400 / 14–15px</div></div>
+        <div class="type-sample" style="font-size:15px;color:#555;line-height:1.7;">Funciona para qualquer pessoa, mesmo que não tenha nenhum produto ou ideia do que vender. <strong style="color:#1A1A1A;">No VTSD você aprende como transformar qualquer habilidade em um produto rentável.</strong></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Feature Title</div><div class="spec">700 / 14px</div></div>
+        <div class="type-sample" style="font-size:14px;font-weight:700;color:#1A1A1A;">Mais de 30 Agentes GPTs treinados</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="label">Small / Meta</div><div class="spec">600 / 11–12px</div></div>
+        <div class="type-sample" style="display:flex;gap:16px;align-items:center;">
+          <span style="font-size:12px;color:#888;font-weight:600;">⏱ 14 dias de Garantia</span>
+          <span style="font-size:12px;color:#888;font-weight:600;">🔒 Compra segura</span>
+          <span style="font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#888;">Aula gratuita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 3. ESPAÇAMENTO                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">3 — Espaçamento</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">4px</div><div class="spacing-var">--vtsd-space-1</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">8px</div><div class="spacing-var">--vtsd-space-2</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">12px</div><div class="spacing-var">--vtsd-space-3</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">16px</div><div class="spacing-var">--vtsd-space-4</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">24px</div><div class="spacing-var">--vtsd-space-6</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">32px</div><div class="spacing-var">--vtsd-space-8</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">48px</div><div class="spacing-var">--vtsd-space-12</div></div>
+      <div class="spacing-row"><div class="spacing-bar" style="width:64px;"></div><div class="spacing-label">64px</div><div class="spacing-var">--vtsd-space-16</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 4. BORDER RADIUS                                    -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">4 — Border Radius</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="radius-card"><div class="radius-box" style="border-radius:6px;"></div><div class="radius-label">SM</div><div class="radius-val">6px — --vtsd-radius-sm</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:8px;"></div><div class="radius-label">MD · Chip</div><div class="radius-val">8px — --vtsd-radius-md</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:12px;"></div><div class="radius-label">LG · Card</div><div class="radius-val">12px — --vtsd-radius-lg</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:16px;"></div><div class="radius-label">XL · Seção</div><div class="radius-val">16px — --vtsd-radius-xl</div></div>
+      <div class="radius-card"><div class="radius-box" style="border-radius:9999px;height:36px;"></div><div class="radius-label">Pill · CTA</div><div class="radius-val">9999px — --vtsd-radius-pill</div></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 5. COMPONENTES                                      -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">5 — Componentes</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- LOGO -->
+      <div class="comp-wrap">
+        <div class="comp-label">Logo · método / venda todo Santo dia</div>
+        <div style="display:flex;gap:40px;flex-wrap:wrap;align-items:center;">
+          <div class="logo-wrap" style="background:#fff;padding:20px 28px;border-radius:8px;border:1px solid #E8E8E8;">
+            <div class="logo-method">MÉTODO</div>
+            <div class="logo-name">vendatodo<br><span class="teal">Santo</span>dia</div>
+          </div>
+          <div class="logo-wrap" style="background:#1A1A1A;padding:20px 28px;border-radius:8px;">
+            <div class="logo-method" style="color:#555;">MÉTODO</div>
+            <div class="logo-name" style="color:#fff;">vendatodo<br><span class="teal">Santo</span>dia</div>
+          </div>
+        </div>
+        <div class="comp-note">"método" — 9px 600 uppercase letter-spacing .2em · "vendatodo" — 22px 800 dark · "Santo" — 22px 800 teal #18B86A · "dia" — dark</div>
+      </div>
+
+      <!-- CTA BUTTONS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Botões CTA (Pill Shape)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+          <a class="btn btn-cta">Quero ganhar dinheiro com a internet <div class="arrow-circle">↗</div></a>
+          <a class="btn btn-cta">Quero entrar para o VTSD <div class="arrow-circle">↗</div></a>
+          <a class="btn btn-cta">Quero fazer minha primeira venda <div class="arrow-circle">↗</div></a>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+          <a class="btn btn-outline">Ver +165 Depoimentos ↓</a>
+          <a class="btn btn-cta-sm">Entrar para o VTSD</a>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="safety-meta" style="justify-content:flex-start;gap:20px;">
+            <div class="safety-item">⏱ 14 dias de Garantia</div>
+            <div class="safety-item">🔒 Compra segura</div>
+          </div>
+        </div>
+        <div class="comp-note">CTA: bg #18B86A · border-radius 9999px (pill) · 700 · ícone →↗ em círculo rgba(255,255,255,.25)<br>Outline: border #D0D0D0 · hover teal · Safety meta: #888 12px abaixo de todo CTA</div>
+      </div>
+
+      <!-- DIAMOND BULLETS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Diamond Bullets ♦ (Benefícios)</div>
+        <div class="diamond-list" style="max-width:320px;">
+          <div class="diamond-item"><span class="diamond">♦</span>Quais foram os produtos mais vendidos nos últimos anos.</div>
+          <div class="diamond-item"><span class="diamond">♦</span>Quais são os formatos de produtos digitais.</div>
+          <div class="diamond-item"><span class="diamond">♦</span>Como começar e quanto você vai precisar investir.</div>
+          <div class="diamond-item"><span class="diamond">♦</span>Quanto tempo vai demorar pra começar as primeiras vendas.</div>
+        </div>
+        <div class="comp-note">bullet ♦: color #18B86A 12px · texto: #333 14px · gap entre itens: 10px</div>
+      </div>
+
+      <!-- FEATURE CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Feature Cards (4 colunas)</div>
+        <div class="ds-grid ds-grid-4">
+          <div class="feature-card"><div class="feature-icon-wrap">🤖</div><div class="feature-title">Mais de 30 Agentes GPTs treinados</div><div class="feature-desc">Eles vão te ajudar em todas as etapas da criação do seu infoproduto.</div></div>
+          <div class="feature-card"><div class="feature-icon-wrap">👥</div><div class="feature-title">Acesso à comunidade exclusiva</div><div class="feature-desc">Compartilhe suas experiências, tire dúvidas e interaja com outros alunos.</div></div>
+          <div class="feature-card"><div class="feature-icon-wrap">📹</div><div class="feature-title">Suporte ao vivo no ZOOM</div><div class="feature-desc">Nosso time estará ao vivo, a cada 15 dias, para te ajudar a seguir a jornada com mais confiança.</div></div>
+          <div class="feature-card"><div class="feature-icon-wrap">✓</div><div class="feature-title">Garantia de 15 dias</div><div class="feature-desc">Teste o método sem risco. Se não estiver satisfeito, nós devolvemos seu investimento.</div></div>
+        </div>
+        <div class="comp-note">bg: #fff · border: #E8E8E8 · border-radius: 12px · ícone: 44px rounded-10px bg rgba(24,184,106,.12) · título: 700 14px · desc: #666 13px</div>
+      </div>
+
+      <!-- AGENT CHIPS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Agent Chips (IA Agentes)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#E0F2FE;">🤖</div>Identidade</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#FEF3C7;">📦</div>Produto</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#FCE7F3;">🎯</div>Encontre Urgências</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#F0FDF4;">📋</div>Agente Copy</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#EDE9FE;">🎬</div>Vídeo de Vendas</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#FEF9C3;">💰</div>Upsell</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#E0F2FE;">💡</div>Big Ideas Infinitas</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#DCFCE7;">📖</div>História do Método</div>
+          <div class="agent-chip"><div class="agent-chip-icon" style="background:#FCE7F3;">⚖️</div>Dynaminze Oferta</div>
+        </div>
+        <div class="comp-note">bg: #fff · border: #E8E8E8 · border-radius: 8px · shadow: 0 2px 6px rgba(0,0,0,.06) · ícone: 26px rounded-6px com cor temática · label: 12px 600</div>
+      </div>
+
+      <!-- PHASE CHIPS + CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Phase Chips + Cards (Roadmap CEE)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+          <span class="phase-chip" style="background:rgba(156,163,175,.15);color:#6B7280;">📋 Fase 1</span>
+          <span class="phase-chip" style="background:rgba(236,72,153,.12);color:#EC4899;">🔴 Fase 2</span>
+          <span class="phase-chip" style="background:rgba(59,130,246,.12);color:#3B82F6;">🔵 Fase 3</span>
+          <span class="phase-chip" style="background:rgba(139,92,246,.12);color:#8B5CF6;">🟣 Fase 4</span>
+          <span class="phase-chip" style="background:rgba(34,197,94,.12);color:#22C55E;">🟢 Fase 5</span>
+          <span class="phase-chip" style="background:rgba(234,179,8,.15);color:#B45309;">🟡 Fase 6</span>
+        </div>
+        <div class="ds-grid ds-grid-3">
+          <div class="phase-card">
+            <div class="phase-card-num"><span class="phase-chip" style="background:rgba(156,163,175,.15);color:#6B7280;font-size:10px;padding:2px 8px;">📋 Fase 01</span></div>
+            <div class="phase-card-title">Ideias de produto e pesquisa de mercado</div>
+            <div class="phase-card-meta">Tempo estimado para conclusão: <strong>7 dias</strong></div>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-num"><span class="phase-chip" style="background:rgba(236,72,153,.12);color:#EC4899;font-size:10px;padding:2px 8px;">🔴 Fase 02</span></div>
+            <div class="phase-card-title">Criação e/ou validação de produto BETA</div>
+            <div class="phase-card-meta">Tempo estimado para conclusão: <strong>14 dias</strong></div>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-num"><span class="phase-chip" style="background:rgba(59,130,246,.12);color:#3B82F6;font-size:10px;padding:2px 8px;">🔵 Fase 03</span></div>
+            <div class="phase-card-title">Primeira venda</div>
+            <div class="phase-card-meta">Tempo estimado: <strong>7 a 21 dias</strong></div>
+          </div>
+        </div>
+        <div class="comp-note">Chip: border-radius 999px · cada fase tem cor própria · Card: bg #fff · border #E8E8E8 · border-radius 10px · título 700 14px · meta #888 12px</div>
+      </div>
+
+      <!-- TESTIMONIAL STRIP -->
+      <div class="comp-wrap">
+        <div class="comp-label">Testimonial Strip (Grandes Players)</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div class="testi-avatar">
+            <div class="testi-photo" style="background:#DBEAFE;">👨</div>
+            <div class="testi-label"><div class="testi-name">João Paulo</div><div class="testi-handle">Hashtag Cursos</div></div>
+          </div>
+          <div class="testi-avatar">
+            <div class="testi-photo" style="background:#FCE7F3;">👩</div>
+            <div class="testi-label"><div class="testi-name">Adriana Santana</div><div class="testi-handle">—</div></div>
+          </div>
+          <div class="testi-avatar">
+            <div class="testi-photo" style="background:#DCFCE7;">👨</div>
+            <div class="testi-label"><div class="testi-name">Felipe Guisoli</div><div class="testi-handle">Universo Narrado</div></div>
+          </div>
+          <div class="testi-avatar">
+            <div class="testi-photo" style="background:#FEF3C7;">👩</div>
+            <div class="testi-label"><div class="testi-name">Laura Amorim</div><div class="testi-handle">Mapas da Lulu</div></div>
+          </div>
+          <div class="testi-avatar">
+            <div class="testi-photo" style="background:#EDE9FE;">👨</div>
+            <div class="testi-label"><div class="testi-name">Ramiro</div><div class="testi-handle">Clube do Valor</div></div>
+          </div>
+        </div>
+        <div class="comp-note">Avatar: 56px círculo com bg temático · nome: 11px 700 · handle: 10px #888 · carrossel horizontal sem bordas visíveis</div>
+      </div>
+
+      <!-- VIDEO TESTIMONIALS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Video Testimonial Cards (com play)</div>
+        <div class="ds-grid ds-grid-3">
+          <div class="video-testi">
+            <div class="video-thumb"><div class="play-btn">▶</div></div>
+            <div class="video-meta">
+              <div class="video-name">Neto e Tati</div>
+              <div class="video-desc">Eles quitaram uma dívida de mais de R$ 200 mil e hoje faturam 6x mais</div>
+            </div>
+          </div>
+          <div class="video-testi">
+            <div class="video-thumb" style="background:#1E1E2E;"><div class="play-btn">▶</div></div>
+            <div class="video-meta">
+              <div class="video-name">Renata Gomes</div>
+              <div class="video-desc">Ela fatura entre R$ 12 a 15 mil por mês com o nicho de costura sob medida</div>
+            </div>
+          </div>
+          <div class="video-testi">
+            <div class="video-thumb" style="background:#1E2A1E;"><div class="play-btn">▶</div></div>
+            <div class="video-meta">
+              <div class="video-name">Pedro Issler</div>
+              <div class="video-desc">Ele achou que era impossível e faturou mais de R$ 100 mil no nicho de música</div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-note">bg: #1A1A1A · thumb: dark gradient · play btn: rgba(255,255,255,.9) 40px · nome: #CCC 12px 600 · desc: #18B86A 12px 700</div>
+      </div>
+
+      <!-- CAROUSEL NAV -->
+      <div class="comp-wrap">
+        <div class="comp-label">Carousel Navigation</div>
+        <div class="carousel-nav">
+          <div class="carousel-arrow">‹</div>
+          <div class="carousel-dot active"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-dot"></div>
+          <div class="carousel-arrow">›</div>
+        </div>
+        <div class="comp-note">Dot inativo: 8px circle #D0D0D0 · Dot ativo: 20×8px rounded-4px #18B86A · Arrows: 36px circle border #D0D0D0 · hover: teal</div>
+      </div>
+
+      <!-- TOPIC PILLS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Topic Pills ("O que você vai aprender")</div>
+        <div>
+          <span class="topic-pill">Concepção do Produto</span>
+          <span class="topic-pill">Venda do Perpétuo</span>
+          <span class="topic-pill">Precificação</span>
+          <span class="topic-pill">Copy vídeo de vendas</span>
+          <span class="topic-pill">Copy para anúncios diretos</span>
+          <span class="topic-pill">Copy para página de vendas</span>
+          <span class="topic-pill">Planejamento</span>
+          <span class="topic-pill">Estratégia de picos de venda</span>
+          <span class="topic-pill">Picos de venda com promoção</span>
+          <span class="topic-pill">SEO</span>
+          <span class="topic-pill">Linha Editorial</span>
+          <span class="topic-pill">Fluxo de caixa</span>
+          <span class="topic-pill">Fundamentos de campanha</span>
+          <span class="topic-pill">Fundamentos do Google Ads</span>
+        </div>
+        <div class="comp-note">bg: #F0FDF6 · border: rgba(24,184,106,.2) · border-radius: 999px · 13px 600 · margin: 4px · usado em grade fluida</div>
+      </div>
+
+      <!-- COMPARISON -->
+      <div class="comp-wrap">
+        <div class="comp-label">Comparação (com VTSD ✓ vs. sem VTSD ✗)</div>
+        <div class="comp-vs">
+          <div class="comp-card good">
+            <div class="comp-card-title">Entrar no mercado digital <span>com o VTSD</span></div>
+            <div class="comp-check-item"><span class="comp-check-icon good">✓</span>+30 agentes GPT treinados que trabalham para você</div>
+            <div class="comp-check-item"><span class="comp-check-icon good">✓</span>Tempo de criação de 2 semanas no máximo</div>
+            <div class="comp-check-item"><span class="comp-check-icon good">✓</span>Método comprovado, com baixíssima chance de erro</div>
+            <div class="comp-check-item"><span class="comp-check-icon good">✓</span>Alto potencial de lucro. Resultados comprovados</div>
+          </div>
+          <div class="comp-card bad">
+            <div class="comp-card-title">Entrar no mercado digital <span>sem o VTSD</span></div>
+            <div class="comp-check-item"><span class="comp-check-icon bad">✗</span>Começar totalmente perdido e desperdiçar tempo e dinheiro</div>
+            <div class="comp-check-item"><span class="comp-check-icon bad">✗</span>Tempo de começar a pensar em aplicar a ideia +6 meses</div>
+            <div class="comp-check-item"><span class="comp-check-icon bad">✗</span>Chance de dar errado assustadoramente alta</div>
+            <div class="comp-check-item"><span class="comp-check-icon bad">✗</span>Baixo potencial de lucro e falta de estratégia</div>
+          </div>
+        </div>
+        <div class="comp-note">Good: bg #F0FDF6 · border rgba(24,184,106,.2) · check #18B86A · Bad: bg #FFF5F5 · border #FECACA · X #EF4444</div>
+      </div>
+
+      <!-- PRESS CARDS -->
+      <div class="comp-wrap">
+        <div class="comp-label">Press Mention Cards (Notícias)</div>
+        <div class="ds-grid ds-grid-3">
+          <div class="press-card">
+            <div class="press-logo">1 Bilhão</div>
+            <div class="press-title">Marketing Digital e lançamento de infoprodutos movimentam bilhões no Brasil</div>
+            <div class="press-body">Atualmente, o maior nome do Marketing Digital no Brasil é Pablo Marçal, responsável pela mentoria de milhares de profissionais...</div>
+          </div>
+          <div class="press-card">
+            <div class="press-logo" style="color:#1A56DB;">FGV</div>
+            <div class="press-title">Criação de conteúdo digital cresce 30% e impulsiona mercado de trabalho brasileiro, aponta estudo</div>
+            <div class="press-body">Foram mais de 389 mil ocupações geradas nos últimos 12 meses...</div>
+          </div>
+          <div class="press-card">
+            <div class="press-logo">Valor Econômico</div>
+            <div class="press-title">Mercado de mkt digital cresce 30% no Brasil em 12 meses</div>
+            <div class="press-body">Segundo pesquisa, 42% dos infoprodutores afirmaram que têm venda de infoprodutos como principal fonte de renda...</div>
+          </div>
+        </div>
+        <div class="comp-note">bg: #fff · border: #E8E8E8 · border-radius: 10px · logo: 11px 800 da mídia · título: 700 13px · corpo: #888 11px</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- 6. CSS TOKENS                                       -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <div class="ds-section">
+    <div class="ds-section-title">6 — CSS Custom Properties (Tokens)</div>
+    <div class="tokens-block">
+<pre><span class="t-comment">/* ── Venda Todo Santo Dia (VTSD) — Design Tokens ── */</span>
+<span class="t-punct">:root {</span>
+
+  <span class="t-comment">/* Teal (Marca) */</span>
+  <span class="t-prop">--vtsd-teal</span><span class="t-punct">:</span>        <span class="t-val">#18B86A</span><span class="t-punct">;</span>  <span class="t-comment">/* CTA, acento, ícones, teal text */</span>
+  <span class="t-prop">--vtsd-teal-dark</span><span class="t-punct">:</span>   <span class="t-val">#0F9554</span><span class="t-punct">;</span>  <span class="t-comment">/* hover state */</span>
+  <span class="t-prop">--vtsd-teal-50</span><span class="t-punct">:</span>     <span class="t-val">#E6F9F0</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-teal-tint</span><span class="t-punct">:</span>   <span class="t-val">rgba(24, 184, 106, 0.12)</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-teal-ghost</span><span class="t-punct">:</span>  <span class="t-val">#F0FDF6</span><span class="t-punct">;</span>  <span class="t-comment">/* topic pills, comp card good */</span>
+
+  <span class="t-comment">/* Negativo */</span>
+  <span class="t-prop">--vtsd-red</span><span class="t-punct">:</span>         <span class="t-val">#EF4444</span><span class="t-punct">;</span>  <span class="t-comment">/* "sem o VTSD", ✗ */</span>
+  <span class="t-prop">--vtsd-red-ghost</span><span class="t-punct">:</span>   <span class="t-val">#FFF5F5</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-red-border</span><span class="t-punct">:</span>  <span class="t-val">#FECACA</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Fases do Roadmap CEE */</span>
+  <span class="t-prop">--vtsd-phase-1</span><span class="t-punct">:</span>     <span class="t-val">#9CA3AF</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-phase-2</span><span class="t-punct">:</span>     <span class="t-val">#EC4899</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-phase-3</span><span class="t-punct">:</span>     <span class="t-val">#3B82F6</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-phase-4</span><span class="t-punct">:</span>     <span class="t-val">#8B5CF6</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-phase-5</span><span class="t-punct">:</span>     <span class="t-val">#22C55E</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-phase-6</span><span class="t-punct">:</span>     <span class="t-val">#EAB308</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Neutros */</span>
+  <span class="t-prop">--vtsd-bg</span><span class="t-punct">:</span>          <span class="t-val">#F7F7F7</span><span class="t-punct">;</span>  <span class="t-comment">/* page background */</span>
+  <span class="t-prop">--vtsd-white</span><span class="t-punct">:</span>       <span class="t-val">#FFFFFF</span><span class="t-punct">;</span>  <span class="t-comment">/* cards, seções brancas */</span>
+  <span class="t-prop">--vtsd-border</span><span class="t-punct">:</span>      <span class="t-val">#E8E8E8</span><span class="t-punct">;</span>  <span class="t-comment">/* todas as bordas */</span>
+  <span class="t-prop">--vtsd-dark</span><span class="t-punct">:</span>        <span class="t-val">#1A1A1A</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-body</span><span class="t-punct">:</span>        <span class="t-val">#555555</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-muted</span><span class="t-punct">:</span>       <span class="t-val">#888888</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Tipografia */</span>
+  <span class="t-prop">--vtsd-font</span><span class="t-punct">:</span>        <span class="t-val">'Plus Jakarta Sans', sans-serif</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-xs</span><span class="t-punct">:</span>     <span class="t-val">10px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-sm</span><span class="t-punct">:</span>     <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-base</span><span class="t-punct">:</span>   <span class="t-val">14px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-md</span><span class="t-punct">:</span>     <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-lg</span><span class="t-punct">:</span>     <span class="t-val">22px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-xl</span><span class="t-punct">:</span>     <span class="t-val">30px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-size-hero</span><span class="t-punct">:</span>   <span class="t-val">40px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Espaçamento */</span>
+  <span class="t-prop">--vtsd-space-1</span><span class="t-punct">:</span>     <span class="t-val">4px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-2</span><span class="t-punct">:</span>     <span class="t-val">8px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-3</span><span class="t-punct">:</span>     <span class="t-val">12px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-4</span><span class="t-punct">:</span>     <span class="t-val">16px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-6</span><span class="t-punct">:</span>     <span class="t-val">24px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-8</span><span class="t-punct">:</span>     <span class="t-val">32px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-12</span><span class="t-punct">:</span>    <span class="t-val">48px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-space-16</span><span class="t-punct">:</span>    <span class="t-val">64px</span><span class="t-punct">;</span>
+
+  <span class="t-comment">/* Border Radius */</span>
+  <span class="t-prop">--vtsd-radius-sm</span><span class="t-punct">:</span>   <span class="t-val">6px</span><span class="t-punct">;</span>
+  <span class="t-prop">--vtsd-radius-md</span><span class="t-punct">:</span>   <span class="t-val">8px</span><span class="t-punct">;</span>   <span class="t-comment">/* chips de agente, fases */</span>
+  <span class="t-prop">--vtsd-radius-lg</span><span class="t-punct">:</span>   <span class="t-val">12px</span><span class="t-punct">;</span>  <span class="t-comment">/* cards */</span>
+  <span class="t-prop">--vtsd-radius-xl</span><span class="t-punct">:</span>   <span class="t-val">16px</span><span class="t-punct">;</span>  <span class="t-comment">/* seções, wrappers */</span>
+  <span class="t-prop">--vtsd-radius-pill</span><span class="t-punct">:</span> <span class="t-val">9999px</span><span class="t-punct">;</span> <span class="t-comment">/* botões CTA, topic pills */</span>
+
+<span class="t-punct">}</span></pre>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
